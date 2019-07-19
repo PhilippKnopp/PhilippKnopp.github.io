@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8" />
+
+	<title>God in the Deep</title>
+	
+	<style>* { padding: 0; margin: 0;}</style>
+	
+	<script src="phaser.min.js"></script>
+
+</head>
+
+<body style="background-color:#0A0C0F; text-align:center;">
+	
+<script>
+	
+	var config = {
+		type: Phaser.AUTO,
+		width: 1920,
+		height: 1080,
+		physics: {
+			default: 'arcade',
+			arcade: {
+				gravity: { y: 0 },
+				debug: false
+			}
+		},
+		scale: { mode: Phaser.Scale.FIT },
+		scene: {
+			preload: preload,
+			create: create
+		}
+	};
+	
+	var game = new Phaser.Game(config);
+	var objects = {};
+	var tileArray = [];
+	var matrixWidth = 10;
+	var matrixHeight = 20;
+
+	function preload() {
+		
+	}
+
+	function create() {
+		
+		objects.camera = this.cameras.add(0, 0, 1920, 1080);
+		objects.camera.setBackgroundColor('#0A0C0F');
+		
+		var calculatePathButton = this.add.text(0, 700, "Calculate Path", { fontFamily: "Verdana" });
+		calculatePathButton.setInteractive();
+		calculatePathButton.on("pointerup", function pointerUp() {
+			calculatePath();
+		});
+		
+		var insertWallsButton = this.add.text(0, 730, "Insert Walls", { fontFamily: "Verdana" });
+		insertWallsButton.setInteractive();
+		insertWallsButton.on("pointerup", function pointerUp() {
+			insertWalls();
+		});
+		
+		var index = 0;
+		for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
+			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
+				var tile = this.add.text(xPos*25, yPos*25+15, "0", { fontFamily: "Verdana" });
+				tile.setAlpha(0.5);
+				tile.state = 0;
+				tile.walkable = true;
+				tile.updateState = function () {
+					if (this.state == 1) {
+						this.setAlpha(1);
+						this.setStyle({fill: "#0055aa"});
+						this.text = "A"
+					} else if (this.state == 2) {
+						this.setAlpha(1);
+						this.setStyle({fill: "#ffa500"});
+						this.text = "B"
+					} else if (this.state == 3) {
+						this.setAlpha(0.5);
+						this.setStyle({fill: "#0055aa"});
+						this.text = "+"
+					} else if (this.state == 4) {
+						this.setAlpha(1);
+						this.setStyle({fill: "#339933"});
+						this.text = "+"
+					} else if (this.state == 0) {
+						this.setAlpha(0.5);
+						this.setStyle({fill: "#ffffff"});
+						this.text = "0"
+					} else if (this.state == 5) {
+						this.setAlpha(0.1);
+						this.setStyle({fill: "#ffffff"});
+						this.text = "X"
+						this.walkable = false;
+					}
+				};
+				tile.setInteractive();
+				tile.on("pointerup", function pointerUp () {
+					if (this.state < 2) {
+						this.state++;
+					} else {
+						this.state = 0;
+					};
+					this.updateState();
+				});
+				tile.name = index++;
+				tile.neighbors = [];
+				tile.neighborsDistance = [];
+				tile.checkForNeighbors = function () {
+					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != 0 && tileArray[this.name-1-matrixWidth].walkable == true) {
+						this.neighbors.push(tileArray[this.name-1-matrixWidth]);
+						this.neighborsDistance.push(1.5*tileArray[this.name-1-matrixWidth].weight);
+					};
+					if (this.name-matrixWidth >= 0 && tileArray[this.name-matrixWidth].walkable == true) {
+						this.neighbors.push(tileArray[this.name-matrixWidth]);
+						this.neighborsDistance.push(1*tileArray[this.name-matrixWidth].weight);
+					};
+					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name-matrixWidth+1].walkable == true) {
+						this.neighbors.push(tileArray[this.name-matrixWidth+1]);
+						this.neighborsDistance.push(1.5*tileArray[this.name-matrixWidth+1].weight);
+					};
+					if (this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name+1].walkable == true) {
+						this.neighbors.push(tileArray[this.name+1]);
+						this.neighborsDistance.push(1*tileArray[this.name+1].weight);
+					};
+					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name+1+matrixWidth].walkable == true) {
+						this.neighbors.push(tileArray[this.name+1+matrixWidth]);
+						this.neighborsDistance.push(1.5*tileArray[this.name+1+matrixWidth].weight);
+					};
+					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && tileArray[this.name+matrixWidth].walkable == true) {
+						this.neighbors.push(tileArray[this.name+matrixWidth]);
+						this.neighborsDistance.push(1*tileArray[this.name+matrixWidth].weight);
+					};
+					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && this.name%matrixWidth != 0 && tileArray[this.name-1+matrixWidth].walkable == true) {
+						this.neighbors.push(tileArray[this.name-1+matrixWidth]);
+						this.neighborsDistance.push(1.5*tileArray[this.name-1+matrixWidth].weight);
+					};
+					if (this.name%matrixWidth != 0 && tileArray[this.name-1].walkable == true) {
+						this.neighbors.push(tileArray[this.name-1]);
+						this.neighborsDistance.push(1*tileArray[this.name-1].weight);
+					};
+				};
+				tile.weight = 1;
+				tile.estimatedWayToB = function () {
+					
+					let a = this.name;
+					let b = tileArray.findIndex(findEnd);
+					
+					let xDistance = (Math.abs(b%matrixWidth-a%matrixWidth));
+					let yDistance = Math.abs(Math.floor(b/matrixWidth)-Math.floor(a/matrixWidth));
+					let diagonals = Math.min(xDistance, yDistance);
+					return xDistance + yDistance - diagonals/2;
+				};
+				tile.distanceTravelled;
+				tile.wayPointUsefulness;
+				tile.entryPoint;
+				tileArray.push(tile);
+			}
+		}
+		
+	}
+	
+function findStart(element) {
+  return element.text == "A";
+}
+	
+function findEnd(element) {
+  return element.text == "B";
+}
+	
+function insertWalls() {
+	var levelMap = [
+		0, 0, 5, 0, 0, 0, 0, 0, 0, 5,
+		0, 0, 5, 0, 0, 0, 0, 0, 5, 0,
+		0, 0, 5, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 5, 0, 0, 5, 0, 0,
+		0, 0, 0, 0, 5, 0, 0, 5, 0, 0,
+		0, 0, 5, 5, 5, 0, 0, 5, 5, 5,
+		5, 0, 0, 0, 0, 0, 0, 5, 0, 0,
+		5, 0, 0, 0, 0, 0, 0, 5, 0, 0,
+		5, 0, 0, 0, 0, 0, 0, 0, 0, 5,
+		0, 0, 5, 5, 5, 0, 0, 5, 5, 5,
+		0, 0, 5, 0, 0, 0, 0, 0, 0, 5,
+		0, 0, 5, 0, 0, 0, 0, 0, 5, 0,
+		0, 0, 5, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 5, 0, 0, 5, 0, 0,
+		0, 0, 0, 0, 5, 0, 0, 5, 0, 0,
+		0, 0, 5, 5, 5, 0, 0, 5, 5, 5,
+		5, 0, 0, 0, 0, 0, 0, 5, 0, 0,
+		5, 0, 0, 0, 0, 0, 0, 5, 0, 0,
+		5, 0, 0, 0, 0, 0, 0, 5, 0, 5,
+		0, 0, 5, 5, 5, 0, 0, 5, 5, 5,
+	];
+	for (var i = 0; i < tileArray.length; i++) {
+		tileArray[i].state = levelMap[i];
+		tileArray[i].updateState();
+	}
+	
+}
+	
+	
+function calculatePath () {
+	
+	console.log("Click");
+	
+	var mappedList = [];
+	var frontierList = [];
+	var frontierListValues = [];
+	var path = [];
+	var activeNode;
+	var pathFound = false;
+	
+	
+	// finde A und füge ihn der frontierList hinzu {name, wayPointUsefulness}
+	var nameOfA = tileArray[tileArray.findIndex(findStart)].name;
+	tileArray[nameOfA].entryPoint = "Start";
+	tileArray[nameOfA].distanceTravelled = 0;
+	tileArray[nameOfA].wayPointUsefulness = tileArray[nameOfA].distanceTravelled + tileArray[nameOfA].estimatedWayToB();
+	frontierList.push(tileArray[nameOfA]);
+	
+	// gehe folgende Schleife solange durch bis es einen Weg gibt
+	mapperLoop: while (pathFound == false) {
+		
+		console.log("mapperLoop");
+
+        // gehe frontierList durch nach niedrigster wayPointUsefulness
+        frontierListValues.length = 0;
+        for (var i = 0; i < frontierList.length; i++) {
+            frontierListValues.push(frontierList[i].wayPointUsefulness);
+        };
+        activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
+
+        // Wenn Knoten mit Niedrigster wayPointUsefulness schon das Ziel ist, ist A* fertig
+        if (frontierList[activeNode].text == "B") {
+			pathFound == true;
+			let backtraceIndex = tileArray.findIndex(findEnd);
+			
+			while (tileArray[tileArray[backtraceIndex].entryPoint].text != "A") {
+				path.unshift(tileArray[backtraceIndex].entryPoint);
+				tileArray[tileArray[backtraceIndex].entryPoint].state = 4;
+				tileArray[tileArray[backtraceIndex].entryPoint].updateState();
+				backtraceIndex = tileArray[backtraceIndex].entryPoint;
+			}
+			
+			console.log(path);
+            break mapperLoop;
+        }
+
+        // berechne für diesen alle neighbors
+        frontierList[activeNode].checkForNeighbors();
+
+        // Füge Neighbors des aktuellen Knotens der Frontierlist hinzu
+        for (var i = 0; i < frontierList[activeNode].neighbors.length; i++) {
+
+            let distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
+            if (containsObject(frontierList[activeNode].neighbors[i], frontierList)) {
+                if (distanceTravelled < frontierList[activeNode].neighbors[i].distanceTravelled) {
+                    frontierList[activeNode].neighbors[i].distanceTravelled = distanceTravelled;
+                    frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB();
+                    frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
+                }
+            } else if (containsObject(frontierList[activeNode].neighbors[i], mappedList)) {
+                continue;
+            } else {
+                frontierList[activeNode].neighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
+                frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB();
+                frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
+                frontierList.push(frontierList[activeNode].neighbors[i]);
+				if (frontierList[activeNode].neighbors[i].text != "B") {
+					frontierList[activeNode].neighbors[i].state = 3;
+					frontierList[activeNode].neighbors[i].updateState();
+				}
+            }
+        };
+
+        // Füge den aktiven Knoten der mappedList hinzu
+        // Lösche den aktven Knoten aus der frontierList
+        mappedList.push(frontierList[activeNode]);
+        frontierList.splice(activeNode,1);
+	
+	}
+	
+	console.log(frontierList);
+	
+	clearNodes();
+}
+	
+function clearNodes() {
+	tileArray.forEach(function(element) {
+		element.neighbors.length = 0;
+		element.distanceTravelled = "";
+		element.wayPointUsefulness = "";
+		element.entryPoint = "";
+	});
+}
+	
+function containsObject(obj, list) {
+    var i;
+    for (i = 0; i < list.length; i++) {
+        if (list[i] === obj) {
+            return true;
+        }
+    }
+
+    return false;
+}
+	
+</script>
+</body>
+
+</html>
