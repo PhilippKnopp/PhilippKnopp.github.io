@@ -43,14 +43,15 @@
 		this.load.spritesheet('Logo_Sprite', 'img/Logo_Sprite.png', { frameWidth: 330, frameHeight: 357 });
 		this.load.spritesheet('Tile_Sprite', 'img/Tile_Sprite.png', { frameWidth: 180, frameHeight: 180 });
 		
-		let waiter = "a";
+		var waiter = "a";
 		
 		this.load.on('complete', function () {
 			waiter = "b";
+			console.log("cool");
 		});
 		
 		while (waiter == "a") {
-			console.log("waiting...");
+			console.log("a");
 		}
 		
 	}
