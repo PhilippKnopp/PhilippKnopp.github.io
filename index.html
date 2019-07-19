@@ -203,8 +203,6 @@ function insertWalls() {
 	
 function calculatePath () {
 	
-	console.log("Click");
-	
 	var mappedList = [];
 	var frontierList = [];
 	var frontierListValues = [];
@@ -222,8 +220,6 @@ function calculatePath () {
 	
 	// gehe folgende Schleife solange durch bis es einen Weg gibt
 	mapperLoop: while (pathFound == false) {
-		
-		console.log("mapperLoop");
 
         // gehe frontierList durch nach niedrigster wayPointUsefulness
         frontierListValues.length = 0;
@@ -244,7 +240,6 @@ function calculatePath () {
 				backtraceIndex = tileArray[backtraceIndex].entryPoint;
 			}
 			
-			console.log(path);
             break mapperLoop;
         }
 
@@ -281,8 +276,6 @@ function calculatePath () {
         frontierList.splice(activeNode,1);
 	
 	}
-	
-	console.log(frontierList);
 	
 	clearNodes();
 }
