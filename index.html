@@ -8,7 +8,7 @@
 	
 	<style>* { padding: 0; margin: 0;}</style>
 	
-	<script src="phaser.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/phaser@3.18.1/dist/phaser.min.js"></script>
 
 </head>
 
@@ -49,6 +49,8 @@
 		objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0A0C0F');
 		
+		var Info = this.add.text(0, 630, "Click on a '0' to set a Starting Point 'A'\nClick on a '0' twice to set a Goal Point 'B'", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 9 });
+		
 		var calculatePathButton = this.add.text(0, 700, "Calculate Path", { fontFamily: "Verdana" });
 		calculatePathButton.setInteractive();
 		calculatePathButton.on("pointerup", function pointerUp() {
@@ -61,6 +63,12 @@
 			insertWalls();
 		});
 		
+		var insertWallsButton = this.add.text(0, 790, "Reset", { fontFamily: "Verdana" });
+		insertWallsButton.setInteractive();
+		insertWallsButton.on("pointerup", function pointerUp() {
+			resetView();
+		});
+		
 		var index = 0;
 		for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
 			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
@@ -69,31 +77,45 @@
 				tile.state = 0;
 				tile.walkable = true;
 				tile.updateState = function () {
-					if (this.state == 1) {
+					if (this.state == 1) { 
 						this.setAlpha(1);
 						this.setStyle({fill: "#0055aa"});
-						this.text = "A"
+						this.text = "A";
 					} else if (this.state == 2) {
 						this.setAlpha(1);
 						this.setStyle({fill: "#ffa500"});
-						this.text = "B"
-					} else if (this.state == 3) {
+						this.text = "B";
+					} else if (this.state == 3) { 
 						this.setAlpha(0.5);
 						this.setStyle({fill: "#0055aa"});
-						this.text = "+"
+						this.text = "+";
 					} else if (this.state == 4) {
 						this.setAlpha(1);
 						this.setStyle({fill: "#339933"});
-						this.text = "+"
-					} else if (this.state == 0) {
+						this.text = "+";
+					} else if (this.state == 0) { //normaler Boden
 						this.setAlpha(0.5);
 						this.setStyle({fill: "#ffffff"});
-						this.text = "0"
-					} else if (this.state == 5) {
+						this.text = "0";
+						this.weight = 1;
+						this.walkable = true;
+					} else if (this.state == 5) { //Wand
 						this.setAlpha(0.1);
 						this.setStyle({fill: "#ffffff"});
-						this.text = "X"
+						this.text = "X";
 						this.walkable = false;
+					} else if (this.state == 6) { //Schwieriges Terrain
+						this.setAlpha(0.25);
+						this.setStyle({fill: "#ffffff"});
+						this.text = "0";
+						this.walkable = true;
+						this.weight = 2;
+					} else if (this.state == 7) { //Wasser
+						this.setAlpha(0.25);
+						this.setStyle({fill: "#006688"});
+						this.text = "0";
+						this.walkable = true;
+						this.weight = 4;
 					}
 				};
 				tile.setInteractive();
@@ -199,7 +221,13 @@ function insertWalls() {
 	}
 	
 }
-	
+
+function resetView() {
+	for (var i = 0; i < tileArray.length; i++) {
+		tileArray[i].state = 0;
+		tileArray[i].updateState();
+	}
+}
 	
 function calculatePath () {
 	
