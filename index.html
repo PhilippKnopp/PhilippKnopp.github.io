@@ -46,11 +46,12 @@
         caveLayer1.setOrigin(0.5, 0.5);
         
         this.load.image('caveLayer2', 'caveLayer2.png');
-        var caveLayer1 = this.add.image(800, 540, 'caveLayer2');
+        var caveLayer2 = this.add.image(800, 109, 'caveLayer2');
         caveLayer2.setOrigin(0.5, 0.5);
         
         this.load.on('progress', function (value) {
             console.log(value);
+            
         });
  
         this.load.on('complete', function () {
