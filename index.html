@@ -218,8 +218,7 @@ function insertWalls() {
 		
 		for (var j = 0; j < tileArray[i].neighbors; i++) {
 			if (tileArray[i].neighborsDistance[j] == "x") {
-				tileArray[i].neighborsDistance.splice(j, 1);
-				tileArray[i].neighbors.splice(j, 1);
+				tileArray[i].neighborsDistance[j] = 500;
 			}
 		}
 	}
