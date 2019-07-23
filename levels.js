@@ -87,7 +87,8 @@ function returnLevelType(level) {
 		return level1Type;
 	}
 }
-function returnLevelConnections(level) {
+
+function returnlevel1Connections(level) {
 	if (level == 1) {
 		return level1Connections;
 	}

@@ -42,7 +42,7 @@
 	var matrixHeight = 39;
 
 	function preload() {
-		console.log("Version 3.")
+		
 	}
 
 	function create() {
@@ -218,7 +218,8 @@ function insertWalls() {
 		
 		for (var j = 0; j < tileArray[i].neighbors; i++) {
 			if (tileArray[i].neighborsDistance[j] == "x") {
-				tileArray[i].neighborsDistance[j] = 500;
+				tileArray[i].neighborsDistance.splice(j, 1);
+				tileArray[i].neighbors.splice(j, 1);
 			}
 		}
 	}
@@ -257,7 +258,7 @@ function calculatePath () {
             frontierListValues.push(frontierList[i].wayPointUsefulness);
         };
         activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
-		console.log(frontierList[activeNode].name);
+
         // Wenn Knoten mit Niedrigster wayPointUsefulness schon das Ziel ist, ist A* fertig
         if (frontierList[activeNode].text == "B") {
 			pathFound == true;
