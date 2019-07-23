@@ -144,7 +144,6 @@
 				tile.neighbors = [];
 				tile.neighborsDistance = [];
 				tile.checkForNeighbors = function () {
-					if (this.walkable == true) {
 					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != 0 && tileArray[this.name-1-matrixWidth].walkable == true) {
 						this.neighbors.push(tileArray[this.name-1-matrixWidth]);
 						this.neighborsDistance.push(1.5*tileArray[this.name-1-matrixWidth].weight);
@@ -177,7 +176,6 @@
 						this.neighbors.push(tileArray[this.name-1]);
 						this.neighborsDistance.push(1*tileArray[this.name-1].weight);
 					};
-				};
 				};
 				tile.weight = 1;
 				tile.estimatedWayToB = function () {
@@ -213,12 +211,18 @@ function insertWalls() {
 		tileArray[i].state = levelMap[i];
 		tileArray[i].updateState();
 	}
-	var levelMap =[];
+	var levelMapConnections = returnLevelConnections(1);
 	for (var i = 0; i < tileArray.length; i++) {
 		tileArray[i].checkForNeighbors();
-		levelMap.push(tileArray[i].neighborsDistance);
+		tileArray[i].neighborsDistance = levelMapConnections[i];
+		
+		for (var j = 0; j < tileArray[i].neighbors; i++) {
+			if (tileArray[i].neighborsDistance[j] == "x") {
+				tileArray[i].neighborsDistance.splice(j, 1);
+				tileArray[i].neighbors.splice(j, 1);
+			}
+		}
 	}
-	console.log(levelMap);
 }
 
 function resetView() {
@@ -271,7 +275,7 @@ function calculatePath () {
         }
 
         // berechne für diesen alle neighbors
-        frontierList[activeNode].checkForNeighbors();
+        //frontierList[activeNode].checkForNeighbors();
 
         // Füge Neighbors des aktuellen Knotens der Frontierlist hinzu
         for (var i = 0; i < frontierList[activeNode].neighbors.length; i++) {
