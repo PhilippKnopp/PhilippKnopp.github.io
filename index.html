@@ -42,7 +42,7 @@
 	var matrixHeight = 39;
 
 	function preload() {
-		console.log("Version 1.")
+		console.log("Version 2.")
 	}
 
 	function create() {
@@ -257,7 +257,7 @@ function calculatePath () {
             frontierListValues.push(frontierList[i].wayPointUsefulness);
         };
         activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
-
+		console.log(activeNode);
         // Wenn Knoten mit Niedrigster wayPointUsefulness schon das Ziel ist, ist A* fertig
         if (frontierList[activeNode].text == "B") {
 			pathFound == true;
