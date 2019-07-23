@@ -9,6 +9,7 @@
 	<style>* { padding: 0; margin: 0;}</style>
 	
 <script src="//cdn.jsdelivr.net/npm/phaser@3.18.1/dist/phaser.min.js"></script>
+<script src="levels.js"></script>
 
 </head>
 
@@ -37,24 +38,11 @@
 	var game = new Phaser.Game(config);
 	var objects = {};
 	var tileArray = [];
-	var matrixWidth = 10;
-	var matrixHeight = 20;
+	var matrixWidth = 23;
+	var matrixHeight = 39;
 
 	function preload() {
-		this.load.image('caveLayer1', 'caveLayer1.png');
-        
-        this.load.image('caveLayer2', 'caveLayer2.png');
-        
-        this.load.on('progress', function (value) {
-            console.log(value);
-            
-        });
- 
-        this.load.on('complete', function () {
-            console.log('complete');
-            //caveLayer1.destroy();
-            //caveLayer2.destroy();
-        });
+		
 	}
 
 	function create() {
@@ -62,13 +50,7 @@
 		objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0A0C0F');
         
-        var caveLayer1 = this.add.image(800, 540, 'caveLayer1');
-        caveLayer1.setOrigin(0.5, 0.5);
-        
-        var caveLayer2 = this.add.image(800, 109, 'caveLayer2');
-        caveLayer2.setOrigin(0.5, 0.5);
-        
-		var Info = this.add.text(0, 630, "Click on a '0' to set a Starting Point 'A'\nClick on a '0' twice to set a Goal Point 'B'", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 9 });
+		var Info = this.add.text(0, 630, "Click on a '0' to set a Starting Point 'A'\nClick on a '0' twice to set a Goal Point 'B'", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
 		
 		var calculatePathButton = this.add.text(0, 700, "Calculate Path", { fontFamily: "Verdana" });
 		calculatePathButton.setInteractive();
@@ -82,9 +64,9 @@
 			insertWalls();
 		});
 		
-		var insertWallsButton = this.add.text(0, 790, "Reset", { fontFamily: "Verdana" });
-		insertWallsButton.setInteractive();
-		insertWallsButton.on("pointerup", function pointerUp() {
+		var resetButton = this.add.text(0, 790, "Reset", { fontFamily: "Verdana" });
+		resetButton.setInteractive();
+		resetButton.on("pointerup", function pointerUp() {
 			resetView();
 		});
 		
@@ -130,11 +112,23 @@
 						this.walkable = true;
 						this.weight = 2;
 					} else if (this.state == 7) { //Wasser
-						this.setAlpha(0.25);
+						this.setAlpha(0.5);
 						this.setStyle({fill: "#006688"});
-						this.text = "0";
+						this.text = "W";
 						this.walkable = true;
 						this.weight = 4;
+					} else if (this.state == 8) { //Niedriges Wasser
+						this.setAlpha(0.25);
+						this.setStyle({fill: "#006688"});
+						this.text = "W";
+						this.walkable = true;
+						this.weight = 2;
+					} else if (this.state == 9) { //Trap
+						this.setAlpha(0.5);
+						this.setStyle({fill: "#ffffff"});
+						this.text = "T";
+						this.weight = 1;
+						this.walkable = true;
 					}
 				};
 				tile.setInteractive();
@@ -212,33 +206,11 @@ function findEnd(element) {
 }
 	
 function insertWalls() {
-	var levelMap = [
-		0, 0, 5, 0, 0, 0, 0, 0, 0, 5,
-		0, 0, 5, 0, 0, 0, 0, 0, 5, 0,
-		0, 0, 5, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 5, 0, 0, 5, 0, 0,
-		0, 0, 0, 0, 5, 0, 0, 5, 0, 0,
-		0, 0, 5, 5, 5, 0, 0, 5, 5, 5,
-		5, 0, 0, 0, 0, 0, 0, 5, 0, 0,
-		5, 0, 0, 0, 0, 0, 0, 5, 0, 0,
-		5, 0, 0, 0, 0, 0, 0, 0, 0, 5,
-		0, 0, 5, 5, 5, 0, 0, 5, 5, 5,
-		0, 0, 5, 0, 0, 0, 0, 0, 0, 5,
-		0, 0, 5, 0, 0, 0, 0, 0, 5, 0,
-		0, 0, 5, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 5, 0, 0, 5, 0, 0,
-		0, 0, 0, 0, 5, 0, 0, 5, 0, 0,
-		0, 0, 5, 5, 5, 0, 0, 5, 5, 5,
-		5, 0, 0, 0, 0, 0, 0, 5, 0, 0,
-		5, 0, 0, 0, 0, 0, 0, 5, 0, 0,
-		5, 0, 0, 0, 0, 0, 0, 5, 0, 5,
-		0, 0, 5, 5, 5, 0, 0, 5, 5, 5,
-	];
+	var levelMap = returnLevelType(1);
 	for (var i = 0; i < tileArray.length; i++) {
 		tileArray[i].state = levelMap[i];
 		tileArray[i].updateState();
 	}
-	
 }
 
 function resetView() {
