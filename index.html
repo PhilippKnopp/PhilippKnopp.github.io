@@ -144,6 +144,7 @@
 				tile.neighbors = [];
 				tile.neighborsDistance = [];
 				tile.checkForNeighbors = function () {
+					if (this.walkable == true) {
 					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != 0 && tileArray[this.name-1-matrixWidth].walkable == true) {
 						this.neighbors.push(tileArray[this.name-1-matrixWidth]);
 						this.neighborsDistance.push(1.5*tileArray[this.name-1-matrixWidth].weight);
@@ -176,6 +177,7 @@
 						this.neighbors.push(tileArray[this.name-1]);
 						this.neighborsDistance.push(1*tileArray[this.name-1].weight);
 					};
+				};
 				};
 				tile.weight = 1;
 				tile.estimatedWayToB = function () {
