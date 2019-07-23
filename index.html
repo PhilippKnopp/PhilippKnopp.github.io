@@ -50,21 +50,21 @@
 		objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0A0C0F');
         
-		var Info = this.add.text(0, 630, "Click on a '0' to set a Starting Point 'A'\nClick on a '0' twice to set a Goal Point 'B'", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
+		var Info = this.add.text(600, 15, "Click on a '0' to set a Starting Point 'A'\nClick on a '0' twice to set a Goal Point 'B'", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
 		
-		var calculatePathButton = this.add.text(0, 700, "Calculate Path", { fontFamily: "Verdana" });
+		var calculatePathButton = this.add.text(600, 85, "Calculate Path", { fontFamily: "Verdana" });
 		calculatePathButton.setInteractive();
 		calculatePathButton.on("pointerup", function pointerUp() {
 			calculatePath();
 		});
 		
-		var insertWallsButton = this.add.text(0, 730, "Insert Walls", { fontFamily: "Verdana" });
+		var insertWallsButton = this.add.text(600, 115, "Insert Walls", { fontFamily: "Verdana" });
 		insertWallsButton.setInteractive();
 		insertWallsButton.on("pointerup", function pointerUp() {
 			insertWalls();
 		});
 		
-		var resetButton = this.add.text(0, 790, "Reset", { fontFamily: "Verdana" });
+		var resetButton = this.add.text(600, 145, "Reset", { fontFamily: "Verdana" });
 		resetButton.setInteractive();
 		resetButton.on("pointerup", function pointerUp() {
 			resetView();
@@ -211,6 +211,12 @@ function insertWalls() {
 		tileArray[i].state = levelMap[i];
 		tileArray[i].updateState();
 	}
+	var levelMap =[];
+	for (var i = 0; i < tileArray.length; i++) {
+		tileArray[i].checkForNeighbors();
+		levelMap.push(tileArray[i].neighborsDistance);
+	}
+	console.log(levelMap);
 }
 
 function resetView() {
