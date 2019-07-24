@@ -41,11 +41,12 @@
 	var matrixWidth = 23;
 	var matrixHeight = 39;
 	
-	var mapImage;
+	var mapImg;
 
 	function preload() {
-		console.log("Version 3.7");
+		console.log("Version 4");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
+        this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
 	}
 
 	function create() {
@@ -53,7 +54,8 @@
 		objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0A0C0F');
         
-		mapImage = this.add.image(287, 498, 'map-lvl-1').setAlpha(0.5);
+		mapImg = this.add.image(287, 498, 'map-lvl-1').setAlpha(0.5);
+        tileSpt = this.add.sprite(540, 800, 'tileSprite').setAlpha(1);
 		
 		
 		var Info = this.add.text(600, 15, "Click on a '0' to set a Starting Point 'A'\nClick on a '0' twice to set a Goal Point 'B'", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
@@ -79,59 +81,43 @@
 		var index = 0;
 		for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
 			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
-				var tile = this.add.text(xPos*25, yPos*25+15, "0", { fontFamily: "Verdana" });
-				tile.setAlpha(0.01);
+                var tile = this.add.sprite(xPos*25, yPos*25+15, 'tileSprite');
+				//var tile = this.add.text(xPos*25, yPos*25+15, "0", { fontFamily: "Verdana" });
+				tile.setAlpha(1);
 				tile.state = 0;
+                tile.text = "0";
 				tile.walkable = [1,1,1,1,1,1,1,1];
 				tile.updateState = function () {
-					if (this.state == 1) { 
-						this.setAlpha(1);
-						this.setStyle({fill: "#0055aa"});
+					if (this.state == 1) {
+						this.setFrame(1);
 						this.text = "A";
 					} else if (this.state == 2) {
-						this.setAlpha(1);
-						this.setStyle({fill: "#ffa500"});
+						this.setFrame(2);
 						this.text = "B";
 					} else if (this.state == 3) { 
-						this.setAlpha(0.01);
-						this.setStyle({fill: "#0055aa"});
 						this.text = "+";
 					} else if (this.state == 4) {
-						this.setAlpha(1);
-						this.setStyle({fill: "#339933"});
 						this.text = "+";
-					} else if (this.state == 0) { //normaler Boden
-						this.setAlpha(0.01);
-						this.setStyle({fill: "#ffffff"});
+					} else if (this.state == 0) { // normaler Boden
 						this.text = "0";
-						this.weight = 1;
+                        this.weight = 1;
 						this.walkable = [1,1,1,1,1,1,1,1];
-					} else if (this.state == 5) { //Wand
-						this.setAlpha(0.01);
-						this.setStyle({fill: "#ffffff"});
+					} else if (this.state == 5) { // Wand
 						this.text = "X";
 						this.walkable = [0,0,0,0,0,0,0,0];
-					} else if (this.state == 6) { //Schwieriges Terrain
-						this.setAlpha(0.01);
-						this.setStyle({fill: "#ffffff"});
+					} else if (this.state == 6) { // Schwieriges Terrain
 						this.text = "0";
 						this.walkable = [2,2,2,2,2,2,2,2];
 						this.weight = 2;
-					} else if (this.state == 7) { //Wasser
-						this.setAlpha(0);
-						this.setStyle({fill: "#006688"});
+					} else if (this.state == 7) { // Wasser
 						this.text = "W";
 						this.walkable = [3,3,3,3,3,3,3,3];
 						this.weight = 3;
-					} else if (this.state == 8) { //Niedriges Wasser
-						this.setAlpha(0.01);
-						this.setStyle({fill: "#006688"});
+					} else if (this.state == 8) { // Niedriges Wasser
 						this.text = "W";
 						this.walkable = [2,2,2,2,2,2,2,2];
 						this.weight = 2;
-					} else if (this.state == 9) { //Trap
-						this.setAlpha(0.01);
-						this.setStyle({fill: "#ffffff"});
+					} else if (this.state == 9) { // Trap
 						this.text = "T";
 						this.weight = 1;
 						this.walkable = [1,1,1,1,1,1,1,1];
