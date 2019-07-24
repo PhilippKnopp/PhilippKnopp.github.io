@@ -44,7 +44,7 @@
 	var mapImg;
 
 	function preload() {
-		console.log("Version 4");
+		console.log("Version 4.1");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
 	}
@@ -97,8 +97,10 @@
 					} else if (this.state == 3) { 
 						this.text = "+";
 					} else if (this.state == 4) {
+                        this.setFrame(3);
 						this.text = "+";
 					} else if (this.state == 0) { // normaler Boden
+                        this.setFrame(0);
 						this.text = "0";
                         this.weight = 1;
 						this.walkable = [1,1,1,1,1,1,1,1];
