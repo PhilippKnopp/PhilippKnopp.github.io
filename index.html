@@ -44,7 +44,7 @@
 	var mapImage;
 
 	function preload() {
-		console.log("Version 3.2");
+		console.log("Version 3.3");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
 	}
 
@@ -54,6 +54,9 @@
 		objects.camera.setBackgroundColor('#0A0C0F');
         
 		mapImage = this.add.image(0, 0, 'map-lvl-1').setAlpha(0.5);
+		mapImage.originX = 0;
+		mapImage.originY = 0;
+		
 		
 		var Info = this.add.text(600, 15, "Click on a '0' to set a Starting Point 'A'\nClick on a '0' twice to set a Goal Point 'B'", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
 		
