@@ -80,7 +80,7 @@
 		for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
 			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
 				var tile = this.add.text(xPos*25, yPos*25+15, "0", { fontFamily: "Verdana" });
-				tile.setAlpha(0);
+				tile.setAlpha(0.01);
 				tile.state = 0;
 				tile.walkable = [1,1,1,1,1,1,1,1];
 				tile.updateState = function () {
@@ -93,7 +93,7 @@
 						this.setStyle({fill: "#ffa500"});
 						this.text = "B";
 					} else if (this.state == 3) { 
-						this.setAlpha(0);
+						this.setAlpha(0.01);
 						this.setStyle({fill: "#0055aa"});
 						this.text = "+";
 					} else if (this.state == 4) {
@@ -101,18 +101,18 @@
 						this.setStyle({fill: "#339933"});
 						this.text = "+";
 					} else if (this.state == 0) { //normaler Boden
-						this.setAlpha(0);
+						this.setAlpha(0.01);
 						this.setStyle({fill: "#ffffff"});
 						this.text = "0";
 						this.weight = 1;
 						this.walkable = [1,1,1,1,1,1,1,1];
 					} else if (this.state == 5) { //Wand
-						this.setAlpha(0);
+						this.setAlpha(0.01);
 						this.setStyle({fill: "#ffffff"});
 						this.text = "X";
 						this.walkable = [0,0,0,0,0,0,0,0];
 					} else if (this.state == 6) { //Schwieriges Terrain
-						this.setAlpha(0);
+						this.setAlpha(0.01);
 						this.setStyle({fill: "#ffffff"});
 						this.text = "0";
 						this.walkable = [2,2,2,2,2,2,2,2];
@@ -124,13 +124,13 @@
 						this.walkable = [3,3,3,3,3,3,3,3];
 						this.weight = 3;
 					} else if (this.state == 8) { //Niedriges Wasser
-						this.setAlpha(0);
+						this.setAlpha(0.01);
 						this.setStyle({fill: "#006688"});
 						this.text = "W";
 						this.walkable = [2,2,2,2,2,2,2,2];
 						this.weight = 2;
 					} else if (this.state == 9) { //Trap
-						this.setAlpha(0);
+						this.setAlpha(0.01);
 						this.setStyle({fill: "#ffffff"});
 						this.text = "T";
 						this.weight = 1;
