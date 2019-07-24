@@ -42,7 +42,7 @@
 	var matrixHeight = 39;
 
 	function preload() {
-		console.log("Version 3.")
+		console.log("Version 3.1");
 	}
 
 	function create() {
@@ -207,20 +207,15 @@ function findEnd(element) {
 	
 function insertWalls() {
 	
-	var logthing = [];
-	
 	var levelMap = returnLevelType(1);
 	for (var i = 0; i < tileArray.length; i++) {
 		tileArray[i].state = levelMap[i];
 		tileArray[i].updateState();
-		logthing.push(tileArray[i].walkable);
 	}
-/*	var levelMapConnections = returnLevelConnections(1);
+	var levelMapConnections = returnLevelConnections(1);
 	for (var i = 0; i < tileArray.length; i++) {
 		tileArray[i].walkable = levelMapConnections[i];
-	}*/
-	
-	console.log(logthing);
+	}
 }
 
 function resetView() {
