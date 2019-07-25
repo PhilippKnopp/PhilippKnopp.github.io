@@ -42,11 +42,18 @@
 	var matrixHeight = 39;
 	
 	var mapImg;
+    var mage;
+    var rogue;
+    var barb;
 
 	function preload() {
 		console.log("Version 4.1");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
+        
+        this.load.spritesheet('mageSprite', 'img/mToken.png', { frameWidth: 30, frameHeight: 30 });
+        this.load.spritesheet('rogueSprite', 'img/rToken.png', { frameWidth: 30, frameHeight: 30 });
+        this.load.spritesheet('barbSprite', 'img/bToken.png', { frameWidth: 30, frameHeight: 30 });
 	}
 
 	function create() {
@@ -54,8 +61,7 @@
 		objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0A0C0F');
         
-		mapImg = this.add.image(287, 498, 'map-lvl-1').setAlpha(0.5);
-        tileSpt = this.add.sprite(540, 800, 'tileSprite').setAlpha(1);
+		mapImg = this.add.image(297, 498, 'map-lvl-1').setAlpha(0.5);
 		
 		
 		var Info = this.add.text(600, 15, "Click on a '0' to set a Starting Point 'A'\nClick on a '0' twice to set a Goal Point 'B'", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
@@ -66,11 +72,11 @@
 			calculatePath();
 		});
 		
-		var insertWallsButton = this.add.text(600, 115, "Insert Walls", { fontFamily: "Verdana" });
+		/*var insertWallsButton = this.add.text(600, 115, "Insert Walls", { fontFamily: "Verdana" });
 		insertWallsButton.setInteractive();
 		insertWallsButton.on("pointerup", function pointerUp() {
 			insertWalls();
-		});
+		});*/
 		
 		var resetButton = this.add.text(600, 145, "Reset", { fontFamily: "Verdana" });
 		resetButton.setInteractive();
@@ -81,15 +87,15 @@
 		var index = 0;
 		for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
 			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
-                var tile = this.add.sprite(xPos*25+4, yPos*25+26, 'tileSprite');
-				//var tile = this.add.text(xPos*25, yPos*25+15, "0", { fontFamily: "Verdana" });
+                var tile = this.add.sprite(xPos*25+15, yPos*25+26, 'tileSprite');
 				tile.setAlpha(1);
 				tile.state = 0;
                 tile.text = "0";
 				tile.walkable = [1,1,1,1,1,1,1,1];
 				tile.updateState = function () {
 					if (this.state == 1) {
-						this.setFrame(1);
+                        mage.position(this.x, this.y);
+                        mage.setAlpha(1);
 						this.text = "A";
 					} else if (this.state == 2) {
 						this.setFrame(2);
@@ -185,10 +191,19 @@
 				tile.distanceTravelled;
 				tile.wayPointUsefulness;
 				tile.entryPoint;
+                tile.occupiedby;
 				tileArray.push(tile);
 			}
 		}
 		
+        insertWalls();
+        
+        mage = this.add.sprite(20, 20, 'mageSprite').setalpha(0);
+        mage.position = function (tileX, tileY) {
+            this.x = tileX;
+            this.y = tileY;
+        };
+        
 	}
 	
 function findStart(element) {
