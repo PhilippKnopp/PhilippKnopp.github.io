@@ -45,15 +45,17 @@
     var mage;
     var rogue;
     var barb;
+    
+    var level = 1;
 
 	function preload() {
-		console.log("Version 4.1");
+		console.log("Version 4.2");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
-        this.load.spritesheet('mageSprite', 'img/mToken.png', { frameWidth: 30, frameHeight: 30 });
-        this.load.spritesheet('rogueSprite', 'img/rToken.png', { frameWidth: 30, frameHeight: 30 });
-        this.load.spritesheet('barbSprite', 'img/bToken.png', { frameWidth: 30, frameHeight: 30 });
+        this.load.spritesheet('mageSprite', 'img/mToken.png', { frameWidth: 25, frameHeight: 25 });
+        this.load.spritesheet('rogueSprite', 'img/rToken.png', { frameWidth: 25, frameHeight: 25 });
+        this.load.spritesheet('barbSprite', 'img/bToken.png', { frameWidth: 25, frameHeight: 25 });
 	}
 
 	function create() {
@@ -93,11 +95,12 @@
                 tile.text = "0";
 				tile.walkable = [1,1,1,1,1,1,1,1];
 				tile.updateState = function () {
-					if (this.state == 1) {
-                        mage.position(this.x, this.y);
+					if (this.occupiedBy == "mage") {
+                        mage.position(this.x, this.y, this.name);
                         mage.setAlpha(1);
 						this.text = "A";
-					} else if (this.state == 2) {
+					};
+                    if (this.state == 2) {
 						this.setFrame(2);
 						this.text = "B";
 					} else if (this.state == 3) { 
@@ -134,7 +137,7 @@
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
 					if (this.state < 2) {
-						this.state++;
+						this.state = 2;
 					} else {
 						this.state = 0;
 					};
@@ -191,7 +194,7 @@
 				tile.distanceTravelled;
 				tile.wayPointUsefulness;
 				tile.entryPoint;
-                tile.occupiedby;
+                tile.occupiedBy;
 				tileArray.push(tile);
 			}
 		}
@@ -199,11 +202,17 @@
         insertWalls();
         
         mage = this.add.sprite(20, 20, 'mageSprite').setAlpha(0);
-        mage.position = function (tileX, tileY) {
+        mage.mapPosition = function (tileX, tileY, tileIndex) {
             this.x = tileX;
             this.y = tileY;
+            mage.onTile = tileIndex;
         };
-        
+        mage.onTile;
+        mage.setOnMap = function () {
+            tileArray[mageStartingPosition[level]].occupiedBy = "mage";
+            tileArray[mageStartingPosition[level]].updateState();
+        };
+        mage.setOnMap();
 	}
 	
 function findStart(element) {
