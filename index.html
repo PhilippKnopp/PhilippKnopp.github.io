@@ -74,7 +74,7 @@
 		calculatePathButton.setInteractive();
 		calculatePathButton.on("pointerup", function pointerUp() {
             let activeChar= playerChars.findIndex(findActiveChar);
-			calculatePath(activeChar.onTile);
+			calculatePath(playerChars[activeChar].onTile);
 		});
 		
 		/*var insertWallsButton = this.add.text(600, 115, "Insert Walls", { fontFamily: "Verdana" });
