@@ -99,6 +99,7 @@
 				tile.walkable = [1,1,1,1,1,1,1,1];
 				tile.updateState = function () {
 					if (this.occupiedBy == "mage") {
+                        console.log("this.name" + this.name);
                         mage.mapPosition(this.x, this.y, this.name);
                         mage.setAlpha(1);
 						this.text = "A";
@@ -135,7 +136,7 @@
 						this.text = "T";
 						this.weight = 1;
 						this.walkable = [1,1,1,1,1,1,1,1];
-					}
+					};
 				};
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
@@ -203,11 +204,6 @@
 		}
         
         mage = this.add.sprite(20, 20, 'mageSprite').setAlpha(0);
-        mage.mapPosition = function (tileX, tileY, tileIndex) {
-            this.x = tileX;
-            this.y = tileY;
-            mage.onTile = tileIndex;
-        };
         mage.onTile;
         mage.active = false;
         mage.setOnMap = function () {
@@ -222,6 +218,12 @@
             barb.active = false;
             barb.setFrame(0);
         });
+        mage.mapPosition = function (tileX, tileY, tileIndex) {
+            this.x = tileX;
+            this.y = tileY;
+            mage.onTile = tileIndex;
+            console.log("mage on Tile" +mage.onTile);
+        };
         playerChars.push(mage);
         
         
@@ -258,7 +260,7 @@ function resetView() {
 	}
 }
 	
-function calculatePath (startfromHere) {
+function calculatePath (nameOfA) {
 	
 	var mappedList = [];
 	var frontierList = [];
@@ -269,7 +271,7 @@ function calculatePath (startfromHere) {
 	
 	
 	// finde A und füge ihn der frontierList hinzu {name, wayPointUsefulness}
-	var nameOfA = startfromHere;
+    console.log("nameOfA" +nameOfA);
 	tileArray[nameOfA].entryPoint = "Start";
 	tileArray[nameOfA].distanceTravelled = 0;
 	tileArray[nameOfA].wayPointUsefulness = tileArray[nameOfA].distanceTravelled + tileArray[nameOfA].estimatedWayToB();
