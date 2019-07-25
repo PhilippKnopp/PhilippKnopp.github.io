@@ -51,7 +51,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 4.5");
+		console.log("Version 4.6");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -74,9 +74,7 @@
 		calculatePathButton.setInteractive();
 		calculatePathButton.on("pointerup", function pointerUp() {
             let activeChar = playerChars.findIndex(findActiveChar);
-            console.log(activeChar);
-            console.log(playerChars);
-			calculatePath(playerChars[0].onTile);
+			calculatePath(playerChars[activeChar].onTile);
 		});
 		
 		/*var insertWallsButton = this.add.text(600, 115, "Insert Walls", { fontFamily: "Verdana" });
@@ -212,6 +210,7 @@
             tileArray[mageStartingPosition[level]].occupiedBy = "mage";
             tileArray[mageStartingPosition[level]].updateState();
         };
+        mage.setInteractive();
         mage.on("pointerup", function pointerUp () {
             this.active = true;
             this.setFrame(1);
@@ -291,10 +290,10 @@ function calculatePath (nameOfA) {
 
         // Wenn Knoten mit Niedrigster wayPointUsefulness schon das Ziel ist, ist A* fertig
         if (frontierList[activeNode].text == "B") {
-			pathFound == true;
+			pathFound = true;
 			let backtraceIndex = tileArray.findIndex(findEnd);
 			
-			while (tileArray[tileArray[backtraceIndex].entryPoint].text != "A") {
+			while (tileArray[tileArray[backtraceIndex].entryPoint].name != nameOfA) {
 				path.unshift(tileArray[backtraceIndex].entryPoint);
 				tileArray[tileArray[backtraceIndex].entryPoint].state = 4;
 				tileArray[tileArray[backtraceIndex].entryPoint].updateState();
