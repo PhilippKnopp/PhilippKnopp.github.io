@@ -46,10 +46,12 @@
     var rogue;
     var barb;
     
+    var playerChars = [];
+    
     var level = 1;
 
 	function preload() {
-		console.log("Version 4.3");
+		console.log("Version 4.4");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -66,12 +68,13 @@
 		mapImg = this.add.image(297, 498, 'map-lvl-1').setAlpha(0.5);
 		
 		
-		var Info = this.add.text(600, 15, "Click on a '0' to set a Starting Point 'A'\nClick on a '0' twice to set a Goal Point 'B'", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
+		var Info = this.add.text(600, 15, "Click on a Character to activate it\nClick on a Tile to set a Goal, where the Character is supposed to walk", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
 		
 		var calculatePathButton = this.add.text(600, 85, "Calculate Path", { fontFamily: "Verdana" });
 		calculatePathButton.setInteractive();
 		calculatePathButton.on("pointerup", function pointerUp() {
-			calculatePath();
+            let activeChar= playerChars.findIndex(findActiveChar);
+			calculatePath(activeChar.onTile);
 		});
 		
 		/*var insertWallsButton = this.add.text(600, 115, "Insert Walls", { fontFamily: "Verdana" });
@@ -198,8 +201,6 @@
 				tileArray.push(tile);
 			}
 		}
-		
-        insertWalls();
         
         mage = this.add.sprite(20, 20, 'mageSprite').setAlpha(0);
         mage.mapPosition = function (tileX, tileY, tileIndex) {
@@ -208,19 +209,32 @@
             mage.onTile = tileIndex;
         };
         mage.onTile;
+        mage.active = false;
         mage.setOnMap = function () {
             tileArray[mageStartingPosition[level]].occupiedBy = "mage";
             tileArray[mageStartingPosition[level]].updateState();
         };
-        mage.setOnMap();
+        mage.on("pointerup", function pointerUp () {
+            this.active = true;
+            this.setFrame(1);
+            rogue.active = false;
+            rogue.setFrame(0);
+            barb.active = false;
+            barb.setFrame(0);
+        });
+        playerChars.push(mage);
+        
+        
+        insertWalls();
+        
 	}
 	
-function findStart(element) {
-  return element.text == "A";
+function findActiveChar(element) {
+    return element.active == true;
 }
-	
+    
 function findEnd(element) {
-  return element.text == "B";
+    return element.text == "B";
 }
 	
 function insertWalls() {
@@ -234,6 +248,7 @@ function insertWalls() {
 	for (var i = 0; i < tileArray.length; i++) {
 		tileArray[i].walkable = levelMapConnections[i];
 	}
+    mage.setOnMap();
 }
 
 function resetView() {
@@ -243,7 +258,7 @@ function resetView() {
 	}
 }
 	
-function calculatePath () {
+function calculatePath (startfromHere) {
 	
 	var mappedList = [];
 	var frontierList = [];
@@ -254,7 +269,7 @@ function calculatePath () {
 	
 	
 	// finde A und füge ihn der frontierList hinzu {name, wayPointUsefulness}
-	var nameOfA = tileArray[tileArray.findIndex(findStart)].name;
+	var nameOfA = startfromHere;
 	tileArray[nameOfA].entryPoint = "Start";
 	tileArray[nameOfA].distanceTravelled = 0;
 	tileArray[nameOfA].wayPointUsefulness = tileArray[nameOfA].distanceTravelled + tileArray[nameOfA].estimatedWayToB();
