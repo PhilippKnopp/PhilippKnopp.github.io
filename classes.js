@@ -33,5 +33,5 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.active = true;
         this.setFrame(1);
     }
-    
+
 }

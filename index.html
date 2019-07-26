@@ -78,10 +78,10 @@
 			calculatePath(figuresOnMap[activeChar].onTile);
 		});
 		
-		/*var insertWallsButton = this.add.text(600, 115, "Insert Walls", { fontFamily: "Verdana" });
-		insertWallsButton.setInteractive();
-		insertWallsButton.on("pointerup", function pointerUp() {
-			insertWalls();
+		/*var buildLevelButton = this.add.text(600, 115, "Insert Walls", { fontFamily: "Verdana" });
+		buildLevelButton.setInteractive();
+		buildLevelButton.on("pointerup", function pointerUp() {
+			buildLevel();
 		});*/
 		
 		var resetButton = this.add.text(600, 145, "Reset", { fontFamily: "Verdana" });
@@ -94,7 +94,6 @@
 		for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
 			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
                 var tile = this.add.sprite(xPos*25+15, yPos*25+26, 'tileSprite');
-				tile.setAlpha(1);
 				tile.state = 0;
                 tile.text = "0";
 				tile.walkable = [1,1,1,1,1,1,1,1];
@@ -143,12 +142,10 @@
 				};
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
-					if (this.state < 2) {
-						this.state = 2;
-					} else {
-						this.state = 0;
-					};
-					this.updateState();
+					if (this.occupiedBy == "" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1)) {
+                        this.setFrame(2);
+				        this.text = "B";
+                    }
 				});
 				tile.name = index++;
 				tile.neighbors = [];
@@ -201,7 +198,7 @@
 				tile.distanceTravelled;
 				tile.wayPointUsefulness;
 				tile.entryPoint;
-                tile.occupiedBy;
+                tile.occupiedBy = "";
 				tileArray.push(tile);
 			}
 		}
@@ -221,7 +218,7 @@
         rogue.dieSize = 8;
         figuresOnMap.push(rogue);
         
-        insertWalls();
+        buildLevel();
         
 	}
 	
@@ -233,7 +230,7 @@ function findEnd(element) {
     return element.text == "B";
 }
 	
-function insertWalls() {
+function buildLevel() {
 	
 	var levelMap = returnLevelType(1);
 	for (var i = 0; i < tileArray.length; i++) {
