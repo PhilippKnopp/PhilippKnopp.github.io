@@ -10,6 +10,7 @@
 	
 <script src="//cdn.jsdelivr.net/npm/phaser@3.18.1/dist/phaser.min.js"></script>
 <script src="levels.js"></script>
+<script src="classes.js"></script>
 
 </head>
 
@@ -203,7 +204,9 @@
 			}
 		}
         
-        mage = this.add.sprite(20, 20, 'mageSprite').setAlpha(0);
+        //mage = this.add.sprite(20, 20, 'mageSprite').setAlpha(0);
+        mage = new Figure ({scene: this, x:20, y:20, 'mageSprite'});
+        mage.setAlpha(0);
         mage.onTile;
         mage.active = false;
         mage.setOnMap = function () {
