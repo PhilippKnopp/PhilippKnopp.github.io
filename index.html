@@ -52,7 +52,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 4.7");
+		console.log("Version 5");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -99,10 +99,12 @@
                 tile.text = "0";
 				tile.walkable = [1,1,1,1,1,1,1,1];
 				tile.updateState = function () {
-					if (this.occupiedBy == "mage") {
-                        console.log("this.name" + this.name);
-                        mage.mapPosition(this.x, this.y, this.name);
-                        mage.setAlpha(1);
+					if (this.occupiedBy == "figure") {
+                        for (var i = 0; i < figuresOnMap.length; i++) {
+                            if (this.name == figuresOnMap[i].onTile) {
+                                figuresOnMap[i].mapPosition(this.x, this.y);
+                            }
+                        }
 						this.text = "A";
 					};
                     if (this.state == 2) {
@@ -205,18 +207,10 @@
 		}
         
         //mage = this.add.sprite(20, 20, 'mageSprite').setAlpha(0);
-        mage = new Figure ({scene: this, x:20, y:20}, 'mageSprite');
+        mage = new Figure ({scene:this, x:20, y:20}, 'mageSprite');
         mage.setAlpha(0);
-        mage.setOnMap = function () {
-            tileArray[mageStartingPosition[level]].occupiedBy = "mage";
-            tileArray[mageStartingPosition[level]].updateState();
-        };
-        mage.mapPosition = function (tileX, tileY, tileIndex) {
-            this.x = tileX;
-            this.y = tileY;
-            mage.onTile = tileIndex;
-            console.log("mage on Tile" +mage.onTile);
-        };
+        mage.onTile = mageStartingPosition[level];
+        
         figuresOnMap.push(mage);
         
         
@@ -243,7 +237,11 @@ function insertWalls() {
 	for (var i = 0; i < tileArray.length; i++) {
 		tileArray[i].walkable = levelMapConnections[i];
 	}
-    mage.setOnMap();
+    
+    for (var i = 0; i < figuresOnMap.length; i++) {
+        figuresOnMap[i].setOnMap();
+    }
+    
 }
 
 function resetView() {
