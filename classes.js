@@ -9,7 +9,6 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.setInteractive();
         this.on("pointerup", this.activateFigure, this);
         
-        this.
     }
     
     activateFigure() {
