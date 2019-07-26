@@ -2,7 +2,8 @@ class Figure extends Phaser.GameObjects.Sprite {
     constructor (config, key) {
         super(config.scene, config.x, config.y, key);
         config.scene.add.existing(this);
-
+        this.setAlpha(0);
+        
         this.onTile;
         this.active = false;
         
@@ -14,13 +15,14 @@ class Figure extends Phaser.GameObjects.Sprite {
             tileArray[this.onTile].updateState();
             this.setAlpha(1);
         };
-        
         this.mapPosition = function (tileX, tileY) {
             this.x = tileX;
             this.y = tileY;
         };
         
-        
+        this.movement = 6;
+        this.armor = 4;
+        this.dieSize;
     }
     
     activateFigure() {

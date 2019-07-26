@@ -52,7 +52,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 5");
+		console.log("Version 5.1");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -206,13 +206,20 @@
 			}
 		}
         
-        //mage = this.add.sprite(20, 20, 'mageSprite').setAlpha(0);
         mage = new Figure ({scene:this, x:20, y:20}, 'mageSprite');
-        mage.setAlpha(0);
         mage.onTile = mageStartingPosition[level];
-        
+        mage.dieSize = 4;
         figuresOnMap.push(mage);
         
+        barb = new Figure ({scene:this, x:20, y:20}, 'barbSprite');
+        barb.onTile = barbStartingPosition[level];
+        barb.dieSize = 12;
+        figuresOnMap.push(barb);
+        
+        rogue = new Figure ({scene:this, x:20, y:20}, 'rogueSprite');
+        rogue.onTile = rogueStartingPosition[level];
+        rogue.dieSize = 8;
+        figuresOnMap.push(rogue);
         
         insertWalls();
         
@@ -262,7 +269,6 @@ function calculatePath (nameOfA) {
 	
 	
 	// finde A und füge ihn der frontierList hinzu {name, wayPointUsefulness}
-    console.log("nameOfA" +nameOfA);
 	tileArray[nameOfA].entryPoint = "Start";
 	tileArray[nameOfA].distanceTravelled = 0;
 	tileArray[nameOfA].wayPointUsefulness = tileArray[nameOfA].distanceTravelled + tileArray[nameOfA].estimatedWayToB();
