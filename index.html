@@ -47,7 +47,7 @@
     var rogue;
     var barb;
     
-    var playerChars = [];
+    var figuresOnMap = [];
     
     var level = 1;
 
@@ -74,8 +74,8 @@
 		var calculatePathButton = this.add.text(600, 85, "Calculate Path", { fontFamily: "Verdana" });
 		calculatePathButton.setInteractive();
 		calculatePathButton.on("pointerup", function pointerUp() {
-            let activeChar = playerChars.findIndex(findActiveChar);
-			calculatePath(playerChars[activeChar].onTile);
+            let activeChar = figuresOnMap.findIndex(findActiveChar);
+			calculatePath(figuresOnMap[activeChar].onTile);
 		});
 		
 		/*var insertWallsButton = this.add.text(600, 115, "Insert Walls", { fontFamily: "Verdana" });
@@ -207,28 +207,17 @@
         //mage = this.add.sprite(20, 20, 'mageSprite').setAlpha(0);
         mage = new Figure ({scene: this, x:20, y:20}, 'mageSprite');
         mage.setAlpha(0);
-        mage.onTile;
-        mage.active = false;
         mage.setOnMap = function () {
             tileArray[mageStartingPosition[level]].occupiedBy = "mage";
             tileArray[mageStartingPosition[level]].updateState();
         };
-        mage.setInteractive();
-        mage.on("pointerup", function pointerUp () {
-            this.active = true;
-            this.setFrame(1);
-            rogue.active = false;
-            rogue.setFrame(0);
-            barb.active = false;
-            barb.setFrame(0);
-        });
         mage.mapPosition = function (tileX, tileY, tileIndex) {
             this.x = tileX;
             this.y = tileY;
             mage.onTile = tileIndex;
             console.log("mage on Tile" +mage.onTile);
         };
-        playerChars.push(mage);
+        figuresOnMap.push(mage);
         
         
         insertWalls();
