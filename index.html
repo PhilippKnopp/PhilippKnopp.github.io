@@ -52,7 +52,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 4.6");
+		console.log("Version 4.7");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -205,7 +205,7 @@
 		}
         
         //mage = this.add.sprite(20, 20, 'mageSprite').setAlpha(0);
-        mage = new Figure ({scene: this, x:20, y:20, 'mageSprite'});
+        mage = new Figure ({scene: this, x:20, y:20}, 'mageSprite');
         mage.setAlpha(0);
         mage.onTile;
         mage.active = false;
