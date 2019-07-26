@@ -12,7 +12,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     activateFigure() {
-        for (var i = 0; i < figuresOnMap.length, i++) {
+        for (var i = 0; i < figuresOnMap.length; i++) {
             figuresOnMap[i].active = false;
             figuresOnMap[i].setFrame(0);
         }
