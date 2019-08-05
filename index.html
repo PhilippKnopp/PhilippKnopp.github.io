@@ -43,6 +43,12 @@
 	var matrixHeight = 39;
 	
 	var mapImg;
+    var doorButton;
+    var moveButton;
+    var attackButton;
+    var searchButton;
+    var faceButton;
+    
     var mage;
     var rogue;
     var barb;
@@ -52,13 +58,19 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 5.1");
+		console.log("Version 5.2");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
         this.load.spritesheet('mageSprite', 'img/mToken.png', { frameWidth: 25, frameHeight: 25 });
         this.load.spritesheet('rogueSprite', 'img/rToken.png', { frameWidth: 25, frameHeight: 25 });
         this.load.spritesheet('barbSprite', 'img/bToken.png', { frameWidth: 25, frameHeight: 25 });
+        
+        this.load.spritesheet('doorSprite', 'img/door.png', { frameWidth: 61, frameHeight: 61 });
+        this.load.spritesheet('moveSprite', 'img/move.png', { frameWidth: 61, frameHeight: 61 });
+        this.load.spritesheet('attackSprite', 'img/attack.png', { frameWidth: 61, frameHeight: 61 });
+        this.load.spritesheet('searchSprite', 'img/search.png', { frameWidth: 61, frameHeight: 61 });
+        this.load.spritesheet('faceSprite', 'img/face.png', { frameWidth: 78, frameHeight: 78 });
 	}
 
 	function create() {
@@ -68,6 +80,12 @@
         
 		mapImg = this.add.image(297, 498, 'map-lvl-1').setAlpha(0.5);
 		
+        doorButton = this.add.sprite(400, 400, 'doorSprite').setAlpha(0);
+        moveButton = this.add.sprite(400, 400, 'moveSprite').setAlpha(0);
+        attackButton = this.add.sprite(400, 400, 'attackSprite').setAlpha(0);
+        searchButton = this.add.sprite(400, 400, 'searchSprite').setAlpha(0);
+        faceButton = this.add.sprite(400, 400, 'faceSprite').setAlpha(0);
+        
 		
 		var Info = this.add.text(600, 15, "Click on a Character to activate it\nClick on a Tile to set a Goal, where the Character is supposed to walk", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
 		

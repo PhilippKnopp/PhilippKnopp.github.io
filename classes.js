@@ -9,6 +9,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         
         this.setInteractive();
         this.on("pointerup", this.activateFigure, this);
+        this.on("pointerover", this.showActions, this);
         
         this.setOnMap = function () {
             tileArray[this.onTile].occupiedBy = "figure";
@@ -32,6 +33,13 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         this.active = true;
         this.setFrame(1);
+    }
+    
+    showActions() {
+        faceButton.x = this.x;
+        faceButton.y = this.y+20;
+        faceButton.setAlpha(1);
+        faceButton.setFrame(1);
     }
 
 }
