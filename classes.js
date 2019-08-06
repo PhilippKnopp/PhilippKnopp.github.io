@@ -42,16 +42,15 @@ class Figure extends Phaser.GameObjects.Sprite {
         faceButton.y = this.y;
         faceButton.setAlpha(1);
         
-        console.log(tileArray[this.onTile].neighbors);
+        //bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
         tileArray[this.onTile].checkForNeighbors();
-        console.log(tileArray[this.onTile].neighbors);
-        moveButton.x = this.x+buttonXpos;
-        moveButton.y = this.y;
-        moveButton.setAlpha(1);
-        buttonXpos += 85;
+        if (tileArray[this.onTile].neighbors.length != 0) {
+            moveButton.x = this.x+buttonXpos;
+            moveButton.y = this.y;
+            moveButton.setAlpha(1);
+            buttonXpos += 85;
+        }
         tileArray[this.onTile].neighbors.length = 0;
-        console.log(tileArray[this.onTile].neighbors);
-        
         
         attackButton.x = this.x+buttonXpos;
         attackButton.y = this.y;
