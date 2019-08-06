@@ -96,10 +96,10 @@
 			calculatePath(figuresOnMap[activeChar].onTile);
 		});
         
-        this.input.on("pointerup", () => 
+        this.input.on("pointerup", function pointerUp() {
             deactivateFigures();
             hideActions();
-		);
+        });
         
 		
 		/*var buildLevelButton = this.add.text(800, 115, "Insert Walls", { fontFamily: "Verdana" });
