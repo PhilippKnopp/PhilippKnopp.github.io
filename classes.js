@@ -11,7 +11,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.on("pointerup", this.activateFigure, this);
         
         if (figuresOnMap.findIndex(findActiveChar) == -1) {
-            this.on("pointerout", hideActions(), this);
+            this.on("pointerout", this.hideFace, this);
             this.on("pointerover", this.showActions, this);
         }
         
@@ -91,6 +91,10 @@ class Figure extends Phaser.GameObjects.Sprite {
                 break;
         }
         
+    }
+    
+    hideFace() {
+        hideActions();
     }
     
     showActions() {
