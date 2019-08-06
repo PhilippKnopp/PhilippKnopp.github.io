@@ -9,12 +9,8 @@ class Figure extends Phaser.GameObjects.Sprite {
         
         this.setInteractive();
         this.on("pointerup", this.activateFigure, this);
-        if (figuresOnMap.findIndex(findActiveChar) == -1) {
-            console.log("This is active");
-            console.log(figuresOnMap.findIndex(findActiveChar));
-            this.on("pointerout", this.hideFace, this);
-            this.on("pointerover", this.showFace, this);
-        }
+        this.on("pointerout", this.hideFace, this);
+        this.on("pointerover", this.showFace, this);
         
         this.setOnMap = function () {
             tileArray[this.onTile].occupiedBy = "figure";
@@ -103,26 +99,30 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     hideFace() {
-        hideActions();
+        if (figuresOnMap.findIndex(findActiveChar) == -1) {
+            hideActions();
+        }
     }
     
     showFace() {
-        faceButton.x = this.x-60;
-        faceButton.y = this.y;
-        faceButton.setAlpha(1);
-        
-        switch(this) {
-            case mage:
-                faceButton.setFrame(0);
-                break;
-            case rogue:
-                faceButton.setFrame(1);
-                break;
-            case barb:
-                faceButton.setFrame(2);
-                break;
-            default:
-                break;
+        if (figuresOnMap.findIndex(findActiveChar) == -1) {
+            faceButton.x = this.x-60;
+            faceButton.y = this.y;
+            faceButton.setAlpha(1);
+
+            switch(this) {
+                case mage:
+                    faceButton.setFrame(0);
+                    break;
+                case rogue:
+                    faceButton.setFrame(1);
+                    break;
+                case barb:
+                    faceButton.setFrame(2);
+                    break;
+                default:
+                    break;
+            }
         }
     }
     
