@@ -32,7 +32,8 @@
 		scale: { mode: Phaser.Scale.FIT },
 		scene: {
 			preload: preload,
-			create: create
+			create: create,
+            update: update
 		}
 	};
 	
@@ -41,6 +42,7 @@
 	var tileArray = [];
 	var matrixWidth = 25;
 	var matrixHeight = 40;
+    var figureWantsToMove = false;
 	
 	var mapImg;
     var doorButton;
@@ -217,7 +219,16 @@
 		}
         
         doorButton = this.add.sprite(400, 400, 'doorSprite').setAlpha(0);
+        
         moveButton = this.add.sprite(400, 400, 'moveSprite').setAlpha(0);
+        moveButton.setInteractive();
+		moveButton.on("pointerup", function pointerUp() {
+            figureWantsToMove = true;
+            hideActions();
+            moveButton.setAlpha(1);
+            moveButton.scale(0.5);
+		});
+        
         attackButton = this.add.sprite(400, 400, 'attackSprite').setAlpha(0);
         searchButton = this.add.sprite(400, 400, 'searchSprite').setAlpha(0);
         faceButton = this.add.sprite(400, 400, 'faceSprite').setAlpha(0);
@@ -248,6 +259,13 @@
         
 	}
 	
+    function update () {
+        if (figureWantsToMove == true) {
+            moveButton.x = pointer.x + 50;
+            moveButton.y = pointer.y + 50;
+        }
+    }
+    
 function findActiveChar(element) {
     return element.active == true;
 }
