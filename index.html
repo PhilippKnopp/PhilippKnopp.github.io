@@ -39,8 +39,8 @@
 	var game = new Phaser.Game(config);
 	var objects = {};
 	var tileArray = [];
-	var matrixWidth = 23;
-	var matrixHeight = 39;
+	var matrixWidth = 25;
+	var matrixHeight = 40;
 	
 	var mapImg;
     var doorButton;
@@ -66,11 +66,11 @@
         this.load.spritesheet('rogueSprite', 'img/rToken.png', { frameWidth: 25, frameHeight: 25 });
         this.load.spritesheet('barbSprite', 'img/bToken.png', { frameWidth: 25, frameHeight: 25 });
         
-        this.load.spritesheet('doorSprite', 'img/door.png', { frameWidth: 61, frameHeight: 61 });
-        this.load.spritesheet('moveSprite', 'img/move.png', { frameWidth: 61, frameHeight: 61 });
-        this.load.spritesheet('attackSprite', 'img/attack.png', { frameWidth: 61, frameHeight: 61 });
-        this.load.spritesheet('searchSprite', 'img/search.png', { frameWidth: 61, frameHeight: 61 });
-        this.load.spritesheet('faceSprite', 'img/face.png', { frameWidth: 78, frameHeight: 78 });
+        this.load.spritesheet('doorSprite', 'img/door.png', { frameWidth: 66, frameHeight: 66 });
+        this.load.spritesheet('moveSprite', 'img/move.png', { frameWidth: 66, frameHeight: 66 });
+        this.load.spritesheet('attackSprite', 'img/attack.png', { frameWidth: 66, frameHeight: 66 });
+        this.load.spritesheet('searchSprite', 'img/search.png', { frameWidth: 66, frameHeight: 66 });
+        this.load.spritesheet('faceSprite', 'img/face.png', { frameWidth: 86, frameHeight: 86 });
 	}
 
 	function create() {
@@ -78,7 +78,7 @@
 		objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0A0C0F');
         
-		mapImg = this.add.image(297, 498, 'map-lvl-1').setAlpha(0.5);
+		mapImg = this.add.image(307, 523, 'map-lvl-1').setAlpha(0.5);
 		
         doorButton = this.add.sprite(400, 400, 'doorSprite').setAlpha(0);
         moveButton = this.add.sprite(400, 400, 'moveSprite').setAlpha(0);
@@ -111,7 +111,7 @@
 		var index = 0;
 		for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
 			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
-                var tile = this.add.sprite(xPos*25+15, yPos*25+26, 'tileSprite');
+                var tile = this.add.sprite(xPos*25+100, yPos*25+26, 'tileSprite');
 				tile.state = 0;
                 tile.text = "0";
 				tile.walkable = [1,1,1,1,1,1,1,1];
