@@ -58,7 +58,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 5.5");
+		console.log("Version 5.6");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -78,6 +78,12 @@
 		objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0A0C0F');
         
+        this.input.on("pointerup", function pointerUp() {
+            console.log("shit the zone is to big...");
+            deactivateFigures();
+            hideActions();
+        });
+        
 		mapImg = this.add.image(407, 523, 'map-lvl-1').setAlpha(0.5);
 		
         doorButton = this.add.sprite(400, 400, 'doorSprite').setAlpha(0);
@@ -96,12 +102,6 @@
 			calculatePath(figuresOnMap[activeChar].onTile);
 		});
         
-        this.input.on("pointerup", function pointerUp() {
-            deactivateFigures();
-            hideActions();
-        });
-        
-		
 		/*var buildLevelButton = this.add.text(800, 115, "Insert Walls", { fontFamily: "Verdana" });
 		buildLevelButton.setInteractive();
 		buildLevelButton.on("pointerup", function pointerUp() {
