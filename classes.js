@@ -140,6 +140,7 @@ function hideActions() {
     attackButton.setAlpha(0);
     searchButton.setAlpha(0);
     cancelButton.setAlpha(0);
+    console.log("not anymore");
 }
 
 function deactivateFigures() {

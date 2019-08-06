@@ -61,7 +61,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 6.2");
+		console.log("Version 6.3");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -226,6 +226,7 @@
             figureWantsToMove = true;
             hideActions();
             moveButton.setAlpha(1);
+            console.log("should be visible");
             moveButton.setScale(0.5);
 		});
         
@@ -263,6 +264,7 @@
         if (figureWantsToMove == true) {
             moveButton.x = game.input.x + 50;
             moveButton.y = game.input.y + 50;
+            console.log(moveButton.x);
         }
     }
     
