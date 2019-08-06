@@ -10,6 +10,8 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.setInteractive();
         this.on("pointerup", this.activateFigure, this);
         if (figuresOnMap.findIndex(findActiveChar) == -1) {
+            console.log("This is active");
+            console.log(figuresOnMap.findIndex(findActiveChar));
             this.on("pointerout", this.hideFace, this);
             this.on("pointerover", this.showFace, this);
         }
