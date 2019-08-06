@@ -43,31 +43,31 @@ class Figure extends Phaser.GameObjects.Sprite {
         attackButton.setAlpha(0);
         searchButton.setAlpha(0);
         
-        let buttonXpos = 50;
+        let buttonXpos = 60;
         
-        faceButton.x = this.x-60;
+        faceButton.x = this.x-70;
         faceButton.y = this.y;
         faceButton.setAlpha(1);
         
         moveButton.x = this.x+buttonXpos;
         moveButton.y = this.y;
         moveButton.setAlpha(1);
-        buttonXpos += 75;
+        buttonXpos += 85;
         
         attackButton.x = this.x+buttonXpos;
         attackButton.y = this.y;
         attackButton.setAlpha(1);
-        buttonXpos += 75;
+        buttonXpos += 85;
         
         searchButton.x = this.x+buttonXpos;
         searchButton.y = this.y;
         searchButton.setAlpha(1);
-        buttonXpos += 75;
+        buttonXpos += 85;
         
         doorButton.x = this.x+buttonXpos;
         doorButton.y = this.y;
         doorButton.setAlpha(1);
-        buttonXpos += 75;
+        buttonXpos += 85;
         
         switch(this) {
             case mage:
