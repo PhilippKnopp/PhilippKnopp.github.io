@@ -95,6 +95,13 @@
             let activeChar = figuresOnMap.findIndex(findActiveChar);
 			calculatePath(figuresOnMap[activeChar].onTile);
 		});
+        
+        this.setInteractive();
+        this.on("pointerup", function pointerUp() {
+            deactivateFigures();
+            hideActions();
+		});
+        
 		
 		/*var buildLevelButton = this.add.text(800, 115, "Insert Walls", { fontFamily: "Verdana" });
 		buildLevelButton.setInteractive();
