@@ -61,7 +61,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 6.0");
+		console.log("Version 6.2");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -226,7 +226,7 @@
             figureWantsToMove = true;
             hideActions();
             moveButton.setAlpha(1);
-            moveButton.scale(0.5);
+            moveButton.setScale(0.5);
 		});
         
         attackButton = this.add.sprite(400, 400, 'attackSprite').setAlpha(0);
@@ -261,8 +261,8 @@
 	
     function update () {
         if (figureWantsToMove == true) {
-            moveButton.x = pointer.x + 50;
-            moveButton.y = pointer.y + 50;
+            moveButton.x = game.input.x + 50;
+            moveButton.y = game.input.y + 50;
         }
     }
     
@@ -374,6 +374,7 @@ function calculatePath (nameOfA) {
 	}
 	
 	clearNodes();
+    returnCursorToNormal();
 }
 	
 function clearNodes() {
@@ -383,6 +384,13 @@ function clearNodes() {
 		element.wayPointUsefulness = "";
 		element.entryPoint = "";
 	});
+}
+    
+function returnCursorToNormal() {
+	figureWantsToMove = false;
+    hideActions();
+    moveButton.setScale(1);
+    deactivateFigures();
 }
 	
 function containsObject(obj, list) {
