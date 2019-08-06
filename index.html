@@ -59,7 +59,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 5.8");
+		console.log("Version 5.9");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -81,19 +81,6 @@
 		objects.camera.setBackgroundColor('#0A0C0F');
         
 		mapImg = this.add.image(407, 523, 'map-lvl-1').setAlpha(0.5);
-		
-        doorButton = this.add.sprite(400, 400, 'doorSprite').setAlpha(0);
-        moveButton = this.add.sprite(400, 400, 'moveSprite').setAlpha(0);
-        attackButton = this.add.sprite(400, 400, 'attackSprite').setAlpha(0);
-        searchButton = this.add.sprite(400, 400, 'searchSprite').setAlpha(0);
-        faceButton = this.add.sprite(400, 400, 'faceSprite').setAlpha(0);
-        
-        cancelButton = this.add.sprite(400, 400, 'cancelSprite').setAlpha(0);
-        cancelButton.setInteractive();
-        cancelButton.on("pointerup", function pointerUp() {
-            deactivateFigures();
-		});
-        
 		
 		var Info = this.add.text(800, 15, "Click on a Character to activate it\nClick on a Tile to set a Goal, where the Character is supposed to walk", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
 		
@@ -228,6 +215,19 @@
 				tileArray.push(tile);
 			}
 		}
+        
+        doorButton = this.add.sprite(400, 400, 'doorSprite').setAlpha(0);
+        moveButton = this.add.sprite(400, 400, 'moveSprite').setAlpha(0);
+        attackButton = this.add.sprite(400, 400, 'attackSprite').setAlpha(0);
+        searchButton = this.add.sprite(400, 400, 'searchSprite').setAlpha(0);
+        faceButton = this.add.sprite(400, 400, 'faceSprite').setAlpha(0);
+        
+        cancelButton = this.add.sprite(400, 400, 'cancelSprite').setAlpha(0);
+        cancelButton.setInteractive();
+        cancelButton.on("pointerup", function pointerUp() {
+            hideActions();
+            deactivateFigures();
+		});
         
         mage = new Figure ({scene:this, x:20, y:20}, 'mageSprite');
         mage.onTile = mageStartingPosition[level];
