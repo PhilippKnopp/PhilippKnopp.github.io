@@ -58,7 +58,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 5.3");
+		console.log("Version 5.4");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -96,10 +96,10 @@
 			calculatePath(figuresOnMap[activeChar].onTile);
 		});
         
-        this.input.on("pointerup", function pointerUp() {
+        this.input.on("pointerup", () => 
             deactivateFigures();
             hideActions();
-		});
+		);
         
 		
 		/*var buildLevelButton = this.add.text(800, 115, "Insert Walls", { fontFamily: "Verdana" });
