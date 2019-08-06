@@ -58,7 +58,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 5.6");
+		console.log("Version 5.7");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -70,6 +70,7 @@
         this.load.spritesheet('moveSprite', 'img/move.png', { frameWidth: 65, frameHeight: 65 });
         this.load.spritesheet('attackSprite', 'img/attack.png', { frameWidth: 65, frameHeight: 65 });
         this.load.spritesheet('searchSprite', 'img/search.png', { frameWidth: 65, frameHeight: 65 });
+        this.load.spritesheet('cancelSprite', 'img/cancel.png', { frameWidth: 65, frameHeight: 65 });
         this.load.spritesheet('faceSprite', 'img/face.png', { frameWidth: 85, frameHeight: 85 });
 	}
 
@@ -78,12 +79,6 @@
 		objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0A0C0F');
         
-        this.input.on("pointerup", function pointerUp() {
-            console.log("shit the zone is to big...");
-            deactivateFigures();
-            hideActions();
-        });
-        
 		mapImg = this.add.image(407, 523, 'map-lvl-1').setAlpha(0.5);
 		
         doorButton = this.add.sprite(400, 400, 'doorSprite').setAlpha(0);
@@ -91,6 +86,12 @@
         attackButton = this.add.sprite(400, 400, 'attackSprite').setAlpha(0);
         searchButton = this.add.sprite(400, 400, 'searchSprite').setAlpha(0);
         faceButton = this.add.sprite(400, 400, 'faceSprite').setAlpha(0);
+        
+        cancelButton = this.add.sprite(400, 400, 'cancelSprite').setAlpha(0);
+        cancelButton.setInteractive();
+        cancelButton.on("pointerup", function pointerUp() {
+            deactivateFigures();
+		});
         
 		
 		var Info = this.add.text(800, 15, "Click on a Character to activate it\nClick on a Tile to set a Goal, where the Character is supposed to walk", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });

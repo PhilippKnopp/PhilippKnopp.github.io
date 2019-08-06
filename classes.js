@@ -9,10 +9,9 @@ class Figure extends Phaser.GameObjects.Sprite {
         
         this.setInteractive();
         this.on("pointerup", this.activateFigure, this);
-        
         if (figuresOnMap.findIndex(findActiveChar) == -1) {
             this.on("pointerout", this.hideFace, this);
-            this.on("pointerover", this.showActions, this);
+            this.on("pointerover", this.showFace, this);
         }
         
         this.setOnMap = function () {
@@ -65,6 +64,11 @@ class Figure extends Phaser.GameObjects.Sprite {
         doorButton.setAlpha(1);
         buttonXpos += 85;
         
+        cancelButton.x = this.x+buttonXpos;
+        cancelButton.y = this.y;
+        cancelButton.setAlpha(1);
+        buttonXpos += 85;
+        
         switch(this) {
             case mage:
                 faceButton.setFrame(0);
@@ -72,6 +76,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 moveButton.setFrame(0);
                 attackButton.setFrame(0);
                 searchButton.setFrame(0);
+                cancelButton.setFrame(0);
                 break;
             case rogue:
                 faceButton.setFrame(1);
@@ -79,6 +84,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 moveButton.setFrame(1);
                 attackButton.setFrame(1);
                 searchButton.setFrame(1);
+                cancelButton.setFrame(1);
                 break;
             case barb:
                 faceButton.setFrame(2);
@@ -86,6 +92,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 moveButton.setFrame(2);
                 attackButton.setFrame(2);
                 searchButton.setFrame(2);
+                cancelButton.setFrame(2);
                 break;
             default:
                 break;
@@ -97,7 +104,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         hideActions();
     }
     
-    showActions() {
+    showFace() {
         faceButton.x = this.x-60;
         faceButton.y = this.y;
         faceButton.setAlpha(1);
@@ -125,6 +132,7 @@ function hideActions() {
     moveButton.setAlpha(0);
     attackButton.setAlpha(0);
     searchButton.setAlpha(0);
+    cancelButton.setAlpha(0);
 }
 
 function deactivateFigures() {
