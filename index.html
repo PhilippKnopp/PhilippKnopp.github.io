@@ -227,7 +227,7 @@
             hideActions();
             moveButton.setAlpha(1);
             console.log("should be visible");
-            moveButton.setScale(0.5);
+            moveButton.sprite.setScale(0.5);
 		});
         
         attackButton = this.add.sprite(400, 400, 'attackSprite').setAlpha(0);
@@ -262,8 +262,8 @@
 	
     function update () {
         if (figureWantsToMove == true) {
-            moveButton.x = this.game.activePointer.x + 50;
-            moveButton.y = this.game.activePointer.y + 50;
+            moveButton.x = this.game.input.activePointer.x + 50;
+            moveButton.y = this.game.input.activePointer.y + 50;
             console.log(moveButton.x);
         }
     }
