@@ -43,6 +43,7 @@
 	var matrixWidth = 25;
 	var matrixHeight = 40;
     var figureWantsToMove = false;
+    var movementTween;
 	
 	var mapImg;
     var doorButton;
@@ -61,7 +62,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 6.5");
+		console.log("Version 6.6");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -86,6 +87,14 @@
 		
 		var Info = this.add.text(800, 15, "Click on a Character to activate it\nClick on a Tile to set a Goal, where the Character is supposed to walk", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
 		
+        movementTween = this.tweens.add({
+            targets: mage,
+            x: 10,
+            y: 10,
+            duration: 100
+        });
+        movementTween.pause();
+        
 		/*var calculatePathButton = this.add.text(800, 85, "Calculate Path", { fontFamily: "Verdana" });
 		calculatePathButton.setInteractive();
 		calculatePathButton.on("pointerup", function pointerUp() {
@@ -334,7 +343,6 @@ function calculatePath (activeChar) {
 			let backtraceIndex = tileArray.findIndex(findEnd);
 			
 			while (tileArray[tileArray[backtraceIndex].entryPoint].name != activeChar.onTile) {
-                console.log(activeChar); // CONSOLE
 				activeChar.pathToTravel.unshift(tileArray[backtraceIndex].entryPoint);
 				tileArray[tileArray[backtraceIndex].entryPoint].state = 4;
 				tileArray[tileArray[backtraceIndex].entryPoint].updateState();
