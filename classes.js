@@ -32,12 +32,14 @@ class Figure extends Phaser.GameObjects.Sprite {
             var movementTween = config.scene.tweens.add({
                 targets: this,
                 paused: true,
-                x: tileArray[this.pathToTravel[0]].x,
-                y: tileArray[this.pathToTravel[0]].y,
+                //x: tileArray[this.pathToTravel[0]].x,
+                //y: tileArray[this.pathToTravel[0]].y,
+                y: 50,
                 duration: 200
             });
-            this.pathToTravel.shift();
+            //this.pathToTravel.shift();
             movementTween.play();
+            console.log("should've run");
         }
     }
     
