@@ -69,7 +69,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 6.9");
+		console.log("Version 7.0");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -107,11 +107,17 @@
 			buildLevel();
 		});*/
 		
-        movementTween1 = this.tweens.add({targets: mage, paused: true, x: "-=25", y: "-=25", duration: 200});
+        movementTween1 = this.tweens.add({
+            targets: mage,
+            paused: true,
+            x: "-=25",
+            y: "-=25",
+            duration: 200
+        });
         movementTween2 = this.tweens.add({targets: mage, paused: true, y: "-=25", duration: 200});
-        movementTween3 = this.tweens.add({targets: mage, paused: true, x: "+=25", y: "-=25", duration: 200});
+        movementTween3 = this.tweens.add({targets: mage, paused: true, x: '+=25', y: '-=25', duration: 200});
         movementTween4 = this.tweens.add({targets: mage, paused: true, x: "+=25", duration: 200});
-        movementTween5 = this.tweens.add({targets: mage, paused: true, x: "+=25", y: "+=25", duration: 200});
+        movementTween5 = this.tweens.add({targets: mage, paused: true, x: "+=25" , y: "+=25", duration: 200});
         movementTween6 = this.tweens.add({targets: mage, paused: true, y: "+=25", duration: 200});
         movementTween7 = this.tweens.add({targets: mage, paused: true, x: "-=25", y: "+=25", duration: 200});
         movementTween8 = this.tweens.add({targets: mage, paused: true, x: "-=25", duration: 200});
