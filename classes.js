@@ -29,16 +29,26 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.dieSize;
         
         this.moveNow = function () {
-            var movementTween = config.scene.tweens.add({
-                targets: this,
-                paused: true,
-                //x: tileArray[this.pathToTravel[0]].x,
-                //y: tileArray[this.pathToTravel[0]].y,
-                y: 50,
-                duration: 200
-            });
-            //this.pathToTravel.shift();
-            movementTween.play();
+            
+            if (this.pathToTravel[0].x < this.x && this.pathToTravel[0].y < this.y) {
+                movementTween1.play();
+            } else if (this.pathToTravel[0].x == this.x && this.pathToTravel[0].y < this.y) {
+                movementTween2.play();
+            } else if (this.pathToTravel[0].x > this.x && this.pathToTravel[0].y < this.y) {
+                movementTween3.play();
+            } else if (this.pathToTravel[0].x > this.x && this.pathToTravel[0].y == this.y) {
+                movementTween4.play();
+            } else if (this.pathToTravel[0].x > this.x && this.pathToTravel[0].y > this.y) {
+                movementTween5.play();
+            } else if (this.pathToTravel[0].x == this.x && this.pathToTravel[0].y > this.y) {
+                movementTween6.play();
+            } else if (this.pathToTravel[0].x < this.x && this.pathToTravel[0].y > this.y) {
+                movementTween7.play();
+            } else if (this.pathToTravel[0].x < this.x && this.pathToTravel[0].y == this.y) {
+                movementTween8.play();
+            }
+            
+            this.pathToTravel.shift();
             console.log("should've run");
         }
     }
@@ -117,6 +127,15 @@ class Figure extends Phaser.GameObjects.Sprite {
             default:
                 break;
         }
+        
+        movementTween1.data[0].target = this;
+        movementTween2.data[0].target = this;
+        movementTween3.data[0].target = this;
+        movementTween4.data[0].target = this;
+        movementTween5.data[0].target = this;
+        movementTween6.data[0].target = this;
+        movementTween7.data[0].target = this;
+        movementTween8.data[0].target = this;
         
     }
     

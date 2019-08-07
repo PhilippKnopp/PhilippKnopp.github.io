@@ -43,6 +43,14 @@
 	var matrixWidth = 25;
 	var matrixHeight = 40;
     var figureWantsToMove = false;
+    var movementTween1;
+    var movementTween2;
+    var movementTween3;
+    var movementTween4;
+    var movementTween5;
+    var movementTween6;
+    var movementTween7;
+    var movementTween8;
 	
 	var mapImg;
     var doorButton;
@@ -99,6 +107,15 @@
 			buildLevel();
 		});*/
 		
+        movementTween1 = this.tweens.add({targets: mage, paused: true, x: -=25, y: -=25, duration: 200});
+        movementTween2 = this.tweens.add({targets: mage, paused: true, y: -=25, duration: 200});
+        movementTween3 = this.tweens.add({targets: mage, paused: true, x: +=25, y: -=25, duration: 200});
+        movementTween4 = this.tweens.add({targets: mage, paused: true, x: +=25, duration: 200});
+        movementTween5 = this.tweens.add({targets: mage, paused: true, x: +=25, y: +=25, duration: 200});
+        movementTween6 = this.tweens.add({targets: mage, paused: true, y: +=25, duration: 200});
+        movementTween7 = this.tweens.add({targets: mage, paused: true, x: -=25, y: +=25, duration: 200});
+        movementTween8 = this.tweens.add({targets: mage, paused: true, x: -=25, duration: 200});
+        
 		var resetButton = this.add.text(800, 145, "Reset", { fontFamily: "Verdana" });
 		resetButton.setInteractive();
 		resetButton.on("pointerup", function pointerUp() {
