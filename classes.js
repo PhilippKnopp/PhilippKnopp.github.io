@@ -29,7 +29,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.dieSize;
         
         this.moveNow = function () {
-            var movementTween = this.tweens.add({
+            var movementTween = game.tweens.add({
                 targets: this,
                 paused: true,
                 x: tileArray[this.pathToTravel[0]].x,
