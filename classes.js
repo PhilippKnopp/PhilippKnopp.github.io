@@ -31,6 +31,12 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.moveNow = function () {
             
             if (this.pathToTravel.length > 0) {
+                
+                console.log(this.pathToTravel[0].x);
+                console.log(this.pathToTravel[0].y);
+                console.log(this.x);
+                console.log(this.y);
+                
                 if (this.pathToTravel[0].x < this.x && this.pathToTravel[0].y < this.y) {
                     movementTween1.play();
                 } else if (this.pathToTravel[0].x == this.x && this.pathToTravel[0].y < this.y) {
@@ -52,6 +58,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.pathToTravel.shift();
             }
         }
+        
     }
     
     activateFigure() {
