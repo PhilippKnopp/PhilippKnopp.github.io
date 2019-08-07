@@ -23,8 +23,14 @@ class Figure extends Phaser.GameObjects.Sprite {
         };
         
         this.movement = 6;
+        this.moved = 0;
+        this.pathToTravel;
         this.armor = 4;
         this.dieSize;
+        
+        this.moveNow = function () {
+            console.log(this.pathToTravel + this.dieSize);
+        };
     }
     
     activateFigure() {
@@ -42,7 +48,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         faceButton.y = this.y;
         faceButton.setAlpha(1);
         
-        //bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
+        // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
         tileArray[this.onTile].checkForNeighbors();
         if (tileArray[this.onTile].neighbors.length != 0) {
             moveButton.x = this.x+buttonXpos;
@@ -52,6 +58,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         tileArray[this.onTile].neighbors.length = 0;
         
+        // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
         attackButton.x = this.x+buttonXpos;
         attackButton.y = this.y;
         attackButton.setAlpha(1);
