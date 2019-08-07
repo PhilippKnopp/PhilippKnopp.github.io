@@ -24,7 +24,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         
         this.movement = 6;
         this.moved = 0;
-        this.pathToTravel;
+        this.pathToTravel = [];
         this.armor = 4;
         this.dieSize;
         
@@ -147,7 +147,6 @@ function hideActions() {
     attackButton.setAlpha(0);
     searchButton.setAlpha(0);
     cancelButton.setAlpha(0);
-    console.log("not anymore");
 }
 
 function deactivateFigures() {

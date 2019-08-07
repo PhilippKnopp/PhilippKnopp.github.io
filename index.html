@@ -334,6 +334,7 @@ function calculatePath (activeChar) {
 			let backtraceIndex = tileArray.findIndex(findEnd);
 			
 			while (tileArray[tileArray[backtraceIndex].entryPoint].name != activeChar.onTile) {
+                console.log(activeChar); // CONSOLE
 				activeChar.pathToTravel.unshift(tileArray[backtraceIndex].entryPoint);
 				tileArray[tileArray[backtraceIndex].entryPoint].state = 4;
 				tileArray[tileArray[backtraceIndex].entryPoint].updateState();
