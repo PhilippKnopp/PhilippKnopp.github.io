@@ -61,7 +61,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 6.4");
+		console.log("Version 6.5");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -158,7 +158,7 @@
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
                      // nichts ist auf der Tile und diese ist von einer Seite aus begehbar und der
-					if (this.occupiedBy == "" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && var figureWantsToMove == true) {
+					if (this.occupiedBy == "" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && figureWantsToMove == true) {
                         this.setFrame(2);
 				        this.text = "B";
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
