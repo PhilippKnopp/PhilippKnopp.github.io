@@ -262,8 +262,8 @@
 	
     function update () {
         if (figureWantsToMove == true) {
-            moveButton.x = game.input.x + 50;
-            moveButton.y = game.input.y + 50;
+            moveButton.x = this.game.activePointer.x + 50;
+            moveButton.y = this.game.activePointer.y + 50;
             console.log(moveButton.x);
         }
     }
