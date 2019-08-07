@@ -30,26 +30,27 @@ class Figure extends Phaser.GameObjects.Sprite {
         
         this.moveNow = function () {
             
-            if (this.pathToTravel[0].x < this.x && this.pathToTravel[0].y < this.y) {
-                movementTween1.play();
-            } else if (this.pathToTravel[0].x == this.x && this.pathToTravel[0].y < this.y) {
-                movementTween2.play();
-            } else if (this.pathToTravel[0].x > this.x && this.pathToTravel[0].y < this.y) {
-                movementTween3.play();
-            } else if (this.pathToTravel[0].x > this.x && this.pathToTravel[0].y == this.y) {
-                movementTween4.play();
-            } else if (this.pathToTravel[0].x > this.x && this.pathToTravel[0].y > this.y) {
-                movementTween5.play();
-            } else if (this.pathToTravel[0].x == this.x && this.pathToTravel[0].y > this.y) {
-                movementTween6.play();
-            } else if (this.pathToTravel[0].x < this.x && this.pathToTravel[0].y > this.y) {
-                movementTween7.play();
-            } else if (this.pathToTravel[0].x < this.x && this.pathToTravel[0].y == this.y) {
-                movementTween8.play();
+            if (this.pathToTravel.length > 0) {
+                if (this.pathToTravel[0].x < this.x && this.pathToTravel[0].y < this.y) {
+                    movementTween1.play();
+                } else if (this.pathToTravel[0].x == this.x && this.pathToTravel[0].y < this.y) {
+                    movementTween2.play();
+                } else if (this.pathToTravel[0].x > this.x && this.pathToTravel[0].y < this.y) {
+                    movementTween3.play();
+                } else if (this.pathToTravel[0].x > this.x && this.pathToTravel[0].y == this.y) {
+                    movementTween4.play();
+                } else if (this.pathToTravel[0].x > this.x && this.pathToTravel[0].y > this.y) {
+                    movementTween5.play();
+                } else if (this.pathToTravel[0].x == this.x && this.pathToTravel[0].y > this.y) {
+                    movementTween6.play();
+                } else if (this.pathToTravel[0].x < this.x && this.pathToTravel[0].y > this.y) {
+                    movementTween7.play();
+                } else if (this.pathToTravel[0].x < this.x && this.pathToTravel[0].y == this.y) {
+                    movementTween8.play();
+                }
+
+                this.pathToTravel.shift();
             }
-            
-            this.pathToTravel.shift();
-            console.log("should've run");
         }
     }
     
