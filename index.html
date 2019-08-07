@@ -62,7 +62,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 6.6");
+		console.log("Version 6.7");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -89,11 +89,11 @@
 		
         movementTween = this.tweens.add({
             targets: mage,
+            paused: true,
             x: 10,
             y: 10,
             duration: 100
         });
-        movementTween.pause();
         
 		/*var calculatePathButton = this.add.text(800, 85, "Calculate Path", { fontFamily: "Verdana" });
 		calculatePathButton.setInteractive();
