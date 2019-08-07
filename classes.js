@@ -32,26 +32,26 @@ class Figure extends Phaser.GameObjects.Sprite {
             
             if (this.pathToTravel.length > 0) {
                 
-                console.log(this.pathToTravel[0].x);
-                console.log(this.pathToTravel[0].y);
+                console.log(tileArray[this.pathToTravel[0]].x);
+                console.log(tileArray[this.pathToTravel[0]].y);
                 console.log(this.x);
                 console.log(this.y);
                 
-                if (this.pathToTravel[0].x < this.x && this.pathToTravel[0].y < this.y) {
+                if (tileArray[this.pathToTravel[0]].x < this.x && tileArray[this.pathToTravel[0]].y < this.y) {
                     movementTween1.play();
-                } else if (this.pathToTravel[0].x == this.x && this.pathToTravel[0].y < this.y) {
+                } else if (tileArray[this.pathToTravel[0]].x == this.x && tileArray[this.pathToTravel[0]].y < this.y) {
                     movementTween2.play();
-                } else if (this.pathToTravel[0].x > this.x && this.pathToTravel[0].y < this.y) {
+                } else if (tileArray[this.pathToTravel[0]].x > this.x && tileArray[this.pathToTravel[0]].y < this.y) {
                     movementTween3.play();
-                } else if (this.pathToTravel[0].x > this.x && this.pathToTravel[0].y == this.y) {
+                } else if (tileArray[this.pathToTravel[0]].x > this.x && tileArray[this.pathToTravel[0]].y == this.y) {
                     movementTween4.play();
-                } else if (this.pathToTravel[0].x > this.x && this.pathToTravel[0].y > this.y) {
+                } else if (tileArray[this.pathToTravel[0]].x > this.x && tileArray[this.pathToTravel[0]].y > this.y) {
                     movementTween5.play();
-                } else if (this.pathToTravel[0].x == this.x && this.pathToTravel[0].y > this.y) {
+                } else if (tileArray[this.pathToTravel[0]].x == this.x && tileArray[this.pathToTravel[0]].y > this.y) {
                     movementTween6.play();
-                } else if (this.pathToTravel[0].x < this.x && this.pathToTravel[0].y > this.y) {
+                } else if (tileArray[this.pathToTravel[0]].x < this.x && tileArray[this.pathToTravel[0]].y > this.y) {
                     movementTween7.play();
-                } else if (this.pathToTravel[0].x < this.x && this.pathToTravel[0].y == this.y) {
+                } else if (tileArray[this.pathToTravel[0]].x < this.x && tileArray[this.pathToTravel[0]].y == this.y) {
                     movementTween8.play();
                 }
 
