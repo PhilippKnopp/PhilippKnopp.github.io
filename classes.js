@@ -29,14 +29,14 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.dieSize;
         
         this.moveNow = function () {
+            console.log(this.x + "von dieser X Position Startet es");
+            console.log(tileArray[this.pathToTravel[0]].x + "zu dieser X Position soll es gehen");
             movementTween.data[0].target = this;
             movementTween.data[0].x = tileArray[this.pathToTravel[0]].x;
             console.log(movementTween.data[0].x);
             movementTween.data[0].y = tileArray[this.pathToTravel[0]].y;
-            console.log(movementTween.data[0].y);
             movementTween.play();
-            console.log(this.x);
-            console.log(this.y);
+            console.log(this.x + "jetzt ist es an diesem X");
             this.pathToTravel.shift();
         };
     }
