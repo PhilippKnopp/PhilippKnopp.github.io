@@ -262,8 +262,7 @@
         
         movementTween = this.tweens.add({
             targets: mage,
-            x: mage.x,
-            y: mage.y,
+            props: {x: "+=0", y: "+=0"},
             duration: 200
         });
         
