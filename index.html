@@ -43,14 +43,7 @@
 	var matrixWidth = 25;
 	var matrixHeight = 40;
     var figureWantsToMove = false;
-    var movementTween1;
-    var movementTween2;
-    var movementTween3;
-    var movementTween4;
-    var movementTween5;
-    var movementTween6;
-    var movementTween7;
-    var movementTween8;
+    var movementTween;
 	
 	var mapImg;
     var doorButton;
@@ -69,7 +62,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 7.2");
+		console.log("Version 7.3");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -267,42 +260,12 @@
         rogue.dieSize = 8;
         figuresOnMap.push(rogue);
         
-        movementTween1 = this.tweens.add({
+        movementTween = this.tweens.add({
             targets: mage,
-            props: { x: { value: "-=25", duration: 200 },
-                     y: { value: "-=25", duration: 200 }}
-        }).pause();
-        movementTween2 = this.tweens.add({
-            targets: mage,
-            y: { value: "-=25", duration: 150 }
-        }).pause();
-        movementTween3 = this.tweens.add({
-            targets: mage,
-            props: { x: { value: "+=25", duration: 200 },
-                     y: { value: "-=25", duration: 200 }}
-        }).pause();
-        movementTween4 = this.tweens.add({
-            targets: mage,
-            x: { value: "+=25", duration: 150 }
-        }).pause();
-        movementTween5 = this.tweens.add({
-            targets: mage,
-            props: { x: { value: "+=2500", duration: 5000 },
-                     y: { value: "+=2500", duration: 5000 }}
+            x: 0,
+            y: 0,
+            duration: 200
         });
-        movementTween6 = this.tweens.add({
-            targets: mage,
-            y: { value: "+=25", duration: 150 }
-        }).pause();
-        movementTween7 = this.tweens.add({
-            targets: mage,
-            props: { x: { value: "-=25", duration: 200 },
-                     y: { value: "+=25", duration: 200 }}
-        }).pause();
-        movementTween8 = this.tweens.add({
-            targets: mage,
-            x: { value: "-=25", duration: 150 }
-        }).pause();
         
         buildLevel();
         
@@ -424,6 +387,7 @@ function calculatePath (activeChar) {
 	
 	clearNodes();
     returnCursorToNormal();
+    activeChar.activateFigure();
 }
 	
 function clearNodes() {
@@ -439,7 +403,6 @@ function returnCursorToNormal() {
 	figureWantsToMove = false;
     hideActions();
     moveButton.setScale(1);
-    deactivateFigures();
 }
 	
 function containsObject(obj, list) {

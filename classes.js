@@ -31,29 +31,10 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.moveNow = function () {
             
             if (this.pathToTravel.length > 0) {
-                
-                if ((tileArray[this.pathToTravel[0]].x < this.x) && (tileArray[this.pathToTravel[0]].y < this.y)) {
-                    movementTween1.play();
-                    console.log("1");
-                } else if ((tileArray[this.pathToTravel[0]].x == this.x) && (tileArray[this.pathToTravel[0]].y < this.y)) {
-                    movementTween2.play();
-                    console.log("2");
-                } else if ((tileArray[this.pathToTravel[0]].x > this.x) && (tileArray[this.pathToTravel[0]].y < this.y)) {
-                    movementTween3.play();
-                    console.log("3");
-                } else if ((tileArray[this.pathToTravel[0]].x > this.x) && (tileArray[this.pathToTravel[0]].y == this.y)) {
-                    movementTween4.play();
-                    console.log("4");
-                } else if ((tileArray[this.pathToTravel[0]].x > this.x) && (tileArray[this.pathToTravel[0]].y > this.y)) {
-                    movementTween5.play();
-                } else if ((tileArray[this.pathToTravel[0]].x == this.x) && (tileArray[this.pathToTravel[0]].y > this.y)) {
-                    movementTween6.play();
-                } else if ((tileArray[this.pathToTravel[0]].x < this.x) && (tileArray[this.pathToTravel[0]].y > this.y)) {
-                    movementTween7.play();
-                } else if ((tileArray[this.pathToTravel[0]].x < this.x) && (tileArray[this.pathToTravel[0]].y == this.y)) {
-                    movementTween8.play();
-                }
-
+                movementTween.updateTo(x, tileArray[this.pathToTravel[0]].x, true);
+                movementTween.updateTo(y, tileArray[this.pathToTravel[0]].y, true);
+                movementTween.restart();
+                console.log("1");
                 this.pathToTravel.shift();
             }
         }
@@ -135,14 +116,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 break;
         }
         
-        movementTween1.data[0].target = this;
-        movementTween2.data[0].target = this;
-        movementTween3.data[0].target = this;
-        movementTween4.data[0].target = this;
-        movementTween5.data[0].target = this;
-        movementTween6.data[0].target = this;
-        movementTween7.data[0].target = this;
-        movementTween8.data[0].target = this;
+        movementTween.data[0].target = this;
         
     }
     
