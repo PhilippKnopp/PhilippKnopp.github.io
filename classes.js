@@ -71,7 +71,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         
         let buttonXpos = 60;
         
-        faceButton.x = this.x-70;
+        faceButton.x = this.x-60;
         faceButton.y = this.y;
         faceButton.setAlpha(1);
         
