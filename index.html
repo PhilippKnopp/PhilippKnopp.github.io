@@ -18,6 +18,9 @@
 	
 <script>
 	
+    console.log("Version 7.4");
+    
+    // configurations Variable, mit der das Spiel gestartet wird
 	var config = {
 		type: Phaser.AUTO,
 		width: 1920,
@@ -37,6 +40,7 @@
 		}
 	};
 	
+    // Variablen, die in der App verwendet werden
 	var game = new Phaser.Game(config);
 	var objects = {};
 	var tileArray = [];
@@ -61,8 +65,8 @@
     
     var level = 1;
 
+    // Funktion die alle Bilder lädt
 	function preload() {
-		console.log("Version 7.4");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -78,8 +82,9 @@
         this.load.spritesheet('faceSprite', 'img/face.png', { frameWidth: 85, frameHeight: 85 });
 	}
 
+    // Funktion die alle Sachen erstellt
 	function create() {
-		
+        
 		objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0A0C0F');
         
@@ -87,24 +92,11 @@
 		
 		var Info = this.add.text(800, 15, "Click on a Character to activate it\nClick on a Tile to set a Goal, where the Character is supposed to walk", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
         
-		/*var calculatePathButton = this.add.text(800, 85, "Calculate Path", { fontFamily: "Verdana" });
-		calculatePathButton.setInteractive();
-		calculatePathButton.on("pointerup", function pointerUp() {
-            let activeChar = figuresOnMap.findIndex(findActiveChar);
-			calculatePath(figuresOnMap[activeChar].onTile);
-		});
-        
-		var buildLevelButton = this.add.text(800, 115, "Insert Walls", { fontFamily: "Verdana" });
+		/*var buildLevelButton = this.add.text(800, 115, "Insert Walls", { fontFamily: "Verdana" });
 		buildLevelButton.setInteractive();
 		buildLevelButton.on("pointerup", function pointerUp() {
 			buildLevel();
 		});*/
-        
-		var resetButton = this.add.text(800, 145, "Reset", { fontFamily: "Verdana" });
-		resetButton.setInteractive();
-		resetButton.on("pointerup", function pointerUp() {
-			resetView();
-		});
 		
 		var index = 0;
 		for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
@@ -262,8 +254,7 @@
         
         movementTween = this.tweens.add({
             targets: mage,
-            props: {x: "+=0", y: "+=0"},
-            duration: 200
+            props: {x: {value: "+=0", duration: 200}, y: {value: "+=0", duration: 200}}
         });
         
         buildLevel();
@@ -276,144 +267,137 @@
             moveButton.y = this.game.input.activePointer.y + 50;
         }
     }
-    
-function findActiveChar(element) {
-    return element.active == true;
-}
-    
-function findEnd(element) {
-    return element.text == "B";
-}
-	
-function buildLevel() {
-	
-	var levelMap = returnLevelType(1);
-	for (var i = 0; i < tileArray.length; i++) {
-		tileArray[i].state = levelMap[i];
-		tileArray[i].updateState();
-	}
-	var levelMapConnections = returnLevelConnections(1);
-	for (var i = 0; i < tileArray.length; i++) {
-		tileArray[i].walkable = levelMapConnections[i];
-	}
-    
-    for (var i = 0; i < figuresOnMap.length; i++) {
-        figuresOnMap[i].setOnMap();
+
+    function findActiveChar(element) {
+        return element.active == true;
     }
-    
-}
 
-function resetView() {
-	for (var i = 0; i < tileArray.length; i++) {
-		tileArray[i].state = 0;
-		tileArray[i].updateState();
-	}
-}
-	
-function calculatePath (activeChar) {
-	
-	var mappedList = [];
-	var frontierList = [];
-	var frontierListValues = [];
-	var activeNode;
-	var pathFound = false;
-	
-	
-	// finde A und füge ihn der frontierList hinzu {name, wayPointUsefulness}
-	tileArray[activeChar.onTile].entryPoint = "Start";
-	tileArray[activeChar.onTile].distanceTravelled = 0;
-	tileArray[activeChar.onTile].wayPointUsefulness = tileArray[activeChar.onTile].distanceTravelled + tileArray[activeChar.onTile].estimatedWayToB();
-	frontierList.push(tileArray[activeChar.onTile]);
-	
-	// gehe folgende Schleife solange durch bis es einen Weg gibt
-	mapperLoop: while (pathFound == false) {
+    function findEnd(element) {
+        return element.text == "B";
+    }
 
-        // gehe frontierList durch nach niedrigster wayPointUsefulness
-        frontierListValues.length = 0;
-        for (var i = 0; i < frontierList.length; i++) {
-            frontierListValues.push(frontierList[i].wayPointUsefulness);
-        };
-        activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
+    function buildLevel() {
 
-        // Wenn Knoten mit Niedrigster wayPointUsefulness schon das Ziel ist, ist A* fertig
-        if (frontierList[activeNode].text == "B") {
-			pathFound = true; // unterbricht das Pfadsuchen
-			let backtraceIndex = tileArray.findIndex(findEnd); // Sucht den Index des Zielfeldes
-            activeChar.pathToTravel.unshift(backtraceIndex); // Fügt das Zielfeld dem Pfad hinzu
-			
-			while (tileArray[tileArray[backtraceIndex].entryPoint].name != activeChar.onTile) {
-				activeChar.pathToTravel.unshift(tileArray[backtraceIndex].entryPoint);
-				tileArray[tileArray[backtraceIndex].entryPoint].state = 4;
-				tileArray[tileArray[backtraceIndex].entryPoint].updateState();
-				backtraceIndex = tileArray[backtraceIndex].entryPoint;
-			}
-			
-            break mapperLoop;
+        var levelMap = returnLevelType(1);
+        for (var i = 0; i < tileArray.length; i++) {
+            tileArray[i].state = levelMap[i];
+            tileArray[i].updateState();
+        }
+        var levelMapConnections = returnLevelConnections(1);
+        for (var i = 0; i < tileArray.length; i++) {
+            tileArray[i].walkable = levelMapConnections[i];
         }
 
-        // berechne für diesen alle neighbors
-        frontierList[activeNode].checkForNeighbors();
+        for (var i = 0; i < figuresOnMap.length; i++) {
+            figuresOnMap[i].setOnMap();
+        }
 
-        // Füge Neighbors des aktuellen Knotens der Frontierlist hinzu
-        for (var i = 0; i < frontierList[activeNode].neighbors.length; i++) {
+    }
 
-            let distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
-            if (containsObject(frontierList[activeNode].neighbors[i], frontierList)) {
-                if (distanceTravelled < frontierList[activeNode].neighbors[i].distanceTravelled) {
-                    frontierList[activeNode].neighbors[i].distanceTravelled = distanceTravelled;
+    function calculatePath (activeChar) {
+
+        var mappedList = [];
+        var frontierList = [];
+        var frontierListValues = [];
+        var activeNode;
+        var pathFound = false;
+
+
+        // finde A und füge ihn der frontierList hinzu {name, wayPointUsefulness}
+        tileArray[activeChar.onTile].entryPoint = "Start";
+        tileArray[activeChar.onTile].distanceTravelled = 0;
+        tileArray[activeChar.onTile].wayPointUsefulness = tileArray[activeChar.onTile].distanceTravelled + tileArray[activeChar.onTile].estimatedWayToB();
+        frontierList.push(tileArray[activeChar.onTile]);
+
+        // gehe folgende Schleife solange durch bis es einen Weg gibt
+        mapperLoop: while (pathFound == false) {
+
+            // gehe frontierList durch nach niedrigster wayPointUsefulness
+            frontierListValues.length = 0;
+            for (var i = 0; i < frontierList.length; i++) {
+                frontierListValues.push(frontierList[i].wayPointUsefulness);
+            };
+            activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
+
+            // Wenn Knoten mit Niedrigster wayPointUsefulness schon das Ziel ist, ist A* fertig
+            if (frontierList[activeNode].text == "B") {
+                pathFound = true; // unterbricht das Pfadsuchen
+                let backtraceIndex = tileArray.findIndex(findEnd); // Sucht den Index des Zielfeldes
+                activeChar.pathToTravel.unshift(backtraceIndex); // Fügt das Zielfeld dem Pfad hinzu
+
+                while (tileArray[tileArray[backtraceIndex].entryPoint].name != activeChar.onTile) {
+                    activeChar.pathToTravel.unshift(tileArray[backtraceIndex].entryPoint);
+                    tileArray[tileArray[backtraceIndex].entryPoint].state = 4;
+                    tileArray[tileArray[backtraceIndex].entryPoint].updateState();
+                    backtraceIndex = tileArray[backtraceIndex].entryPoint;
+                }
+
+                break mapperLoop;
+            }
+
+            // berechne für diesen alle neighbors
+            frontierList[activeNode].checkForNeighbors();
+
+            // Füge Neighbors des aktuellen Knotens der Frontierlist hinzu
+            for (var i = 0; i < frontierList[activeNode].neighbors.length; i++) {
+
+                let distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
+                if (containsObject(frontierList[activeNode].neighbors[i], frontierList)) {
+                    if (distanceTravelled < frontierList[activeNode].neighbors[i].distanceTravelled) {
+                        frontierList[activeNode].neighbors[i].distanceTravelled = distanceTravelled;
+                        frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB();
+                        frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
+                    }
+                } else if (containsObject(frontierList[activeNode].neighbors[i], mappedList)) {
+                    continue;
+                } else {
+                    frontierList[activeNode].neighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
                     frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB();
                     frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
+                    frontierList.push(frontierList[activeNode].neighbors[i]);
+                    if (frontierList[activeNode].neighbors[i].text != "B") {
+                        frontierList[activeNode].neighbors[i].state = 3;
+                        frontierList[activeNode].neighbors[i].updateState();
+                    }
                 }
-            } else if (containsObject(frontierList[activeNode].neighbors[i], mappedList)) {
-                continue;
-            } else {
-                frontierList[activeNode].neighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
-                frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB();
-                frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
-                frontierList.push(frontierList[activeNode].neighbors[i]);
-				if (frontierList[activeNode].neighbors[i].text != "B") {
-					frontierList[activeNode].neighbors[i].state = 3;
-					frontierList[activeNode].neighbors[i].updateState();
-				}
-            }
-        };
+            };
 
-        // Füge den aktiven Knoten der mappedList hinzu und Lösche den aktven Knoten aus der frontierList
-        mappedList.push(frontierList[activeNode]);
-        frontierList.splice(activeNode,1);
-	
-	}
-	
-	clearNodes();
-    returnCursorToNormal();
-    //activeChar.activateFigure();
-}
-	
-function clearNodes() {
-	tileArray.forEach(function(element) {
-		element.neighbors.length = 0;
-		element.distanceTravelled = "";
-		element.wayPointUsefulness = "";
-		element.entryPoint = "";
-	});
-}
-    
-function returnCursorToNormal() {
-	figureWantsToMove = false;
-    hideActions();
-    moveButton.setScale(1);
-}
-	
-function containsObject(obj, list) {
-    var i;
-    for (i = 0; i < list.length; i++) {
-        if (list[i] === obj) {
-            return true;
+            // Füge den aktiven Knoten der mappedList hinzu und Lösche den aktven Knoten aus der frontierList
+            mappedList.push(frontierList[activeNode]);
+            frontierList.splice(activeNode,1);
+
         }
+
+        clearNodes();
+        returnCursorToNormal();
+        //activeChar.activateFigure();
     }
 
-    return false;
-}
+    function clearNodes() {
+        tileArray.forEach(function(element) {
+            element.neighbors.length = 0;
+            element.distanceTravelled = "";
+            element.wayPointUsefulness = "";
+            element.entryPoint = "";
+        });
+    }
+
+    function returnCursorToNormal() {
+        figureWantsToMove = false;
+        hideActions();
+        moveButton.setScale(1);
+    }
+
+    function containsObject(obj, list) {
+        var i;
+        for (i = 0; i < list.length; i++) {
+            if (list[i] === obj) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 	
 </script>
 </body>
