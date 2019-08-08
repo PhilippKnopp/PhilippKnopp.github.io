@@ -109,48 +109,40 @@
 		
         movementTween1 = this.tweens.add({
             targets: mage,
-            paused: true,
             x: { value: "-=25", duration: 200 },
             y: { value: "-=25", duration: 200 }
-        });
+        }).pause();
         movementTween2 = this.tweens.add({
             targets: mage,
-            paused: true,
             y: { value: "-=25", duration: 150 }
-        });
+        }).pause();
         movementTween3 = this.tweens.add({
             targets: mage,
-            paused: true,
             x: { value: "+=25", duration: 200 },
             y: { value: "-=25", duration: 200 }
-        });
+        }).pause();
         movementTween4 = this.tweens.add({
             targets: mage,
-            paused: true,
             x: { value: "+=25", duration: 150 }
-        });
+        }).pause();
         movementTween5 = this.tweens.add({
             targets: mage,
-            paused: true,
             x: { value: "+=25", duration: 200 },
             y: { value: "+=25", duration: 200 }
-        });
+        }).pause();
         movementTween6 = this.tweens.add({
             targets: mage,
-            paused: true,
             y: { value: "+=25", duration: 150 }
-        });
+        }).pause();
         movementTween7 = this.tweens.add({
             targets: mage,
-            paused: true,
             x: { value: "-=25", duration: 200 },
             y: { value: "+=25", duration: 200 }
-        });
+        }).pause();
         movementTween8 = this.tweens.add({
             targets: mage,
-            paused: true,
             x: { value: "-=25", duration: 150 }
-        });
+        }).pause();
         
 		var resetButton = this.add.text(800, 145, "Reset", { fontFamily: "Verdana" });
 		resetButton.setInteractive();
