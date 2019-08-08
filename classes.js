@@ -31,8 +31,8 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.moveNow = function () {
             
             if (this.pathToTravel.length > 0) {
-                movementTween.updateTo(x, tileArray[this.pathToTravel[0]].x, true);
-                movementTween.updateTo(y, tileArray[this.pathToTravel[0]].y, true);
+                movementTween.updateTo("x", tileArray[this.pathToTravel[0]].x, true);
+                movementTween.updateTo("y", tileArray[this.pathToTravel[0]].y, true);
                 movementTween.restart();
                 console.log("1");
                 this.pathToTravel.shift();
