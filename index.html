@@ -69,7 +69,7 @@
     var level = 1;
 
 	function preload() {
-		console.log("Version 7.1");
+		console.log("Version 7.2");
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -106,43 +106,6 @@
 		buildLevelButton.on("pointerup", function pointerUp() {
 			buildLevel();
 		});*/
-		
-        movementTween1 = this.tweens.add({
-            targets: mage,
-            props: { x: { value: "-=25", duration: 200 },
-                     y: { value: "-=25", duration: 200 }}
-        }).pause();
-        movementTween2 = this.tweens.add({
-            targets: mage,
-            y: { value: "-=25", duration: 150 }
-        }).pause();
-        movementTween3 = this.tweens.add({
-            targets: mage,
-            props: { x: { value: "+=25", duration: 200 },
-                     y: { value: "-=25", duration: 200 }}
-        }).pause();
-        movementTween4 = this.tweens.add({
-            targets: mage,
-            x: { value: "+=25", duration: 150 }
-        }).pause();
-        movementTween5 = this.tweens.add({
-            targets: mage,
-            props: { x: { value: "+=2500", duration: 5000 },
-                     y: { value: "+=2500", duration: 5000 }}
-        });
-        movementTween6 = this.tweens.add({
-            targets: mage,
-            y: { value: "+=25", duration: 150 }
-        }).pause();
-        movementTween7 = this.tweens.add({
-            targets: mage,
-            props: { x: { value: "-=25", duration: 200 },
-                     y: { value: "+=25", duration: 200 }}
-        }).pause();
-        movementTween8 = this.tweens.add({
-            targets: mage,
-            x: { value: "-=25", duration: 150 }
-        }).pause();
         
 		var resetButton = this.add.text(800, 145, "Reset", { fontFamily: "Verdana" });
 		resetButton.setInteractive();
@@ -303,6 +266,43 @@
         rogue.onTile = rogueStartingPosition[level];
         rogue.dieSize = 8;
         figuresOnMap.push(rogue);
+        
+        movementTween1 = this.tweens.add({
+            targets: mage,
+            props: { x: { value: "-=25", duration: 200 },
+                     y: { value: "-=25", duration: 200 }}
+        }).pause();
+        movementTween2 = this.tweens.add({
+            targets: mage,
+            y: { value: "-=25", duration: 150 }
+        }).pause();
+        movementTween3 = this.tweens.add({
+            targets: mage,
+            props: { x: { value: "+=25", duration: 200 },
+                     y: { value: "-=25", duration: 200 }}
+        }).pause();
+        movementTween4 = this.tweens.add({
+            targets: mage,
+            x: { value: "+=25", duration: 150 }
+        }).pause();
+        movementTween5 = this.tweens.add({
+            targets: mage,
+            props: { x: { value: "+=2500", duration: 5000 },
+                     y: { value: "+=2500", duration: 5000 }}
+        });
+        movementTween6 = this.tweens.add({
+            targets: mage,
+            y: { value: "+=25", duration: 150 }
+        }).pause();
+        movementTween7 = this.tweens.add({
+            targets: mage,
+            props: { x: { value: "-=25", duration: 200 },
+                     y: { value: "+=25", duration: 200 }}
+        }).pause();
+        movementTween8 = this.tweens.add({
+            targets: mage,
+            x: { value: "-=25", duration: 150 }
+        }).pause();
         
         buildLevel();
         
