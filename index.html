@@ -18,7 +18,7 @@
 	
 <script>
 	
-    console.log("Version 7.4");
+    console.log("Version 7.5");
     
     // configurations Variable, mit der das Spiel gestartet wird
 	var config = {
@@ -254,7 +254,9 @@
         
         movementTween = this.tweens.add({
             targets: mage,
-            props: {x: {value: "+=0", duration: 200}, y: {value: "+=0", duration: 200}}
+            x: "+=0",
+            y: "+=0",
+            duration: 200
         });
         
         buildLevel();
