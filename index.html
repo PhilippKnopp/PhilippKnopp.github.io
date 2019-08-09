@@ -69,7 +69,7 @@
 
     // Funktion die alle Bilder lädt
 	function preload() {
-		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
+	this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
         this.load.spritesheet('mageSprite', 'img/mToken.png', { frameWidth: 25, frameHeight: 25 });
@@ -301,6 +301,7 @@
 	}
 	
     function onCompleteHandler (tween, targets) {
+	    console.log(targets[0]);
         targets[0].pathToTravel.shift();
         targets[0].moveNow();
     }
