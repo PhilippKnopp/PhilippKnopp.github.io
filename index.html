@@ -18,7 +18,7 @@
 	
 <script>
 	
-    console.log("Version 8.1");
+    console.log("Version 8.2");
     
     // configurations Variable, mit der das Spiel gestartet wird
 	var config = {
@@ -258,7 +258,6 @@
                 let activeChar = figuresOnMap.findIndex(findActiveChar);
                 if (activeChar != -1) {
                     if (figuresOnMap[activeChar].pathToTravel.length > 0 ) {
-                        console.log(tileArray[figuresOnMap[activeChar].pathToTravel[0]].x);
                         return tileArray[figuresOnMap[activeChar].pathToTravel[0]].x;
                     } else {
                         return "+= 0";
@@ -270,8 +269,7 @@
             y: { value: function () { 
                 let activeChar = figuresOnMap.findIndex(findActiveChar);
                 if (activeChar != -1) {
-                    if (activeChar.pathToTravel.length > 0 ) {
-                        console.log(tileArray[figuresOnMap[activeChar].pathToTravel[0]].y);
+                    if (figuresOnMap[activeChar].pathToTravel.length > 0 ) {
                         return tileArray[figuresOnMap[activeChar].pathToTravel[0]].y;
                     } else {
                         return "+= 0";
