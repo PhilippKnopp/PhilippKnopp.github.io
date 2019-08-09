@@ -256,9 +256,9 @@
             targets: mage,
             x: { value: function () { 
                 let activeChar = figuresOnMap.findIndex(findActiveChar);
-                if (activeChar.pathToTravel.length > 0 ) {
-                    console.log(tileArray[activeChar.pathToTravel[0]].x);
-                    return tileArray[activeChar.pathToTravel[0]].x;
+                if (figuresOnMap[activeChar].pathToTravel.length > 0 ) {
+                    console.log(tileArray[figuresOnMap[activeChar].pathToTravel[0]].x);
+                    return tileArray[figuresOnMap[activeChar].pathToTravel[0]].x;
                 } else {
                     return "+= 0";
                 }
@@ -266,8 +266,8 @@
             y: { value: function () { 
                 let activeChar = figuresOnMap.findIndex(findActiveChar);
                 if (activeChar.pathToTravel.length > 0 ) {
-                    console.log(tileArray[activeChar.pathToTravel[0]].y);
-                    return tileArray[activeChar.pathToTravel[0]].y;
+                    console.log(tileArray[figuresOnMap[activeChar].pathToTravel[0]].y);
+                    return tileArray[figuresOnMap[activeChar].pathToTravel[0]].y;
                 } else {
                     return "+= 0";
                 }
