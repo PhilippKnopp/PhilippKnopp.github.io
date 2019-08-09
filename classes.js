@@ -29,7 +29,6 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.dieSize;
         
         this.moveNow = function () {
-            
             if (this.pathToTravel.length > 0 && this == barb) {
                 movementTweenBarb.data[0].start = this.x;
                 movementTweenBarb.data[1].start = this.y;
@@ -42,8 +41,9 @@ class Figure extends Phaser.GameObjects.Sprite {
                 movementTweenMage.data[0].start = this.x;
                 movementTweenMage.data[1].start = this.y;
                 movementTweenMage.restart();
+            } else {
+                console.log("really?");
             }
-            //this.pathToTravel.shift();
         }
         
     }

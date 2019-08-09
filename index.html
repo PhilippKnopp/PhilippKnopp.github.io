@@ -267,7 +267,9 @@
             y: { value: function () { 
                 return tileArray[mage.pathToTravel[0]].y;
             }},
-            duration: 200
+            duration: 200,
+            onComplete: onCompleteHandler,
+            onCompleteParams: []
         });
         
         movementTweenRogue = this.tweens.add({
@@ -278,7 +280,9 @@
             y: { value: function () { 
                 return tileArray[rogue.pathToTravel[0]].y;
             }},
-            duration: 200
+            duration: 200,
+            onComplete: onCompleteHandler,
+            onCompleteParams: []
         });
         
         movementTweenBarb = this.tweens.add({
@@ -289,11 +293,18 @@
             y: { value: function () { 
                 return tileArray[barb.pathToTravel[0]].y;
             }},
-            duration: 200
+            duration: 200,
+            onComplete: onCompleteHandler,
+            onCompleteParams: []
         });
         
 	}
 	
+    function onCompleteHandler (tween, targets) {
+        targets[0].pathToTravel.shift();
+        targets[0].moveNow();
+    }
+    
     function update () {
         if (figureWantsToMove == true) {
             moveButton.x = this.game.input.activePointer.x + 50;
