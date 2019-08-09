@@ -33,8 +33,8 @@ class Figure extends Phaser.GameObjects.Sprite {
             if (this.pathToTravel.length > 0) {
                 movementTween.restart();
                 movementTween.pause();
-                movementTween.updateTo("x", 200, true);
-                movementTween.updateTo("y", 200, true);
+                movementTween.updateTo("x", 200, false);
+                movementTween.updateTo("y", 200, false);
                 movementTween.resume();
                 console.log(movementTween);
                 this.pathToTravel.shift();
