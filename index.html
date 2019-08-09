@@ -18,7 +18,7 @@
 	
 <script>
 	
-    console.log("Version 7.8");
+    console.log("Version 8.0");
     
     // configurations Variable, mit der das Spiel gestartet wird
 	var config = {
@@ -254,8 +254,24 @@
         
         movementTween = this.tweens.add({
             targets: mage,
-            x: "+=0",
-            y: "+=0",
+            x: { value: function () { 
+                let activeChar = figuresOnMap.findIndex(findActiveChar);
+                if (activeChar.pathToTravel.length > 0 ) {
+                    console.log(tileArray[activeChar.pathToTravel[0]].x);
+                    return tileArray[activeChar.pathToTravel[0]].x;
+                } else {
+                    return "+= 0";
+                }
+            }},
+            y: { value: function () { 
+                let activeChar = figuresOnMap.findIndex(findActiveChar);
+                if (activeChar.pathToTravel.length > 0 ) {
+                    console.log(tileArray[activeChar.pathToTravel[0]].y);
+                    return tileArray[activeChar.pathToTravel[0]].y;
+                } else {
+                    return "+= 0";
+                }
+            }},
             duration: 200
         });
         
