@@ -119,6 +119,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         movementTween.data[0].target = this;
+        movementTween.data[1].target = this;
         
     }
     
