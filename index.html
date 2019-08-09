@@ -268,7 +268,7 @@
                 return tileArray[mage.pathToTravel[0]].y;
             }},
             duration: 200,
-            onComplete: onCompleteHandler,
+            onComplete: onCompleteHandler3,
             onCompleteParams: []
         });
         
@@ -281,7 +281,7 @@
                 return tileArray[rogue.pathToTravel[0]].y;
             }},
             duration: 200,
-            onComplete: onCompleteHandler,
+            onComplete: onCompleteHandler2,
             onCompleteParams: []
         });
         
@@ -294,14 +294,27 @@
                 return tileArray[barb.pathToTravel[0]].y;
             }},
             duration: 200,
-            onComplete: onCompleteHandler,
+            onComplete: onCompleteHandler1,
             onCompleteParams: []
         });
         
 	}
 	
-    function onCompleteHandler (tween, targets) {
+    function onCompleteHandler1 (tween, targets) {
 	    console.log(targets[0]);
+	    console.log("this1");
+        targets[0].pathToTravel.shift();
+        targets[0].moveNow();
+    }
+function onCompleteHandler2 (tween, targets) {
+	    console.log(targets[0]);
+	    console.log("this2");
+        targets[0].pathToTravel.shift();
+        targets[0].moveNow();
+    }
+function onCompleteHandler3 (tween, targets) {
+	    console.log(targets[0]);
+	    console.log("this3");
         targets[0].pathToTravel.shift();
         targets[0].moveNow();
     }
