@@ -18,7 +18,7 @@
 	
 <script>
 	
-    console.log("Version 8.0");
+    console.log("Version 8.1");
     
     // configurations Variable, mit der das Spiel gestartet wird
 	var config = {
@@ -256,18 +256,26 @@
             targets: mage,
             x: { value: function () { 
                 let activeChar = figuresOnMap.findIndex(findActiveChar);
-                if (figuresOnMap[activeChar].pathToTravel.length > 0 ) {
-                    console.log(tileArray[figuresOnMap[activeChar].pathToTravel[0]].x);
-                    return tileArray[figuresOnMap[activeChar].pathToTravel[0]].x;
+                if (activeChar != -1) {
+                    if (figuresOnMap[activeChar].pathToTravel.length > 0 ) {
+                        console.log(tileArray[figuresOnMap[activeChar].pathToTravel[0]].x);
+                        return tileArray[figuresOnMap[activeChar].pathToTravel[0]].x;
+                    } else {
+                        return "+= 0";
+                    }
                 } else {
                     return "+= 0";
                 }
             }},
             y: { value: function () { 
                 let activeChar = figuresOnMap.findIndex(findActiveChar);
-                if (activeChar.pathToTravel.length > 0 ) {
-                    console.log(tileArray[figuresOnMap[activeChar].pathToTravel[0]].y);
-                    return tileArray[figuresOnMap[activeChar].pathToTravel[0]].y;
+                if (activeChar != -1) {
+                    if (activeChar.pathToTravel.length > 0 ) {
+                        console.log(tileArray[figuresOnMap[activeChar].pathToTravel[0]].y);
+                        return tileArray[figuresOnMap[activeChar].pathToTravel[0]].y;
+                    } else {
+                        return "+= 0";
+                    }
                 } else {
                     return "+= 0";
                 }
