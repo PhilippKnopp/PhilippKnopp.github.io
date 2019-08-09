@@ -293,14 +293,13 @@
             y: { value: function () { 
                 return tileArray[barb.pathToTravel[0]].y;
             }},
-            duration: 200,
-            onComplete: onCompleteHandler1,
-            onCompleteParams: []
+            duration: 200
         });
+	movementTweenBarb.on('complete', listener);
         
 	}
 	
-    function onCompleteHandler1 (tween, targets) {
+    function listener (tween, targets) {
 	    console.log(targets[0]);
 	    console.log("this1");
         targets[0].pathToTravel.shift();
