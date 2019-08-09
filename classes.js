@@ -31,8 +31,13 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.moveNow = function () {
             
             if (this.pathToTravel.length > 0) {
-                movementTween.updateTo("x", 345, true);
-                movementTween.updateTo("y", 345, true);
+                movementTween.data[0].target = this;
+                movementTween.data[1].target = this;
+                movementTween.data[0].start = this.x;
+                movementTween.data[1].start = this.y;
+                movementTween.data[0].end = tileArray[this.pathToTravel[0]].x;
+                movementTween.data[1].end = tileArray[this.pathToTravel[0]].y;
+                movementTween.restart();
                 this.pathToTravel.shift();
             }
         }
@@ -113,9 +118,6 @@ class Figure extends Phaser.GameObjects.Sprite {
             default:
                 break;
         }
-        
-        movementTween.data[0].target = this;
-        movementTween.data[1].target = this;
         
     }
     
