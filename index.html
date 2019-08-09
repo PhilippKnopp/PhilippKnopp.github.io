@@ -18,7 +18,7 @@
 	
 <script>
 	
-    console.log("Version 8.2");
+    console.log("Version 8.3");
     
     // configurations Variable, mit der das Spiel gestartet wird
 	var config = {
@@ -47,7 +47,9 @@
 	var matrixWidth = 25;
 	var matrixHeight = 40;
     var figureWantsToMove = false;
-    var movementTween;
+    var movementTweenBarb;
+    var movementTweenMage;
+    var movementTweenRogue;
 	
 	var mapImg;
     var doorButton;
@@ -239,49 +241,56 @@
         
         mage = new Figure ({scene:this, x:20, y:20}, 'mageSprite');
         mage.onTile = mageStartingPosition[level];
+        mage.pathToTravel.push(mageStartingPosition[level]);
         mage.dieSize = 4;
         figuresOnMap.push(mage);
         
         barb = new Figure ({scene:this, x:20, y:20}, 'barbSprite');
         barb.onTile = barbStartingPosition[level];
+        barb.pathToTravel.push(barbStartingPosition[level]);
         barb.dieSize = 12;
         figuresOnMap.push(barb);
         
         rogue = new Figure ({scene:this, x:20, y:20}, 'rogueSprite');
         rogue.onTile = rogueStartingPosition[level];
+        rogue.pathToTravel.push(rogueStartingPosition[level]);
         rogue.dieSize = 8;
         figuresOnMap.push(rogue);
         
-        movementTween = this.tweens.add({
+        buildLevel();
+        
+        movementTweenMage = this.tweens.add({
             targets: mage,
-            x: { value: function () { 
-                let activeChar = figuresOnMap.findIndex(findActiveChar);
-                if (activeChar != -1) {
-                    if (figuresOnMap[activeChar].pathToTravel.length > 0 ) {
-                        return tileArray[figuresOnMap[activeChar].pathToTravel[0]].x;
-                    } else {
-                        return "+= 0";
-                    }
-                } else {
-                    return "+= 0";
-                }
+            x: { value: function () {
+                return tileArray[mage.pathToTravel[0]].x;
             }},
             y: { value: function () { 
-                let activeChar = figuresOnMap.findIndex(findActiveChar);
-                if (activeChar != -1) {
-                    if (figuresOnMap[activeChar].pathToTravel.length > 0 ) {
-                        return tileArray[figuresOnMap[activeChar].pathToTravel[0]].y;
-                    } else {
-                        return "+= 0";
-                    }
-                } else {
-                    return "+= 0";
-                }
+                return tileArray[mage.pathToTravel[0]].y;
             }},
             duration: 200
         });
         
-        buildLevel();
+        movementTweenRogue = this.tweens.add({
+            targets: rogue,
+            x: { value: function () {
+                return tileArray[rogue.pathToTravel[0]].x;
+            }},
+            y: { value: function () { 
+                return tileArray[rogue.pathToTravel[0]].y;
+            }},
+            duration: 200
+        });
+        
+        movementTweenBarb = this.tweens.add({
+            targets: barb,
+            x: { value: function () {
+                return tileArray[barb.pathToTravel[0]].x;
+            }},
+            y: { value: function () { 
+                return tileArray[barb.pathToTravel[0]].y;
+            }},
+            duration: 200
+        });
         
 	}
 	
@@ -326,6 +335,7 @@
         var activeNode;
         var pathFound = false;
 
+        activeChar.pathToTravel.length = 0;
 
         // finde A und füge ihn der frontierList hinzu {name, wayPointUsefulness}
         tileArray[activeChar.onTile].entryPoint = "Start";
