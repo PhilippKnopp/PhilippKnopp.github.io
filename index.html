@@ -18,7 +18,7 @@
 	
 <script>
 	
-    console.log("Version 8.3");
+    console.log("Version 8.4");
     
     // configurations Variable, mit der das Spiel gestartet wird
 	var config = {
@@ -222,7 +222,7 @@
         moveButton = this.add.sprite(400, 400, 'moveSprite').setAlpha(0);
         moveButton.setInteractive();
 		moveButton.on("pointerup", function pointerUp() {
-            figureWantsToMove = true;
+            figureMoveState = "planning";
             hideActions();
             moveButton.setAlpha(1);
             moveButton.setScale(0.5);
