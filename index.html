@@ -46,7 +46,7 @@
 	var tileArray = [];
 	var matrixWidth = 25;
 	var matrixHeight = 40;
-    var figureWantsToMove = false;
+    var figureMoveState = "none";
     var movementTweenBarb;
     var movementTweenMage;
     var movementTweenRogue;
@@ -267,9 +267,7 @@
             y: { value: function () { 
                 return tileArray[mage.pathToTravel[0]].y;
             }},
-            duration: 200,
-            onComplete: onCompleteHandler3,
-            onCompleteParams: []
+            duration: 200
         });
         
         movementTweenRogue = this.tweens.add({
@@ -280,9 +278,7 @@
             y: { value: function () { 
                 return tileArray[rogue.pathToTravel[0]].y;
             }},
-            duration: 200,
-            onComplete: onCompleteHandler2,
-            onCompleteParams: []
+            duration: 200
         });
         
         movementTweenBarb = this.tweens.add({
@@ -295,33 +291,17 @@
             }},
             duration: 200
         });
-	movementTweenBarb.on('complete', listener);
         
 	}
-	
-    function listener (tween, targets) {
-	    console.log(targets[0]);
-	    console.log("this1");
-        targets[0].pathToTravel.shift();
-        targets[0].moveNow();
-    }
-function onCompleteHandler2 (tween, targets) {
-	    console.log(targets[0]);
-	    console.log("this2");
-        targets[0].pathToTravel.shift();
-        targets[0].moveNow();
-    }
-function onCompleteHandler3 (tween, targets) {
-	    console.log(targets[0]);
-	    console.log("this3");
-        targets[0].pathToTravel.shift();
-        targets[0].moveNow();
-    }
     
     function update () {
-        if (figureWantsToMove == true) {
+        if (figureMoveState == "planning") {
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
+        }
+	if (figureMoveState == "moving" && movementTweenBarb.isPlaying()) {
+            targets[0].pathToTravel.shift();
+            targets[0].moveNow();
         }
     }
 
@@ -441,7 +421,7 @@ function onCompleteHandler3 (tween, targets) {
     }
 
     function returnCursorToNormal() {
-        figureWantsToMove = false;
+        figureMoveState = "none";
         hideActions();
         moveButton.setScale(1);
     }
