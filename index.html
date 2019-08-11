@@ -18,7 +18,7 @@
 	
 <script>
 	
-    console.log("Version 8.4");
+    console.log("Version 8.5");
     
     // configurations Variable, mit der das Spiel gestartet wird
 	var config = {
@@ -153,7 +153,7 @@
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
                      // nichts ist auf der Tile und diese ist von einer Seite aus begehbar und der
-					if (this.occupiedBy == "" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && figureWantsToMove == true) {
+					if (this.occupiedBy == "" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && figureMoveState == "planning") {
                         this.setFrame(2);
 				        this.text = "B";
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
@@ -421,7 +421,7 @@
     }
 
     function returnCursorToNormal() {
-        figureMoveState = "none";
+        figureMoveState = "moving";
         hideActions();
         moveButton.setScale(1);
     }
