@@ -18,7 +18,7 @@
 	
 <script>
 	
-    console.log("Version 8.4");
+    console.log("Version 8.41");
     
     // configurations Variable, mit der das Spiel gestartet wird
 	var config = {
@@ -299,7 +299,7 @@
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
         } else if (figureMoveState == "moving") {
-            let activeChar = figuresOnMap.findIndex(findActiveChar);
+            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.pathToTravel.shift();
             if (activeChar.pathToTravel.length >= 1) {
                 activeChar.moveNow();
