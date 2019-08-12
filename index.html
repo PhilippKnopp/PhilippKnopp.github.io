@@ -18,7 +18,7 @@
 	
 <script>
 	
-    console.log("Version 8.5");
+    console.log("Version 8.6");
     
     // configurations Variable, mit der das Spiel gestartet wird
 	var config = {
@@ -267,7 +267,8 @@
             y: { value: function () { 
                 return tileArray[mage.pathToTravel[0]].y;
             }},
-            duration: 200
+            duration: 250,
+            ease: 'Sine.easeInOut'
         });
         
         movementTweenRogue = this.tweens.add({
@@ -278,7 +279,8 @@
             y: { value: function () { 
                 return tileArray[rogue.pathToTravel[0]].y;
             }},
-            duration: 200
+            duration: 250,
+            ease: 'Sine.easeInOut'
         });
         
         movementTweenBarb = this.tweens.add({
@@ -289,7 +291,8 @@
             y: { value: function () { 
                 return tileArray[barb.pathToTravel[0]].y;
             }},
-            duration: 200
+            duration: 250,
+            ease: 'Sine.easeInOut'
         });
         
 	}
@@ -301,11 +304,10 @@
         } else if (figureMoveState == "moving" && movementTweenBarb.isPlaying() == false && movementTweenRogue.isPlaying() == false && movementTweenMage.isPlaying() == false) {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.pathToTravel.shift();
-            console.log("logging");
-            if (activeChar.pathToTravel.length >= 1) {
+            if (activeChar.pathToTravel.length > 0) {
                 activeChar.moveNow();
             } else {
-                figureMoveState == "none";
+                figureMoveState = "none";
             }
         } 
     }
@@ -413,6 +415,7 @@
 
         clearNodes();
         returnCursorToNormal();
+        figureMoveState = "moving";
         //activeChar.activateFigure();
     }
 
@@ -426,7 +429,6 @@
     }
 
     function returnCursorToNormal() {
-        figureMoveState = "moving";
         hideActions();
         moveButton.setScale(1);
     }
