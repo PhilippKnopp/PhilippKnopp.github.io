@@ -18,7 +18,7 @@
 	
 <script>
 	
-    console.log("Version 8.5");
+    console.log("Version 8.4");
     
     // configurations Variable, mit der das Spiel gestartet wird
 	var config = {
@@ -69,7 +69,7 @@
 
     // Funktion die alle Bilder lädt
 	function preload() {
-	this.load.image('map-lvl-1', 'img/map-lvl-1.png');
+		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
         this.load.spritesheet('mageSprite', 'img/mToken.png', { frameWidth: 25, frameHeight: 25 });
@@ -298,11 +298,15 @@
         if (figureMoveState == "planning") {
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
-        }
-	if (figureMoveState == "moving" && movementTweenBarb.isPlaying()) {
-            targets[0].pathToTravel.shift();
-            targets[0].moveNow();
-        }
+        } else if (figureMoveState == "moving") {
+            let activeChar = figuresOnMap.findIndex(findActiveChar);
+            activeChar.pathToTravel.shift();
+            if (activeChar.pathToTravel.length >= 1) {
+                activeChar.moveNow();
+            } else {
+                figureMoveState == "none";
+            }
+        } 
     }
 
     function findActiveChar(element) {
