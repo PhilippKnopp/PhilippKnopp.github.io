@@ -18,7 +18,7 @@
 	
 <script>
 	
-    console.log("Version 8.6");
+    console.log("Version 8.61");
     
     // configurations Variable, mit der das Spiel gestartet wird
 	var config = {
@@ -115,7 +115,6 @@
                                 figuresOnMap[i].mapPosition(this.x, this.y);
                             }
                         }
-						this.text = "A";
 					};
                     if (this.state == 0) { // normaler Boden
                         this.setFrame(0);
@@ -259,9 +258,7 @@
             duration: 250,
             ease: 'Sine.easeInOut',
             onComplete: function () {
-                mage.pathToTravel.shift();
-                console.log("pathToTravel -1");
-                console.log(mage.pathToTravel);
+                barb.enterTile();
             },
             onCompleteScope: movementTweenMage
         });
@@ -277,9 +274,7 @@
             duration: 250,
             ease: 'Sine.easeInOut',
             onComplete: function () {
-                rogue.pathToTravel.shift();
-                console.log("pathToTravel -1");
-                console.log(rogue.pathToTravel);
+                barb.enterTile();
             },
             onCompleteScope: movementTweenRogue
         });
@@ -295,9 +290,7 @@
             duration: 250,
             ease: 'Sine.easeInOut',
             onComplete: function () {
-                barb.pathToTravel.shift();
-                console.log("pathToTravel -1");
-                console.log(barb.pathToTravel);
+                barb.enterTile();
             },
             onCompleteScope: movementTweenBarb
         });
