@@ -55,84 +55,80 @@ class Figure extends Phaser.GameObjects.Sprite {
     
     activateFigure() {
         
-        if (figureMoveState != "none") {
-            break;
-        }
-        
-        
-        deactivateFigures();
-        
-        this.active = true;
-        this.setFrame(1);
-        
-        hideActions();
-        
-        let buttonXpos = 60;
-        
-        faceButton.x = this.x-60;
-        faceButton.y = this.y;
-        faceButton.setAlpha(1);
-        
-        // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
-        tileArray[this.onTile].checkForNeighbors();
-        if (tileArray[this.onTile].neighbors.length != 0) {
-            moveButton.x = this.x+buttonXpos;
-            moveButton.y = this.y;
-            moveButton.setAlpha(1);
+        if (figureMoveState == "none") {
+            deactivateFigures();
+
+            this.active = true;
+            this.setFrame(1);
+
+            hideActions();
+
+            let buttonXpos = 60;
+
+            faceButton.x = this.x-60;
+            faceButton.y = this.y;
+            faceButton.setAlpha(1);
+
+            // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
+            tileArray[this.onTile].checkForNeighbors();
+            if (tileArray[this.onTile].neighbors.length != 0) {
+                moveButton.x = this.x+buttonXpos;
+                moveButton.y = this.y;
+                moveButton.setAlpha(1);
+                buttonXpos += 85;
+            }
+            tileArray[this.onTile].neighbors.length = 0;
+
+            // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
+            attackButton.x = this.x+buttonXpos;
+            attackButton.y = this.y;
+            attackButton.setAlpha(1);
             buttonXpos += 85;
+
+            searchButton.x = this.x+buttonXpos;
+            searchButton.y = this.y;
+            searchButton.setAlpha(1);
+            buttonXpos += 85;
+
+            doorButton.x = this.x+buttonXpos;
+            doorButton.y = this.y;
+            doorButton.setAlpha(1);
+            buttonXpos += 85;
+
+            cancelButton.x = this.x+buttonXpos;
+            cancelButton.y = this.y;
+            cancelButton.setAlpha(1);
+            buttonXpos += 85;
+
+            switch(this) {
+                case mage:
+                    faceButton.setFrame(0);
+                    doorButton.setFrame(0);
+                    moveButton.setFrame(0);
+                    attackButton.setFrame(0);
+                    searchButton.setFrame(0);
+                    cancelButton.setFrame(0);
+                    break;
+                case rogue:
+                    faceButton.setFrame(1);
+                    doorButton.setFrame(1);
+                    moveButton.setFrame(1);
+                    attackButton.setFrame(1);
+                    searchButton.setFrame(1);
+                    cancelButton.setFrame(1);
+                    break;
+                case barb:
+                    faceButton.setFrame(2);
+                    doorButton.setFrame(2);
+                    moveButton.setFrame(2);
+                    attackButton.setFrame(2);
+                    searchButton.setFrame(2);
+                    cancelButton.setFrame(2);
+                    break;
+                default:
+                    break;
+            }
         }
-        tileArray[this.onTile].neighbors.length = 0;
-        
-        // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
-        attackButton.x = this.x+buttonXpos;
-        attackButton.y = this.y;
-        attackButton.setAlpha(1);
-        buttonXpos += 85;
-        
-        searchButton.x = this.x+buttonXpos;
-        searchButton.y = this.y;
-        searchButton.setAlpha(1);
-        buttonXpos += 85;
-        
-        doorButton.x = this.x+buttonXpos;
-        doorButton.y = this.y;
-        doorButton.setAlpha(1);
-        buttonXpos += 85;
-        
-        cancelButton.x = this.x+buttonXpos;
-        cancelButton.y = this.y;
-        cancelButton.setAlpha(1);
-        buttonXpos += 85;
-        
-        switch(this) {
-            case mage:
-                faceButton.setFrame(0);
-                doorButton.setFrame(0);
-                moveButton.setFrame(0);
-                attackButton.setFrame(0);
-                searchButton.setFrame(0);
-                cancelButton.setFrame(0);
-                break;
-            case rogue:
-                faceButton.setFrame(1);
-                doorButton.setFrame(1);
-                moveButton.setFrame(1);
-                attackButton.setFrame(1);
-                searchButton.setFrame(1);
-                cancelButton.setFrame(1);
-                break;
-            case barb:
-                faceButton.setFrame(2);
-                doorButton.setFrame(2);
-                moveButton.setFrame(2);
-                attackButton.setFrame(2);
-                searchButton.setFrame(2);
-                cancelButton.setFrame(2);
-                break;
-            default:
-                break;
-        }
-        
     }
     
     hideFace() {
