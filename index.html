@@ -298,7 +298,7 @@
         if (figureMoveState == "planning") {
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
-        } else if (figureMoveState == "moving" && (movementTweenBarb.isPlaying() || movementTweenRogue.isPlaying() || movementTweenMage.isPlaying())) {
+        } else if (figureMoveState == "moving" && movementTweenBarb.isPlaying() == false && movementTweenRogue.isPlaying() == false && movementTweenMage.isPlaying() == false) {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.pathToTravel.shift();
             console.log("logging");
