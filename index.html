@@ -18,7 +18,7 @@
 	
 <script>
 	
-    console.log("Version 8.41");
+    console.log("Version 8.5");
     
     // configurations Variable, mit der das Spiel gestartet wird
 	var config = {
@@ -298,9 +298,10 @@
         if (figureMoveState == "planning") {
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
-        } else if (figureMoveState == "moving") {
+        } else if (figureMoveState == "moving" && (movementTweenBarb.isPlaying() || movementTweenRogue.isPlaying() || movementTweenMage.isPlaying())) {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.pathToTravel.shift();
+            console.log("logging");
             if (activeChar.pathToTravel.length >= 1) {
                 activeChar.moveNow();
             } else {
