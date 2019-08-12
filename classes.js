@@ -47,12 +47,18 @@ class Figure extends Phaser.GameObjects.Sprite {
             } else {
                 figureMoveState = "none";
                 console.log("stop moving");
+                this.activateFigure();
             }
         }
         
     }
     
     activateFigure() {
+        
+        if (figureMoveState != "none") {
+            break;
+        }
+        
         
         deactivateFigures();
         

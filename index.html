@@ -117,15 +117,7 @@
                         }
 						this.text = "A";
 					};
-                    if (this.state == 2) {
-						this.setFrame(2);
-						this.text = "B";
-					} else if (this.state == 3) { 
-						this.text = "+";
-					} else if (this.state == 4) {
-                        this.setFrame(3);
-						this.text = "+";
-					} else if (this.state == 0) { // normaler Boden
+                    if (this.state == 0) { // normaler Boden
                         this.setFrame(0);
 						this.text = "0";
                         this.weight = 1;
@@ -378,8 +370,6 @@
 
                 while (tileArray[tileArray[backtraceIndex].entryPoint].name != activeChar.onTile) {
                     activeChar.pathToTravel.unshift(tileArray[backtraceIndex].entryPoint);
-                    tileArray[tileArray[backtraceIndex].entryPoint].state = 4;
-                    tileArray[tileArray[backtraceIndex].entryPoint].updateState();
                     backtraceIndex = tileArray[backtraceIndex].entryPoint;
                 }
 
@@ -406,10 +396,6 @@
                     frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB(endIndex);
                     frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
                     frontierList.push(frontierList[activeNode].neighbors[i]);
-                    if (frontierList[activeNode].neighbors[i].name != endIndex) {
-                        frontierList[activeNode].neighbors[i].state = 3;
-                        frontierList[activeNode].neighbors[i].updateState();
-                    }
                 }
             };
 
