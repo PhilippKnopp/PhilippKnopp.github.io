@@ -197,10 +197,9 @@
 					};
 				};
 				tile.weight = 1;
-				tile.estimatedWayToB = function () {
+				tile.estimatedWayToB = function (b) {
 					
 					let a = this.name;
-					let b = tileArray.findIndex(findEnd);
 					
 					let xDistance = (Math.abs(b%matrixWidth-a%matrixWidth));
 					let yDistance = Math.abs(Math.floor(b/matrixWidth)-Math.floor(a/matrixWidth));
@@ -314,10 +313,6 @@
         return element.active == true;
     }
 
-    function findEnd(element) {
-        return element.text == "B";
-    }
-
     function buildLevel() {
 
         var levelMap = returnLevelType(1);
@@ -336,7 +331,7 @@
 
     }
 
-    function calculatePath (activeChar) {
+    function calculatePath (activeChar, endIndex) {
 
         var mappedList = [];
         var frontierList = [];
@@ -349,7 +344,7 @@
         // finde A und füge ihn der frontierList hinzu {name, wayPointUsefulness}
         tileArray[activeChar.onTile].entryPoint = "Start";
         tileArray[activeChar.onTile].distanceTravelled = 0;
-        tileArray[activeChar.onTile].wayPointUsefulness = tileArray[activeChar.onTile].distanceTravelled + tileArray[activeChar.onTile].estimatedWayToB();
+        tileArray[activeChar.onTile].wayPointUsefulness = tileArray[activeChar.onTile].distanceTravelled + tileArray[activeChar.onTile].estimatedWayToB(endIndex);
         frontierList.push(tileArray[activeChar.onTile]);
 
         // gehe folgende Schleife solange durch bis es einen Weg gibt
@@ -363,9 +358,9 @@
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
 
             // Wenn Knoten mit Niedrigster wayPointUsefulness schon das Ziel ist, ist A* fertig
-            if (frontierList[activeNode].text == "B") {
+            if (frontierList[activeNode].name == endIndex) {
                 pathFound = true; // unterbricht das Pfadsuchen
-                let backtraceIndex = tileArray.findIndex(findEnd); // Sucht den Index des Zielfeldes
+                let backtraceIndex = endIndex; // Sucht den Index des Zielfeldes
                 activeChar.pathToTravel.unshift(backtraceIndex); // Fügt das Zielfeld dem Pfad hinzu
 
                 while (tileArray[tileArray[backtraceIndex].entryPoint].name != activeChar.onTile) {
@@ -388,17 +383,17 @@
                 if (containsObject(frontierList[activeNode].neighbors[i], frontierList)) {
                     if (distanceTravelled < frontierList[activeNode].neighbors[i].distanceTravelled) {
                         frontierList[activeNode].neighbors[i].distanceTravelled = distanceTravelled;
-                        frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB();
+                        frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB(endIndex);
                         frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
                     }
                 } else if (containsObject(frontierList[activeNode].neighbors[i], mappedList)) {
                     continue;
                 } else {
                     frontierList[activeNode].neighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
-                    frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB();
+                    frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB(endIndex);
                     frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
                     frontierList.push(frontierList[activeNode].neighbors[i]);
-                    if (frontierList[activeNode].neighbors[i].text != "B") {
+                    if (frontierList[activeNode].neighbors[i].name != endIndex) {
                         frontierList[activeNode].neighbors[i].state = 3;
                         frontierList[activeNode].neighbors[i].updateState();
                     }
