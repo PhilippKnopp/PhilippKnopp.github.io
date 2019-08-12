@@ -265,7 +265,13 @@
                 return tileArray[mage.pathToTravel[0]].y;
             }},
             duration: 250,
-            ease: 'Sine.easeInOut'
+            ease: 'Sine.easeInOut',
+            onComplete: function () {
+                mage.pathToTravel.shift();
+                console.log("pathToTravel -1");
+                console.log(mage.pathToTravel);
+            },
+            onCompleteScope: movementTweenMage
         });
         
         movementTweenRogue = this.tweens.add({
@@ -277,7 +283,13 @@
                 return tileArray[rogue.pathToTravel[0]].y;
             }},
             duration: 250,
-            ease: 'Sine.easeInOut'
+            ease: 'Sine.easeInOut',
+            onComplete: function () {
+                rogue.pathToTravel.shift();
+                console.log("pathToTravel -1");
+                console.log(rogue.pathToTravel);
+            },
+            onCompleteScope: movementTweenRogue
         });
         
         movementTweenBarb = this.tweens.add({
@@ -289,7 +301,13 @@
                 return tileArray[barb.pathToTravel[0]].y;
             }},
             duration: 250,
-            ease: 'Sine.easeInOut'
+            ease: 'Sine.easeInOut',
+            onComplete: function () {
+                barb.pathToTravel.shift();
+                console.log("pathToTravel -1");
+                console.log(barb.pathToTravel);
+            },
+            onCompleteScope: movementTweenBarb
         });
         
 	}

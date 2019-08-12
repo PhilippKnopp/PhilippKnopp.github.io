@@ -48,9 +48,6 @@ class Figure extends Phaser.GameObjects.Sprite {
                 figureMoveState = "none";
                 console.log("stop moving");
             }
-            this.pathToTravel.shift();
-            console.log("pathToTravel -1");
-            console.log(this.pathToTravel);
         }
         
     }
