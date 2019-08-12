@@ -106,6 +106,7 @@
                 var tile = this.add.sprite(xPos*25+100, yPos*25+26, 'tileSprite');
 				tile.state = 0;
                 tile.text = "0";
+                tile.name = index++;
 				tile.walkable = [1,1,1,1,1,1,1,1];
 				tile.updateState = function () {
 					if (this.occupiedBy == "figure") {
@@ -154,14 +155,11 @@
 				tile.on("pointerup", function pointerUp () {
                      // nichts ist auf der Tile und diese ist von einer Seite aus begehbar und der
 					if (this.occupiedBy == "" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && figureMoveState == "planning") {
-                        this.setFrame(2);
-				        this.text = "B";
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
-                        calculatePath(figuresOnMap[activeChar]);
-                        figuresOnMap[activeChar].moveNow();
+                        calculatePath(figuresOnMap[activeChar], this.name);
+                        //figuresOnMap[activeChar].moveNow();
                     }
 				});
-				tile.name = index++;
 				tile.neighbors = [];
 				tile.neighborsDistance = [];
 				tile.checkForNeighbors = function () {
