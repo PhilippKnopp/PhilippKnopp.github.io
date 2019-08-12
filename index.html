@@ -300,14 +300,7 @@
             moveButton.y = this.game.input.activePointer.y + 50;
         } else if (figureMoveState == "moving" && movementTweenBarb.isPlaying() == false && movementTweenRogue.isPlaying() == false && movementTweenMage.isPlaying() == false) {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-            activeChar.pathToTravel.shift();
-            console.log("one pathToTravel -1");
-            if (activeChar.pathToTravel.length > 0) {
-                console.log("start next Tween");
-                activeChar.moveNow();
-            } else {
-                figureMoveState = "none";
-            }
+            activeChar.moveNow();
         } 
     }
 
