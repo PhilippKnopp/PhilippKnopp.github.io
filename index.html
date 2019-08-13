@@ -228,18 +228,22 @@
         mage.onTile = mageStartingPosition[level];
         mage.pathToTravel.push(mageStartingPosition[level]);
         mage.dieSize = 4;
+        mage.health = 4;
         figuresOnMap.push(mage);
         
         barb = new Figure ({scene:this, x:20, y:20}, 'barbSprite');
         barb.onTile = barbStartingPosition[level];
         barb.pathToTravel.push(barbStartingPosition[level]);
         barb.dieSize = 12;
+        barb.health = 12;
         figuresOnMap.push(barb);
         
         rogue = new Figure ({scene:this, x:20, y:20}, 'rogueSprite');
         rogue.onTile = rogueStartingPosition[level];
         rogue.pathToTravel.push(rogueStartingPosition[level]);
         rogue.dieSize = 8;
+        rogue.health = 8;
+        
         figuresOnMap.push(rogue);
         
         buildLevel();
