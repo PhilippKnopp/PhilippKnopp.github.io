@@ -103,11 +103,16 @@ class Figure extends Phaser.GameObjects.Sprite {
             searchButton.y = this.y;
             searchButton.setAlpha(1);
             buttonXpos += 85;
-
-            doorButton.x = this.x+buttonXpos;
-            doorButton.y = this.y;
-            doorButton.setAlpha(1);
-            buttonXpos += 85;
+            
+            // bietet den "Tür-Button" an, wenn eine Tür in Reichweite ist.
+            tileArray[this.onTile].checkForNeighbors();
+            if (tileArray.findIndex(findActiveChar) > 0) {
+                doorButton.x = this.x+buttonXpos;
+                doorButton.y = this.y;
+                doorButton.setAlpha(1);
+                buttonXpos += 85;
+            }
+            tileArray[this.onTile].neighbors.length = 0;
 
             cancelButton.x = this.x+buttonXpos;
             cancelButton.y = this.y;

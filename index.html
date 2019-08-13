@@ -121,6 +121,9 @@
 					} else if (this.state == "0t1") { // Trap
 						this.weight = 1;
 						//this.walkable = [1,1,1,1,1,1,1,1];
+					} else if (this.state == "0dc") { // Trap
+						this.weight = 1;
+						//this.walkable = [1,1,1,1,1,1,1,1];
 					} else if (this.state == 5) { // Wand
 						//this.walkable = [0,0,0,0,0,0,0,0];
 					} else if (this.state == 6) { // Schwieriges Terrain
@@ -310,6 +313,14 @@
 
     function findActiveChar(element) {
         return element.active == true;
+    }
+    
+    function findDoor(element) {
+        if (element.state == "0dc") {
+            return element.state == "0dc";
+        } else if (element.state == "0do") {
+            return element.state == "0do";
+        }
     }
 
     function buildLevel() {
