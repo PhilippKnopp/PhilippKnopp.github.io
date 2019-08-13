@@ -105,7 +105,6 @@
 			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
                 var tile = this.add.sprite(xPos*25+100, yPos*25+26, 'tileSprite');
 				tile.state = 0;
-                tile.text = "0";
                 tile.name = index++;
 				tile.walkable = [1,1,1,1,1,1,1,1];
 				tile.updateState = function () {
@@ -117,29 +116,22 @@
                         }
 					};
                     if (this.state == 0) { // normaler Boden
-                        this.setFrame(0);
-						this.text = "0";
                         this.weight = 1;
-						this.walkable = [1,1,1,1,1,1,1,1];
+						//this.walkable = [1,1,1,1,1,1,1,1];
+					} else if (this.state == "0t1") { // Trap
+						this.weight = 1;
+						//this.walkable = [1,1,1,1,1,1,1,1];
 					} else if (this.state == 5) { // Wand
-						this.text = "X";
-						this.walkable = [0,0,0,0,0,0,0,0];
+						//this.walkable = [0,0,0,0,0,0,0,0];
 					} else if (this.state == 6) { // Schwieriges Terrain
-						this.text = "0";
-						this.walkable = [2,2,2,2,2,2,2,2];
+						//this.walkable = [2,2,2,2,2,2,2,2];
 						this.weight = 2;
 					} else if (this.state == 7) { // Wasser
-						this.text = "W";
-						this.walkable = [3,3,3,3,3,3,3,3];
+						//this.walkable = [3,3,3,3,3,3,3,3];
 						this.weight = 3;
 					} else if (this.state == 8) { // Niedriges Wasser
-						this.text = "W";
-						this.walkable = [2,2,2,2,2,2,2,2];
+						//this.walkable = [2,2,2,2,2,2,2,2];
 						this.weight = 2;
-					} else if (this.state == 9) { // Trap
-						this.text = "T";
-						this.weight = 1;
-						this.walkable = [1,1,1,1,1,1,1,1];
 					};
 				};
 				tile.setInteractive();
@@ -215,10 +207,14 @@
             moveButton.setAlpha(1);
             moveButton.setScale(0.5);
 		});
+        moveButton.setDepth(1);
         
         attackButton = this.add.sprite(400, 400, 'attackSprite').setAlpha(0);
+        attackButton.setDepth(1);
         searchButton = this.add.sprite(400, 400, 'searchSprite').setAlpha(0);
+        searchButton.setDepth(1);
         faceButton = this.add.sprite(400, 400, 'faceSprite').setAlpha(0);
+        faceButton.setDepth(1);
         
         cancelButton = this.add.sprite(400, 400, 'cancelSprite').setAlpha(0);
         cancelButton.setInteractive();
@@ -226,6 +222,7 @@
             hideActions();
             deactivateFigures();
 		});
+        cancelButton.setDepth(1);
         
         mage = new Figure ({scene:this, x:20, y:20}, 'mageSprite');
         mage.onTile = mageStartingPosition[level];

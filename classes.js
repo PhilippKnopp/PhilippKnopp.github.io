@@ -19,15 +19,9 @@ class Figure extends Phaser.GameObjects.Sprite {
         };
         
         this.enterTile = function () {
-            console.log(this.pathToTravel);
-            console.log(this.onTile);
             tileArray[this.onTile].occupiedBy = "";
             this.onTile = this.pathToTravel[0];
-            console.log(this.pathToTravel);
-            console.log(this.onTile);
             this.pathToTravel.shift();
-            console.log(this.pathToTravel);
-            console.log(this.onTile);
             tileArray[this.onTile].occupiedBy = "figure";
         };
         
