@@ -53,7 +53,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 let attackroll = getRandomInt(this.dieSize, true);
                 tileArray[this.onTile].checkForNeighbors();
                 let adjacentEnemies = false;
-                for (var i = 0; i < tileArray.neighbors; i++) {
+                for (var i = 0; i < tileArray.neighbors.length; i++) {
                     if (tileArray.neighbors[i].occupiedBy == "enemy") {
                         adjacentEnemies = true;
                     }
@@ -63,7 +63,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 } else if (adjacentEnemies == false) {
                     console.log("implement aoe Damage");
                 }
-                tileArray[this.onTile].checkForNeighbors.length = 0;
+                tileArray[this.onTile].neighbors.length = 0;
             } else { // standard Attacke für Barb und Schurke im Nahkampf
                 let attackroll = getRandomInt(this.dieSize, false);
                 if (attackroll >= enemy.def) {
@@ -110,21 +110,24 @@ class Figure extends Phaser.GameObjects.Sprite {
             faceButton.setAlpha(1);
 
             // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
-            tileArray[this.onTile].checkForNeighbors(); // Listet Nachbarn auf
+            tileArray[this.onTile].checkForNeighbors();
             if (tileArray[this.onTile].neighbors.length != 0) {
                 moveButton.x = this.x+buttonXpos;
                 moveButton.y = this.y;
                 moveButton.setAlpha(1);
                 buttonXpos += 85;
             }
+            tileArray[this.onTile].neighbors.length = 0;
 
             // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
             let adjacentEnemies = false;
-            for (var i = 0; i < tileArray.neighbors; i++) {
+            tileArray[this.onTile].checkForNeighbors();
+            for (var i = 0; i < tileArray.neighbors.length; i++) {
                 if (tileArray.neighbors[i].occupiedBy == "enemy") {
                     adjacentEnemies = true;
                 }
             }
+            tileArray[this.onTile].neighbors.length = 0;
             if ((this == mage) || adjacentEnemies == true) {
                 console.log("magier LOS implementieren");
                 attackButton.x = this.x+buttonXpos;
@@ -132,7 +135,6 @@ class Figure extends Phaser.GameObjects.Sprite {
                 attackButton.setAlpha(1);
                 buttonXpos += 85;
             }
-            tileArray[this.onTile].neighbors.length = 0;  // Setzt Nachbarliste wieder auf Null
 
             searchButton.x = this.x+buttonXpos;
             searchButton.y = this.y;
