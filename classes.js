@@ -54,7 +54,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 tileArray[this.onTile].checkForNeighbors();
                 let adjacentEnemies = false;
                 for (var i = 0; i < tileArray[this.onTile].neighbors.length; i++) {
-                    if (tileArray[tileArray[this.onTile].neighbors[i]].occupiedBy == "enemy") {
+                    if (tileArray[this.onTile].neighbors[i].occupiedBy == "enemy") {
                         adjacentEnemies = true;
                     }
                 }
@@ -105,7 +105,6 @@ class Figure extends Phaser.GameObjects.Sprite {
 
             let buttonXpos = 60;
             tileArray[this.onTile].checkForNeighbors();
-            console.log(tileArray[this.onTile].neighbors);
             
             faceButton.x = this.x-60;
             faceButton.y = this.y;
@@ -122,7 +121,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
             let adjacentEnemies = false;
             for (var i = 0; i < tileArray[this.onTile].neighbors.length; i++) {
-                if (tileArray[tileArray[this.onTile].neighbors[i]].occupiedBy == "enemy") {
+                if (tileArray[this.onTile].neighbors[i].occupiedBy == "enemy") {
                     adjacentEnemies = true;
                 }
             }
