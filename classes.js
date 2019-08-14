@@ -104,30 +104,28 @@ class Figure extends Phaser.GameObjects.Sprite {
             hideActions();
 
             let buttonXpos = 60;
-
+            tileArray[this.onTile].checkForNeighbors();
+            console.log(tileArray[this.onTile].neighbors);
+            
             faceButton.x = this.x-60;
             faceButton.y = this.y;
             faceButton.setAlpha(1);
 
             // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
-            tileArray[this.onTile].checkForNeighbors();
             if (tileArray[this.onTile].neighbors.length != 0) {
                 moveButton.x = this.x+buttonXpos;
                 moveButton.y = this.y;
                 moveButton.setAlpha(1);
                 buttonXpos += 85;
             }
-            tileArray[this.onTile].neighbors.length = 0;
 
             // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
             let adjacentEnemies = false;
-            tileArray[this.onTile].checkForNeighbors();
             for (var i = 0; i < tileArray[this.onTile].neighbors.length; i++) {
                 if (tileArray[tileArray[this.onTile].neighbors[i]].occupiedBy == "enemy") {
                     adjacentEnemies = true;
                 }
             }
-            tileArray[this.onTile].neighbors.length = 0;
             if ((this == mage) || adjacentEnemies == true) {
                 console.log("magier LOS implementieren");
                 attackButton.x = this.x+buttonXpos;
@@ -182,6 +180,8 @@ class Figure extends Phaser.GameObjects.Sprite {
                 default:
                     break;
             }
+            
+            tileArray[this.onTile].neighbors.length = 0;
         }
     }
     
