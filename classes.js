@@ -53,8 +53,8 @@ class Figure extends Phaser.GameObjects.Sprite {
                 let attackroll = getRandomInt(this.dieSize, true);
                 tileArray[this.onTile].checkForNeighbors();
                 let adjacentEnemies = false;
-                for (var i = 0; i < tileArray.neighbors.length; i++) {
-                    if (tileArray.neighbors[i].occupiedBy == "enemy") {
+                for (var i = 0; i < tileArray[this.onTile].neighbors.length; i++) {
+                    if (tileArray[tileArray[this.onTile].neighbors[i]].occupiedBy == "enemy") {
                         adjacentEnemies = true;
                     }
                 }
@@ -122,8 +122,8 @@ class Figure extends Phaser.GameObjects.Sprite {
             // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
             let adjacentEnemies = false;
             tileArray[this.onTile].checkForNeighbors();
-            for (var i = 0; i < tileArray.neighbors.length; i++) {
-                if (tileArray.neighbors[i].occupiedBy == "enemy") {
+            for (var i = 0; i < tileArray[this.onTile].neighbors.length; i++) {
+                if (tileArray[tileArray[this.onTile].neighbors[i]].occupiedBy == "enemy") {
                     adjacentEnemies = true;
                 }
             }
