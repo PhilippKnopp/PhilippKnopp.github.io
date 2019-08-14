@@ -129,7 +129,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 }
             }
             if ((this == mage) || adjacentEnemies == true) {
-                console.Log("magier LOS implementieren");
+                console.log("magier LOS implementieren");
                 attackButton.x = this.x+buttonXpos;
                 attackButton.y = this.y;
                 attackButton.setAlpha(1);
