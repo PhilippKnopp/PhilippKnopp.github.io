@@ -11,6 +11,7 @@
 <script src="//cdn.jsdelivr.net/npm/phaser@3.18.1/dist/phaser.min.js"></script>
 <script src="levels.js"></script>
 <script src="classes.js"></script>
+<script src="random.js"></script>
 
 </head>
 
@@ -121,9 +122,10 @@
 					} else if (this.state == "0t1") { // Trap
 						this.weight = 1;
 						//this.walkable = [1,1,1,1,1,1,1,1];
-					} else if (this.state == "0dc") { // Trap
+					} else if (this.state == "0dc") { // Türe geschlossen
 						this.weight = 1;
-						//this.walkable = [1,1,1,1,1,1,1,1];
+					} else if (this.state == "0do") { // Türe offen
+						this.weight = 1;
 					} else if (this.state == 5) { // Wand
 						//this.walkable = [0,0,0,0,0,0,0,0];
 					} else if (this.state == 6) { // Schwieriges Terrain
@@ -201,6 +203,12 @@
 		}
         
         doorButton = this.add.sprite(400, 400, 'doorSprite').setAlpha(0);
+        doorButton.setInteractive();
+		doorButton.on("pointerup", function pointerUp() {
+            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+            doors(activeChar, activeChar.onTile);
+		});
+        doorButton.setDepth(1);
         
         moveButton = this.add.sprite(400, 400, 'moveSprite').setAlpha(0);
         moveButton.setInteractive();

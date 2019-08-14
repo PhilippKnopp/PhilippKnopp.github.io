@@ -39,8 +39,37 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.movement = 6;
         this.moved = 0;
         this.pathToTravel = [];
-        this.armor = 4;
+        this.def = 4;
         this.dieSize;
+        
+        this.attack = function (enemy) {
+            if (this.stealth == true) { // hinterhältiger Angriff
+                let attackroll = getRandomInt(this.dieSize, false) + getRandomInt(this.dieSize, false);
+                if (attackroll >= enemy.def) {
+                    enemy.health -= attackroll;
+                }
+            } else if (this == mage) { // Magieangriff
+                let attackroll = getRandomInt(this.dieSize, true);
+                tileArray[this.onTile].checkForNeighbors();
+                let adjacentEnemies = false;
+                for (var i = 0; i < tileArray.neighbors; i++) {
+                    if (tileArray.neighbors[i].occupiedBy == "enemy") {
+                        adjacentEnemies = true;
+                    }
+                }
+                if (adjacentEnemies == true && attackroll >= enemy.def) {
+                    enemy.health -= attackroll;
+                } else if (adjacentEnemies == false) {
+                    console.log("implement aoe Damage");
+                }
+                tileArray[this.onTile].checkForNeighbors.length = 0;
+            } else { // standard Attacke für Barb und Schurke im Nahkampf
+                let attackroll = getRandomInt(this.dieSize, false);
+                if (attackroll >= enemy.def) {
+                    enemy.health -= attackroll;
+                }
+            }
+        }
         
         this.moveNow = function () {
             if (this.pathToTravel.length > 0 && this == barb) {
@@ -84,20 +113,29 @@ class Figure extends Phaser.GameObjects.Sprite {
             faceButton.setAlpha(1);
 
             // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
-            tileArray[this.onTile].checkForNeighbors();
+            tileArray[this.onTile].checkForNeighbors(); // Listet Nachbarn auf
             if (tileArray[this.onTile].neighbors.length != 0) {
                 moveButton.x = this.x+buttonXpos;
                 moveButton.y = this.y;
                 moveButton.setAlpha(1);
                 buttonXpos += 85;
             }
-            tileArray[this.onTile].neighbors.length = 0;
 
             // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
-            attackButton.x = this.x+buttonXpos;
-            attackButton.y = this.y;
-            attackButton.setAlpha(1);
-            buttonXpos += 85;
+            let adjacentEnemies = false;
+            for (var i = 0; i < tileArray.neighbors; i++) {
+                if (tileArray.neighbors[i].occupiedBy == "enemy") {
+                    adjacentEnemies = true;
+                }
+            }
+            if ((this == mage) || adjacentEnemies == true) {
+                console.Log("magier LOS implementieren");
+                attackButton.x = this.x+buttonXpos;
+                attackButton.y = this.y;
+                attackButton.setAlpha(1);
+                buttonXpos += 85;
+            }
+            tileArray[this.onTile].neighbors.length = 0;  // Setzt Nachbarliste wieder auf Null
 
             searchButton.x = this.x+buttonXpos;
             searchButton.y = this.y;
