@@ -427,6 +427,7 @@
     function clearNodes() {
         tileArray.forEach(function(element) {
             element.neighbors.length = 0;
+            element.neighborsDistance.length = 0;
             element.distanceTravelled = "";
             element.wayPointUsefulness = "";
             element.entryPoint = "";
