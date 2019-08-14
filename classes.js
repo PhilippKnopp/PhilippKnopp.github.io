@@ -24,10 +24,11 @@ class Figure extends Phaser.GameObjects.Sprite {
             this.pathToTravel.shift();
             tileArray[this.onTile].occupiedBy = "figure";
             if (tileArray[this.onTile].state == "0t1") {
-                console.log("trap1");
                 trap1(this);
                 this.moveNow;
             }
+            console.log(this.onTile);
+            console.log(tileArray[this.onTile].walkable);
         };
         
         this.mapPosition = function (tileX, tileY) {
@@ -75,21 +76,17 @@ class Figure extends Phaser.GameObjects.Sprite {
             if (this.pathToTravel.length > 0 && this == barb) {
                 movementTweenBarb.data[0].start = this.x;
                 movementTweenBarb.data[1].start = this.y;
-                console.log("start next Tween");
                 movementTweenBarb.restart();
             } else if (this.pathToTravel.length > 0 && this == rogue) {
                 movementTweenRogue.data[0].start = this.x;
                 movementTweenRogue.data[1].start = this.y;
-                console.log("start next Tween");
                 movementTweenRogue.restart();
             } else if (this.pathToTravel.length > 0 && this == mage) {
                 movementTweenMage.data[0].start = this.x;
                 movementTweenMage.data[1].start = this.y;
-                console.log("start next Tween");
                 movementTweenMage.restart();
             } else {
                 figureMoveState = "none";
-                console.log("stop moving");
                 this.activateFigure();
             }
         }
