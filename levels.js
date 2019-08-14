@@ -11,7 +11,7 @@ var level1Type = [
     5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 5, 5, // 249
     5, 5, 5, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 6, 0, 0, 7, 7, 7, 5, 5, // 274
     5, 5, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, "0dc", "0dc", "0dc", 6, 5, 7, 7, 5, 5, 5, // 299
-    5, 5, 5, 0, 0, 0, 0, 6, 6, 0, 0, 0, 0, 0, 6, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5,
+    5, 5, 5, 0, 0, 0, 0, 6, 6, 0, 0, 0, 0, 0, 6, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
     5, 5, 6, 0, 6, 5, 5, 5, 5, 5, 6, 6, 0, 0, 6, "0dc", "0dc", "0dc", 5, 5, 5, 5, 5, 5, 5,
     5, 5, 6, 0, 5, 5, 5, 5, 5, 5, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5,
     5, 5, 6, 0, 6, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5,
@@ -144,6 +144,7 @@ function doors(char, tile) {
             tileArray[317].walkable = [0,0,0,0,0,0,0,0];
         }
     }
+    clearNodes();
 }
 
 var textL1intro = "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local guardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two pale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are holding a woman captive. She is not the girl they came to look for, but sems to be in need for their help anyway, as the young adventurers hear them say: 'We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!'";
