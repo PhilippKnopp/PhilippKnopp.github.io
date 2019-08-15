@@ -20,7 +20,7 @@
 	
 <script>
 	
-    console.log("Version 8.61");
+    console.log("Version 8.7");
     
     // configurations Variable, mit der das Spiel gestartet wird
 	var config = {
@@ -402,7 +402,7 @@
                         aX++;
                         console.log("rechts");
                         while (diagonal >= 0.5) {
-                            index = index + matrixWidth;
+                            index = index + matrixWidth + 1;
                             diagonal = diagonal + ((Math.abs(difY) / Math.abs(difX)) - 0.5);
                             losPathDifficulty.push(tileArray[index].neighbors[0]);
                             aX++;
