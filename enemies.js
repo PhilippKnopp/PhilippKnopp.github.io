@@ -11,5 +11,17 @@ class Enemies extends Phaser.GameObjects.Sprite {
         this.on("pointerup", this.activateFigure, this);
         this.on("pointerout", this.hideFace, this);
         this.on("pointerover", this.showFace, this);
-         
+    }
+    
+    activateFigure () {
+        
+    }
+    
+    hideFace () {
+        
+    }
+    
+    showFace () {
+        
+    }
 }

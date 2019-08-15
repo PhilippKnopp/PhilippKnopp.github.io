@@ -49,6 +49,7 @@
 	var matrixWidth = 25;
 	var matrixHeight = 40;
     var figureMoveState = "none";
+    var figureSearchState = "none";
     var movementTweenBarb;
     var movementTweenMage;
     var movementTweenRogue;
@@ -139,7 +140,11 @@
 					if (this.occupiedBy == "" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && figureMoveState == "planning") {
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
                         calculatePath(figuresOnMap[activeChar], this.name);
-                        //figuresOnMap[activeChar].moveNow();
+                    }
+                    if (figureSearchState == "planning") {
+                        let activeChar = figuresOnMap.findIndex(findActiveChar);
+                        console.log("check LoS");
+                        console.log(lineOfSight (figuresOnMap[activeChar], this.name));
                     }
 				});
 				tile.neighbors = [];
@@ -216,8 +221,17 @@
         
         attackButton = this.add.sprite(400, 400, 'attackSprite').setAlpha(0);
         attackButton.setDepth(1);
+        
         searchButton = this.add.sprite(400, 400, 'searchSprite').setAlpha(0);
+        searchButton.setInteractive();
+		searchButton.on("pointerup", function pointerUp() {
+            figureSearchState = "planning";
+            hideActions();
+            searchButton.setAlpha(1);
+            searchButton.setScale(0.5);
+		});
         searchButton.setDepth(1);
+        
         faceButton = this.add.sprite(400, 400, 'faceSprite').setAlpha(0);
         faceButton.setDepth(1);
         
@@ -229,6 +243,8 @@
 		});
         cancelButton.setDepth(1);
         
+        
+        // Erstellt die drei Spielfiguren
         mage = new Figure ({scene:this, x:20, y:20}, 'mageSprite');
         mage.onTile = mageStartingPosition[level];
         mage.pathToTravel.push(mageStartingPosition[level]);
@@ -248,7 +264,6 @@
         rogue.pathToTravel.push(rogueStartingPosition[level]);
         rogue.dieSize = 8;
         rogue.health = 8;
-        
         figuresOnMap.push(rogue);
         
         buildLevel();
@@ -310,7 +325,12 @@
         } else if (figureMoveState == "moving" && movementTweenBarb.isPlaying() == false && movementTweenRogue.isPlaying() == false && movementTweenMage.isPlaying() == false) {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.moveNow();
-        } 
+        }
+        
+        if (figureSearchState == "planning") {
+            searchButton.x = this.game.input.activePointer.x + 50;
+            searchButton.y = this.game.input.activePointer.y + 50;
+        }
     }
 
     function findActiveChar(element) {
@@ -343,6 +363,123 @@
 
     }
 
+    function lineOfSight (activeChar, endIndex) {
+        let aX = activeChar.onTile % matrixWidth;
+        let aY = Math.floor(activeChar.onTile / matrixWidth);
+        
+        let bX = endIndex % matrixWidth;
+        let bY = Math.floor(endIndex / matrixWidth);
+        
+        let difX = aX-bX;
+        let difY = aY-bY;
+        
+        let index = activeChar.onTile;
+        
+        let losPathDifficulty = [];
+        
+        if ( Math.abs(difX) > Math.abs(difY)) { // liegt Links oder Rechts 
+            if (difX > 0) { //liegt Links
+                if (difY > 0) { // liegt Links, leicht Oben
+                    console.log("liegt Links, leicht Oben");
+                } else if (difY < 0) { // liegt Links, leicht Unten
+                    console.log("liegt Links, leicht Unten");
+                } else { // liegt Links gleich hoch
+                    while (aX > bX) {
+                        index = index - 1;
+                        aX = aX - 1;
+                        losPathDifficulty.push(tileArray[index].neighbors[3]);
+                    }
+                }
+            } else if (difX < 0) { // liegt Rechts
+                if (difY > 0) { // liegt Rechts, leicht Oben
+                    console.log("liegt Rechts, leicht Oben");
+                } else if (difY < 0) { // liegt Rechts, leicht Unten
+                    diagonal = Math.abs(difY) / Math.abs(difX);
+                    while (aX < bX) {
+                        index = index + 1;
+                        losPathDifficulty.push(tileArray[index].neighbors[7]);
+                        diagonal += (Math.abs(difY) / Math.abs(difX));
+                        aX++;
+                        console.log("rechts");
+                        while (diagonal >= 0.5) {
+                            index = index + matrixWidth;
+                            diagonal = diagonal + ((Math.abs(difY) / Math.abs(difX)) - 0.5);
+                            losPathDifficulty.push(tileArray[index].neighbors[0]);
+                            aX++;
+                            console.log("runter rechts");
+                        }
+                    }
+                } else { // liegt Rechts gleich hoch
+                    while (aX < bX) {
+                        index = index + 1;
+                        aX = aX + 1;
+                        losPathDifficulty.push(tileArray[index].neighbors[7]);
+                    }
+                }
+            }
+        } else if ( Math.abs(difX) < Math.abs(difY) ) {// liegt Über oder Unter
+            if (difY > 0) { //liegt Über
+                if (difX > 0) { // liegt Über, leicht Links
+                    console.log("liegt Über, leicht Links");
+                } else if (difX < 0) { // liegt Über, leicht Rechts
+                    console.log("liegt Über, leicht Rechts");
+                } else { // liegt Über, gleiche Breite
+                    while (aY > bY) {
+                        index = index - matrixWidth;
+                        aY = aY - 1;
+                        losPathDifficulty.push(tileArray[index].neighbors[5]);
+                    }
+                }
+            } else if (difY < 0) { // liegt Unter
+                if (difX > 0) { // liegt Unter, leicht Links
+                    console.log("liegt Unter, leicht Links");
+                } else if (difX < 0) { // liegt Unter, leicht Rechts
+                    console.log("liegt Unter, leicht Rechts");
+                } else { // liegt Unter, gleiche Breite
+                    while (aY < bY) {
+                        index = index + matrixWidth;
+                        aY = aY + 1;
+                        losPathDifficulty.push(tileArray[index].neighbors[1]);
+                    }
+                }
+            }
+        } else { // liegt Diagonal
+            if (difX > 0) { // liegt Diagonal Links
+                if (difY > 0) { // liegt Diagonal Links Oben
+                    while (aX > bX) {
+                        index = index - matrixWidth - 1;
+                        aX = aX - 1;
+                        losPathDifficulty.push(tileArray[index].neighbors[4]);
+                    }
+                } else if (difY < 0) { // liegt Diagonal Links Unten
+                    while (aX > bX) {
+                        index = index + matrixWidth - 1;
+                        aX = aX - 1;
+                        losPathDifficulty.push(tileArray[index].neighbors[2]);
+                    }
+                }
+            } else if (difX < 0) { // liegt Diagonal Rechts
+                if (difY > 0) { // liegt Diagonal Rechts Oben
+                    while (aX < bX) {
+                        index = index - matrixWidth + 1;
+                        aX = aX + 1;
+                        losPathDifficulty.push(tileArray[index].neighbors[6]);
+                    }
+                } else if (difY < 0) { // liegt Diagonal Rechts Unten
+                    while (aX < bX) {
+                        index = index + matrixWidth + 1;
+                        aX = aX + 1;
+                        losPathDifficulty.push(tileArray[index].neighbors[0]);
+                    }
+                }
+            }
+        }
+        
+        let los_blocked = losPathDifficulty.includes(0); 
+        return los_blocked;
+        
+    }
+    
     function calculatePath (activeChar, endIndex) {
 
         var mappedList = [];
