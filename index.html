@@ -10,7 +10,8 @@
 	
 <script src="//cdn.jsdelivr.net/npm/phaser@3.18.1/dist/phaser.min.js"></script>
 <script src="levels.js"></script>
-<script src="classes.js"></script>
+<script src="heroines.js"></script>
+<script src="enemies.js"></script>
 <script src="random.js"></script>
 
 </head>
@@ -109,13 +110,6 @@
                 tile.name = index++;
 				tile.walkable = [1,1,1,1,1,1,1,1];
 				tile.updateState = function () {
-					if (this.occupiedBy == "figure") {
-                        for (var i = 0; i < figuresOnMap.length; i++) {
-                            if (this.name == figuresOnMap[i].onTile) {
-                                figuresOnMap[i].mapPosition(this.x, this.y);
-                            }
-                        }
-					};
                     if (this.state == 0) { // normaler Boden
                         this.weight = 1;
 						//this.walkable = [1,1,1,1,1,1,1,1];
