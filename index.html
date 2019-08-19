@@ -377,7 +377,7 @@
         
         let losPathDifficulty = [];
         
-        if ( Math.abs(difX) > Math.abs(difY)) { // liegt Links oder Rechts 
+        if ( Math.abs(difX) > Math.abs(difY) ) { // liegt Links oder Rechts 
             if (difX > 0) { //liegt Links
                 if (difY > 0) { // liegt Links, leicht Oben
                     console.log("liegt Links, leicht Oben");
@@ -394,25 +394,29 @@
                 if (difY > 0) { // liegt Rechts, leicht Oben
                     console.log("liegt Rechts, leicht Oben");
                 } else if (difY < 0) { // liegt Rechts, leicht Unten
-                    diagonal = Math.abs(difY) / Math.abs(difX);
+                    let stepX = 1/difX;
+                    let stepY = 1/difY;
+                    let wayX = 0;
+                    let wayY = 0;
                     while (aX < bX) {
-                        index = index + 1;
-                        losPathDifficulty.push(tileArray[index].neighbors[7]);
-                        diagonal += (Math.abs(difY) / Math.abs(difX));
+                        wayX = wayX + stepX;
+                        wayY = wayY + stepY;
                         aX++;
-                        console.log("rechts");
-                        while (diagonal >= 0.5) {
+                        if ( wayY > wayX) {
                             index = index + matrixWidth + 1;
-                            diagonal = diagonal + ((Math.abs(difY) / Math.abs(difX)) - 0.5);
                             losPathDifficulty.push(tileArray[index].neighbors[0]);
-                            aX++;
-                            console.log("runter rechts");
+                            wayX = wayX - stepX;
+                            wayY = wayY - stepY;
+                        } else {
+                            index = index + 1;
+                            losPathDifficulty.push(tileArray[index].neighbors[7]);
+                            wayX = wayX - stepX;
                         }
                     }
                 } else { // liegt Rechts gleich hoch
                     while (aX < bX) {
                         index = index + 1;
-                        aX = aX + 1;
+                        aX++;
                         losPathDifficulty.push(tileArray[index].neighbors[7]);
                     }
                 }
