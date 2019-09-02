@@ -394,29 +394,24 @@
                 if (difY > 0) { // liegt Rechts, leicht Oben
                     console.log("liegt Rechts, leicht Oben");
                 } else if (difY < 0) { // liegt Rechts, leicht Unten
-                    let stepX = Math.abs(1/difX);
-                    let stepY = Math.abs(1/difY);
+                    let stepX = (difX+1)-(difY+1);
+                    let stepY = difY;
                     let wayX = 0;
-                    let wayY = 0;
-                    console.log("stepX: "+stepX);
-                    console.log("stepY: "+stepY);
+                    console.log("stepX: "+ stepX);
+                    console.log("stepY: "+ stepY);
                     while (aX < bX) {
-                        wayX = wayX + stepX;
-                        wayY = wayY + stepY;
                         aX++;
-                        console.log("wayX: "+wayX);
-                        console.log("wayY: "+wayY);
-                        if ( wayY > wayX) {
+                        wayX += stepX;
+                        if ( wayX >= 1) {
+                            index = index + 1;
+                            console.log("wayX: "+ wayX);
+                            console.log("O");
+                            wayX--;
+                            losPathDifficulty.push(tileArray[index].walkable[7]);
+                        } else {
                             index = index + matrixWidth + 1;
                             console.log("SO");
                             losPathDifficulty.push(tileArray[index].walkable[0]);
-                            wayX = wayX - stepX;
-                            wayY = wayY - stepY;
-                        } else {
-                            index = index + 1;
-                            console.log("O");
-                            losPathDifficulty.push(tileArray[index].walkable[7]);
-                            wayX = wayX - stepX;
                         }
                     }
                 } else { // liegt Rechts gleich hoch
