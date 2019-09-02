@@ -387,6 +387,7 @@
                     while (aX > bX) {
                         index = index - 1;
                         aX = aX - 1;
+                        tileArray[index].checkForNeighbors();
                         losPathDifficulty.push(tileArray[index].neighbors[3]);
                     }
                 }
@@ -404,11 +405,13 @@
                         aX++;
                         if ( wayY > wayX) {
                             index = index + matrixWidth + 1;
+                            tileArray[index].checkForNeighbors();
                             losPathDifficulty.push(tileArray[index].neighbors[0]);
                             wayX = wayX - stepX;
                             wayY = wayY - stepY;
                         } else {
                             index = index + 1;
+                            tileArray[index].checkForNeighbors();
                             losPathDifficulty.push(tileArray[index].neighbors[7]);
                             wayX = wayX - stepX;
                         }
@@ -417,6 +420,7 @@
                     while (aX < bX) {
                         index = index + 1;
                         aX++;
+                        tileArray[index].checkForNeighbors();
                         losPathDifficulty.push(tileArray[index].neighbors[7]);
                     }
                 }
@@ -431,6 +435,7 @@
                     while (aY > bY) {
                         index = index - matrixWidth;
                         aY = aY - 1;
+                        tileArray[index].checkForNeighbors();
                         losPathDifficulty.push(tileArray[index].neighbors[5]);
                     }
                 }
@@ -443,6 +448,7 @@
                     while (aY < bY) {
                         index = index + matrixWidth;
                         aY = aY + 1;
+                        tileArray[index].checkForNeighbors();
                         losPathDifficulty.push(tileArray[index].neighbors[1]);
                     }
                 }
@@ -453,12 +459,14 @@
                     while (aX > bX) {
                         index = index - matrixWidth - 1;
                         aX = aX - 1;
+                        tileArray[index].checkForNeighbors();
                         losPathDifficulty.push(tileArray[index].neighbors[4]);
                     }
                 } else if (difY < 0) { // liegt Diagonal Links Unten
                     while (aX > bX) {
                         index = index + matrixWidth - 1;
                         aX = aX - 1;
+                        tileArray[index].checkForNeighbors();
                         losPathDifficulty.push(tileArray[index].neighbors[2]);
                     }
                 }
@@ -467,12 +475,14 @@
                     while (aX < bX) {
                         index = index - matrixWidth + 1;
                         aX = aX + 1;
+                        tileArray[index].checkForNeighbors();
                         losPathDifficulty.push(tileArray[index].neighbors[6]);
                     }
                 } else if (difY < 0) { // liegt Diagonal Rechts Unten
                     while (aX < bX) {
                         index = index + matrixWidth + 1;
                         aX = aX + 1;
+                        tileArray[index].checkForNeighbors();
                         losPathDifficulty.push(tileArray[index].neighbors[0]);
                     }
                 }
