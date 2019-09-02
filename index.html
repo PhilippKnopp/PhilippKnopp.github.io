@@ -93,7 +93,7 @@
 		objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0A0C0F');
         
-		mapImg = this.add.image(407, 523, 'map-lvl-1').setAlpha(0.5);
+		mapImg = this.add.image(410, 525, 'map-lvl-1').setAlpha(0.5);
 		
 		var Info = this.add.text(800, 15, "Click on a Character to activate it\nClick on a Tile to set a Goal, where the Character is supposed to walk", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
         
@@ -404,11 +404,13 @@
                         aX++;
                         if ( wayY > wayX) {
                             index = index + matrixWidth + 1;
+                            console.log("SO");
                             losPathDifficulty.push(tileArray[index].walkable[0]);
                             wayX = wayX - stepX;
                             wayY = wayY - stepY;
                         } else {
                             index = index + 1;
+                            console.log("S");
                             losPathDifficulty.push(tileArray[index].walkable[7]);
                             wayX = wayX - stepX;
                         }
