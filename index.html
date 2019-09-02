@@ -387,8 +387,7 @@
                     while (aX > bX) {
                         index = index - 1;
                         aX = aX - 1;
-                        tileArray[index].checkForNeighbors();
-                        losPathDifficulty.push(tileArray[index].neighbors[3]);
+                        losPathDifficulty.push(tileArray[index].walkable[3]);
                     }
                 }
             } else if (difX < 0) { // liegt Rechts
@@ -405,14 +404,12 @@
                         aX++;
                         if ( wayY > wayX) {
                             index = index + matrixWidth + 1;
-                            tileArray[index].checkForNeighbors();
-                            losPathDifficulty.push(tileArray[index].neighbors[0]);
+                            losPathDifficulty.push(tileArray[index].walkable[0]);
                             wayX = wayX - stepX;
                             wayY = wayY - stepY;
                         } else {
                             index = index + 1;
-                            tileArray[index].checkForNeighbors();
-                            losPathDifficulty.push(tileArray[index].neighbors[7]);
+                            losPathDifficulty.push(tileArray[index].walkable[7]);
                             wayX = wayX - stepX;
                         }
                     }
@@ -420,8 +417,7 @@
                     while (aX < bX) {
                         index = index + 1;
                         aX++;
-                        tileArray[index].checkForNeighbors();
-                        losPathDifficulty.push(tileArray[index].neighbors[7]);
+                        losPathDifficulty.push(tileArray[index].walkable[7]);
                     }
                 }
             }
@@ -435,8 +431,7 @@
                     while (aY > bY) {
                         index = index - matrixWidth;
                         aY = aY - 1;
-                        tileArray[index].checkForNeighbors();
-                        losPathDifficulty.push(tileArray[index].neighbors[5]);
+                        losPathDifficulty.push(tileArray[index].walkable[5]);
                     }
                 }
             } else if (difY < 0) { // liegt Unter
@@ -448,8 +443,7 @@
                     while (aY < bY) {
                         index = index + matrixWidth;
                         aY = aY + 1;
-                        tileArray[index].checkForNeighbors();
-                        losPathDifficulty.push(tileArray[index].neighbors[1]);
+                        losPathDifficulty.push(tileArray[index].walkable[1]);
                     }
                 }
             }
@@ -459,15 +453,13 @@
                     while (aX > bX) {
                         index = index - matrixWidth - 1;
                         aX = aX - 1;
-                        tileArray[index].checkForNeighbors();
-                        losPathDifficulty.push(tileArray[index].neighbors[4]);
+                        losPathDifficulty.push(tileArray[index].walkable[4]);
                     }
                 } else if (difY < 0) { // liegt Diagonal Links Unten
                     while (aX > bX) {
                         index = index + matrixWidth - 1;
                         aX = aX - 1;
-                        tileArray[index].checkForNeighbors();
-                        losPathDifficulty.push(tileArray[index].neighbors[2]);
+                        losPathDifficulty.push(tileArray[index].walkable[2]);
                     }
                 }
             } else if (difX < 0) { // liegt Diagonal Rechts
@@ -475,15 +467,13 @@
                     while (aX < bX) {
                         index = index - matrixWidth + 1;
                         aX = aX + 1;
-                        tileArray[index].checkForNeighbors();
-                        losPathDifficulty.push(tileArray[index].neighbors[6]);
+                        losPathDifficulty.push(tileArray[index].walkable[6]);
                     }
                 } else if (difY < 0) { // liegt Diagonal Rechts Unten
                     while (aX < bX) {
                         index = index + matrixWidth + 1;
                         aX = aX + 1;
-                        tileArray[index].checkForNeighbors();
-                        losPathDifficulty.push(tileArray[index].neighbors[0]);
+                        losPathDifficulty.push(tileArray[index].walkable[0]);
                     }
                 }
             }
