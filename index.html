@@ -394,8 +394,8 @@
                 if (difY > 0) { // liegt Rechts, leicht Oben
                     console.log("liegt Rechts, leicht Oben");
                 } else if (difY < 0) { // liegt Rechts, leicht Unten
-                    let stepX = (difX+1)-(difY+1);
-                    let stepY = difY;
+                    let stepX = (Math.abs(difX)+1)-(Math.abs(difY)+1);
+                    let stepY = Math.abs(difY);
                     let wayX = 0;
                     console.log("stepX: "+ stepX);
                     console.log("stepY: "+ stepY);
