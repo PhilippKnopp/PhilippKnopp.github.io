@@ -411,6 +411,7 @@
                             losPathDifficulty.push(tileArray[index].walkable[0]);
                             aX++;
                         } else if (pointer >= stepStraights){
+                            stepStraights += 1/(straights+1);
                             index = index + 1;
                             console.log("O");
                             losPathDifficulty.push(tileArray[index].walkable[7]);
