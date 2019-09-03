@@ -398,26 +398,25 @@
                     let straights = Math.abs(difX)-Math.abs(difY);
                     let stepDiagonals = 1/(diagonals+1);
                     let stepStraights = 1/(straights+1);
-                    let increment = 1/(Math.abs(difX)+1);
                     let pointer = 0;
                     console.log("stepDiagonals: "+stepDiagonals);
                     console.log("stepStraights: "+stepStraights);
                     console.log("increment: "+increment);
                     while (aX < bX) {
+                        pointer += 0.01;
+                        console.log("pointer: "+pointer);
                         if (pointer >= stepDiagonals) {
-                            stepDiagonals += stepDiagonals;
+                            stepDiagonals += 1/(diagonals+1);
                             index = index + matrixWidth + 1;
                             console.log("SO");
                             losPathDifficulty.push(tileArray[index].walkable[0]);
-                        } else if (pointer >= stepStraights) {
-                            stepStraights += stepStraights;
+                            aX++;
+                        } else if (pointer >= stepStraights){
                             index = index + 1;
                             console.log("O");
                             losPathDifficulty.push(tileArray[index].walkable[7]);
+                            aX++;
                         }
-                        aX++;
-                        pointer += increment;
-                        console.log("pointer: "+pointer);
                     }
                 } else { // liegt Rechts gleich hoch
                     while (aX < bX) {
