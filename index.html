@@ -394,25 +394,30 @@
                 if (difY > 0) { // liegt Rechts, leicht Oben
                     console.log("liegt Rechts, leicht Oben");
                 } else if (difY < 0) { // liegt Rechts, leicht Unten
-                    let stepX = (Math.abs(difX)+1)-(Math.abs(difY)+1);
-                    let stepY = Math.abs(difY);
-                    let wayX = 0;
-                    console.log("stepX: "+ stepX);
-                    console.log("stepY: "+ stepY);
+                    let diagonals = Math.abs(difY);
+                    let straights = Math.abs(difX)-Math.abs(difY);
+                    let stepDiagonals = 1/diagonals;
+                    let stepStraights = 1/straights;
+                    let increment = 1/Math.abs(difX);
+                    let pointer = 0;
+                    console.log("stepDiagonals: "+stepDiagonals);
+                    console.log("stepStraights: "+stepStraights);
+                    console.log("increment: "+increment);
                     while (aX < bX) {
-                        aX++;
-                        wayX += stepX;
-                        if ( wayX >= 1) {
-                            index = index + 1;
-                            console.log("wayX: "+ wayX);
-                            console.log("O");
-                            wayX--;
-                            losPathDifficulty.push(tileArray[index].walkable[7]);
-                        } else {
+                        if (pointer >= stepDiagonals) {
+                            stepDiagonals += stepDiagonals;
                             index = index + matrixWidth + 1;
                             console.log("SO");
                             losPathDifficulty.push(tileArray[index].walkable[0]);
+                        } else if (pointer >= stepStraights) {
+                            stepStraights += stepStraights;
+                            index = index + 1;
+                            console.log("O");
+                            losPathDifficulty.push(tileArray[index].walkable[7]);
                         }
+                        aX++;
+                        pointer += increment;
+                        console.log("increment: "+increment);
                     }
                 } else { // liegt Rechts gleich hoch
                     while (aX < bX) {
