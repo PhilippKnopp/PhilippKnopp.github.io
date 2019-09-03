@@ -396,9 +396,9 @@
                 } else if (difY < 0) { // liegt Rechts, leicht Unten
                     let diagonals = Math.abs(difY);
                     let straights = Math.abs(difX)-Math.abs(difY);
-                    let stepDiagonals = 1/diagonals;
-                    let stepStraights = 1/straights;
-                    let increment = 1/Math.abs(difX);
+                    let stepDiagonals = 1/(diagonals+1);
+                    let stepStraights = 1/(straights+1);
+                    let increment = 1/(Math.abs(difX)+1);
                     let pointer = 0;
                     console.log("stepDiagonals: "+stepDiagonals);
                     console.log("stepStraights: "+stepStraights);
@@ -417,7 +417,7 @@
                         }
                         aX++;
                         pointer += increment;
-                        console.log("increment: "+increment);
+                        console.log("pointer: "+pointer);
                     }
                 } else { // liegt Rechts gleich hoch
                     while (aX < bX) {
