@@ -375,6 +375,15 @@
         
         let index = activeChar.onTile;
         
+        let diagonals = Math.abs(difY);
+        let straights = Math.abs(difX)-Math.abs(difY);
+        let stepDiagonals = 1/(diagonals+1);
+        let stepStraights = 1/(straights+1);
+        let pointer = 0;
+        let pointerIncrement = stepDiagonals + stepStraights;
+        console.log("stepDiagonals: "+stepDiagonals);
+        console.log("stepStraights: "+stepStraights);
+        
         let losPathDifficulty = [];
         
         if ( Math.abs(difX) > Math.abs(difY) ) { // liegt Links oder Rechts 
@@ -391,21 +400,14 @@
                     }
                 }
             } else if (difX < 0) { // liegt Rechts
-                let diagonals = Math.abs(difY);
-                let straights = Math.abs(difX)-Math.abs(difY);
-                let stepDiagonals = 1/(diagonals+1);
-                let stepStraights = 1/(straights+1);
-                let pointer = 0;
-                console.log("stepDiagonals: "+stepDiagonals);
-                console.log("stepStraights: "+stepStraights);
                 if (difY > 0) { // liegt Rechts, leicht Oben
                     while (aX < bX) {
-                        pointer += 0.01;
+                        pointer += pointerIncrement;
                         console.log("pointer: "+pointer);
                         if (pointer >= stepDiagonals) {
                             stepDiagonals += 1/(diagonals+1);
                             index = index - matrixWidth + 1;
-                            console.log("SO");
+                            console.log("NO");
                             losPathDifficulty.push(tileArray[index].walkable[6]);
                             aX++;
                         } else if (pointer >= stepStraights){
@@ -418,7 +420,7 @@
                     }
                 } else if (difY < 0) { // liegt Rechts, leicht Unten
                     while (aX < bX) {
-                        pointer += 0.01;
+                        pointer += pointerIncrement;
                         console.log("pointer: "+pointer);
                         if (pointer >= stepDiagonals) {
                             stepDiagonals += 1/(diagonals+1);
