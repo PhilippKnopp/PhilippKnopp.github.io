@@ -380,7 +380,7 @@
         let stepDiagonals = 1/(diagonals+1);
         let stepStraights = 1/(straights+1);
         let pointer = 0;
-        let pointerIncrement = stepDiagonals + stepStraights;
+        let pointerIncrement = stepDiagonals * stepStraights;
         console.log("stepDiagonals: "+stepDiagonals);
         console.log("stepStraights: "+stepStraights);
         
@@ -395,13 +395,13 @@
                 } else { // liegt Links gleich hoch
                     while (aX > bX) {
                         index = index - 1;
-                        aX = aX - 1;
+                        aX--;
                         losPathDifficulty.push(tileArray[index].walkable[3]);
                     }
                 }
             } else if (difX < 0) { // liegt Rechts
-                if (difY > 0) { // liegt Rechts, leicht Oben
-                    while (aX < bX) {
+                while  (aX < bX) {
+                    if (difY > 0) { // liegt Rechts, leicht Oben
                         pointer += pointerIncrement;
                         console.log("pointer: "+pointer);
                         if (pointer >= stepDiagonals) {
@@ -409,17 +409,13 @@
                             index = index - matrixWidth + 1;
                             console.log("NO");
                             losPathDifficulty.push(tileArray[index].walkable[6]);
-                            aX++;
                         } else if (pointer >= stepStraights){
                             stepStraights += 1/(straights+1);
                             index = index + 1;
                             console.log("O");
                             losPathDifficulty.push(tileArray[index].walkable[7]);
-                            aX++;
                         }
-                    }
-                } else if (difY < 0) { // liegt Rechts, leicht Unten
-                    while (aX < bX) {
+                    } else if (difY < 0) { // liegt Rechts, leicht Unten
                         pointer += pointerIncrement;
                         console.log("pointer: "+pointer);
                         if (pointer >= stepDiagonals) {
@@ -427,21 +423,17 @@
                             index = index + matrixWidth + 1;
                             console.log("SO");
                             losPathDifficulty.push(tileArray[index].walkable[0]);
-                            aX++;
-                        } else if (pointer >= stepStraights){
+                        } else if (pointer >= stepStraights) {
                             stepStraights += 1/(straights+1);
                             index = index + 1;
                             console.log("O");
                             losPathDifficulty.push(tileArray[index].walkable[7]);
-                            aX++;
                         }
-                    }
-                } else { // liegt Rechts gleich hoch
-                    while (aX < bX) {
+                    } else { // liegt Rechts gleich hoch
                         index = index + 1;
-                        aX++;
                         losPathDifficulty.push(tileArray[index].walkable[7]);
                     }
+                    aX++;
                 }
             }
         } else if ( Math.abs(difX) < Math.abs(difY) ) {// liegt Über oder Unter
