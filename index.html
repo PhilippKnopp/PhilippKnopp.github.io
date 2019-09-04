@@ -401,39 +401,27 @@
                 }
             } else if (difX < 0) { // liegt Rechts
                 while  (aX < bX) {
-                    if (difY > 0) { // liegt Rechts, leicht Oben
-                        pointer += pointerIncrement;
-                        console.log("pointer: "+pointer);
-                        if (pointer >= stepDiagonals) {
-                            stepDiagonals += 1/(diagonals+1);
-                            index = index - matrixWidth + 1;
-                            console.log("NO");
-                            losPathDifficulty.push(tileArray[index].walkable[6]);
-                        } else if (pointer >= stepStraights){
-                            stepStraights += 1/(straights+1);
-                            index = index + 1;
-                            console.log("O");
-                            losPathDifficulty.push(tileArray[index].walkable[7]);
-                        }
-                    } else if (difY < 0) { // liegt Rechts, leicht Unten
-                        pointer += pointerIncrement;
-                        console.log("pointer: "+pointer);
-                        if (pointer >= stepDiagonals) {
-                            stepDiagonals += 1/(diagonals+1);
-                            index = index + matrixWidth + 1;
-                            console.log("SO");
-                            losPathDifficulty.push(tileArray[index].walkable[0]);
-                        } else if (pointer >= stepStraights) {
-                            stepStraights += 1/(straights+1);
-                            index = index + 1;
-                            console.log("O");
-                            losPathDifficulty.push(tileArray[index].walkable[7]);
-                        }
-                    } else { // liegt Rechts gleich hoch
+                    pointer += pointerIncrement;
+                    console.log("pointer: "+pointer);
+                    if (pointer >= stepDiagonals && difY > 0) {
+                        stepDiagonals += 1/(diagonals+1);
+                        index = index - matrixWidth + 1;
+                        console.log("NO");
+                        losPathDifficulty.push(tileArray[index].walkable[6]);
+                        aX++;
+                    } else if (pointer >= stepDiagonals && difY < 0) {
+                        stepDiagonals += 1/(diagonals+1);
+                        index = index + matrixWidth + 1;
+                        console.log("SO");
+                        losPathDifficulty.push(tileArray[index].walkable[0]);
+                        aX++;
+                    } else if (pointer >= stepStraights || difY == 0) {
+                        stepStraights += 1/(straights+1);
                         index = index + 1;
+                        console.log("O");
                         losPathDifficulty.push(tileArray[index].walkable[7]);
+                        aX++;
                     }
-                    aX++;
                 }
             }
         } else if ( Math.abs(difX) < Math.abs(difY) ) {// liegt Über oder Unter
