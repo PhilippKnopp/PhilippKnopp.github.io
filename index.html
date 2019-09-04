@@ -386,7 +386,7 @@
         
         let losPathDifficulty = [];
         
-        if ( Math.abs(difX) > Math.abs(difY) ) { // liegt Links oder Rechts 
+        if ( Math.abs(difX) >= Math.abs(difY) ) { // liegt Links oder Rechts 
             if (difX > 0) { //liegt Links
                 while  (aX > bX) {
                     pointer += pointerIncrement;
@@ -462,19 +462,31 @@
                     }
                 }
             } else if (difY < 0) { // liegt Unter
-                if (difX > 0) { // liegt Unter, leicht Links
-                    console.log("liegt Unter, leicht Links");
-                } else if (difX < 0) { // liegt Unter, leicht Rechts
-                    console.log("liegt Unter, leicht Rechts");
-                } else { // liegt Unter, gleiche Breite
-                    while (aY < bY) {
+                while  (aY < bY) {
+                    pointer += pointerIncrement;
+                    console.log("pointer: "+pointer);
+                    if (pointer >= stepDiagonals && difX > 0) { // S-W
+                        stepDiagonals += 1/(diagonals+1);
+                        index = index + matrixWidth - 1;
+                        console.log("SW");
+                        losPathDifficulty.push(tileArray[index].walkable[2]);
+                        aY++;
+                    } else if (pointer >= stepDiagonals && difX < 0) { // S-O
+                        stepDiagonals += 1/(diagonals+1);
+                        index = index + matrixWidth + 1;
+                        console.log("SO");
+                        losPathDifficulty.push(tileArray[index].walkable[0]);
+                        aY++;
+                    } else if (pointer >= stepStraights || difX == 0) { // S
+                        stepStraights += 1/(straights+1);
                         index = index + matrixWidth;
-                        aY = aY + 1;
+                        console.log("S");
                         losPathDifficulty.push(tileArray[index].walkable[1]);
+                        aY++;
                     }
                 }
             }
-        } else { // liegt Diagonal
+        } /*else { // liegt Diagonal
             if (difX > 0) { // liegt Diagonal Links
                 if (difY > 0) { // liegt Diagonal Links Oben
                     while (aX > bX) {
@@ -504,7 +516,7 @@
                     }
                 }
             }
-        }
+        }*/
         
         console.log(losPathDifficulty);
         let los_blocked = losPathDifficulty.includes(0); 
