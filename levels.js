@@ -102,7 +102,7 @@ function returnLevelConnections(level) {
 function trap1(victim) {
     victim.pathToTravel.length = 0;
     tileArray[victim.onTile].occupiedBy = "";
-    trap1.setAlpha(1);
+    trap1Img.setAlpha(1);
     tileArray[437].state = 0;
     tileArray[438].state = 0;
     tileArray[462].state = 0;
@@ -130,7 +130,7 @@ function doors(char, tile) {
             tileArray[340].state = "0do";
             tileArray[341].state = "0do";
             tileArray[342].state = "0do";
-            door1.setAlpha(1);
+            door1Img.setAlpha(1);
             tileArray[315].walkable = [0,1,1,1,1,1,0,0];
             tileArray[316].walkable = [1,1,1,1,1,1,1,1];
             tileArray[317].walkable = [1,1,0,0,0,1,1,1];
@@ -141,7 +141,7 @@ function doors(char, tile) {
             tileArray[340].state = "0dc";
             tileArray[341].state = "0dc";
             tileArray[342].state = "0dc";
-            door1.setAlpha(0);
+            door1Img.setAlpha(0);
             tileArray[315].walkable = [0,0,0,0,0,0,0,0];
             tileArray[316].walkable = [0,0,0,0,0,0,0,0];
             tileArray[317].walkable = [0,0,0,0,0,0,0,0];

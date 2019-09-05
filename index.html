@@ -66,14 +66,14 @@
     var cancelButton;
     
     var crystal1;
-    var door1;
+    var door1Img;
     var door2;
     var door3;
     var door4;
     var door5;
     var door6;
     var idol1;
-    var trap1;
+    var trap1Img;
     var circle1;
     
     var mage;
@@ -120,16 +120,16 @@
 		objects.camera.setBackgroundColor('#0A0C0F');
         
 		mapImg = this.add.image(410, 525, 'map-lvl-1').setAlpha(0.5);
-        crystal1 = this.add.image(487, 95, 'crystal1').setAlpha(0);
-        door1 = this.add.image(386, 301, 'door1').setAlpha(0);
-        door2 = this.add.image(387, 558, 'door2').setAlpha(0);
-        door3 = this.add.image(324, 499, 'door3').setAlpha(0);
-        door4 = this.add.image(471, 505, 'door4').setAlpha(0);
-        door5 = this.add.image(326, 369, 'door5').setAlpha(0);
-        door6 = this.add.image(444, 369, 'door6').setAlpha(0);
-        idol1 = this.add.image(386, 923, 'idol1').setAlpha(0);
-        trap1 = this.add.image(309, 446, 'trap1').setAlpha(0);
-        circle1 = this.add.image(105, 731, 'circle1').setAlpha(0);
+        crystal1Img = this.add.image(487, 95, 'crystal1').setAlpha(0);
+        door1Img = this.add.image(386, 301, 'door1').setAlpha(0);
+        door2Img = this.add.image(387, 558, 'door2').setAlpha(0);
+        door3Img = this.add.image(324, 499, 'door3').setAlpha(0);
+        door4Img = this.add.image(471, 505, 'door4').setAlpha(0);
+        door5Img = this.add.image(326, 369, 'door5').setAlpha(0);
+        door6Img = this.add.image(444, 369, 'door6').setAlpha(0);
+        idol1Img = this.add.image(386, 923, 'idol1').setAlpha(0);
+        trap1Img = this.add.image(309, 446, 'trap1').setAlpha(0);
+        circle1Img = this.add.image(105, 731, 'circle1').setAlpha(0);
 		
 		var Info = this.add.text(800, 15, "Click on a Character to activate it\nDepending on Position, you can select various Actions", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
         
@@ -385,14 +385,6 @@
 
     function findActiveChar(element) {
         return element.active == true;
-    }
-    
-    function findDoor(element) {
-        if (element.state == "0dc") {
-            return element.state == "0dc";
-        } else if (element.state == "0do") {
-            return element.state == "0do";
-        }
     }
 
     function buildLevel() {

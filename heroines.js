@@ -96,7 +96,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             tileArray[463].state = 0;
             tileArray[487].state = 0;
             tileArray[488].state = 0;
-            trap1.setAlpha(0);
+            trap1Img.setAlpha(0);
         }
         
     }
@@ -200,7 +200,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                     moveButton.setFrame(2);
                     attackButton.setFrame(2);
                     searchButton.setFrame(2);
-                    specialButton.setFrame(2);
+                    //specialButton.setFrame(2);
                     cancelButton.setFrame(2);
                     break;
                 default:
