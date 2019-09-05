@@ -158,7 +158,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist
             let adjacentTrap = false;
             for (var i = 0; i < tileArray[this.onTile].neighbors.length; i++) {
-                if (tileArray[this.onTile].neighbors[i].state.includes("t")) {
+                if (tileArray[this.onTile].neighbors[i].state == "0t1") {
                     adjacentTrap = true;
                 }
             }
