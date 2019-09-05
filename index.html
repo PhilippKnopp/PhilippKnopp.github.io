@@ -22,7 +22,8 @@
 	
     console.log("Version 8.7");
     
-    // configurations Variable, mit der das Spiel gestartet wird
+////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
+    
 	var config = {
 		type: Phaser.AUTO,
 		width: 1920,
@@ -41,8 +42,9 @@
             update: update
 		}
 	};
-	
-    // Variablen, die in der App verwendet werden
+    
+////////////// Variablen, die in der App verwendet werden   //////////////////////////////////////////////////////////////////////////////////////////
+
 	var game = new Phaser.Game(config);
 	var objects = {};
 	var tileArray = [];
@@ -60,7 +62,19 @@
     var attackButton;
     var searchButton;
     var faceButton;
+    var specialButton;
     var cancelButton;
+    
+    var crystal1;
+    var door1;
+    var door2;
+    var door3;
+    var door4;
+    var door5;
+    var door6;
+    var idol1;
+    var trap1;
+    var circle1;
     
     var mage;
     var rogue;
@@ -73,6 +87,17 @@
     // Funktion die alle Bilder lädt
 	function preload() {
 		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
+        this.load.image('crystal1', 'img/crystal1.png');
+        this.load.image('door1', 'img/door1.png');
+        this.load.image('door2', 'img/door2.png');
+        this.load.image('door3', 'img/door3.png');
+        this.load.image('door4', 'img/door4.png');
+        this.load.image('door5', 'img/door5.png');
+        this.load.image('door6', 'img/door6.png');
+        this.load.image('trap1', 'img/trap1.png');
+        this.load.image('circle1', 'img/circle1.png');
+        this.load.image('idol1', 'img/idol1.png');
+        
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
         this.load.spritesheet('mageSprite', 'img/mToken.png', { frameWidth: 25, frameHeight: 25 });
@@ -84,6 +109,7 @@
         this.load.spritesheet('attackSprite', 'img/attack.png', { frameWidth: 65, frameHeight: 65 });
         this.load.spritesheet('searchSprite', 'img/search.png', { frameWidth: 65, frameHeight: 65 });
         this.load.spritesheet('cancelSprite', 'img/cancel.png', { frameWidth: 65, frameHeight: 65 });
+        this.load.spritesheet('specialSprite', 'img/special.png', { frameWidth: 65, frameHeight: 65 });
         this.load.spritesheet('faceSprite', 'img/face.png', { frameWidth: 85, frameHeight: 85 });
 	}
 
@@ -94,8 +120,18 @@
 		objects.camera.setBackgroundColor('#0A0C0F');
         
 		mapImg = this.add.image(410, 525, 'map-lvl-1').setAlpha(0.5);
+        crystal1 = this.add.image(487, 95, 'crystal1').setAlpha(0);
+        door1 = this.add.image(386, 301, 'door1').setAlpha(0);
+        door2 = this.add.image(387, 558, 'door2').setAlpha(0);
+        door3 = this.add.image(324, 499, 'door3').setAlpha(0);
+        door4 = this.add.image(471, 505, 'door4').setAlpha(0);
+        door5 = this.add.image(326, 369, 'door5').setAlpha(0);
+        door6 = this.add.image(444, 369, 'door6').setAlpha(0);
+        idol1 = this.add.image(386, 923, 'idol1').setAlpha(0);
+        trap1 = this.add.image(309, 446, 'trap1').setAlpha(0);
+        circle1 = this.add.image(105, 731, 'circle1').setAlpha(0);
 		
-		var Info = this.add.text(800, 15, "Click on a Character to activate it\nClick on a Tile to set a Goal, where the Character is supposed to walk", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
+		var Info = this.add.text(800, 15, "Click on a Character to activate it\nDepending on Position, you can select various Actions", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
         
 		/*var buildLevelButton = this.add.text(800, 115, "Insert Walls", { fontFamily: "Verdana" });
 		buildLevelButton.setInteractive();
@@ -143,8 +179,10 @@
                     }
                     if (figureSearchState == "planning") {
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
-                        console.log("check LoS");
-                        console.log(lineOfSight (figuresOnMap[activeChar], this.name));
+                        showText(this.name);
+                        if (lineOfSight (figuresOnMap[activeChar], this.name) == true) {
+                            showText(this.name);
+                        }
                     }
 				});
 				tile.neighbors = [];
@@ -232,6 +270,17 @@
 		});
         searchButton.setDepth(1);
         
+        specialButton = this.add.sprite(400, 400, 'specialSprite').setAlpha(0);
+        specialButton.setInteractive();
+		specialButton.on("pointerup", function pointerUp() {
+            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+            if (specialButton.mode == "disableTrap" && level == 1) {
+                disableTrap1(activeChar, activeChar.onTile);
+            }
+		});
+        specialButton.mode = "";
+        specialButton.setDepth(1);
+        
         faceButton = this.add.sprite(400, 400, 'faceSprite').setAlpha(0);
         faceButton.setDepth(1);
         
@@ -249,6 +298,7 @@
         mage.onTile = mageStartingPosition[level];
         mage.pathToTravel.push(mageStartingPosition[level]);
         mage.dieSize = 4;
+        mage.explodes = true;
         mage.health = 4;
         figuresOnMap.push(mage);
         
@@ -381,8 +431,6 @@
         let stepStraights = 1/(straights+1);
         let pointer = 0;
         let pointerIncrement = stepDiagonals * stepStraights;
-        console.log("stepDiagonals: "+stepDiagonals);
-        console.log("stepStraights: "+stepStraights);
         
         let losPathDifficulty = [];
         
@@ -390,23 +438,19 @@
             if (difX > 0) { //liegt Links
                 while  (aX > bX) {
                     pointer += pointerIncrement;
-                    console.log("pointer: "+pointer);
                     if (pointer >= stepDiagonals && difY > 0) { // N-W
                         stepDiagonals += 1/(diagonals+1);
                         index = index - matrixWidth - 1;
-                        console.log("NW");
                         losPathDifficulty.push(tileArray[index].walkable[4]);
                         aX--;
                     } else if (pointer >= stepDiagonals && difY < 0) { // S-W
                         stepDiagonals += 1/(diagonals+1);
                         index = index + matrixWidth - 1;
-                        console.log("SW");
                         losPathDifficulty.push(tileArray[index].walkable[2]);
                         aX--;
                     } else if (pointer >= stepStraights || difY == 0) { // W
                         stepStraights += 1/(straights+1);
                         index = index - 1;
-                        console.log("W");
                         losPathDifficulty.push(tileArray[index].walkable[3]);
                         aX--;
                     }
@@ -414,23 +458,19 @@
             } else if (difX < 0) { // liegt Rechts
                 while  (aX < bX) {
                     pointer += pointerIncrement;
-                    console.log("pointer: "+pointer);
                     if (pointer >= stepDiagonals && difY > 0) { // N-O
                         stepDiagonals += 1/(diagonals+1);
                         index = index - matrixWidth + 1;
-                        console.log("NO");
                         losPathDifficulty.push(tileArray[index].walkable[6]);
                         aX++;
                     } else if (pointer >= stepDiagonals && difY < 0) { // S-O
                         stepDiagonals += 1/(diagonals+1);
                         index = index + matrixWidth + 1;
-                        console.log("SO");
                         losPathDifficulty.push(tileArray[index].walkable[0]);
                         aX++;
                     } else if (pointer >= stepStraights || difY == 0) { // O
                         stepStraights += 1/(straights+1);
                         index = index + 1;
-                        console.log("O");
                         losPathDifficulty.push(tileArray[index].walkable[7]);
                         aX++;
                     }
@@ -440,23 +480,19 @@
             if (difY > 0) { //liegt Über
                 while  (aY > bY) {
                     pointer += pointerIncrement;
-                    console.log("pointer: "+pointer);
                     if (pointer >= stepDiagonals && difX > 0) { // N-W
                         stepDiagonals += 1/(diagonals+1);
                         index = index - matrixWidth - 1;
-                        console.log("NW");
                         losPathDifficulty.push(tileArray[index].walkable[4]);
                         aY--;
                     } else if (pointer >= stepDiagonals && difX < 0) { // N-O
                         stepDiagonals += 1/(diagonals+1);
                         index = index - matrixWidth + 1;
-                        console.log("NO");
                         losPathDifficulty.push(tileArray[index].walkable[6]);
                         aY--;
                     } else if (pointer >= stepStraights || difX == 0) { // N
                         stepStraights += 1/(straights+1);
                         index = index - matrixWidth;
-                        console.log("N");
                         losPathDifficulty.push(tileArray[index].walkable[5]);
                         aY--;
                     }
@@ -464,64 +500,31 @@
             } else if (difY < 0) { // liegt Unter
                 while  (aY < bY) {
                     pointer += pointerIncrement;
-                    console.log("pointer: "+pointer);
                     if (pointer >= stepDiagonals && difX > 0) { // S-W
                         stepDiagonals += 1/(diagonals+1);
                         index = index + matrixWidth - 1;
-                        console.log("SW");
                         losPathDifficulty.push(tileArray[index].walkable[2]);
                         aY++;
                     } else if (pointer >= stepDiagonals && difX < 0) { // S-O
                         stepDiagonals += 1/(diagonals+1);
                         index = index + matrixWidth + 1;
-                        console.log("SO");
                         losPathDifficulty.push(tileArray[index].walkable[0]);
                         aY++;
                     } else if (pointer >= stepStraights || difX == 0) { // S
                         stepStraights += 1/(straights+1);
                         index = index + matrixWidth;
-                        console.log("S");
                         losPathDifficulty.push(tileArray[index].walkable[1]);
                         aY++;
                     }
                 }
             }
-        } /*else { // liegt Diagonal
-            if (difX > 0) { // liegt Diagonal Links
-                if (difY > 0) { // liegt Diagonal Links Oben
-                    while (aX > bX) {
-                        index = index - matrixWidth - 1;
-                        aX = aX - 1;
-                        losPathDifficulty.push(tileArray[index].walkable[4]);
-                    }
-                } else if (difY < 0) { // liegt Diagonal Links Unten
-                    while (aX > bX) {
-                        index = index + matrixWidth - 1;
-                        aX = aX - 1;
-                        losPathDifficulty.push(tileArray[index].walkable[2]);
-                    }
-                }
-            } else if (difX < 0) { // liegt Diagonal Rechts
-                if (difY > 0) { // liegt Diagonal Rechts Oben
-                    while (aX < bX) {
-                        index = index - matrixWidth + 1;
-                        aX = aX + 1;
-                        losPathDifficulty.push(tileArray[index].walkable[6]);
-                    }
-                } else if (difY < 0) { // liegt Diagonal Rechts Unten
-                    while (aX < bX) {
-                        index = index + matrixWidth + 1;
-                        aX = aX + 1;
-                        losPathDifficulty.push(tileArray[index].walkable[0]);
-                    }
-                }
-            }
-        }*/
+        }
         
-        console.log(losPathDifficulty);
-        let los_blocked = losPathDifficulty.includes(0); 
-        return los_blocked;
+        returnCursorToNormal();
+        figureSearchState = "none";
         
+        let los_blocked = losPathDifficulty.includes(0); // testet ob in dem Array "losPathDifficulty" eine 0 vorkommt (dort kann man nicht hinlaufen)
+        return !los_blocked; // gibt "true" zurück, wenn man in direkter Linie zum angesehenen Punkt laufen/schwimmen/... könnte.
     }
     
     function calculatePath (activeChar, endIndex) {
@@ -612,6 +615,7 @@
     function returnCursorToNormal() {
         hideActions();
         moveButton.setScale(1);
+        searchButton.setScale(1);
     }
 
     function containsObject(obj, list) {
@@ -623,6 +627,15 @@
         }
 
         return false;
+    }
+    
+    function showText (index) {
+        if (tileArray[index].state == 7 || tileArray[index].state == 8) {
+            //Info.text = information[this.name];
+            Info.text = information[textL1R1lake];
+        } else {
+            Info.text = information[textL1R1];
+        }
     }
 	
 </script>

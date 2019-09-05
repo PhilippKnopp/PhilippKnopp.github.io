@@ -102,6 +102,7 @@ function returnLevelConnections(level) {
 function trap1(victim) {
     victim.pathToTravel.length = 0;
     tileArray[victim.onTile].occupiedBy = "";
+    trap1.setAlpha(1);
     tileArray[437].state = 0;
     tileArray[438].state = 0;
     tileArray[462].state = 0;
@@ -129,6 +130,7 @@ function doors(char, tile) {
             tileArray[340].state = "0do";
             tileArray[341].state = "0do";
             tileArray[342].state = "0do";
+            door1.setAlpha(1);
             tileArray[315].walkable = [0,1,1,1,1,1,0,0];
             tileArray[316].walkable = [1,1,1,1,1,1,1,1];
             tileArray[317].walkable = [1,1,0,0,0,1,1,1];
@@ -139,6 +141,7 @@ function doors(char, tile) {
             tileArray[340].state = "0dc";
             tileArray[341].state = "0dc";
             tileArray[342].state = "0dc";
+            door1.setAlpha(0);
             tileArray[315].walkable = [0,0,0,0,0,0,0,0];
             tileArray[316].walkable = [0,0,0,0,0,0,0,0];
             tileArray[317].walkable = [0,0,0,0,0,0,0,0];
@@ -148,7 +151,7 @@ function doors(char, tile) {
 }
 
 var textL1intro = "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local guardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two pale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are holding a woman captive. She is not the girl they came to look for, but sems to be in need for their help anyway, as the young adventurers hear them say: 'We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!'";
-var textL1R1 = "A cold and dark cave. The walls are rough and wet. There is a kind of temple, that was cut out of the stone next to a lake.";
-var textL1R1lake = "The water is ice cold. Although the water is crystal clear it is too dark to see how deep the water is.";
+var textL1R1 = "A cold and dark cave. The walls are rough and wet. There is an impressive temple, that was cut out of the stone next to a lake.";
+var textL1R1lake = "Although the water is crystal clear it is too dark to see how deep the water is.";
 var textL1R1lakeP6 = "There is a faint glimmer of a crystal at the bottom of the lake.";
-var textL1R1temple = "Stairs lead to an ancient and impressive propylon. It is carved directly into the wall and the dark stone gives it a sinister aura.";
+var textL1R1temple = "Stairs lead to an ancient propylon. It is carved directly into the wall and the dark stone gives it a sinister aura.";

@@ -6,6 +6,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.onTile;
         this.active = false;
         this.dieSize;
+        this.explodes = false;
         this.health;
         this.movement = 6;
         this.moved = 0;
@@ -37,12 +38,12 @@ class Figure extends Phaser.GameObjects.Sprite {
         
         this.attack = function (enemy) {
             if (this.stealth == true) { // hinterhältiger Angriff
-                let attackroll = getRandomInt(this.dieSize, false) + getRandomInt(this.dieSize, false);
+                let attackroll = getRandomInt(this.dieSize, this.explodes) + getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {
                     enemy.health -= attackroll;
                 }
             } else if (this == mage) { // Magieangriff
-                let attackroll = getRandomInt(this.dieSize, true);
+                let attackroll = getRandomInt(this.dieSize, this.explodes);
                 tileArray[this.onTile].checkForNeighbors();
                 let adjacentEnemies = false;
                 for (var i = 0; i < tileArray[this.onTile].neighbors.length; i++) {
@@ -57,7 +58,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 }
                 tileArray[this.onTile].neighbors.length = 0;
             } else { // standard Attacke für Barb und Schurke im Nahkampf
-                let attackroll = getRandomInt(this.dieSize, false);
+                let attackroll = getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {
                     enemy.health -= attackroll;
                 }
@@ -81,6 +82,21 @@ class Figure extends Phaser.GameObjects.Sprite {
                 figureMoveState = "none";
                 this.activateFigure();
             }
+        }
+        
+        this.disableTrap = function () {
+            let skillcheck = getRandomInt(this.dieSize, this.explodes);
+            if (skillcheck <= 3) {
+                this.health -= 1;
+                console.log("trap sprung but disabled");
+            }
+            tileArray[437].state = 0;
+            tileArray[438].state = 0;
+            tileArray[462].state = 0;
+            tileArray[463].state = 0;
+            tileArray[487].state = 0;
+            tileArray[488].state = 0;
+            trap1.setAlpha(0);
         }
         
     }
@@ -117,7 +133,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                     adjacentEnemies = true;
                 }
             }
-            if ((this == mage) || adjacentEnemies == true) {
+            if (this == mage || adjacentEnemies == true) {
                 console.log("magier LOS implementieren");
                 attackButton.x = this.x+buttonXpos;
                 attackButton.y = this.y;
@@ -138,6 +154,20 @@ class Figure extends Phaser.GameObjects.Sprite {
                 doorButton.setAlpha(1);
                 buttonXpos += 85;
             }
+            
+            // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist
+            let adjacentTrap = false;
+            for (var i = 0; i < tileArray[this.onTile].neighbors.length; i++) {
+                if (tileArray[this.onTile].neighbors[i].state.includes("t")) {
+                    adjacentTrap = true;
+                }
+            }
+            if ((this == mage || this == rogue) && adjacentTrap == true ) {
+                specialButton.x = this.x+buttonXpos;
+                specialButton.y = this.y;
+                specialButton.setAlpha(1);
+                buttonXpos += 85;
+            }
 
             // bietet den "Cancel-Button" an.
             cancelButton.x = this.x+buttonXpos;
@@ -152,6 +182,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                     moveButton.setFrame(0);
                     attackButton.setFrame(0);
                     searchButton.setFrame(0);
+                    specialButton.setFrame(0);
                     cancelButton.setFrame(0);
                     break;
                 case rogue:
@@ -160,6 +191,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                     moveButton.setFrame(1);
                     attackButton.setFrame(1);
                     searchButton.setFrame(1);
+                    specialButton.setFrame(1);
                     cancelButton.setFrame(1);
                     break;
                 case barb:
@@ -168,6 +200,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                     moveButton.setFrame(2);
                     attackButton.setFrame(2);
                     searchButton.setFrame(2);
+                    specialButton.setFrame(2);
                     cancelButton.setFrame(2);
                     break;
                 default:
@@ -214,6 +247,7 @@ function hideActions() {
     moveButton.setAlpha(0);
     attackButton.setAlpha(0);
     searchButton.setAlpha(0);
+    specialButton.setAlpha(0);
     cancelButton.setAlpha(0);
 }
 
