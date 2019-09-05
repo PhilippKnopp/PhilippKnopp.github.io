@@ -121,16 +121,16 @@
 		objects.camera.setBackgroundColor('#0A0C0F');
         
 		mapImg = this.add.image(410, 525, 'map-lvl-1').setAlpha(0.5);
-        crystal1Img = this.add.image(487, 95, 'crystal1').setAlpha(0);
-        door1Img = this.add.image(386, 301, 'door1').setAlpha(0);
-        door2Img = this.add.image(387, 558, 'door2').setAlpha(0);
-        door3Img = this.add.image(324, 499, 'door3').setAlpha(0);
-        door4Img = this.add.image(471, 505, 'door4').setAlpha(0);
-        door5Img = this.add.image(326, 369, 'door5').setAlpha(0);
-        door6Img = this.add.image(444, 369, 'door6').setAlpha(0);
-        idol1Img = this.add.image(386, 923, 'idol1').setAlpha(0);
-        trap1Img = this.add.image(309, 446, 'trap1').setAlpha(0);
-        circle1Img = this.add.image(105, 731, 'circle1').setAlpha(0);
+        crystal1Img = this.add.image(601, 124, 'crystal1').setAlpha(0);
+        door1Img = this.add.image(500, 330, 'door1').setAlpha(0);
+        door2Img = this.add.image(501, 587, 'door2').setAlpha(0);
+        door3Img = this.add.image(438, 528, 'door3').setAlpha(0);
+        door4Img = this.add.image(585, 534, 'door4').setAlpha(0);
+        door5Img = this.add.image(440, 398, 'door5').setAlpha(0);
+        door6Img = this.add.image(558, 398, 'door6').setAlpha(0);
+        idol1Img = this.add.image(500, 952, 'idol1').setAlpha(0);
+        trap1Img = this.add.image(423, 475, 'trap1').setAlpha(0);
+        circle1Img = this.add.image(219, 760, 'circle1').setAlpha(0);
 		
 		Info = this.add.text(800, 15, "Click on a Character to activate it\nDepending on Position, you can select various Actions", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
         
@@ -626,7 +626,7 @@
         if (tileArray[index].state == 7 || tileArray[index].state == 8) {
             //Info.text = information[this.name];
             Info.text = textL1R1lake;
-            crystal1.setAlpha(1);
+            crystal1Img.setAlpha(1);
         } else {
             Info.text = information[textL1R1];
         }
