@@ -81,6 +81,7 @@
     var barb;
     
     var figuresOnMap = [];
+    var Info;
     
     var level = 1;
 
@@ -131,7 +132,7 @@
         trap1Img = this.add.image(309, 446, 'trap1').setAlpha(0);
         circle1Img = this.add.image(105, 731, 'circle1').setAlpha(0);
 		
-		var Info = this.add.text(800, 15, "Click on a Character to activate it\nDepending on Position, you can select various Actions", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
+		Info = this.add.text(800, 15, "Click on a Character to activate it\nDepending on Position, you can select various Actions", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
         
 		/*var buildLevelButton = this.add.text(800, 115, "Insert Walls", { fontFamily: "Verdana" });
 		buildLevelButton.setInteractive();
@@ -624,7 +625,8 @@
     function showText (index) {
         if (tileArray[index].state == 7 || tileArray[index].state == 8) {
             //Info.text = information[this.name];
-            Info.text = information[textL1R1lake];
+            Info.text = textL1R1lake;
+            crystal1.setAlpha(1);
         } else {
             Info.text = information[textL1R1];
         }
