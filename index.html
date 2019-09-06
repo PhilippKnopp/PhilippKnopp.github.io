@@ -178,6 +178,7 @@
                     if (figureSearchState == "planning") {
                         showText(this.name);
                         console.log(this.name);
+                        returnCursorToNormal();
                         let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
                         activeChar.activateFigure();
                     }
@@ -511,7 +512,6 @@
             }
         }
         
-        returnCursorToNormal();
         figureSearchState = "none";
         
         let los_blocked = losPathDifficulty.includes(0); // testet ob in dem Array "losPathDifficulty" eine 0 vorkommt (dort kann man nicht hinlaufen)
