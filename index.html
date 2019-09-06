@@ -386,12 +386,12 @@
 
     function buildLevel() {
 
-        var levelMap = returnLevelType(1);
+        let levelMap = returnLevelType(1);
         for (var i = 0; i < tileArray.length; i++) {
             tileArray[i].state = levelMap[i];
             tileArray[i].updateState();
         }
-        var levelMapConnections = returnLevelConnections(1);
+        let levelMapConnections = returnLevelConnections(1);
         for (var i = 0; i < tileArray.length; i++) {
             tileArray[i].walkable = levelMapConnections[i];
         }
@@ -399,6 +399,8 @@
         for (var i = 0; i < figuresOnMap.length; i++) {
             figuresOnMap[i].setOnMap();
         }
+        
+        tielArray[941].occupiedBy = "idol";
 
     }
 

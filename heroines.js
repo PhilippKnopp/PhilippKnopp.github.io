@@ -126,13 +126,12 @@ class Figure extends Phaser.GameObjects.Sprite {
             } else if (this == mage) {
                 for (var i = 0; i < tileArray.length; i++) {
                     if (lineOfSight (this, i) && (tileArray[i].occupiedBy == "enemy" || tileArray[i].occupiedBy == "idol")) {
-                        
+                        attackButton.x = this.x+buttonXpos;
+                        attackButton.y = this.y;
+                        attackButton.setAlpha(1);
+                        buttonXpos += 85;
                     }
                 }
-                attackButton.x = this.x+buttonXpos;
-                attackButton.y = this.y;
-                attackButton.setAlpha(1);
-                buttonXpos += 85;
             }
 
             // bietet den "Suchen-Button" an.
