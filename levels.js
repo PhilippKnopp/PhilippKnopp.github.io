@@ -256,6 +256,7 @@ function doors(char, tile) {
         }
     }
     clearNodes();
+    char.activateFigure();
 }
 
 var textL1intro = "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local guardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two pale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are holding a woman captive. She is not the girl they came to look for, but sems to be in need for their help anyway, as the young adventurers hear them say: 'We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!'";

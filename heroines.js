@@ -79,7 +79,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 movementTweenMage.data[1].start = this.y;
                 movementTweenMage.restart();
             } else {
-                figureMoveState = "none";
+                moveButton.mode = "none";
                 this.activateFigure();
             }
         }
@@ -88,7 +88,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     
     activateFigure() {
         
-        if (figureMoveState == "none") {
+        if (moveButton.mode == "none") {
             deactivateFigures();
 
             this.active = true;

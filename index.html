@@ -50,8 +50,6 @@
 	var tileArray = [];
 	var matrixWidth = 25;
 	var matrixHeight = 40;
-    var figureMoveState = "none";
-    var figureSearchState = "none";
     var movementTweenBarb;
     var movementTweenMage;
     var movementTweenRogue;
@@ -171,11 +169,11 @@
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
                     // nichts ist auf der Tile und diese ist von einer Seite aus begehbar
-					if (this.occupiedBy == "" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && figureMoveState == "planning") {
+					if (this.occupiedBy == "" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
                         calculatePath(figuresOnMap[activeChar], this.name);
                     }
-                    if (figureSearchState == "planning") {
+                    if (searchButton.mode == "planning") {
                         showText(this.name);
                         console.log(this.name);
                         returnCursorToNormal();
@@ -246,9 +244,10 @@
         doorButton.setDepth(1);
         
         moveButton = this.add.sprite(400, 400, 'moveSprite').setAlpha(0);
+        moveButton.mode = "none";
         moveButton.setInteractive();
 		moveButton.on("pointerup", function pointerUp() {
-            figureMoveState = "planning";
+            moveButton.mode = "planning";
             hideActions();
             moveButton.setAlpha(1);
             moveButton.setScale(0.5);
@@ -256,12 +255,27 @@
         moveButton.setDepth(1);
         
         attackButton = this.add.sprite(400, 400, 'attackSprite').setAlpha(0);
+        attackButton.mode = "";
+        attackButton.setInteractive();
+		attackButton.on("pointerup", function pointerUp() {
+            if (attackButton.mode == "rc") {
+                attackButton.mode = "planning rc";
+                hideActions();
+                attackButton.setAlpha(1);
+                attackButton.setScale(0.5);
+            } else {
+                attackButton.mode = "planning cc";
+                hideActions();
+                attackButton.setAlpha(1);
+                attackButton.setScale(0.5);
+            }
         attackButton.setDepth(1);
         
         searchButton = this.add.sprite(400, 400, 'searchSprite').setAlpha(0);
+        searchButton.mode = "none";
         searchButton.setInteractive();
 		searchButton.on("pointerup", function pointerUp() {
-            figureSearchState = "planning";
+            searchButton.mode = "planning";
             hideActions();
             searchButton.setAlpha(1);
             searchButton.setScale(0.5);
@@ -367,17 +381,22 @@
 	}
     
     function update () {
-        if (figureMoveState == "planning") {
+        if (moveButton.mode == "planning") {
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
-        } else if (figureMoveState == "moving" && movementTweenBarb.isPlaying() == false && movementTweenRogue.isPlaying() == false && movementTweenMage.isPlaying() == false) {
+        } else if (moveButton.mode == "moving" && movementTweenBarb.isPlaying() == false && movementTweenRogue.isPlaying() == false && movementTweenMage.isPlaying() == false) {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.moveNow();
         }
         
-        if (figureSearchState == "planning") {
+        if (searchButton.mode == "planning") {
             searchButton.x = this.game.input.activePointer.x + 50;
             searchButton.y = this.game.input.activePointer.y + 50;
+        }
+            
+        if (attackButton.mode == "planning rc" || attackButton.mode == "planning cc") {
+            attackButton.x = this.game.input.activePointer.x + 50;
+            attackButton.y = this.game.input.activePointer.y + 50;
         }
     }
 
@@ -512,7 +531,7 @@
             }
         }
         
-        figureSearchState = "none";
+        searchButton.mode = "none";
         
         let los_blocked = losPathDifficulty.includes(0); // testet ob in dem Array "losPathDifficulty" eine 0 vorkommt (dort kann man nicht hinlaufen)
         return !los_blocked; // gibt "true" zurück, wenn man in direkter Linie zum angesehenen Punkt laufen/schwimmen/... könnte.
@@ -589,7 +608,7 @@
 
         clearNodes();
         returnCursorToNormal();
-        figureMoveState = "moving";
+        moveButton.mode = "moving";
         //activeChar.activateFigure();
     }
 
