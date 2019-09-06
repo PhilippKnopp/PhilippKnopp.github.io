@@ -621,7 +621,7 @@
     
     function showText (index) {
         let activeChar = figuresOnMap.findIndex(findActiveChar);
-        if (lineOfSight (figuresOnMap[activeChar], this.name) == true) {
+        if (lineOfSight (figuresOnMap[activeChar], index) == true) {
             if (tileArray[index].state == 7 || tileArray[index].state == 8) {
                 Info.text = textL1R1lake;
                 crystal1Img.setAlpha(1);
