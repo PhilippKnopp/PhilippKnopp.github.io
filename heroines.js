@@ -124,13 +124,17 @@ class Figure extends Phaser.GameObjects.Sprite {
                 attackButton.setAlpha(1);
                 buttonXpos += 85;
             } else if (this == mage) {
+                let distantEnemies = false;
                 for (var i = 0; i < tileArray.length; i++) {
-                    if (lineOfSight (this, i) && (tileArray[i].occupiedBy == "enemy" || tileArray[i].occupiedBy == "idol")) {
-                        attackButton.x = this.x+buttonXpos;
-                        attackButton.y = this.y;
-                        attackButton.setAlpha(1);
-                        buttonXpos += 85;
+                    if (lineOfSight(this, i) == true && (tileArray[i].occupiedBy == "enemy" || tileArray[i].occupiedBy == "idol")) {
+                        distantEnemies = true;
                     }
+                }
+                if (distantEnemies == true) {
+                    attackButton.x = this.x+buttonXpos;
+                    attackButton.y = this.y;
+                    attackButton.setAlpha(1);
+                    buttonXpos += 85;
                 }
             }
 
