@@ -102,7 +102,8 @@ function returnLevelConnections(level) {
 function trap1(victim) {
     victim.pathToTravel.length = 0;
     tileArray[victim.onTile].occupiedBy = "";
-    trap1Img.setAlpha(1);
+    trap1Sprt.setAlpha(1);
+    trap1Sprt.setFrame(1);
     tileArray[437].state = 0;
     tileArray[438].state = 0;
     tileArray[462].state = 0;

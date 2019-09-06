@@ -73,7 +73,7 @@
     var door5;
     var door6;
     var idol1;
-    var trap1Img;
+    var trap1Sprt;
     var circle1;
     
     var mage;
@@ -95,9 +95,9 @@
         this.load.image('door4', 'img/door4.png');
         this.load.image('door5', 'img/door5.png');
         this.load.image('door6', 'img/door6.png');
-        this.load.image('trap1', 'img/trap1.png');
         this.load.image('circle1', 'img/circle1.png');
         this.load.image('idol1', 'img/idol1.png');
+        this.load.spritesheet('trap1Sprite', 'img/trap1.png', { frameWidth: 75, frameHeight: 75 });
         
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 25, frameHeight: 25 });
         
@@ -122,14 +122,14 @@
         
 		mapImg = this.add.image(410, 525, 'map-lvl-1').setAlpha(0.5);
         crystal1Img = this.add.image(601, 124, 'crystal1').setAlpha(0);
-        door1Img = this.add.image(500, 330, 'door1').setAlpha(0);
+        door1Img = this.add.image(499, 329, 'door1').setAlpha(0);
         door2Img = this.add.image(501, 587, 'door2').setAlpha(0);
         door3Img = this.add.image(438, 528, 'door3').setAlpha(0);
         door4Img = this.add.image(585, 534, 'door4').setAlpha(0);
         door5Img = this.add.image(440, 398, 'door5').setAlpha(0);
         door6Img = this.add.image(558, 398, 'door6').setAlpha(0);
         idol1Img = this.add.image(500, 952, 'idol1').setAlpha(0);
-        trap1Img = this.add.image(423, 475, 'trap1').setAlpha(0);
+        trap1Sprt = this.add.sprite(423, 475, 'trap1Sprite').setAlpha(0);
         circle1Img = this.add.image(219, 760, 'circle1').setAlpha(0);
 		
 		Info = this.add.text(800, 15, "Click on a Character to activate it\nDepending on Position, you can select various Actions", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });

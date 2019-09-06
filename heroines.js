@@ -96,7 +96,8 @@ class Figure extends Phaser.GameObjects.Sprite {
             tileArray[463].state = 0;
             tileArray[487].state = 0;
             tileArray[488].state = 0;
-            trap1Img.setAlpha(0);
+            trap1Sprt.setAlpha(0);
+            trap1Sprt.setFrame(2);
         }
         
     }
