@@ -179,7 +179,6 @@
                         calculatePath(figuresOnMap[activeChar], this.name);
                     }
                     if (figureSearchState == "planning") {
-                        let activeChar = figuresOnMap.findIndex(findActiveChar);
                         showText(this.name);
                         console.log(this.name);
                     }
@@ -621,6 +620,7 @@
     }
     
     function showText (index) {
+        let activeChar = figuresOnMap.findIndex(findActiveChar);
         if (lineOfSight (figuresOnMap[activeChar], this.name) == true) {
             if (tileArray[index].state == 7 || tileArray[index].state == 8) {
                 Info.text = textL1R1lake;
