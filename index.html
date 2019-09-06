@@ -269,6 +269,7 @@
                 attackButton.setAlpha(1);
                 attackButton.setScale(0.5);
             }
+        }
         attackButton.setDepth(1);
         
         searchButton = this.add.sprite(400, 400, 'searchSprite').setAlpha(0);
@@ -381,7 +382,7 @@
 	}
     
     function update () {
-        /*if (moveButton.mode == "planning") {
+        if (moveButton.mode == "planning") {
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
         } else if (moveButton.mode == "moving" && movementTweenBarb.isPlaying() == false && movementTweenRogue.isPlaying() == false && movementTweenMage.isPlaying() == false) {
@@ -397,7 +398,7 @@
         if (attackButton.mode == "planning rc" || attackButton.mode == "planning cc") {
             attackButton.x = this.game.input.activePointer.x + 50;
             attackButton.y = this.game.input.activePointer.y + 50;
-        }*/
+        }
     }
 
     function findActiveChar(element) {
