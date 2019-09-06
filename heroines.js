@@ -114,12 +114,21 @@ class Figure extends Phaser.GameObjects.Sprite {
             // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
             let adjacentEnemies = false;
             for (var i = 0; i < tileArray[this.onTile].neighbors.length; i++) {
-                if (tileArray[this.onTile].neighbors[i].occupiedBy == "enemy") {
+                if (tileArray[this.onTile].neighbors[i].occupiedBy == "enemy" || tileArray[this.onTile].neighbors[i].occupiedBy == "idol") {
                     adjacentEnemies = true;
                 }
             }
-            if (this == mage || adjacentEnemies == true) {
-                console.log("magier LOS implementieren");
+            if (adjacentEnemies == true) {
+                attackButton.x = this.x+buttonXpos;
+                attackButton.y = this.y;
+                attackButton.setAlpha(1);
+                buttonXpos += 85;
+            } else if (this == mage) {
+                for (var i = 0; i < tileArray.length; i++) {
+                    if (lineOfSight (this, i) && (tileArray[i].occupiedBy == "enemy" || tileArray[i].occupiedBy == "idol")) {
+                        
+                    }
+                }
                 attackButton.x = this.x+buttonXpos;
                 attackButton.y = this.y;
                 attackButton.setAlpha(1);
