@@ -178,7 +178,7 @@
                     if (figureSearchState == "planning") {
                         showText(this.name);
                         console.log(this.name);
-                        let activeChar = figuresOnMap.findIndex(findActiveChar);
+                        let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
                         activeChar.activateFigure();
                     }
 				});
