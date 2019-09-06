@@ -126,7 +126,9 @@ function disableTrap1() {
     let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
     if (getRandomInt(activeChar.dieSize, activeChar.explodes) <= 3) {
         activeChar.health -= 1;
+        console.log("Trap sprung, but disabled!");
     }
+    trap1Sprt.setAlpha(1);
     trap1Sprt.setFrame(1);
     tileArray[437].state = 0;
     tileArray[438].state = 0;

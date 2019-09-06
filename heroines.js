@@ -84,22 +84,6 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
         }
         
-        this.disableTrap = function () {
-            let skillcheck = getRandomInt(this.dieSize, this.explodes);
-            if (skillcheck <= 3) {
-                this.health -= 1;
-                console.log("trap sprung but disabled");
-            }
-            tileArray[437].state = 0;
-            tileArray[438].state = 0;
-            tileArray[462].state = 0;
-            tileArray[463].state = 0;
-            tileArray[487].state = 0;
-            tileArray[488].state = 0;
-            trap1Sprt.setAlpha(0);
-            trap1Sprt.setFrame(2);
-        }
-        
     }
     
     activateFigure() {
@@ -168,7 +152,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 specialButton.y = this.y;
                 specialButton.setAlpha(1);
                 buttonXpos += 85;
-                specialButton.mode == "disableTrap";
+                specialButton.mode = "disableTrap";
             }
 
             // bietet den "Cancel-Button" an.
