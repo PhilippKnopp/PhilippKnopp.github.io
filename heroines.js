@@ -134,6 +134,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                     attackButton.x = this.x+buttonXpos;
                     attackButton.y = this.y;
                     attackButton.setAlpha(1);
+                    attackButton.mode = "rc";
                     buttonXpos += 85;
                 }
             }

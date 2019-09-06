@@ -255,7 +255,7 @@
         moveButton.setDepth(1);
         
         attackButton = this.add.sprite(400, 400, 'attackSprite').setAlpha(0);
-        attackButton.mode = "";
+        attackButton.mode = "none";
         attackButton.setInteractive();
 		attackButton.on("pointerup", function pointerUp() {
             if (attackButton.mode == "rc") {
