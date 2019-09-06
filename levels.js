@@ -158,3 +158,4 @@ var textL1R1lake = "Although the water is crystal clear it is too dark to see ho
 var textL1R1lakeP6 = "There is a faint glimmer of a crystal at the bottom of the lake.";
 var textL1R1temple = "Stairs lead to an ancient propylon. It is carved directly into the wall and the dark stone gives it a sinister aura.";
 var textL1R3 = "A barren, elongated room. A part of the wall is missing and gives way to a hole in the ground that is filled with rubble. Something seems wrong.";
+var textL1R3trap = "There is a trap that was supposed to push victims through a fake wall into a spiked pit.";
