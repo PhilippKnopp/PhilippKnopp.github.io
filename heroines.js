@@ -168,6 +168,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 specialButton.y = this.y;
                 specialButton.setAlpha(1);
                 buttonXpos += 85;
+                specialButton.mode == "disableTrap";
             }
 
             // bietet den "Cancel-Button" an.

@@ -68,7 +68,6 @@
     var crystal1;
     var door1Img;
     var door2;
-    var door3;
     var door4;
     var door5;
     var door6;
@@ -91,7 +90,6 @@
         this.load.image('crystal1', 'img/crystal1.png');
         this.load.image('door1', 'img/door1.png');
         this.load.image('door2', 'img/door2.png');
-        this.load.image('door3', 'img/door3.png');
         this.load.image('door4', 'img/door4.png');
         this.load.image('door5', 'img/door5.png');
         this.load.image('door6', 'img/door6.png');
@@ -124,9 +122,8 @@
         crystal1Img = this.add.image(601, 124, 'crystal1').setAlpha(0);
         door1Img = this.add.image(501, 329, 'door1').setAlpha(0);
         door2Img = this.add.image(501, 587, 'door2').setAlpha(0);
-        door3Img = this.add.image(438, 527, 'door3').setAlpha(0);
         door4Img = this.add.image(586, 524, 'door4').setAlpha(0);
-        door5Img = this.add.image(440, 397, 'door5').setAlpha(0);
+        door5Img = this.add.image(440, 397, 'door5').setAlpha(1);
         door6Img = this.add.image(558, 397, 'door6').setAlpha(0);
         idol1Img = this.add.image(500, 951, 'idol1').setAlpha(0);
         trap1Sprt = this.add.sprite(423, 474, 'trap1Sprite').setAlpha(0);
@@ -271,9 +268,9 @@
         specialButton = this.add.sprite(400, 400, 'specialSprite').setAlpha(0);
         specialButton.setInteractive();
 		specialButton.on("pointerup", function pointerUp() {
-            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             if (specialButton.mode == "disableTrap" && level == 1) {
-                disableTrap1(activeChar, activeChar.onTile);
+                disableTrap1();
+                specialButton.mode == "";
             }
 		});
         specialButton.mode = "";
