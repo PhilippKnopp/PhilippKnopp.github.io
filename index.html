@@ -34,27 +34,27 @@
 				gravity: { y: 0 },
 				debug: false
 			}
-		},
-		scale: { mode: Phaser.Scale.FIT },
-		scene: {
-			preload: preload,
-			create: create,
+        },
+        scale: { mode: Phaser.Scale.FIT },
+        scene: {
+            preload: preload,
+            create: create,
             update: update
-		}
+        }
 	};
     
 ////////////// Variablen, die in der App verwendet werden   //////////////////////////////////////////////////////////////////////////////////////////
-
-	var game = new Phaser.Game(config);
-	var objects = {};
-	var tileArray = [];
-	var matrixWidth = 25;
-	var matrixHeight = 40;
+    
+    var game = new Phaser.Game(config);
+    var objects = {};
+    var tileArray = [];
+    var matrixWidth = 25;
+    var matrixHeight = 40;
     var movementTweenBarb;
     var movementTweenMage;
     var movementTweenRogue;
-	
-	var mapImg;
+    
+    var mapImg;
     var doorButton;
     var moveButton;
     var attackButton;
@@ -78,13 +78,15 @@
     var barb;
     
     var figuresOnMap = [];
-    var Info;
+    var Info1;
+    var InfoName;
+    var Info2;
     
     var level = 1;
-
+    
     // Funktion die alle Bilder lädt
-	function preload() {
-		this.load.image('map-lvl-1', 'img/map-lvl-1.png');
+    function preload() {
+        this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.image('crystal1', 'img/crystal1.png');
         this.load.image('door1', 'img/door1.png');
         this.load.image('door2', 'img/door2.png');
@@ -93,6 +95,7 @@
         this.load.image('door6', 'img/door6.png');
         this.load.image('circle1', 'img/circle1.png');
         this.load.image('idol1', 'img/idol1.png');
+        this.load.image('gui', 'img/GUI.png');
         this.load.spritesheet('trap1Sprite', 'img/trap1.png', { frameWidth: 79, frameHeight: 78 });
         
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 26, frameHeight: 26 });
@@ -116,6 +119,8 @@
 		objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0C0E11');
         
+        gui = this.add.image(1408, 540, 'gui');
+        
 		mapImg = this.add.image(412, 540, 'map-lvl-1').setAlpha(1);
         crystal1Img = this.add.image(620, 137, 'crystal1').setAlpha(0);
         door1Img = this.add.image(516, 358, 'door1').setAlpha(0);
@@ -127,7 +132,12 @@
         trap1Sprt = this.add.sprite(438, 501, 'trap1Sprite').setAlpha(0);
         circle1Img = this.add.image(230, 800, 'circle1').setAlpha(0);
 		
-		Info = this.add.text(800, 15, "Click on a Character to activate it\nDepending on Position, you can select various Actions", { fontFamily: "Verdana" , color: '#0055aa', lineSpacing: 10 });
+		Info1 = this.add.text(945, 30, "Click on a Character to activate it\nDepending on Position, you can select various Actions", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 10 });
+        
+        InfoName = this.add.text(945, Info1.getBottomLeft()+20, "Riva: ", { fontFamily: "Verdana" , color: '#00aa00', lineSpacing: 10}).setFontStyle('bold');
+        
+        Info2 = this.add.text(945, Info1.getBottomLeft()+30, "I Say This", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 10 });
+        
         
 		/*var buildLevelButton = this.add.text(800, 115, "Insert Walls", { fontFamily: "Verdana" });
 		buildLevelButton.setInteractive();
