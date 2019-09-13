@@ -308,12 +308,12 @@ function doors(char, tile) {
 }
 
 var textL1 = [
-/*0*/   "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local\nguardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two pale\nhumanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are holding a\nwoman captive. She is not the girl they came to look for, but sems to be in need for their help anyway, as the young adventurers hear them say: 'We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!'", 
+/*0*/   "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local\nguardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two\npale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are\nholding a woman captive.\nShe is not the girl they came to look for, but sems to be in need for their help anyway, as the young adventurers hear them say: 'We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!'", 
 /*1*/    "I can't see that.",
-/*2*/    "A cold and dark cave. The walls are rough and wet. There is an impressive temple, that was cut out of the stone next to a lake.",
+/*2*/    "A cold and dark cave. The walls are rough and wet.\nThere is an impressive temple, that was cut out of the stone next to a lake.",
 /*3*/    "Although the water is crystal clear it is too dark to see how deep the water is.",
 /*4*/    "There is a faint glimmer of a crystal at the bottom of the lake.",
-/*5*/    "Stairs lead to an ancient propylon. It is carved directly into the wall and the dark stone gives it a sinister aura.",
+/*5*/    "Stairs lead to an ancient propylon. It is carved directly into the wall\nand the dark stone gives it a sinister aura.",
 /*6*/    "A barren, elongated room. A part of the wall is missing and gives way to a hole in the ground that is filled with rubble. Something seems wrong.",
 /*7*/    "There is a trap that was supposed to push victims through a fake wall into a spiked pit.",
 /*8*/    "The pit is about three meters deep. Once the pit was filled with spikes, but most of them rusted away.",
