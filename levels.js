@@ -41,6 +41,49 @@ var level1Type = [
     5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5
 ];
 
+var level1Info = [
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // 24
+	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 1, 1, 1, // 49
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 1, 1, 1, 1, 1, // 74
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 5, 5, 5, // 99
+    1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 5, 5, // 124
+    1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 5, 5, // 149
+    1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 5, 5, // 174
+    1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 5, // 199
+    1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 5, // 224
+    1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 5, 5, // 249
+    1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 5, 5, 2, 2, 3, 3, 3, 5, 5, // 274
+    1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 5, 5, 5, 6, 5, 3, 3, 5, 5, 5, // 299
+    1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+    1, 1, 2, 2, 2, 5, 5, 5, 5, 5, 6, 2, 5, 2, 6, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5,
+    1, 1, 2, 2, 5, 5, 5, 5, 5, 5, 5, 2, 6, 6, 6, 0, 0, 0, 9, 0, 0, 5, 5, 5, 5,
+    1, 1, 2, 2, 2, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 0, 0, 0, 9, 9, 0, 0, 0, 0, 5,
+    1, 1, 2, 2, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 0, 0, 0, 9, 9, 0, 5, 5, 5, 5,
+    1, 2, 2, 2, 5, 5, 5, 5, 5, 8, 8, 8, 7, 7, 5, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5,
+    1, 5, 5, 5, 5, 5, 5, 5, 5, 8, 8, 8, 7, 7, 5, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5,
+    5, 5, 5, 5, 5, 5, 5, 5, 5, 8, 8, 8, 7, 7, 5, 0, 0, 0, 9, 9, 9, 5, 5, 5, 5,
+    5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 9, 9, 9, 5, 5, 5, 5,
+    5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 9, 9, 9, 0, 0, 0, 5, 5, 5, 5,
+    5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5,
+    5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 9, 9, 9, 0, 0, 0, 0, 5, 5, 5,
+    5, 5, 5, 5, 5, 0, 0, 0, 0, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 5,
+    5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5,
+    5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5,
+    5, 5, 5, 0, 0, 0, 0, 0, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5,
+    5, 5, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5,
+    5, 5, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5,
+    5, 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5,
+    5, 5, 0, 0, 0, 0, 0, 0, 0, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 5, 5,
+    5, 5, 0, 0, 0, 0, 0, 0, 0, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 5, 5,
+    5, 5, 5, 0, 6, 6, 6, 0, 5, 5, 0, 0, 0, 0, 0, 6, 6, 6, 0, 0, 0, 0, 0, 5, 5,
+    5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5,
+    5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 6, 6, 6, 6, 6, 0, 0, 0, 5, 5, 5,
+    5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5,
+    5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 5, 0, 0, 5, 5, 5, 5, 5, 5,
+    5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5,
+    5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5
+];
+
 var level1Connections = [
     [0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],
 	[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[3,3,3,3,3,3,3,3],[3,3,3,3,3,3,3,3],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],
@@ -96,6 +139,11 @@ function returnLevelType(level) {
 function returnLevelConnections(level) {
 	if (level == 1) {
 		return level1Connections;
+	}
+}
+function returnLevelInfo(level) {
+	if (level == 1) {
+		return level1Info;
 	}
 }
 
@@ -259,11 +307,15 @@ function doors(char, tile) {
     char.activateFigure();
 }
 
-var textL1intro = "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local guardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two pale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are holding a woman captive. She is not the girl they came to look for, but sems to be in need for their help anyway, as the young adventurers hear them say: 'We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!'";
-var textL1blockedView = "I can't see that.";
-var textL1R1 = "A cold and dark cave. The walls are rough and wet. There is an impressive temple, that was cut out of the stone next to a lake.";
-var textL1R1lake = "Although the water is crystal clear it is too dark to see how deep the water is.";
-var textL1R1lakeP6 = "There is a faint glimmer of a crystal at the bottom of the lake.";
-var textL1R1temple = "Stairs lead to an ancient propylon. It is carved directly into the wall and the dark stone gives it a sinister aura.";
-var textL1R3 = "A barren, elongated room. A part of the wall is missing and gives way to a hole in the ground that is filled with rubble. Something seems wrong.";
-var textL1R3trap = "There is a trap that was supposed to push victims through a fake wall into a spiked pit.";
+var textL1 = [
+/*0*/   "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local guardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two pale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are holding a woman captive. She is not the girl they came to look for, but sems to be in need for their help anyway, as the young adventurers hear them say: 'We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!'", 
+/*1*/    "I can't see that.",
+/*2*/    "A cold and dark cave. The walls are rough and wet. There is an impressive temple, that was cut out of the stone next to a lake.",
+/*3*/    "Although the water is crystal clear it is too dark to see how deep the water is.",
+/*4*/    "There is a faint glimmer of a crystal at the bottom of the lake.",
+/*5*/    "Stairs lead to an ancient propylon. It is carved directly into the wall and the dark stone gives it a sinister aura.",
+/*6*/    "A barren, elongated room. A part of the wall is missing and gives way to a hole in the ground that is filled with rubble. Something seems wrong.",
+/*7*/    "There is a trap that was supposed to push victims through a fake wall into a spiked pit.",
+/*8*/    "The pit is about three meters deep. Once the pit was filled with spikes, but most of them rusted away."
+    ]
+
