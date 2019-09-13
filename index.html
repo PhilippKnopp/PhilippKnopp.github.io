@@ -133,7 +133,7 @@
         trap1Sprt = this.add.sprite(438, 501, 'trap1Sprite').setAlpha(0);
         circle1Img = this.add.image(230, 800, 'circle1').setAlpha(0);
 		
-		Info1 = this.add.text(950, 40, textL1intro, { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
+		Info1 = this.add.text(950, 40, textL1[0], { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
         
         InfoName = this.add.text(950, Info1.getBottomLeft().y+15, "", { fontFamily: "Verdana" , color: '#914a23', lineSpacing: 12}).setFontStyle('bold');
         InfoName.showName = function (char) {
@@ -144,7 +144,7 @@
         
         Info2 = this.add.text(InfoName.getBottomRight().x, Info1.getBottomLeft().y+15, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12 });
         
-        Info3 = this.add.text(950, Info2.getBottomLeft().y+30, "Click on a Character to activate it\nDepending on Position, you can select various Actions", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
+        Info3 = this.add.text(950, Info2.getBottomLeft().y+30, textL1[0], { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
         
         
 		/*var buildLevelButton = this.add.text(800, 115, "Insert Walls", { fontFamily: "Verdana" });

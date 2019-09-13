@@ -316,6 +316,7 @@ var textL1 = [
 /*5*/    "Stairs lead to an ancient propylon. It is carved directly into the wall and the dark stone gives it a sinister aura.",
 /*6*/    "A barren, elongated room. A part of the wall is missing and gives way to a hole in the ground that is filled with rubble. Something seems wrong.",
 /*7*/    "There is a trap that was supposed to push victims through a fake wall into a spiked pit.",
-/*8*/    "The pit is about three meters deep. Once the pit was filled with spikes, but most of them rusted away."
+/*8*/    "The pit is about three meters deep. Once the pit was filled with spikes, but most of them rusted away.",
+/*9*/    "Click on a Character to activate it\nDepending on Position, you can select various Actions."
     ]
 
