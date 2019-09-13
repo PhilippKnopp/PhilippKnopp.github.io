@@ -308,7 +308,7 @@ function doors(char, tile) {
 }
 
 var textL1 = [
-/*0*/   "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local\nguardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two\npale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are\nholding a woman captive.\nShe is not the girl they came to look for, but sems to be in need for their help anyway, as the young adventurers hear them say: 'We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!'", 
+/*0*/   "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local\nguardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two\npale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are\nholding a woman captive.\nShe is not the girl they came to look for, but sems to be in need for their help anyway, as the young\nadventurers hear one of them hissing in a coarse voice.", 
 /*1*/    "I can't see that.",
 /*2*/    "A cold and dark cave. The walls are rough and wet.\nThere is an impressive temple, that was cut out of the stone next to a lake.",
 /*3*/    "Although the water is crystal clear it is too dark to see how deep the water is.",
@@ -317,6 +317,11 @@ var textL1 = [
 /*6*/    "A barren, elongated room. A part of the wall is missing and gives way to a hole in the ground that is filled with rubble. Something seems wrong.",
 /*7*/    "There is a trap that was supposed to push victims through a fake wall into a spiked pit.",
 /*8*/    "The pit is about three meters deep. Once the pit was filled with spikes, but most of them rusted away.",
-/*9*/    "Click on a Character to activate it\nDepending on Position, you can select various Actions."
-    ]
+/*9*/    "Click on a Character to activate it\nDepending on Position, you can select various Actions.",
+    ];
+
+var textEnemy1 = [
+/*0*/   "pale Acolyte",
+/*1*/   'We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!'
+];
 
