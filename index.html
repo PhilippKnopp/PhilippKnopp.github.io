@@ -82,6 +82,7 @@
     var InfoName;
     var Info2;
     var Info3;
+    var textHistory = [];
     
     var level = 1;
     
@@ -675,16 +676,11 @@
         Info2.setText("");
         Info3.setText("");
         
-        InfoName.setPosition(950, Info1.getBottomLeft().y+15)
-        
-        
         let activeChar = figuresOnMap.findIndex(findActiveChar);
         if (lineOfSight (figuresOnMap[activeChar], index) == true) {
             Info1.setText(textL1[tileArray[index].info]);
             if (tileArray[index].info == 3) {
                 crystal1Img.setAlpha(1);
-            } else if (index == 362 || index == 363 || index == 387 || index == 388 || index == 412 || index == 413) {
-                Info1.text = textL1R3;
             } else if (tileArray[index].info == 7) {
                 trap1Sprt.setAlpha(1);
             }
@@ -695,6 +691,8 @@
         InfoName.setPosition(950, Info1.getBottomLeft().y+15);
         Info2.setPosition(InfoName.getBottomRight().x, Info1.getBottomLeft().y+15);
         Info3.setPosition(950, Info2.getBottomLeft().y+30);
+        
+        textHistory.push(Info1.text, InfoName.text, Info2.text, Info3.text);
     }
 	
 </script>
