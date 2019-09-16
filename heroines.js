@@ -87,8 +87,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     activateFigure() {
-        
-        if (moveButton.mode == "none") {
+        if (moveButton.mode == "none" && searchButton.mode == "none") {
             deactivateFigures();
 
             this.active = true;
@@ -207,6 +206,11 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             
             tileArray[this.onTile].neighbors.length = 0;
+        } else if (searchButton.mode == "planning") {
+            showText(this.onTile, this.description);
+            returnCursorToNormal();
+            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+            activeChar.activateFigure();
         }
     }
     

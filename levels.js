@@ -330,3 +330,9 @@ var textL1Enemy = [
 /*1*/   'We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!'
 ];
 
+var textL1Chars = [
+/*0*/   "A mage from the academy of the thorn.",
+/*1*/   "A proud warrior from a deadly djungle.",
+/*2*/   "A trill rogue."
+]
+
