@@ -86,6 +86,7 @@
     var Info2;
     var Info3;
     var textHistory = [];
+    var textHistoryIndex = 0;
     
     var level = 1;
     
@@ -136,6 +137,11 @@
 		});
 		textBackButton.on("pointerdown", function pointerDown() {
 			this.setFrame(2);
+            showText (textHistory[textHistoryIndex-7], textHistory[textHistoryIndex-6], textHistory[textHistoryIndex-5], textHistory[textHistoryIndex-4]);
+            textHistoryIndex -= 4;
+            textHistory.splice(textHistory.length, 4);
+            console.log(textHistoryIndex);
+            console.log(textHistory);
 		});
         textBackButton.on("pointerup", function pointerUp() {
 			this.setFrame(0);
@@ -192,8 +198,9 @@
         
         InfoName = this.add.text(950, Info1.getBottomLeft().y+15, "", { fontFamily: "Verdana" , color: '#914a23', lineSpacing: 12}).setFontStyle('bold');
         InfoName.showName = function (char) {
-            if (char === "") {
-                InfoName.setText("");
+            if (char.typeof == "string") {
+                InfoName.setText(char);
+                InfoName.setColor('#999999');
             } else {
                 InfoName.setText(char.name + ": ");
                 InfoName.setColor(char.color);
@@ -506,8 +513,6 @@
             attackButton.x = this.game.input.activePointer.x + 50;
             attackButton.y = this.game.input.activePointer.y + 50;
         }
-        
-        console.log(moveButton.mode);
     }
 
     function findActiveChar(element) {
@@ -762,6 +767,10 @@
         Info3.showMessage(text3);
         
         textHistory.push(Info1.text, InfoName.text, Info2.text, Info3.text);
+        textHistoryIndex += 4;
+        
+        console.log(textHistoryIndex);
+        console.log(textHistory);
     }
     
     function eventDispatch (activeChar, eventKey) {
