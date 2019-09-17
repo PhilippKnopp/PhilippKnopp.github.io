@@ -185,7 +185,7 @@
         trap1Sprt = this.add.sprite(438, 501, 'trap1Sprite').setAlpha(0);
         circle1Img = this.add.image(230, 800, 'circle1').setAlpha(0);
 		
-		Info1 = this.add.text(950, 40, textL1[0], { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
+		Info1 = this.add.text(950, 40, "", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
         Info1.showMessage = function (text) {
             Info1.setText(text);
         };
@@ -255,9 +255,15 @@
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
                     // nichts ist auf der Tile und diese ist von einer Seite aus begehbar
-					if (this.occupiedBy == "" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
+					if (this.occupiedBy != "figure" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
                         calculatePath(figuresOnMap[activeChar], this.name);
+                    } else if (moveButton.mode == "planning" && this.occupiedBy == "figure") {
+                        let activeChar = figuresOnMap.findIndex(findActiveChar);
+                        showText ("", figuresOnMap[activeChar], textL1[16]);
+                    } else if (moveButton.mode == "planning") {
+                        let activeChar = figuresOnMap.findIndex(findActiveChar);
+                        showText ("", figuresOnMap[activeChar], textL1[17]);
                     }
                     if (searchButton.mode == "planning") {
                         console.log(this.name);
@@ -661,6 +667,7 @@
         tileArray[activeChar.onTile].wayPointUsefulness = tileArray[activeChar.onTile].distanceTravelled + tileArray[activeChar.onTile].estimatedWayToB(endIndex);
         frontierList.push(tileArray[activeChar.onTile]);
 
+        var i = 0;
         // gehe folgende Schleife solange durch bis es einen Weg gibt
         mapperLoop: while (pathFound == false) {
 
@@ -711,7 +718,8 @@
             // Füge den aktiven Knoten der mappedList hinzu und Lösche den aktven Knoten aus der frontierList
             mappedList.push(frontierList[activeNode]);
             frontierList.splice(activeNode,1);
-
+            console.log(i);
+            i++;
         }
 
         clearNodes();
@@ -762,6 +770,7 @@
             trap1(activeChar);
             activeChar.moveNow;
         } else if (eventKey == "e1") {
+            showText (textL1[0]);
             // start von Level 1
         } else if (eventKey == "e2") {
             // nach dem öffnen der ersten Türe in den tempel
@@ -769,6 +778,14 @@
             // erster Gang
         } else if (eventKey == "e4") {
             // nach dem öffnen der zweiten Türe in den Raum
+        } else if (eventKey == "6e5") {
+            // zweiter Gang
+        } else if (eventKey == "6e6") {
+            // vor dem Bosskampf
+        } else if (eventKey == "e7") {
+            // Statuette wird zerstört
+        } else if (eventKey == "e8") {
+            // ende von Level 1
         };
     }
     
