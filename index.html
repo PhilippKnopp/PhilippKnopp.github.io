@@ -139,7 +139,7 @@
 			this.setFrame(2);
             showText (textHistory[textHistoryIndex-7], textHistory[textHistoryIndex-6], textHistory[textHistoryIndex-5], textHistory[textHistoryIndex-4]);
             textHistoryIndex -= 8;
-            textHistory.splice(textHistory.length, 4);
+            textHistory.splice(textHistory.length-4, 4);
             console.log(textHistoryIndex);
             console.log(textHistory);
 		});
@@ -198,14 +198,14 @@
         
         InfoName = this.add.text(950, Info1.getBottomLeft().y+15, "", { fontFamily: "Verdana" , color: '#914a23', lineSpacing: 12}).setFontStyle('bold');
         InfoName.showName = function (char) {
-            if (char.typeof == "string") {
-                InfoName.setText(char);
-                InfoName.setColor('#999999');
-            } else {
+            if (char.typeof == "object") {
                 InfoName.setText(char.name + ": ");
                 InfoName.setColor(char.color);
-                InfoName.setPosition(950, Info1.getBottomLeft().y+15);
+            } else {
+                InfoName.setText(char);
+                InfoName.setColor('#999999');
             }
+            InfoName.setPosition(950, Info1.getBottomLeft().y+15);
         };
         
         Info2 = this.add.text(InfoName.getBottomRight().x, Info1.getBottomLeft().y+15, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12 });
