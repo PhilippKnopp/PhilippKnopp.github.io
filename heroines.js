@@ -215,6 +215,9 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             returnCursorToNormal();
             activeChar.activateFigure();
+        } else if (moveButton.mode == "planning") {
+            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+            showText ("", activeChar, textL1[16]);
         }
     }
     

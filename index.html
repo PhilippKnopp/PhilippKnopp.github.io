@@ -255,12 +255,9 @@
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
                     // nichts ist auf der Tile und diese ist von einer Seite aus begehbar
-					if (this.occupiedBy != "figure" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
+					if ((this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
                         calculatePath(figuresOnMap[activeChar], this.name);
-                    } else if (moveButton.mode == "planning" && this.occupiedBy == "figure") {
-                        let activeChar = figuresOnMap.findIndex(findActiveChar);
-                        showText ("", figuresOnMap[activeChar], textL1[16]);
                     } else if (moveButton.mode == "planning") {
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
                         showText ("", figuresOnMap[activeChar], textL1[17]);
@@ -666,8 +663,7 @@
         tileArray[activeChar.onTile].distanceTravelled = 0;
         tileArray[activeChar.onTile].wayPointUsefulness = tileArray[activeChar.onTile].distanceTravelled + tileArray[activeChar.onTile].estimatedWayToB(endIndex);
         frontierList.push(tileArray[activeChar.onTile]);
-
-        var k = 0;
+        
         // gehe folgende Schleife solange durch bis es einen Weg gibt
         mapperLoop: while (pathFound == false) {
 
@@ -675,6 +671,10 @@
             frontierListValues.length = 0;
             for (var i = 0; i < frontierList.length; i++) {
                 frontierListValues.push(frontierList[i].wayPointUsefulness);
+            };
+            if (frontierList.length == 0) {
+                showText("", activeChar, textL1[18]);
+                break mapperLoop;
             };
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
 
