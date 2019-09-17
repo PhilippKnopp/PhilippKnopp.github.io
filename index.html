@@ -156,6 +156,9 @@
         textNextButton.setInteractive();
 		textNextButton.on("pointerover", function pointerOver() {
 			this.setFrame(1);
+		});
+		textNextButton.on("pointerdown", function pointerDown() {
+			this.setFrame(2);
             if (textHistoryIndex < textHistory.length-4) {
                 showText (textHistory[textHistoryIndex+1], textHistory[textHistoryIndex+2], textHistory[textHistoryIndex+3], textHistory[textHistoryIndex+4]);
                 //textHistoryIndex -= 8;
@@ -163,9 +166,6 @@
                 console.log(textHistoryIndex);
                 console.log(textHistory);
             }
-		});
-		textNextButton.on("pointerdown", function pointerDown() {
-			this.setFrame(2);
 		});
         textNextButton.on("pointerup", function pointerUp() {
 			this.setFrame(0);
