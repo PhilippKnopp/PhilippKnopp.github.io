@@ -11,10 +11,10 @@ var level1Type = [
     5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 5, 5, // 249
     5, 5, 5, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 6, 0, 0, 7, 7, 7, 5, 5, // 274
     5, 5, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, "0dc", "0dc", "0dc", 6, 5, 7, 7, 5, 5, 5, // 299
-    5, 5, 5, 0, 0, 0, 0, 6, 6, 0, 0, 0, 0, 0, 6, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+    5, 5, 5, 0, 0, 0, 0, 6, 6, 0, 0, 0, 0, 0, 6, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5,
     5, 5, 6, 0, 6, 5, 5, 5, 5, 5, 6, 6, 0, 0, 6, "0dc", "0dc", "0dc", 5, 5, 5, 5, 5, 5, 5,
     5, 5, 6, 0, 5, 5, 5, 5, 5, 5, 5, 6, 0, "0dc", "0dc", 0, 0, 0, "0do", "0do", 0, 5, 5, 5, 5,
-    5, 5, 6, 0, 6, 5, 5, 5, 5, 5, 5, 5, 0, "0dc", "0dc", 0, 0, 0, "0do", "0do", 0, 0, 0, 0, 5,
+    5, 5, 6, 0, 6, 5, 5, 5, 5, 5, 5, 5, 0, "0dc", "0dc", 0, 0, 0, "0do", "0do", 0, 0, 0, "0e3", 5,
     5, 5, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 0, "0dc", "0dc", 0, 0, 0, "0do", "0do", 0, 5, 5, 5, 5,
     5, 0, 0, 6, 5, 5, 5, 5, 5, 6, 6, 6, "0t1", "0t1", 5, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5,
     5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, "0t1", "0t1", 5, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5,
@@ -23,9 +23,9 @@ var level1Type = [
     5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, "0dc", "0dc", "0dc", 0, 0, 0, 5, 5, 5, 5,
     5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5,
     5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, "0dc", "0dc", "0dc", 0, 0, 0, 0, 5, 5, 5,
-    5, 5, 5, 5, 5, 0, 0, 0, 0, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 5,
+    5, 5, 5, 5, 5, 0, 0, 0, 0, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, "6e5", 5,
     5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5,
-    5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5,
+    5, 5, 5, 5, 5, "6e6", 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5,
     5, 5, 5, 0, 0, 0, 0, 0, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5,
     5, 5, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5,
     5, 5, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5,
@@ -197,6 +197,7 @@ function doors(char, tile) {
             tileArray[341].state = "0do";
             tileArray[342].state = "0do";
             door1Img.setAlpha(1);
+            eventDispatch(char, "e2");
             tileArray[315].walkable = [0,1,1,1,1,1,0,0];
             tileArray[316].walkable = [1,1,1,1,1,1,1,1];
             tileArray[317].walkable = [1,1,0,0,0,1,1,1];
@@ -221,6 +222,7 @@ function doors(char, tile) {
             tileArray[591].state = "0do";
             tileArray[592].state = "0do";
             door2Img.setAlpha(1);
+            eventDispatch(char, "e4");
             tileArray[565].walkable = [0,1,1,1,1,1,0,0];
             tileArray[566].walkable = [1,1,1,1,1,1,1,1];
             tileArray[567].walkable = [1,1,0,0,0,1,1,1];
@@ -275,7 +277,7 @@ function doors(char, tile) {
             tileArray[388].state = "0dc";
             tileArray[389].state = "0dc";
             tileArray[413].state = "0dc";
-            tileArray[419].state = "0dc";
+            tileArray[413].state = "0dc";
             door5Img.setAlpha(0);
             tileArray[388].walkable = [1,1,0,0,0,1,1,1];
             tileArray[389].walkable = [0,1,1,1,1,1,0,0];
@@ -287,7 +289,7 @@ function doors(char, tile) {
             tileArray[393].state = "0do";
             tileArray[394].state = "0do";
             tileArray[418].state = "0do";
-            tileArray[592].state = "0do";
+            tileArray[418].state = "0do";
             door6Img.setAlpha(1);
             tileArray[393].walkable = [1,1,0,1,0,1,1,1];
             tileArray[394].walkable = [0,1,1,1,1,1,0,1];
@@ -314,15 +316,16 @@ var textL1 = [
 /*3*/    "Although the water is crystal clear it is too dark to see how deep the water is.",
 /*4*/    "There is a faint glimmer of a crystal at the bottom of the lake.",
 /*5*/    "Stairs lead to an ancient propylon. It is carved directly into the wall\nand the dark stone gives it a sinister aura.",
-/*6*/    "A barren, elongated room. A part of the wall is missing and gives way to a hole in the ground that is filled with rubble. Something seems wrong.",
+/*6*/    "A barren, elongated room. A part of the wall is missing and gives way to a hole in the ground that is filled\nwith rubble. Something seems wrong.",
 /*7*/    "There is a trap that was supposed to push victims through a moovable wall into a pit filled with spikes.",
 /*8*/    "The pit is about three meters deep. Once the pit was filled with spikes, but most of them rusted away.",
 /*9*/    "Click on a Character to activate it\nDepending on Position, you can select various Actions.",
 /*10*/    "A stone block engraved with religious runes.",
-/*11*/    "A huge, cathedral like room, that is illuminated by blue, flickering candles. There are no pews, only an altair in front of a podium. In the middle of the podium there is a pedestral with a dark idol standing upon it. The writhing shadows in the corners of this room seem threatening and darker than they are supposed to.",
-/*12*/    "An austere corridor. The walls were cut into the rock in a way to give them a look as if they were made out of big, smooth stoneblocks.",
-/*13*/    "The room has a dome-like ceiling and columns along the walls. The floor is engraved with intricate runes and a circle.",
-/*14*/    "An idol of the god in the deep. It looks like it was made during a time when humans had only just learned to use tools. Despite its primitive and threatening looks it still has an aura of superiority and knowledge.",
+/*11*/    "A huge, cathedral like room, that is illuminated by blue, flickering candles. There are no pews, only an\naltair in front of a podium. In the middle of the podium there is a pedestral with a dark idol\nstanding upon it. The writhing shadows in the corners of this room seem threatening and darker than they are supposed to.",
+/*12*/    "An austere corridor. The walls were cut into the rock in a way to give them a look as if they were made out\nof big, smooth stoneblocks.",
+/*13*/    "The room has a dome-like ceiling and columns along the walls. The floor is engraved with intricate runes\nand a circle.",
+/*14*/    "An idol of the god in the deep. It looks like it was made during a time when humans had only just learned to\nuse tools. Despite its primitive and threatening looks it still has an aura of superiority\nand knowledge.",
+/*15*/    "With his last hissing breath, a pale priest tells Caelith, that Arowia was sent deeper into the tunnels, as a tribute to an allied faction. Then he dies and the room falls silent. The three heroines look at each other in silence and come to the unspoken agreement that they will not surrender until they end their quest, however slim the odds might be. A few hours of rest later, they search the old temple for a way out and find a steep staircase that leads deeper into the darkness. Knowing full well, that their adventure has only just begun, they start their descent, fighting to keep the last spark of hope alive."
 ];
 
 var textL1Enemy = [
@@ -331,8 +334,12 @@ var textL1Enemy = [
 ];
 
 var textL1Chars = [
-/*0*/   "A mage from the academy of the thorn.",
-/*1*/   "A proud warrior from a deadly djungle.",
-/*2*/   "A trill rogue."
+/*0*/   "An apprentice mage from the twisted academy with a good heart.",
+/*1*/   "A proud warriorborn in a deadly jungle.",
+/*2*/   "A blue skinned trill rogue from a sunken city.",
+/*3*/   "This dog sized, reptile has sharp teeth and translucent skin.",
+/*4*/   "This skinny, bald humanoid being has murder in its black eyes.",
+/*5*/   "A black robe and an unholy symbol show this pale-one‘s sinister power and status. He fanatically swings a vicious iron mace.",
+/*6*/   "A large demon made of smoke and coiling black oil. He is unmitigated brutality but something is holding him back."
 ];
 

@@ -137,9 +137,13 @@
 		textBackButton.on("pointerdown", function pointerDown() {
 			this.setFrame(2);
 		});
+        textBackButton.on("pointerup", function pointerUp() {
+			this.setFrame(0);
+		});
         textBackButton.on("pointerout", function pointerOut() {
 			this.setFrame(0);
 		});
+        
         textNextButton = this.add.image(1707, 525, 'textForwardSprite');
         textNextButton.setInteractive();
 		textNextButton.on("pointerover", function pointerOver() {
@@ -148,9 +152,13 @@
 		textNextButton.on("pointerdown", function pointerDown() {
 			this.setFrame(2);
 		});
+        textNextButton.on("pointerup", function pointerUp() {
+			this.setFrame(0);
+		});
         textNextButton.on("pointerout", function pointerOut() {
 			this.setFrame(0);
 		});
+        
         textNewButton = this.add.image(1791, 525, 'textNewSprite');
         textNewButton.setInteractive();
 		textNewButton.on("pointerover", function pointerOver() {
@@ -158,6 +166,9 @@
 		});
 		textNewButton.on("pointerdown", function pointerDown() {
 			this.setFrame(2);
+		});
+        textNewButton.on("pointerup", function pointerUp() {
+			this.setFrame(0);
 		});
         textNewButton.on("pointerout", function pointerOut() {
 			this.setFrame(0);
@@ -499,7 +510,6 @@
     }
 
     function buildLevel() {
-
         let levelMap = returnLevelType(1);
         for (var i = 0; i < tileArray.length; i++) {
             tileArray[i].state = levelMap[i];
@@ -513,13 +523,13 @@
         for (var i = 0; i < tileArray.length; i++) {
             tileArray[i].info = levelMapInfo[i];
         }
-
+        
         for (var i = 0; i < figuresOnMap.length; i++) {
             figuresOnMap[i].setOnMap();
         }
         
         tileArray[941].occupiedBy = "idol";
-
+        eventDispatch("", "e1");
     }
 
     function lineOfSight (activeChar, endIndex) {
@@ -746,7 +756,22 @@
         
         textHistory.push(Info1.text, InfoName.text, Info2.text, Info3.text);
     }
-	
+    
+    function eventDispatch (activeChar, eventKey) {
+        if (eventKey == "0t1") {
+            trap1(activeChar);
+            activeChar.moveNow;
+        } else if (eventKey == "e1") {
+            // start von Level 1
+        } else if (eventKey == "e2") {
+            // nach dem öffnen der ersten Türe in den tempel
+        } else if (eventKey == "0e3") {
+            // erster Gang
+        } else if (eventKey == "e4") {
+            // nach dem öffnen der zweiten Türe in den Raum
+        };
+    }
+    
 </script>
 </body>
 

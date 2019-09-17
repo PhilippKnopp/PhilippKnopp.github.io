@@ -31,9 +31,8 @@ class Figure extends Phaser.GameObjects.Sprite {
             this.onTile = this.pathToTravel[0];
             this.pathToTravel.shift();
             tileArray[this.onTile].occupiedBy = "figure";
-            if (tileArray[this.onTile].state == "0t1") {
-                trap1(this);
-                this.moveNow;
+            if (typeof tileArray[this.onTile].state === 'string') {
+                eventDispatch(this, tileArray[this.onTile].state);
             };
         };
         
