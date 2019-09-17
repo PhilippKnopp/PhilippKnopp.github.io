@@ -217,7 +217,13 @@ class Figure extends Phaser.GameObjects.Sprite {
             activeChar.activateFigure();
         } else if (moveButton.mode == "planning") {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-            showText ("", activeChar, textL1[16]);
+            if (this == activeChar) {
+                moveButton.mode = "none";
+                returnCursorToNormal();
+                this.activateFigure();
+            } else {
+                showText ("", activeChar, textL1[16]);
+            }
         }
     }
     
