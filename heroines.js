@@ -12,6 +12,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.moved = 0;
         this.pathToTravel = [];
         this.def = 4;
+        this.description;
         
         this.setInteractive();
         this.on("pointerup", this.activateFigure, this);
@@ -33,7 +34,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             if (tileArray[this.onTile].state == "0t1") {
                 trap1(this);
                 this.moveNow;
-            }
+            };
         };
         
         this.attack = function (enemy) {
@@ -208,6 +209,13 @@ class Figure extends Phaser.GameObjects.Sprite {
             tileArray[this.onTile].neighbors.length = 0;
         } else if (searchButton.mode == "planning") {
             showText(this.onTile, this.description);
+            
+            if (this.occupiedBy != "") { ACHTUNG
+                Info1.setText(textL1Chars[description]); ACHTUNG
+            } ACHTUNG
+            
+            
+            
             returnCursorToNormal();
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.activateFigure();

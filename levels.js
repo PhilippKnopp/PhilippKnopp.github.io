@@ -323,7 +323,7 @@ var textL1 = [
 /*12*/    "An austere corridor. The walls were cut into the rock in a way to give them a look as if they were made out of big, smooth stoneblocks.",
 /*13*/    "The room has a dome-like ceiling and columns along the walls. The floor is engraved with intricate runes and a circle.",
 /*14*/    "An idol of the god in the deep. It looks like it was made during a time when humans had only just learned to use tools. Despite its primitive and threatening looks it still has an aura of superiority and knowledge.",
-    ];
+];
 
 var textL1Enemy = [
 /*0*/   "pale Acolyte",
@@ -334,5 +334,5 @@ var textL1Chars = [
 /*0*/   "A mage from the academy of the thorn.",
 /*1*/   "A proud warrior from a deadly djungle.",
 /*2*/   "A trill rogue."
-]
+];
 

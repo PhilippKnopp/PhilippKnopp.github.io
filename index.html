@@ -175,17 +175,32 @@
         circle1Img = this.add.image(230, 800, 'circle1').setAlpha(0);
 		
 		Info1 = this.add.text(950, 40, textL1[0], { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
+        Info1.showMessage = function (text) {
+            Info1.setText(text);
+        };
         
         InfoName = this.add.text(950, Info1.getBottomLeft().y+15, "", { fontFamily: "Verdana" , color: '#914a23', lineSpacing: 12}).setFontStyle('bold');
         InfoName.showName = function (char) {
-            InfoName.setText(char.name + ": ");
-            InfoName.setColor(char.color);
-            InfoName.setPosition(950, Info1.getBottomLeft().y+15);
+            if (char === "") {
+                InfoName.setText("");
+            } else {
+                InfoName.setText(char.name + ": ");
+                InfoName.setColor(char.color);
+                InfoName.setPosition(950, Info1.getBottomLeft().y+15);
+            }
         };
         
         Info2 = this.add.text(InfoName.getBottomRight().x, Info1.getBottomLeft().y+15, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12 });
+        Info2.showMessage = function (text) {
+            Info2.setText(text);
+            Info2.setPosition(InfoName.getBottomRight().x, Info1.getBottomLeft().y+15);
+        };
         
         Info3 = this.add.text(950, Info2.getBottomLeft().y+30, textL1[9], { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
+        Info3.showMessage = function (text) {
+            Info3.setText(text);
+            Info3.setPosition(950, Info2.getBottomLeft().y+30);
+        };
         
         
 		/*var buildLevelButton = this.add.text(800, 115, "Insert Walls", { fontFamily: "Verdana" });
@@ -234,10 +249,19 @@
                         calculatePath(figuresOnMap[activeChar], this.name);
                     }
                     if (searchButton.mode == "planning") {
-                        showText(this.name);
                         console.log(this.name);
-                        returnCursorToNormal();
                         let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+                        if (lineOfSight (activeChar.onTile, this.name) == true) {
+                            showText(textL1[this.info]);
+                            if (this.info == 3) {
+                                crystal1Img.setAlpha(1);
+                            } else if (this.info == 7) {
+                                trap1Sprt.setAlpha(1);
+                            }
+                        } else {
+                            showText(textL1[1]);
+                        }
+                        returnCursorToNormal();
                         activeChar.activateFigure();
                     }
 				});
@@ -713,33 +737,12 @@
         return false;
     }
     
-    function showText (index, description) {
-        Info1.setText("");
-        InfoName.setText("");
-        Info2.setText("");
-        Info3.setText("");
-        
-        
-        
-        let activeChar = figuresOnMap.findIndex(findActiveChar);
-        if (lineOfSight (figuresOnMap[activeChar], index) == true) {
-            if (tileArray[index].occupiedBy != "") {
-                Info1.setText(textL1Chars[description]);
-            } else {
-                Info1.setText(textL1[tileArray[index].info]);
-            }
-            if (tileArray[index].info == 3) {
-                crystal1Img.setAlpha(1);
-            } else if (tileArray[index].info == 7) {
-                trap1Sprt.setAlpha(1);
-            }
-        } else {
-            Info1.setText(textL1[1]);
-        }
-        
-        InfoName.setPosition(950, Info1.getBottomLeft().y+15);
-        Info2.setPosition(InfoName.getBottomRight().x, Info1.getBottomLeft().y+15);
-        Info3.setPosition(950, Info2.getBottomLeft().y+30);
+    function showText (text1 = "", char = "", text2 = "", text3 = "") {
+
+        Info1.showMessage(text1);
+        InfoName.showName(char);
+        Info2.showMessage(text2);
+        Info3.showMessage(text3);
         
         textHistory.push(Info1.text, InfoName.text, Info2.text, Info3.text);
     }
