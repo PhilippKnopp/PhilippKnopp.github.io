@@ -667,7 +667,7 @@
         tileArray[activeChar.onTile].wayPointUsefulness = tileArray[activeChar.onTile].distanceTravelled + tileArray[activeChar.onTile].estimatedWayToB(endIndex);
         frontierList.push(tileArray[activeChar.onTile]);
 
-        var i = 0;
+        var k = 0;
         // gehe folgende Schleife solange durch bis es einen Weg gibt
         mapperLoop: while (pathFound == false) {
 
@@ -718,8 +718,9 @@
             // Füge den aktiven Knoten der mappedList hinzu und Lösche den aktven Knoten aus der frontierList
             mappedList.push(frontierList[activeNode]);
             frontierList.splice(activeNode,1);
-            console.log(i);
-            i++;
+            console.log("k "+k);
+            console.log("frontierList.length "+frontierList.length);
+            k++;
         }
 
         clearNodes();
