@@ -156,6 +156,13 @@
         textNextButton.setInteractive();
 		textNextButton.on("pointerover", function pointerOver() {
 			this.setFrame(1);
+            if (textHistoryIndex < textHistory.length-4) {
+                showText (textHistory[textHistoryIndex+1], textHistory[textHistoryIndex+2], textHistory[textHistoryIndex+3], textHistory[textHistoryIndex+4]);
+                //textHistoryIndex -= 8;
+                textHistory.splice(textHistory.length-4, 4);
+                console.log(textHistoryIndex);
+                console.log(textHistory);
+            }
 		});
 		textNextButton.on("pointerdown", function pointerDown() {
 			this.setFrame(2);
