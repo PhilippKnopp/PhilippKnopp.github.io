@@ -326,7 +326,7 @@ var textL1 = [
 /*13*/    "The room has a dome-like ceiling and columns along the walls. The floor is engraved with intricate runes\nand a circle.",
 /*14*/    "An idol of the god in the deep. It looks like it was made during a time when humans had only just learned to\nuse tools. Despite its primitive and threatening looks it still has an aura of superiority\nand knowledge.",
 /*15*/    "With his last hissing breath, a pale priest tells Caelith, that Arowia was sent deeper into the tunnels, as a tribute to an allied faction. Then he dies and the room falls silent. The three heroines look at each other in silence and come to the unspoken agreement that they will not surrender until they end their quest, however slim the odds might be. A few hours of rest later, they search the old temple for a way out and find a steep staircase that leads deeper into the darkness. Knowing full well, that their adventure has only just begun, they start their descent, fighting to keep the last spark of hope alive.",
-/*16*/    "I can not go there, there is ony space enough for one.",
+/*16*/    "I can not go there, there is only space enough for one.",
 /*17*/    "I can not go there.",
 /*18*/    "I don't know how to get there."
 ];

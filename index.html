@@ -506,6 +506,8 @@
             attackButton.x = this.game.input.activePointer.x + 50;
             attackButton.y = this.game.input.activePointer.y + 50;
         }
+        
+        console.log(moveButton.mode);
     }
 
     function findActiveChar(element) {
@@ -674,7 +676,7 @@
             };
             if (frontierList.length == 0) {
                 showText("", activeChar, textL1[18]);
-                break mapperLoop;
+                return;
             };
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
 
@@ -723,7 +725,6 @@
         clearNodes();
         returnCursorToNormal();
         moveButton.mode = "moving";
-        //activeChar.activateFigure();
     }
 
     function clearNodes() {
