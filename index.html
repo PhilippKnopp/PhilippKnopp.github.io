@@ -718,9 +718,6 @@
             // Füge den aktiven Knoten der mappedList hinzu und Lösche den aktven Knoten aus der frontierList
             mappedList.push(frontierList[activeNode]);
             frontierList.splice(activeNode,1);
-            console.log("k "+k);
-            console.log("frontierList.length "+frontierList.length);
-            k++;
         }
 
         clearNodes();
