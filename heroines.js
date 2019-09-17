@@ -208,16 +208,13 @@ class Figure extends Phaser.GameObjects.Sprite {
             
             tileArray[this.onTile].neighbors.length = 0;
         } else if (searchButton.mode == "planning") {
-            showText(this.onTile, this.description);
-            
-            if (this.occupiedBy != "") { ACHTUNG
-                Info1.setText(textL1Chars[description]); ACHTUNG
-            } ACHTUNG
-            
-            
-            
-            returnCursorToNormal();
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+            if (lineOfSight (activeChar.onTile, this.onTile) == true) {
+                showText(textL1Chars[this.description]);
+            } else {
+                showText(textL1[1]);
+            }
+            returnCursorToNormal();
             activeChar.activateFigure();
         }
     }
@@ -233,7 +230,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             faceButton.x = this.x-60;
             faceButton.y = this.y;
             faceButton.setAlpha(1);
-
+            
             switch(this) {
                 case mage:
                     faceButton.setFrame(0);
