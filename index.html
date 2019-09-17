@@ -138,7 +138,7 @@
 		textBackButton.on("pointerdown", function pointerDown() {
 			this.setFrame(2);
             showText (textHistory[textHistoryIndex-7], textHistory[textHistoryIndex-6], textHistory[textHistoryIndex-5], textHistory[textHistoryIndex-4]);
-            textHistoryIndex -= 4;
+            textHistoryIndex -= 8;
             textHistory.splice(textHistory.length, 4);
             console.log(textHistoryIndex);
             console.log(textHistory);
