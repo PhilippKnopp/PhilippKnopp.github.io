@@ -131,6 +131,8 @@ var mageStartingPosition = [0,378];
 var rogueStartingPosition = [0,353];
 var barbStartingPosition = [0,233];
 
+var paleAcolyteStartingPosition = [0,[207,259]];
+
 function returnLevelType(level) {
 	if (level == 1) {
 		return level1Type;

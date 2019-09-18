@@ -249,7 +249,7 @@
 				tile.weight = 1;
 				tile.estimatedWayToB = function (b) {
 					
-					let a = this.name;
+                    let a = this.name;
 					
 					let xDistance = (Math.abs(b%matrixWidth-a%matrixWidth));
 					let yDistance = Math.abs(Math.floor(b/matrixWidth)-Math.floor(a/matrixWidth));
@@ -366,6 +366,13 @@
         rogue.color = "#003F5E";
         rogue.description = 2;
         figuresOnMap.push(rogue);
+        
+        for (var i = 0; i < paleAcolyteStartingPosition[level].length; i++ ) {
+            var paleAcolyte = new Enemy ({scene:this, x:20, y:20}, 'e2Sprite');
+            paleAcolyte.onTile = paleAcolyteStartingPosition[level].[i];
+            paleAcolyte.pathToTravel.push(paleAcolyteStartingPosition[level].[i]);
+            paleAcolyte.dieSize = 6;
+        }
         
         buildLevel();
         
