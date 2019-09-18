@@ -176,7 +176,7 @@
 		});
 		textNewButton.on("pointerdown", function pointerDown() {
 			this.setFrame(2);
-            if (textHistoryIndex > 3) {
+            if (textHistoryIndex < textHistory.length-4) {
                 showText (textHistory[textHistory.length-4], textHistory[textHistory.length-3], textHistory[textHistory.length-2], textHistory[textHistory.length-1]);
                 textHistory.splice(textHistory.length-4, 4);
                 textHistoryIndex = textHistory.length-1;
@@ -290,7 +290,7 @@
                                 trap1Sprt.setAlpha(1);
                             }
                         } else {
-                            showText(textL1[1]);
+                            showText("", activeChar, textL1[1]);
                         }
                         returnCursorToNormal();
                         activeChar.activateFigure();
