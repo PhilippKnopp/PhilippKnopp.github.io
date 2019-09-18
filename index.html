@@ -369,8 +369,8 @@
         
         for (var i = 0; i < paleAcolyteStartingPosition[level].length; i++ ) {
             var paleAcolyte = new Enemy ({scene:this, x:20, y:20}, 'e2Sprite');
-            paleAcolyte.onTile = paleAcolyteStartingPosition[level].[i];
-            paleAcolyte.pathToTravel.push(paleAcolyteStartingPosition[level].[i]);
+            paleAcolyte.onTile = paleAcolyteStartingPosition[level][i];
+            paleAcolyte.pathToTravel.push(paleAcolyteStartingPosition[level][i]);
             paleAcolyte.dieSize = 6;
         }
         
