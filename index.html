@@ -271,7 +271,7 @@
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
                     // nichts ist auf der Tile und diese ist von einer Seite aus begehbar
-					if ((this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
+					if (this.occupiedBy != "idol" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
                         calculatePath(figuresOnMap[activeChar], this.name);
                     } else if (moveButton.mode == "planning") {
@@ -282,6 +282,7 @@
                         console.log(this.name);
                         let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
                         if (lineOfSight (activeChar.onTile, this.name) == true) {
+                            console.log("inside if");
                             showText(textL1[this.info]);
                             if (this.info == 3) {
                                 crystal1Img.setAlpha(1);
@@ -660,6 +661,8 @@
         
         searchButton.mode = "none";
         
+        console.log(losPathDifficulty);
+        
         let los_blocked = losPathDifficulty.includes(0); // testet ob in dem Array "losPathDifficulty" eine 0 vorkommt (dort kann man nicht hinlaufen)
         return !los_blocked; // gibt "true" zurück, wenn man in direkter Linie zum angesehenen Punkt laufen/schwimmen/... könnte.
     }
@@ -777,9 +780,6 @@
         
         textHistory.push(Info1.text, InfoName.text, Info2.text, Info3.text);
         textHistoryIndex += 4;
-        
-        console.log(textHistoryIndex);
-        console.log(textHistory);
     }
     
     function eventDispatch (activeChar, eventKey) {
