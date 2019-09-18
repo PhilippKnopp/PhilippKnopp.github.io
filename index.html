@@ -281,7 +281,7 @@
                     if (searchButton.mode == "planning") {
                         console.log(this.name);
                         let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-                        if (lineOfSight (activeChar.onTile, this.name) == true) {
+                        if (lineOfSight (activeChar, this.name) == true) {
                             console.log("inside if");
                             showText(textL1[this.info]);
                             if (this.info == 3) {

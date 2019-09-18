@@ -208,7 +208,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             tileArray[this.onTile].neighbors.length = 0;
         } else if (searchButton.mode == "planning") {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-            if (lineOfSight (activeChar.onTile, this.onTile) == true) {
+            if (lineOfSight (activeChar, this.onTile) == true) {
                 showText(textL1Chars[this.description]);
             } else {
                 showText(textL1[1]);
