@@ -18,6 +18,14 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.on("pointerup", this.activateFigure, this);
         this.on("pointerout", this.hideFace, this);
         this.on("pointerover", this.showFace, this);
+        
+        this.setOnMap = function () {
+            tileArray[this.onTile].occupiedBy = "enemy";
+            this.setAlpha(1);
+            this.x = tileArray[this.onTile].x;
+            this.y = tileArray[this.onTile].y;
+        };
+        
     }
     
     activateFigure () {
