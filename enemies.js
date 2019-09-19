@@ -29,7 +29,12 @@ class Enemy extends Phaser.GameObjects.Sprite {
     }
     
     activateFigure () {
-        
+        console.log(this.health);
+        if (attackButton.mode == "planning cc") {
+            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+            activeChar.attack(this);
+        }
+        console.log(this.health);
     }
     
     hideFace () {

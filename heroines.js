@@ -63,6 +63,8 @@ class Figure extends Phaser.GameObjects.Sprite {
                     enemy.health -= attackroll;
                 }
             }
+            attackButton.mode = "none";
+            returnCursorToNormal();
         }
         
         this.moveNow = function () {
