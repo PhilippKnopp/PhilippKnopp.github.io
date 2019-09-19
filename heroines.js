@@ -89,7 +89,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     activateFigure() {
-        if (moveButton.mode == "none" && searchButton.mode == "none") {
+        if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none") {
             deactivateFigures();
 
             this.active = true;
@@ -225,6 +225,15 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.activateFigure();
             } else {
                 showText ("", activeChar, textL1[16]);
+            }
+        } else if (attackButton.mode != "none") {
+            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+            if (this == activeChar) {
+                attackButton.mode = "none";
+                returnCursorToNormal();
+                this.activateFigure();
+            } else {
+                showText ("", activeChar, textL1[19]);
             }
         }
     }

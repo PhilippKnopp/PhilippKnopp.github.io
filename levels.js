@@ -330,7 +330,8 @@ var textL1 = [
 /*15*/    "With his last hissing breath, a pale priest tells Caelith, that Arowia was sent deeper into the tunnels, as a tribute to an allied faction. Then he dies and the room falls silent. The three heroines look at each other in silence and come to the unspoken agreement that they will not surrender until they end their quest, however slim the odds might be. A few hours of rest later, they search the old temple for a way out and find a steep staircase that leads deeper into the darkness. Knowing full well, that their adventure has only just begun, they start their descent, fighting to keep the last spark of hope alive.",
 /*16*/    "I can not go there, there is only space enough for one.",
 /*17*/    "I can not go there.",
-/*18*/    "I don't know how to get there."
+/*18*/    "I don't know how to get there.",
+/*19*/    "She is not my enemy.",
 ];
 
 var textL1Enemy = [

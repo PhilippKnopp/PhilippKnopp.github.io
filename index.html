@@ -196,7 +196,6 @@
                         console.log(this.name);
                         let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
                         if (lineOfSight (activeChar, this.name) == true) {
-                            console.log("inside if");
                             showText(textL1[this.info]);
                             if (this.info == 3) {
                                 crystal1Img.setAlpha(1);
@@ -591,8 +590,6 @@
         }
         
         searchButton.mode = "none";
-        
-        console.log(losPathDifficulty);
         
         let los_blocked = losPathDifficulty.includes(0); // testet ob in dem Array "losPathDifficulty" eine 0 vorkommt (dort kann man nicht hinlaufen)
         return !los_blocked; // gibt "true" zurück, wenn man in direkter Linie zum angesehenen Punkt laufen/schwimmen/... könnte.
