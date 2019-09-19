@@ -7,11 +7,11 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.active = false;
         this.dieSize;
         this.explodes = false;
-        this.health = this.dieSize;
+        this.health;
         this.movement = 6;
         this.moved = 0;
         this.pathToTravel = [];
-        this.def = this.dieSize/2;
+        this.def;
         this.description = 0;
         
         this.setInteractive();
