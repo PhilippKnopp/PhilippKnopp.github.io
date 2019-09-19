@@ -13,6 +13,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.pathToTravel = [];
         this.def;
         this.description = 0;
+        this.loot;
         
         this.setInteractive();
         this.on("pointerup", this.activateFigure, this);
@@ -33,6 +34,11 @@ class Enemy extends Phaser.GameObjects.Sprite {
         if (attackButton.mode == "planning cc") {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.attack(this);
+            if (this.health <= 0) {
+                tileArray[this.onTile].occupiedBy = "";
+                this.setAlpha(0);
+                figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
+            }
         }
         console.log(this.health);
     }

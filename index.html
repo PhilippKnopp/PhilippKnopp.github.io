@@ -455,6 +455,10 @@
     function findActiveChar(element) {
         return element.active == true;
     }
+    
+    function findDeadChar(element) {
+        return element.health <= 0;
+    }
 
     function buildLevel() {
         let levelMap = returnLevelType(1);
@@ -685,6 +689,7 @@
         hideActions();
         moveButton.setScale(1);
         searchButton.setScale(1);
+        attackButton.setScale(1);
     }
 
     function containsObject(obj, list) {
