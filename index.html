@@ -118,7 +118,7 @@
         this.load.spritesheet('searchSprite', 'img/search.png', { frameWidth: 65, frameHeight: 65 });
         this.load.spritesheet('cancelSprite', 'img/cancel.png', { frameWidth: 65, frameHeight: 65 });
         this.load.spritesheet('specialSprite', 'img/special.png', { frameWidth: 65, frameHeight: 65 });
-        this.load.spritesheet('faceSprite', 'img/face.png', { frameWidth: 85, frameHeight: 85 });
+        this.load.spritesheet('faceSprite', 'img/face.png', { frameWidth: 86, frameHeight: 85 });
         this.load.spritesheet('textBackSprite', 'img/textBack.png', { frameWidth: 84, frameHeight: 46 });
         this.load.spritesheet('textForwardSprite', 'img/textForward.png', { frameWidth: 84, frameHeight: 46 });
         this.load.spritesheet('textNewSprite', 'img/textNew.png', { frameWidth: 84, frameHeight: 46 });
@@ -286,17 +286,14 @@
         attackButton.mode = "none";
         attackButton.setInteractive();
 		attackButton.on("pointerup", function pointerUp() {
-            if (attackButton.mode == "rc") {
+            if (attackButton.mode == "possible rc") {
                 attackButton.mode = "planning rc";
-                hideActions();
-                attackButton.setAlpha(1);
-                attackButton.setScale(0.5);
             } else {
                 attackButton.mode = "planning cc";
-                hideActions();
-                attackButton.setAlpha(1);
-                attackButton.setScale(0.5);
             }
+            hideActions();
+            attackButton.setAlpha(1);
+            attackButton.setScale(0.5);
         });
         attackButton.setDepth(1);
         
@@ -687,6 +684,7 @@
         moveButton.setScale(1);
         searchButton.setScale(1);
         attackButton.setScale(1);
+        attackButton.mode = "none";
     }
 
     function containsObject(obj, list) {

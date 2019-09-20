@@ -37,33 +37,20 @@ class Figure extends Phaser.GameObjects.Sprite {
         };
         
         this.attack = function (enemy) {
-            if (this.stealth == true) { // hinterhältiger Angriff
+            if (attackButton.mode == "planning cc" && this.stealth == true) { // hinterhältiger Angriff
                 let attackroll = getRandomInt(this.dieSize, this.explodes) + getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {
                     enemy.health -= attackroll;
                 }
-            } else if (this == mage) { // Magieangriff
+            } else if (attackButton.mode == "planning rc") { // Magieangriff
                 let attackroll = getRandomInt(this.dieSize, this.explodes);
-                tileArray[this.onTile].checkForNeighbors();
-                let adjacentEnemies = false;
-                for (var i = 0; i < tileArray[this.onTile].neighbors.length; i++) {
-                    if (tileArray[this.onTile].neighbors[i].occupiedBy == "enemy") {
-                        adjacentEnemies = true;
-                    }
-                }
-                if (adjacentEnemies == true && attackroll >= enemy.def) {
-                    enemy.health -= attackroll;
-                } else if (adjacentEnemies == false) {
-                    console.log("implement aoe Damage");
-                }
-                tileArray[this.onTile].neighbors.length = 0;
-            } else { // standard Attacke für Barb und Schurke im Nahkampf
+                console.log("implement aoe Damage");
+            } else if (attackButton.mode == "planning cc") { // standard Attacke für Barb und Schurke im Nahkampf
                 let attackroll = getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {
                     enemy.health -= attackroll;
                 }
             }
-            attackButton.mode = "none";
             returnCursorToNormal();
         }
         
@@ -135,7 +122,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                     attackButton.x = this.x+buttonXpos;
                     attackButton.y = this.y;
                     attackButton.setAlpha(1);
-                    attackButton.mode = "rc";
+                    attackButton.mode = "possible rc";
                     buttonXpos += 85;
                 }
             }
@@ -219,22 +206,19 @@ class Figure extends Phaser.GameObjects.Sprite {
             activeChar.activateFigure();
         } else if (moveButton.mode == "planning") {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-            if (this == activeChar) {
-                moveButton.mode = "none";
-                returnCursorToNormal();
-                this.activateFigure();
-            } else {
+            moveButton.mode = "none";
+            returnCursorToNormal();
+            if (this != activeChar) {
                 showText ("", activeChar, textL1[16]);
             }
-        } else if (attackButton.mode != "none") {
+            activeChar.activateFigure();
+        } else if (attackButton.mode == "planning cc" || attackButton.mode == "planning rc") {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-            if (this == activeChar) {
-                attackButton.mode = "none";
-                returnCursorToNormal();
-                this.activateFigure();
-            } else {
+            returnCursorToNormal();
+            if (this != activeChar) {
                 showText ("", activeChar, textL1[19]);
             }
+            activeChar.activateFigure();
         }
     }
     

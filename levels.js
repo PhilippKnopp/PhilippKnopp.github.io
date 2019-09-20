@@ -332,6 +332,7 @@ var textL1 = [
 /*17*/    "I can not go there.",
 /*18*/    "I don't know how to get there.",
 /*19*/    "She is not my enemy.",
+/*20*/    "I can not reach that enemy from here."
 ];
 
 var textL1Enemy = [
