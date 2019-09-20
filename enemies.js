@@ -66,8 +66,8 @@ class Enemy extends Phaser.GameObjects.Sprite {
             faceButton.y = this.y;
             faceButton.setAlpha(1);
             
-            switch(this) {
-                case paleAcolyte:
+            switch(this.name) {
+                case "Pale Acolyte":
                     faceButton.setFrame(3);
                     break;
                 default:
