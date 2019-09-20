@@ -52,6 +52,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 }
             }
             returnCursorToNormal();
+            this.activateFigure();
         }
         
         this.moveNow = function () {
