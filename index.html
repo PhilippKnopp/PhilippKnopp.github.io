@@ -651,6 +651,8 @@
                     }
                 } else if (containsObject(frontierList[activeNode].neighbors[i], mappedList)) {
                     continue;
+                } else if (frontierList[activeNode].neighbors[i].occupiedBy == "enemy" && tileArray[activeChar.onTile].occupiedBy == "figure") {
+                    continue;
                 } else {
                     frontierList[activeNode].neighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
                     frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB(endIndex);
