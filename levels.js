@@ -310,6 +310,7 @@ function doors(char, tile) {
             tileArray[394].walkable = [0,1,1,1,1,1,0,0];
         }
     }
+    enemyVisibility();
     clearNodes();
     char.activateFigure();
 }
