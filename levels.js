@@ -129,9 +129,12 @@ var level1Connections = [
 
 var mageStartingPosition = [0,378];
 var rogueStartingPosition = [0,353];
-var barbStartingPosition = [0,233];
+var barbStartingPosition = [0,232];
 
-var paleAcolyteStartingPosition = [0,[207,259]];
+var caveCrawlerStartingPosition = [0,[116,168,192,193]];
+var paleAcolyteStartingPosition = [0,[207,258,490,611,744,765,792]];
+var palePriestStartingPosition = [0,[703,707,778,782,830,866]];
+var ordrakStartingPosition = [0,[755]];
 
 function returnLevelType(level) {
 	if (level == 1) {
