@@ -35,7 +35,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             tileArray[activeChar.onTile].checkForNeighbors();
             console.log(tileArray[activeChar.onTile].neighbors);
-            console.log(this.onTile]);
+            console.log(this.onTile);
             if (tileArray[activeChar.onTile].neighbors.includes(this.ontile)) {
                 activeChar.attack(this);
             } else {
