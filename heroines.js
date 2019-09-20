@@ -31,6 +31,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             this.onTile = this.pathToTravel[0];
             this.pathToTravel.shift();
             tileArray[this.onTile].occupiedBy = "figure";
+            enemyVisibility();
             if (typeof tileArray[this.onTile].state === 'string') {
                 eventDispatch(this, tileArray[this.onTile].state);
             };
