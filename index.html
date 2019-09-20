@@ -669,6 +669,27 @@
         moveButton.mode = "moving";
     }
 
+    function enemyVisibility () {
+        let enemyIndexes = [];
+        // Alle Feinde werden unsichtbar
+        for (var i = 0; i < figuresOnMap.length; i++) {
+            if (tileArray[figuresOnMap[i].onTile].occupiedBy == "enemy") {
+                figuresOnMap[i].setAlpha(0);
+                enemyIndexes.push(figuresOnMap[i]);
+            }
+        }
+        // Alle Feinde, zu denen LoS besteht, werden wieder sichtbar
+        for (var j = 0; j < 3; j++) {
+            if (tileArray[figuresOnMap[j].onTile].occupiedBy == "figure") {
+                for (var k = 0; k < enemyIndexes.length; k++) {
+                    if (lineOfSight (figuresOnMap[j], enemyIndexes[k].onTile)) {
+                        enemyIndexes[k].setAlpha(1);
+                    }
+                }
+            }
+        }
+    }
+    
     function clearNodes() {
         tileArray.forEach(function(element) {
             element.neighbors.length = 0;
