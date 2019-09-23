@@ -10,6 +10,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.health;
         this.movement = 6;
         this.moved = 0;
+        this.actions = 2;
         this.pathToTravel = [];
         this.def = 4;
         this.description;
