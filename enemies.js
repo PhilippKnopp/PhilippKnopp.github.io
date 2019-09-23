@@ -30,7 +30,6 @@ class Enemy extends Phaser.GameObjects.Sprite {
     }
     
     activateFigure () {
-        console.log(this.health);
         if (attackButton.mode == "planning cc") {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             tileArray[activeChar.onTile].checkForNeighbors();
@@ -50,8 +49,16 @@ class Enemy extends Phaser.GameObjects.Sprite {
         } else if (attackButton.mode == "planning rc") {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.attack(this);
+        } else if (searchButton.mode == "planning") {
+            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+            if (lineOfSight (activeChar, this.onTile) == true) {
+                showText(textL1Chars[this.description]);
+            } else {
+                showText("", activeChar, textL1[1]);
+            }
+            returnCursorToNormal();
+            activeChar.activateFigure();
         }
-        console.log(this.health);
     }
     
     hideFace () {

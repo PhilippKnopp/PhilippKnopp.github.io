@@ -340,8 +340,7 @@ var textL1 = [
 ];
 
 var textL1Enemy = [
-/*0*/   "pale Acolyte",
-/*1*/   'We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!'
+/*0*/   'We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!'
 ];
 
 var textL1Chars = [

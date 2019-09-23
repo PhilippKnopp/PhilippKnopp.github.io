@@ -90,6 +90,7 @@
     var textHistoryIndex = -1;
     
     var level = 1;
+    var fightmode = false;
     
     // Funktion die alle Bilder lädt
     function preload() {
@@ -755,7 +756,7 @@
             trap1(activeChar);
             activeChar.moveNow;
         } else if (eventKey == "e1") {
-            showText (textL1[0]);
+            showText (textL1[0], fuguresOnMap[3], textL1Enemy[0]);
             // start von Level 1
         } else if (eventKey == "e2") {
             // nach dem öffnen der ersten Türe in den tempel

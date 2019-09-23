@@ -153,7 +153,7 @@ class Figure extends Phaser.GameObjects.Sprite {
 }
 
 function showActions(_this) {
-        console.log("activateFigure()");  // <––––––––––––––––––––––––––––––––––
+        console.log("showActions()");  // <––––––––––––––––––––––––––––––––––
         let buttonXpos = 60;
         tileArray[_this.onTile].checkForNeighbors();
         
