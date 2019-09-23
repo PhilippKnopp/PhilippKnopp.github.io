@@ -58,6 +58,14 @@ class Enemy extends Phaser.GameObjects.Sprite {
             }
             returnCursorToNormal();
             activeChar.activateFigure();
+        } else if (moveButton.mode == "planning") {
+            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+            moveButton.mode = "none";
+            returnCursorToNormal();
+            if (this != activeChar) {
+                showText ("", activeChar, textL1[16]);
+            }
+            activeChar.activateFigure();
         }
     }
     
