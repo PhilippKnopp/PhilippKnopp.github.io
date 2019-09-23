@@ -336,11 +336,12 @@ var textL1 = [
 /*17*/    "I can not go there.",
 /*18*/    "I don't know how to get there.",
 /*19*/    "She is not my enemy.",
-/*20*/    "I can not reach that enemy from here."
+/*20*/    "I can not reach that enemy from here.",
+/*21*/    "The huge, wooden portal opens surprisingly smooth and silently. Behind it is an entrance hall to a\ntempla. Silent chanting can be heard from deeper within. Entering the Temple feels like an unwelcome intrusion.",
 ];
 
 var textL1Enemy = [
-/*0*/   'We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!'
+/*0*/   'We will skin you and let you drown in your own blood as punishment for praying to\ntreacherous Gods!'
 ];
 
 var textL1Chars = [
@@ -348,7 +349,7 @@ var textL1Chars = [
 /*1*/   "A proud warriorborn in a deadly jungle.",
 /*2*/   "A blue skinned trill rogue from a sunken city.",
 /*3*/   "This dog sized, reptile has sharp teeth and translucent skin.",
-/*4*/   "This skinny, bald humanoid being has murder in its black eyes.",
+/*4*/   "This bald, humanoid beeing has murder in its black eyes. A black robe covers his\nsickly, pale skin and a religios symbol is hanging around his neck.",
 /*5*/   "A black robe and an unholy symbol show this pale-one‘s sinister power and status. He fanatically swings a vicious iron mace.",
 /*6*/   "A large demon made of smoke and coiling black oil. He is unmitigated brutality but something is holding him back."
 ];
