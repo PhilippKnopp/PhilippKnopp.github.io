@@ -87,10 +87,10 @@ function guiBuilder(_this) {
         }
     };
     
-    Info2 = _this.add.text(InfoName.getBottomRight().x, InfoName.getUpperRight().y+15, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12 });
+    Info2 = _this.add.text(InfoName.getBottomRight().x, InfoName.getTopRight().y+15, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12 });
     Info2.showMessage = function (text) {
         Info2.setText(text);
-        Info2.setPosition(InfoName.getBottomRight().x, InfoName.getUpperRight().y+15);
+        Info2.setPosition(InfoName.getBottomRight().x, InfoName.getTopRight().y+15);
     };
     
     Info3 = _this.add.text(950, Info2.getBottomLeft().y+30, textL1[9], { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
