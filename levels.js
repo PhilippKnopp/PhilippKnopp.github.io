@@ -321,7 +321,7 @@ var textL1 = [
 /*2*/    "A cold and dark cave. The walls are rough and wet.\nThere is an impressive temple, that was cut out of the stone next to a lake.",
 /*3*/    "Although the water is crystal clear it is too dark to see how deep the water is.",
 /*4*/    "There is a faint glimmer of a crystal at the bottom of the lake.",
-/*5*/    "Stairs lead to an ancient propylon. It is carved directly into the wall\nand the dark stone gives it a sinister aura.",
+/*5*/    "Stairs lead to an ancient propylon. It is carved directly into the rock of the cave. The dark stone gives it a sinister aura.",
 /*6*/    "A barren, elongated room. A part of the wall is missing and gives way to a hole in the ground that is filled\nwith rubble. Something seems wrong.",
 /*7*/    "There is a trap that was supposed to push victims through a moovable wall into a pit filled with spikes.",
 /*8*/    "The pit is about three meters deep. Once the pit was filled with spikes, but most of them rusted away.",
@@ -337,7 +337,7 @@ var textL1 = [
 /*18*/    "I don't know how to get there.",
 /*19*/    "She is not my enemy.",
 /*20*/    "I can not reach that enemy from here.",
-/*21*/    "The huge, wooden portal opens surprisingly smooth and silently. Behind it is an entrance hall to a\ntempla. Silent chanting can be heard from deeper within. Entering the Temple feels like an unwelcome intrusion.",
+/*21*/    "The huge, cast iron portal opens surprisingly smooth and silently. Silent chanting can be heard from\ndeeper within the temple. Entering feels like an unwelcome intrusion.",
 ];
 
 var textL1Enemy = [
@@ -346,7 +346,7 @@ var textL1Enemy = [
 
 var textL1Chars = [
 /*0*/   "An apprentice mage from the twisted academy with a good heart.",
-/*1*/   "A proud warriorborn in a deadly jungle.",
+/*1*/   "A proud warrior, born in a deadly jungle.",
 /*2*/   "A blue skinned trill rogue from a sunken city.",
 /*3*/   "This dog sized, reptile has sharp teeth and translucent skin.",
 /*4*/   "This bald, humanoid beeing has murder in its black eyes. A black robe covers his\nsickly, pale skin and a religios symbol is hanging around his neck.",
