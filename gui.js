@@ -4,7 +4,7 @@ function guiBuilder(_this) {
     
 ////////////// Buttons //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    textBackButton = _this.add.image(1623, 525, 'textBackSprite');
+    textBackButton = _this.add.image(1623, 485, 'textBackSprite');
     textBackButton.setInteractive();
     textBackButton.on("pointerover", function pointerOver() {
     this.setFrame(1);
@@ -24,7 +24,7 @@ function guiBuilder(_this) {
         this.setFrame(0);
     });
     
-    textNextButton = _this.add.image(1707, 525, 'textForwardSprite');
+    textNextButton = _this.add.image(1707, 485, 'textForwardSprite');
     textNextButton.setInteractive();
     textNextButton.on("pointerover", function pointerOver() {
         this.setFrame(1);
@@ -43,7 +43,7 @@ function guiBuilder(_this) {
         this.setFrame(0);
     });
 
-    textNewButton = _this.add.image(1791, 525, 'textNewSprite');
+    textNewButton = _this.add.image(1791, 485, 'textNewSprite');
     textNewButton.setInteractive();
     textNewButton.on("pointerover", function pointerOver() {
         this.setFrame(1);
@@ -71,7 +71,7 @@ function guiBuilder(_this) {
         Info1.setText(text);
     };
     
-    InfoName = _this.add.text(950, Info1.getBottomLeft().y+15, "", { fontFamily: "Verdana" , color: '#914a23', lineSpacing: 12}).setFontStyle('bold');
+    InfoName = _this.add.text(950, Info1.getBottomLeft().y+20, "", { fontFamily: "Verdana" , color: '#914a23', lineSpacing: 12}).setFontStyle('bold');
     InfoName.showName = function (char) {
         if (typeof char === 'object') {
             InfoName.setText(char.name + ": ");
@@ -83,7 +83,7 @@ function guiBuilder(_this) {
         if (Info1.text == "") {
             InfoName.setPosition(950, 40);
         } else {
-            InfoName.setPosition(950, Info1.getBottomLeft().y+15);
+            InfoName.setPosition(950, Info1.getBottomLeft().y+20);
         }
     };
     

@@ -337,11 +337,13 @@ var textL1 = [
 /*18*/    "I don't know how to get there.",
 /*19*/    "She is not my enemy.",
 /*20*/    "I can not reach that enemy from here.",
-/*21*/    "The huge, cast iron portal opens surprisingly smooth and silently. Silent chanting can be heard from\ndeeper within the temple. Entering feels like an unwelcome intrusion.",
+/*21*/    "The cast iron portal opens surprisingly smoothly. Silent chanting can be heard from deeper within the temple. Entering feels like an unwelcome intrusion.",
+/*22*/    "This corridor leads to some empty rooms. It s hard to guess what they were once used for.",
+/*23*/    "I found nothing of value.",
 ];
 
 var textL1Enemy = [
-/*0*/   'We will skin you and let you drown in your own blood as punishment for praying to\ntreacherous Gods!'
+/*0*/   "We will skin you and let you drown in your own blood as punishment for praying to\ntreacherous Gods!"
 ];
 
 var textL1Chars = [
