@@ -4,7 +4,7 @@ function guiBuilder(_this) {
     
 ////////////// Buttons //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    textBackButton = _this.add.image(1623, 485, 'textBackSprite');
+    textBackButton = _this.add.sprite(1623, 485, 'textBackSprite');
     textBackButton.setInteractive();
     textBackButton.on("pointerover", function pointerOver() {
     this.setFrame(1);
@@ -24,7 +24,7 @@ function guiBuilder(_this) {
         this.setFrame(0);
     });
     
-    textNextButton = _this.add.image(1707, 485, 'textForwardSprite');
+    textNextButton = _this.add.sprite(1707, 485, 'textForwardSprite');
     textNextButton.setInteractive();
     textNextButton.on("pointerover", function pointerOver() {
         this.setFrame(1);
@@ -43,7 +43,7 @@ function guiBuilder(_this) {
         this.setFrame(0);
     });
 
-    textNewButton = _this.add.image(1791, 485, 'textNewSprite');
+    textNewButton = _this.add.sprite(1791, 485, 'textNewSprite');
     textNewButton.setInteractive();
     textNewButton.on("pointerover", function pointerOver() {
         this.setFrame(1);
@@ -98,4 +98,12 @@ function guiBuilder(_this) {
         Info3.setText(text);
         Info3.setPosition(950, Info2.getBottomLeft().y+30);
     };
+    
+////////////// UI Icons //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    gameModeIcon = _this.add.sprite(977, 485, 'gameModeSprite');
+    
+    gameModeText = _this.add.text(1097, 485, "Exploration", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    xpText = _this.add.text(1097, 485, "12", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    
 }
