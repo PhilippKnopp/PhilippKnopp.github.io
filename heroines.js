@@ -7,6 +7,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.active = false;
         this.dieSize;
         this.explodes = false;
+        this.stealth = false;
         this.health;
         this.movement = 6;
         this.moved = 0;
@@ -35,7 +36,6 @@ class Figure extends Phaser.GameObjects.Sprite {
             this.pathToTravel.shift();
             tileArray[this.onTile].occupiedBy = "figure";
             enemyVisibility();
-            checkFightmode();
             if (typeof tileArray[this.onTile].state === 'string') {
                 eventDispatch(this, tileArray[this.onTile].state);
             };
@@ -56,6 +56,13 @@ class Figure extends Phaser.GameObjects.Sprite {
                 if (attackroll >= enemy.def) {
                     enemy.health -= attackroll;
                 }
+            }
+            if (enemy.health <= 0) {
+                tileArray[enemy.onTile].occupiedBy = "";
+                enemy.setAlpha(0);
+                figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
+                addXP(enemy.loot);
+                checkFightmode();
             }
             returnCursorToNormal();
             this.activateFigure();
