@@ -693,10 +693,12 @@
                 for (var k = 0; k < enemyIndexes.length; k++) {
                     if (lineOfSight (figuresOnMap[j], enemyIndexes[k].onTile)) {
                         enemyIndexes[k].setAlpha(1);
+                        enemyIndexes[k].alarmed = true;
                     }
                 }
             }
         }
+        
     }
     
     function clearNodes() {
@@ -775,6 +777,24 @@
             xpIcon.setFrame(3);
         } else if (20 <= xp) {
             xpIcon.setFrame(4);
+        }
+    }
+    
+    function checkFightmode() {
+        let alarmedEnemies = 0;
+        for (var i = 0; i < figuresOnMap.length; i++) {
+            if (tileArray[figuresOnMap[i].onTile].occupiedBy == "enemy" && figuresOnMap[i].alarmed == true) {
+                alarmedEnemies++;
+            }
+        }
+        if (alarmedEnemies = 0) {
+            fightmode = false;
+            gameModeIcon.setFrame(0);
+            gameModeText.setText("Exploration");
+        } else {
+            fightmode = true;
+            gameModeIcon.setFrame(1);
+            gameModeText.setText("Skirmish");
         }
     }
     

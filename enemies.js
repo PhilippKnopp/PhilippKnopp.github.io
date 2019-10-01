@@ -12,6 +12,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.moved = 0;
         this.pathToTravel = [];
         this.def;
+        this.alarmed = false;
         this.description = 0;
         this.loot;
         
@@ -46,6 +47,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 this.setAlpha(0);
                 figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
                 addXP(this.loot);
+                checkFightmode();
             }
         } else if (attackButton.mode == "planning rc") {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
