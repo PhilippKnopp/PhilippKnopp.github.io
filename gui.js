@@ -105,6 +105,6 @@ function guiBuilder(_this) {
     xpIcon = _this.add.sprite(1258, 485, 'xpSprite');
     
     gameModeText = _this.add.text(1097, 475, "Exploration", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    xpText = _this.add.text(1428, 475, "0", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    xpText = _this.add.text(1428, 475, xp, { fontFamily: "Verdana" , color: '#FFFFFF'});
     
 }

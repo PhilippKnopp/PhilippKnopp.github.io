@@ -70,6 +70,7 @@
     var textHistoryIndex = -1;
     var gameModeIcon;
     var gameModeText;
+    var xp = 0;
     var xpIcon;
     var xpText;
     
@@ -371,6 +372,7 @@
             paleAcolyte.name = "Pale Acolyte";
             paleAcolyte.color = "#878787";
             paleAcolyte.description = 4;
+            paleAcolyte.loot = 3;
             figuresOnMap.push(paleAcolyte);
         }
         
@@ -758,6 +760,22 @@
         } else if (eventKey == "e8") {
             // ende von Level 1
         };
+    }
+    
+    function addXP (number) {
+        xp += number;
+        xpText.setText(xp);
+        if (0 <= xp && xp < 5) {
+            xpIcon.setFrame(0);
+        } else if (5 <= xp && xp < 10) {
+            xpIcon.setFrame(1);
+        } else if (10 <= xp && xp < 15) {
+            xpIcon.setFrame(2);
+        } else if (15 <= xp && xp < 20) {
+            xpIcon.setFrame(3);
+        } else if (20 <= xp) {
+            xpIcon.setFrame(4);
+        }
     }
     
 </script>

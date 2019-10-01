@@ -45,6 +45,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 tileArray[this.onTile].occupiedBy = "";
                 this.setAlpha(0);
                 figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
+                addXP(this.loot);
             }
         } else if (attackButton.mode == "planning rc") {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
