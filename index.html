@@ -51,41 +51,21 @@
     var tileArray = [];
     var matrixWidth = 25;
     var matrixHeight = 40;
-    var movementTweenBarb;
-    var movementTweenMage;
-    var movementTweenRogue;
+    var movementTweenBarb, movementTweenMage, movementTweenRogue;
+    
+    var doorButton, moveButton, attackButton, searchButton,
+        faceButton, specialButton, cancelButton;
+    var textBackButton, textNextButton, textNewButton;
     
     var mapImg;
-    var doorButton;
-    var moveButton;
-    var attackButton;
-    var searchButton;
-    var faceButton;
-    var specialButton;
-    var cancelButton;
-    var textBackButton;
-    var textNextButton;
-    var textNewButton;
-    
-    var crystal1;
-    var door1Img;
-    var door2;
-    var door4;
-    var door5;
-    var door6;
-    var idol1;
+    var crystal1Img, idol1Img, circle1Img;
+    var door1Img, door2Img, door4Img, door5Img, door6Img;
     var trap1Sprt;
-    var circle1;
     
-    var mage;
-    var rogue;
-    var barb;
+    var mage, rogue, barb;
     
     var figuresOnMap = [];
-    var Info1;
-    var InfoName;
-    var Info2;
-    var Info3;
+    var Info1, InfoName, Info2, Info3;
     var textHistory = [];
     var textHistoryIndex = -1;
     var gameModeIcon;
@@ -129,6 +109,7 @@
         this.load.spritesheet('textForwardSprite', 'img/textForward.png', { frameWidth: 84, frameHeight: 46 });
         this.load.spritesheet('textNewSprite', 'img/textNew.png', { frameWidth: 84, frameHeight: 46 });
         this.load.spritesheet('gameModeSprite', 'img/mode.png', { frameWidth: 86, frameHeight: 86 });
+        this.load.spritesheet('xpSprite', 'img/xp.png', { frameWidth: 86, frameHeight: 86 });
         
 	}
 
