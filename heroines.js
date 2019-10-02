@@ -177,7 +177,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     hideFace() {
         console.log("hideFace()");  // <––––––––––––––––––––––––––––––––––
         if (figuresOnMap.findIndex(findActiveChar) == -1 || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
-            hideActions();
+            faceButton.setAlpha(0);
         }
     }
     
