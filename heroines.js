@@ -103,16 +103,11 @@ class Figure extends Phaser.GameObjects.Sprite {
             this.active = true;
             this.setFrame(1);
             
-            console.log(rogue.stealth + " A");
-            console.log(this.checkIfHidden() + " B");
-            
             if (this == rogue && (this.checkIfHidden() == true || this.stealth == true )) {
-                this.stealth == true;
+                this.stealth = true;
                 this.setAlpha(0.5);
-                console.log(rogue.stealth + " C1");
-                console.log(this.stealth + " C2");
             }
-            console.log(rogue.stealth + " D");
+            
             showActions(this);
             
         } else if (searchButton.mode == "planning") {
@@ -161,7 +156,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         let stealthRoll = getRandomInt(this.dieSize, false);
         let highestEnemyDef = Math.max(...enemyDefs);
         if (stealthRoll > highestEnemyDef) {
-            this.stealth == false;
+            this.stealth = false;
             this.setAlpha(1);
         }
         enemyVisibility();
