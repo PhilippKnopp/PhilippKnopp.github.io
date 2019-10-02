@@ -313,7 +313,7 @@ function doors(char, tile) {
     enemyVisibility();
     checkFightmode();
     clearNodes();
-    char.activateFigure();
+    showActions(char);
 }
 
 var textL1 = [

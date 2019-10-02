@@ -49,6 +49,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                     enemy.health -= attackroll;
                 }
                 this.stealth = false;
+                this.setAlpha(1);
             } else if (attackButton.mode == "planning rc") { // Magieangriff
                 let attackroll = getRandomInt(this.dieSize, this.explodes);
                 console.log("implement aoe Damage");
@@ -156,6 +157,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         let highestEnemyDef = Math.max(...enemyDefs);
         if (stealthRoll < highestEnemyDef) {
             this.stealth == false;
+            this.setAlpha(1);
         }
         enemyVisibility();
         checkFightmode();
@@ -300,6 +302,9 @@ function showActions(_this) {
             faceButton.setFrame(1);
             doorButton.setFrame(1);
             moveButton.setFrame(1);
+            if (rogue.stealth == true) {
+                moveButton.setFrame(3);
+            }
             attackButton.setFrame(1);
             searchButton.setFrame(1);
             specialButton.setFrame(1);
