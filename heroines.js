@@ -67,7 +67,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 checkFightmode();
             }
             returnCursorToNormal();
-            this.activateFigure();
+            showActions(this);
         }
         
         this.moveNow = function () {
@@ -301,9 +301,10 @@ function showActions(_this) {
         case rogue:
             faceButton.setFrame(1);
             doorButton.setFrame(1);
-            moveButton.setFrame(1);
-            if (rogue.stealth == true) {
+            if (_this.stealth == true) {
                 moveButton.setFrame(3);
+            } else {
+                moveButton.setFrame(1);
             }
             attackButton.setFrame(1);
             searchButton.setFrame(1);
