@@ -103,7 +103,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             this.active = true;
             this.setFrame(1);
             
-            if (this == rogue && (this.checkIfHidden() == true || this.stealth == true )) {
+            if (this == rogue && (this.checkIfHidden() == true || this.stealth == true)) {
                 this.stealth = true;
                 this.setAlpha(0.5);
             }
@@ -176,14 +176,14 @@ class Figure extends Phaser.GameObjects.Sprite {
     
     hideFace() {
         console.log("hideFace()");  // <––––––––––––––––––––––––––––––––––
-        if (figuresOnMap.findIndex(findActiveChar) == -1) {
+        if (figuresOnMap.findIndex(findActiveChar) == -1 || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
             hideActions();
         }
     }
     
     showFace() {
         console.log("showFace()");  // <––––––––––––––––––––––––––––––––––
-        if (figuresOnMap.findIndex(findActiveChar) == -1) {
+        if (figuresOnMap.findIndex(findActiveChar) == -1 || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
             faceButton.x = this.x-60;
             faceButton.y = this.y;
             faceButton.setAlpha(1);
