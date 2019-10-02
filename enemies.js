@@ -78,8 +78,17 @@ class Enemy extends Phaser.GameObjects.Sprite {
             faceButton.setAlpha(1);
             
             switch(this.name) {
-                case "Pale Acolyte":
+                case "Cave Crawler":
                     faceButton.setFrame(3);
+                    break;
+                case "Pale Acolyte":
+                    faceButton.setFrame(4);
+                    break;
+                case "Pale Priest":
+                    faceButton.setFrame(5);
+                    break;
+                case "Ordrak":
+                    faceButton.setFrame(6);
                     break;
                 default:
                     break;
