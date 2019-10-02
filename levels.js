@@ -311,6 +311,7 @@ function doors(char, tile) {
         }
     }
     enemyVisibility();
+    checkFightmode();
     clearNodes();
     char.activateFigure();
 }

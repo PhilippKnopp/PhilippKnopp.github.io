@@ -139,7 +139,7 @@
 			buildLevel();
 		});*/
 		
-		var index = 0;
+		let index = 0;
 		for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
 			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
                 var tile = this.add.sprite(xPos*26+100, yPos*26+33, 'tileSprite');
@@ -680,6 +680,7 @@
 
     function enemyVisibility () {
         let enemyIndexes = [];
+        let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
         // Alle Feinde werden unsichtbar
         for (var i = 0; i < figuresOnMap.length; i++) {
             if (tileArray[figuresOnMap[i].onTile].occupiedBy == "enemy") {
@@ -693,12 +694,14 @@
                 for (var k = 0; k < enemyIndexes.length; k++) {
                     if (lineOfSight (figuresOnMap[j], enemyIndexes[k].onTile)) {
                         enemyIndexes[k].setAlpha(1);
-                        enemyIndexes[k].alarmed = true;
+                        if (activeChar.stealth == false) {
+                            enemyIndexes[k].alarmed = true;
+                        }
                     }
                 }
             }
         }
-        
+        checkFightmode();
     }
     
     function clearNodes() {
