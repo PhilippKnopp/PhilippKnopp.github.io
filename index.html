@@ -189,7 +189,7 @@
                     }
                     if (searchButton.mode == "planning") {
                         console.log("Tile pointerUp() search");  // <––––––––––––––––––––––––––––––––––
-                        console.log(this.name);
+                        console.log(this.name + " - x: " + this.x + " - y: " + this.y);
                         let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
                         if (lineOfSight (activeChar, this.name) == true) {
                             showText(textL1[this.info]);
@@ -366,10 +366,10 @@
         rogue.description = 2;
         figuresOnMap.push(rogue);
         
-        for (var i = 0; i < paleAcolyteStartingPosition[level].length; i++ ) {
+        for (var j = 0; j < paleAcolyteStartingPosition[level].length; j++ ) {
             var paleAcolyte = new Enemy ({scene:this, x:20, y:20}, 'e2Sprite');
-            paleAcolyte.onTile = paleAcolyteStartingPosition[level][i];
-            paleAcolyte.pathToTravel.push(paleAcolyteStartingPosition[level][i]);
+            paleAcolyte.onTile = paleAcolyteStartingPosition[level][j];
+            paleAcolyte.pathToTravel.push(paleAcolyteStartingPosition[level][j]);
             paleAcolyte.dieSize = 6;
             paleAcolyte.health = 6;
             paleAcolyte.def = 3;
@@ -381,7 +381,7 @@
         }
         
         for (var i = 0; i < palePriestStartingPosition[level].length; i++ ) {
-            var palePriest = new Enemy ({scene:this, x:20, y:20}, 'e1Sprite');
+            var palePriest = new Enemy ({scene:this, x:20, y:20}, 'e3Sprite');
             palePriest.onTile = palePriestStartingPosition[level][i];
             palePriest.pathToTravel.push(palePriestStartingPosition[level][i]);
             palePriest.dieSize = 8;
