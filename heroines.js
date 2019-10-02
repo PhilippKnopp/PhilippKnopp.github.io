@@ -109,7 +109,8 @@ class Figure extends Phaser.GameObjects.Sprite {
             if (this == rogue && (this.checkIfHidden() == true || this.stealth == true )) {
                 this.stealth == true;
                 this.setAlpha(0.5);
-                console.log(rogue.stealth + " C");
+                console.log(rogue.stealth + " C1");
+                console.log(this.stealth + " C2");
             }
             console.log(rogue.stealth + " D");
             showActions(this);
