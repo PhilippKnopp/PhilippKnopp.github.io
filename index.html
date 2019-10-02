@@ -101,7 +101,7 @@
         this.load.spritesheet('e1Sprite', 'img/e1Token.png', { frameWidth: 26, frameHeight: 26 });
         this.load.spritesheet('e2Sprite', 'img/e2Token.png', { frameWidth: 26, frameHeight: 26 });
         this.load.spritesheet('e3Sprite', 'img/e3Token.png', { frameWidth: 26, frameHeight: 26 });
-        this.load.spritesheet('swirlSprite', 'img/swirl.png', { frameWidth: 52, frameHeight: 52 });
+        this.load.spritesheet('swirSprite', 'img/swirl.png', { frameWidth: 52, frameHeight: 52 });
         
         this.load.spritesheet('doorSprite', 'img/door.png', { frameWidth: 65, frameHeight: 65 });
         this.load.spritesheet('moveSprite', 'img/move.png', { frameWidth: 65, frameHeight: 65 });
@@ -394,8 +394,8 @@
             figuresOnMap.push(palePriest);
         }
         
-        swirl1 = this.add.sprite(400, 400, 'swirlSprite').setAlpha(0.5);
-        swirl2 = this.add.sprite(400, 400, 'swirlSprite').setAlpha(0.5);
+        swirl1 = this.add.sprite(230, 813, 'swirSprite').setAlpha(0.5);
+        swirl2 = this.add.sprite(230, 813, 'swirSprite').setAlpha(0.5).setFrame(1);
         
         buildLevel();
         
