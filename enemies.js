@@ -42,7 +42,6 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 showActions(activeChar);
             }
             tileArray[activeChar.onTile].neighbors.length = 0;
-            
         } else if (attackButton.mode == "planning rc") {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.attack(this);

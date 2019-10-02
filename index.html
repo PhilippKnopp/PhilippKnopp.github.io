@@ -61,6 +61,7 @@
     var crystal1Img, idol1Img, circle1Img;
     var door1Img, door2Img, door4Img, door5Img, door6Img;
     var trap1Sprt;
+    var swirl1, swirl2;
     
     var mage, rogue, barb;
     
@@ -97,7 +98,10 @@
         this.load.spritesheet('mageSprite', 'img/mToken.png', { frameWidth: 26, frameHeight: 26 });
         this.load.spritesheet('rogueSprite', 'img/rToken.png', { frameWidth: 26, frameHeight: 26 });
         this.load.spritesheet('barbSprite', 'img/bToken.png', { frameWidth: 26, frameHeight: 26 });
+        this.load.spritesheet('e1Sprite', 'img/e1Token.png', { frameWidth: 26, frameHeight: 26 });
         this.load.spritesheet('e2Sprite', 'img/e2Token.png', { frameWidth: 26, frameHeight: 26 });
+        this.load.spritesheet('e3Sprite', 'img/e3Token.png', { frameWidth: 26, frameHeight: 26 });
+        this.load.spritesheet('swirlSprite', 'img/swirl.png', { frameWidth: 52, frameHeight: 52 });
         
         this.load.spritesheet('doorSprite', 'img/door.png', { frameWidth: 65, frameHeight: 65 });
         this.load.spritesheet('moveSprite', 'img/move.png', { frameWidth: 65, frameHeight: 65 });
@@ -376,6 +380,23 @@
             figuresOnMap.push(paleAcolyte);
         }
         
+        for (var i = 0; i < palePriestStartingPosition[level].length; i++ ) {
+            var palePriest = new Enemy ({scene:this, x:20, y:20}, 'e1Sprite');
+            palePriest.onTile = palePriestStartingPosition[level][i];
+            palePriest.pathToTravel.push(palePriestStartingPosition[level][i]);
+            palePriest.dieSize = 8;
+            palePriest.health = 8;
+            palePriest.def = 4;
+            palePriest.name = "Pale Priest";
+            palePriest.color = "#878787";
+            palePriest.description = 5;
+            palePriest.loot = 4;
+            figuresOnMap.push(palePriest);
+        }
+        
+        swirl1 = this.add.sprite(400, 400, 'swirlSprite').setAlpha(0.5);
+        swirl2 = this.add.sprite(400, 400, 'swirlSprite').setAlpha(0.5);
+        
         buildLevel();
         
         movementTweenMage = this.tweens.add({
@@ -449,6 +470,9 @@
             attackButton.x = this.game.input.activePointer.x + 50;
             attackButton.y = this.game.input.activePointer.y + 50;
         }
+        
+        swirl1.rotation += 0.01;
+        swirl2.rotation -= 0.02;
     }
 
     function findActiveChar(element) {
