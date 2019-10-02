@@ -137,6 +137,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     checkStealth() {
+        console.log("checkStealth()");  // <––––––––––––––––––––––––––––––––––
         let enemyIndexes = [];
         let enemyDefs = [];
         // Alle Feinde auflisten
@@ -161,14 +162,12 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     checkIfHidden() {
+        console.log("checkIfHidden()");  // <––––––––––––––––––––––––––––––––––
         let enemyIndexes = [];
         // Alle Feinde auflisten
         for (var i = 0; i < figuresOnMap.length; i++) {
-            if (tileArray[figuresOnMap[i].onTile].occupiedBy == "enemy") {
-                enemyIndexes.push(figuresOnMap[i]);
-                if (lineOfSight (this, enemyIndexes[k].onTile)) {
-                    return false;
-                }
+            if (tileArray[figuresOnMap[i].onTile].occupiedBy == "enemy" && lineOfSight (this, figuresOnMap[i].onTile)) {
+                return false;
             }
         }
         return true;
