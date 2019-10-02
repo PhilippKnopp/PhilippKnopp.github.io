@@ -103,7 +103,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             this.active = true;
             this.setFrame(1);
             
-            if (this == rogue && this.stealth == false && this.checkIfHidden() == true) {
+            if (this == rogue && (this.checkIfHidden() == true || this.stealth == true )) {
                 this.stealth == true;
                 this.setAlpha(0.5);
                 console.log(rogue.stealth);
@@ -166,10 +166,9 @@ class Figure extends Phaser.GameObjects.Sprite {
     
     checkIfHidden() {
         console.log("checkIfHidden()");  // <––––––––––––––––––––––––––––––––––
-        let enemyIndexes = [];
-        // Alle Feinde auflisten
+        // Schaut ob ein Feind Sichtlinie zum Rogue hat
         for (var i = 0; i < figuresOnMap.length; i++) {
-            if (tileArray[figuresOnMap[i].onTile].occupiedBy == "enemy" && lineOfSight (this, figuresOnMap[i].onTile)) {
+            if (tileArray[figuresOnMap[i].onTile].occupiedBy == "enemy" && lineOfSight(this, figuresOnMap[i].onTile) == true) {
                 return false;
             }
         }
