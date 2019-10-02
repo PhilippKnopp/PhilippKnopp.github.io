@@ -155,7 +155,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         let stealthRoll = getRandomInt(this.dieSize, false);
         let highestEnemyDef = Math.max(...enemyDefs);
-        if (stealthRoll > highestEnemyDef) {
+        if (stealthRoll < highestEnemyDef) {
             this.stealth = false;
             this.setAlpha(1);
         }
