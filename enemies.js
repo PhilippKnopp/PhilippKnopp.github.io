@@ -103,7 +103,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
 function createEnemies (_this) {
     
     // Cave Crawler
-    for (var k = 0; j < caveCrawlerStartingPosition[level].length; k++ ) {
+    for (var k = 0; k < caveCrawlerStartingPosition[level].length; k++ ) {
         var caveCrawler = new Enemy ({scene:_this, x:20, y:20}, 'e1Sprite');
         caveCrawler.onTile = caveCrawlerStartingPosition[level][k];
         caveCrawler.pathToTravel.push(caveCrawlerStartingPosition[level][k]);
@@ -148,7 +148,7 @@ function createEnemies (_this) {
     swirl1 = _this.add.sprite(230, 813, 'swirSprite').setAlpha(0);
     swirl2 = _this.add.sprite(230, 813, 'swirSprite').setAlpha(0).setFrame(1);
     // Ordrak
-    for (var l = 0; i < ordrakStartingPosition[level].length; l++ ) {
+    for (var l = 0; l < ordrakStartingPosition[level].length; l++ ) {
         var ordrak = new Enemy ({scene:_this, x:20, y:20}, 'e4Sprite');
         ordrak.onTile = ordrakStartingPosition[level][l];
         ordrak.pathToTravel.push(ordrakStartingPosition[level][l]);
