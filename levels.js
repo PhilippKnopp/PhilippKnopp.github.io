@@ -179,9 +179,20 @@ function disableTrap1() {
     let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
     if (getRandomInt(activeChar.dieSize, activeChar.explodes) <= 3) {
         activeChar.health -= 1;
-        console.log("Trap sprung, but disabled!");
+        if (activeChar == rogue) {
+            showText(textL1[32], activeChar, textL1[33]);
+        } else if (activeChar == mage) {
+            showText(textL1[34], activeChar, textL1[35]);
+        } 
+    } else {
+        if (activeChar == rogue) {
+            showText(textL1[36]);
+        } else if (activeChar == mage) {
+            showText(textL1[37]);
+        } 
     }
-    activeChar.activateFigure();
+    addXP(8);
+    showActions(activeChar);
     trap1Sprt.setAlpha(1);
     trap1Sprt.setFrame(1);
     tileArray[437].state = 0;
@@ -349,6 +360,12 @@ var textL1 = [
 /*29*/    "I've got it. We should go... \nNow!",
 /*30*/    "A calm and very deep lake.",
 /*31*/    "We should press on.",
+/*32*/    "As Leng tries to disable the trap the old mechanism breaks spraying the surroundings with a hail of wooden and metal shrapnel.",
+/*33*/    "...",
+/*34*/    "Caelith closes her eyes and invisible tendrils start to manipulate the mechanism. But she misjudges the state of the materials and the trap breaksspraying the surroundings with a hail of wooden and metal shrapnel.",
+/*35*/    "A just reward for not beeing careful enough.",
+/*36*/    "With coordinated and fast movements Leng pulls out her tools and starts working through the cracks of the floor in front of her. She unhinges a lever, disabeling the presure plates ahead.",
+/*37*/    "Caelith closes her eyes and invisible tendrils start to manipulate the mechanism, unhinging a lever and disabeling the presure plates ahead.",
 ];
 
 var textL1Enemy = [
