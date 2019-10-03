@@ -320,8 +320,8 @@ var textL1 = [
 /*0*/   "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local\nguardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two\npale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are\nholding a woman captive.\nShe is not the girl they came to look for, but sems to be in need for their help anyway, as the young\nadventurers hear one of them hissing in a coarse voice.", 
 /*1*/    "I can't see that.",
 /*2*/    "A cold and dark cave. The walls are rough and wet.\nThere is an impressive temple, that was cut out of the stone next to a lake.",
-/*3*/    "Although the water is crystal clear it is too dark to see how deep the water is.",
-/*4*/    "There is a faint glimmer of a crystal at the bottom of the lake.",
+/*3*/    "Even though the water is crystal clear the surface of the lake only reflects the dark surroundings. That makes it impossible to tell how deep the lake truly is.",
+/*4*/    "There is a faint glimmer of something at the bottom of the lake.",
 /*5*/    "Stairs lead to an ancient propylon. It is carved directly into the rock of the cave. The dark stone gives it a sinister aura.",
 /*6*/    "A barren, elongated room. A part of the wall is missing and gives way to a hole in the ground that is filled\nwith rubble. Something seems wrong.",
 /*7*/    "There is a trap that was supposed to push victims through a moovable wall into a pit filled with spikes.",
@@ -341,6 +341,14 @@ var textL1 = [
 /*21*/    "The cast iron portal opens surprisingly smoothly. Silent chanting can be heard from deeper within the temple. Entering feels like an unwelcome intrusion.",
 /*22*/    "This corridor leads to some empty rooms. It s hard to guess what they were once used for.",
 /*23*/    "I found nothing of value.",
+/*24*/    "Caelith tries to retrieve the item from the bottom of the lake. But it is more likely for her to suffer from hypothermia than to reach it.",
+/*25*/    "Leng, remind me why I am doing this?",
+/*26*/    "Rhiva tries with an iron determination to retrieve the item from the bottom of the lake. After some time she resurfaces almost unconscious.",
+/*27*/    "I can try again!",
+/*28*/    "Leng dives deep and deeper to the bottom of the icy lake. Her eyes adjust quickly to the complete darkness of the lake. As she reaches for the glowing crystals she feels that something large started moving in the water.",
+/*29*/    "I've got it. We should go... \nNow!",
+/*30*/    "A calm and very deep lake.",
+/*31*/    "We should press on.",
 ];
 
 var textL1Enemy = [
@@ -350,10 +358,10 @@ var textL1Enemy = [
 var textL1Chars = [
 /*0*/   "An apprentice mage from the twisted academy with a good heart.",
 /*1*/   "A proud warrior, born in a deadly jungle.",
-/*2*/   "A blue skinned trill rogue from a sunken city.",
+/*2*/   "A rogue from a sunken city.",
 /*3*/   "This dog sized, reptile has sharp teeth and translucent skin.",
 /*4*/   "This bald, humanoid beeing has murder in its black eyes. A black robe covers his\nsickly, pale skin and a religios symbol is hanging around his neck.",
 /*5*/   "A black robe and an unholy symbol show this pale-one‘s sinister power and status. He fanatically swings a vicious iron mace.",
-/*6*/   "A large demon made of smoke and coiling black oil. He is unmitigated brutality but something is holding him back."
+/*6*/   "A large demon made of smoke and coiling black oil. He is unmitigated brutality but something seems to hold him back."
 ];
 
