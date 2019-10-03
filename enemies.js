@@ -145,8 +145,8 @@ function createEnemies (_this) {
     }
     
     // Schatten Abwehr Effekt für Ordrak
-    swirl1 = _this.add.sprite(230, 813, 'swirSprite').setAlpha(0);
-    swirl2 = _this.add.sprite(230, 813, 'swirSprite').setAlpha(0).setFrame(1);
+    swirl1 = _this.add.sprite(230, 813, 'swirSprite').setAlpha(0.2);
+    swirl2 = _this.add.sprite(230, 813, 'swirSprite').setAlpha(0.2).setFrame(1);
     // Ordrak
     for (var l = 0; l < ordrakStartingPosition[level].length; l++ ) {
         var ordrak = new Enemy ({scene:_this, x:20, y:20}, 'e4Sprite');

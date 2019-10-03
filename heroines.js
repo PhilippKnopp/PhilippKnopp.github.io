@@ -207,6 +207,11 @@ class Figure extends Phaser.GameObjects.Sprite {
 }
 
 function showActions(_this) {
+    
+    if (_this == rogue && fightmode == false) {
+        _this.stealth == true;
+    }
+    
     console.log("showActions()");  // <––––––––––––––––––––––––––––––––––
     hideActions();
     let buttonXpos = 60;

@@ -204,6 +204,22 @@
                         }
                         returnCursorToNormal();
                         showActions(activeChar);
+                    } else if (attackButton.mode == "planning cc" && this.occupiedBy == "idol") {
+                        this.checkForNeighbors();
+                        let activeCharIndex = figuresOnMap.findIndex(findActiveChar);
+                        if (this.neighbors.includes(activeCharIndex) == true) {
+                            eventDispatch (figuresOnMap[activeCharIndex], "e7");
+                        }
+                        this.neighbors.length = 0;
+                        returnCursorToNormal();
+                        showActions(figuresOnMap[activeCharIndex]);
+                    } else if (attackButton.mode == "planning rc" && this.occupiedBy == "idol") {
+                        let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+                        if (lineOfSight (activeChar, this.name) == true) {
+                            eventDispatch (activeChar, "e7");
+                        }
+                        returnCursorToNormal();
+                        showActions(activeChar);
                     }
 				});
 				tile.neighbors = [];
@@ -754,8 +770,9 @@
             showText (textL1[22], activeChar, textL1[23]);
         } else if (eventKey == "6e6") {
             // vor dem Bosskampf
-        } else if (eventKey == "e7") {
-            // Statuette wird zerstört
+        } else if (eventKey == "e7") {  // Statuette wird zerstört
+            addXP (20);
+            idol1Img.setAlpha(1);
         } else if (eventKey == "e8") {
             // ende von Level 1
         };
