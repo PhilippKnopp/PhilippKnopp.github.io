@@ -80,7 +80,6 @@
     
     // Funktion die alle Bilder lädt
     function preload() {
-        console.log("preload()");  // <––––––––––––––––––––––––––––––––––
         this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.image('crystal1', 'img/crystal1.png');
         this.load.image('door1', 'img/door1.png');
@@ -121,10 +120,8 @@
 
     // Funktion die alle Sachen erstellt
 	function create() {
-        console.log("create()");  // <––––––––––––––––––––––––––––––––––
 		objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0C0E11');
-        console.log("guiBuilder()");  // <––––––––––––––––––––––––––––––––––
         guiBuilder(this); // Greift auf gui.js zu und erstellt viele der User Interface Elemente
         
 		mapImg = this.add.image(412, 540, 'map-lvl-1').setAlpha(1);
@@ -180,16 +177,16 @@
 				tile.on("pointerup", function pointerUp () {
                     // nichts ist auf der Tile und diese ist von einer Seite aus begehbar
 					if (this.occupiedBy != "idol" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
-                        console.log("Tile pointerUp() move");  // <––––––––––––––––––––––––––––––––––
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
                         calculatePath(figuresOnMap[activeChar], this.name);
                     } else if (moveButton.mode == "planning") {
-                        console.log("Tile pointerUp() move2");  // <––––––––––––––––––––––––––––––––––
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
                         showText ("", figuresOnMap[activeChar], textL1[17]);
                     }
+                    
+                    console.log(attackButton.mode);
+                    console.log(this.occupiedBy);
                     if (searchButton.mode == "planning") {
-                        console.log("Tile pointerUp() search");  // <––––––––––––––––––––––––––––––––––
                         console.log(this.name + " - x: " + this.x + " - y: " + this.y);
                         let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
                         if (lineOfSight (activeChar, this.name) == true) {
@@ -207,8 +204,10 @@
                     } else if (attackButton.mode == "planning cc" && this.occupiedBy == "idol") {
                         this.checkForNeighbors();
                         let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-                        if (this.neighbors.includes(activeChar.onTile) == true) {
-                            eventDispatch (activeChar, "e7");
+                        for (let i = 0; i < this.neighbors.length; i++) {
+                            if (this.neighbors[i].name == activeChar.onTile) {
+                                eventDispatch (activeChar, "e7");
+                            }
                         }
                         this.neighbors.length = 0;
                         returnCursorToNormal();
@@ -225,7 +224,6 @@
 				tile.neighbors = [];
 				tile.neighborsDistance = [];
 				tile.checkForNeighbors = function () {
-                    console.log("Tile checkForNeighbors()");  // <––––––––––––––––––––––––––––––––––
 					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != 0 && tileArray[this.name-1-matrixWidth].walkable[4] != 0) {
 						this.neighbors.push(tileArray[this.name-1-matrixWidth]);
 						this.neighborsDistance.push(1.5*tileArray[this.name-1-matrixWidth].walkable[4]);
@@ -280,7 +278,6 @@
         doorButton = this.add.sprite(400, 400, 'doorSprite').setAlpha(0);
         doorButton.setInteractive();
 		doorButton.on("pointerup", function pointerUp() {
-            console.log("DoorButton pointerUp()");  // <––––––––––––––––––––––––––––––––––
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             doors(activeChar, activeChar.onTile);
 		});
@@ -290,7 +287,6 @@
         moveButton.mode = "none";
         moveButton.setInteractive();
 		moveButton.on("pointerup", function pointerUp() {
-            console.log("moveButton pointerUp()");  // <––––––––––––––––––––––––––––––––––
             moveButton.mode = "planning";
             hideActions();
             moveButton.setAlpha(1);
@@ -302,7 +298,6 @@
         attackButton.mode = "none";
         attackButton.setInteractive();
 		attackButton.on("pointerup", function pointerUp() {
-            console.log("attackButton pointerUp()");  // <––––––––––––––––––––––––––––––––––
             if (attackButton.mode == "possible rc") {
                 attackButton.mode = "planning rc";
             } else {
@@ -318,7 +313,6 @@
         searchButton.mode = "none";
         searchButton.setInteractive();
 		searchButton.on("pointerup", function pointerUp() {
-            console.log("searchButton pointerUp()");  // <––––––––––––––––––––––––––––––––––
             searchButton.mode = "planning";
             hideActions();
             searchButton.setAlpha(1);
@@ -330,7 +324,6 @@
         specialButton.setInteractive();
         specialButton.mode = "";
 		specialButton.on("pointerup", function pointerUp() {
-            console.log("specialButton pointerUp()");  // <––––––––––––––––––––––––––––––––––
             if (specialButton.mode == "disableTrap" && level == 1) {
                 disableTrap1();
                 specialButton.mode == "";
@@ -344,7 +337,6 @@
         cancelButton = this.add.sprite(400, 400, 'cancelSprite').setAlpha(0);
         cancelButton.setInteractive();
         cancelButton.on("pointerup", function pointerUp() {
-            console.log("cancelButton pointerUp()");  // <––––––––––––––––––––––––––––––––––
             hideActions();
             deactivateFigures();
 		});
@@ -397,7 +389,6 @@
             duration: 250,
             ease: 'Sine.easeInOut',
             onComplete: function () {
-                console.log("movementTweenMage onComplete()");  // <––––––––––––––––––––––––––––––––––
                 mage.enterTile();
             },
             onCompleteScope: movementTweenMage
@@ -414,7 +405,6 @@
             duration: 250,
             ease: 'Sine.easeInOut',
             onComplete: function () {
-                console.log("movementTweenRogue onComplete()");  // <––––––––––––––––––––––––––––––––––
                 rogue.enterTile();
             },
             onCompleteScope: movementTweenRogue
@@ -431,7 +421,6 @@
             duration: 250,
             ease: 'Sine.easeInOut',
             onComplete: function () {
-                console.log("movementTweenBarb onComplete()");  // <––––––––––––––––––––––––––––––––––
                 barb.enterTile();
             },
             onCompleteScope: movementTweenBarb
@@ -463,17 +452,14 @@
     }
 
     function findActiveChar(element) {
-        console.log("findActiveChar()");  // <––––––––––––––––––––––––––––––––––
         return element.active == true;
     }
     
     function findDeadChar(element) {
-        console.log("findDeadChar()");  // <––––––––––––––––––––––––––––––––––
         return element.health <= 0;
     }
 
     function buildLevel() {
-        console.log("buildLevel()");  // <––––––––––––––––––––––––––––––––––
         let levelMap = returnLevelType(1);
         for (var i = 0; i < tileArray.length; i++) {
             tileArray[i].state = levelMap[i];
@@ -497,7 +483,6 @@
     }
 
     function lineOfSight (activeChar, endIndex) {
-        console.log("lineOfSight()");  // <––––––––––––––––––––––––––––––––––
         let aX = activeChar.onTile % matrixWidth;
         let aY = Math.floor(activeChar.onTile / matrixWidth);
         
