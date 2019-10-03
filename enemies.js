@@ -14,6 +14,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.def;
         this.alarmed = false;
         this.description = 0;
+        this.color = "#878787";
         this.loot;
         
         this.setInteractive();
@@ -95,4 +96,69 @@ class Enemy extends Phaser.GameObjects.Sprite {
             }
         }
     }
+}
+
+////////////// Gegner werden auf der Karte platziert   //////////////////////////////////////////////////////////////////////////////////////////
+
+function createEnemies (_this) {
+    
+    // Cave Crawler
+    for (var k = 0; j < caveCrawlerStartingPosition[level].length; k++ ) {
+        var caveCrawler = new Enemy ({scene:_this, x:20, y:20}, 'e1Sprite');
+        caveCrawler.onTile = caveCrawlerStartingPosition[level][k];
+        caveCrawler.pathToTravel.push(caveCrawlerStartingPosition[level][k]);
+        caveCrawler.dieSize = 4;
+        caveCrawler.health = 2;
+        caveCrawler.def = 2;
+        caveCrawler.name = "Cave Crawler";
+        caveCrawler.description = 3;
+        caveCrawler.loot = 1;
+        figuresOnMap.push(caveCrawler);
+    }
+    
+    // Pale Acolyte
+    for (var j = 0; j < paleAcolyteStartingPosition[level].length; j++ ) {
+        var paleAcolyte = new Enemy ({scene:_this, x:20, y:20}, 'e2Sprite');
+        paleAcolyte.onTile = paleAcolyteStartingPosition[level][j];
+        paleAcolyte.pathToTravel.push(paleAcolyteStartingPosition[level][j]);
+        paleAcolyte.dieSize = 6;
+        paleAcolyte.health = 6;
+        paleAcolyte.def = 3;
+        paleAcolyte.name = "Pale Acolyte";
+        paleAcolyte.description = 4;
+        paleAcolyte.loot = 3;
+        figuresOnMap.push(paleAcolyte);
+    }
+    
+    // Pale Priest
+    for (var i = 0; i < palePriestStartingPosition[level].length; i++ ) {
+        var palePriest = new Enemy ({scene:_this, x:20, y:20}, 'e3Sprite');
+        palePriest.onTile = palePriestStartingPosition[level][i];
+        palePriest.pathToTravel.push(palePriestStartingPosition[level][i]);
+        palePriest.dieSize = 8;
+        palePriest.health = 8;
+        palePriest.def = 4;
+        palePriest.name = "Pale Priest";
+        palePriest.description = 5;
+        palePriest.loot = 4;
+        figuresOnMap.push(palePriest);
+    }
+    
+    // Schatten Abwehr Effekt für Ordrak
+    swirl1 = _this.add.sprite(230, 813, 'swirSprite').setAlpha(0);
+    swirl2 = _this.add.sprite(230, 813, 'swirSprite').setAlpha(0).setFrame(1);
+    // Ordrak
+    for (var l = 0; i < ordrakStartingPosition[level].length; l++ ) {
+        var ordrak = new Enemy ({scene:_this, x:20, y:20}, 'e4Sprite');
+        ordrak.onTile = ordrakStartingPosition[level][l];
+        ordrak.pathToTravel.push(ordrakStartingPosition[level][l]);
+        ordrak.dieSize = 8;
+        ordrak.health = 12;
+        ordrak.def = 4;
+        ordrak.name = "Ordrak";
+        ordrak.description = 6;
+        ordrak.loot = 20;
+        figuresOnMap.push(ordrak);
+    }
+
 }

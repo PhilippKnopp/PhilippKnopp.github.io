@@ -21,7 +21,7 @@
 	
 <script>
 	
-    console.log("Version 9");
+    console.log("Version 0.2");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -101,6 +101,7 @@
         this.load.spritesheet('e1Sprite', 'img/e1Token.png', { frameWidth: 26, frameHeight: 26 });
         this.load.spritesheet('e2Sprite', 'img/e2Token.png', { frameWidth: 26, frameHeight: 26 });
         this.load.spritesheet('e3Sprite', 'img/e3Token.png', { frameWidth: 26, frameHeight: 26 });
+        this.load.spritesheet('e4Sprite', 'img/e4Token.png', { frameWidth: 26, frameHeight: 26 });
         this.load.spritesheet('swirSprite', 'img/swirl.png', { frameWidth: 52, frameHeight: 52 });
         
         this.load.spritesheet('doorSprite', 'img/door.png', { frameWidth: 65, frameHeight: 65 });
@@ -366,37 +367,7 @@
         rogue.description = 2;
         figuresOnMap.push(rogue);
         
-        for (var j = 0; j < paleAcolyteStartingPosition[level].length; j++ ) {
-            var paleAcolyte = new Enemy ({scene:this, x:20, y:20}, 'e2Sprite');
-            paleAcolyte.onTile = paleAcolyteStartingPosition[level][j];
-            paleAcolyte.pathToTravel.push(paleAcolyteStartingPosition[level][j]);
-            paleAcolyte.dieSize = 6;
-            paleAcolyte.health = 6;
-            paleAcolyte.def = 3;
-            paleAcolyte.name = "Pale Acolyte";
-            paleAcolyte.color = "#878787";
-            paleAcolyte.description = 4;
-            paleAcolyte.loot = 3;
-            figuresOnMap.push(paleAcolyte);
-        }
-        
-        for (var i = 0; i < palePriestStartingPosition[level].length; i++ ) {
-            var palePriest = new Enemy ({scene:this, x:20, y:20}, 'e3Sprite');
-            palePriest.onTile = palePriestStartingPosition[level][i];
-            palePriest.pathToTravel.push(palePriestStartingPosition[level][i]);
-            palePriest.dieSize = 8;
-            palePriest.health = 8;
-            palePriest.def = 4;
-            palePriest.name = "Pale Priest";
-            palePriest.color = "#878787";
-            palePriest.description = 5;
-            palePriest.loot = 4;
-            figuresOnMap.push(palePriest);
-        }
-        
-        swirl1 = this.add.sprite(230, 813, 'swirSprite').setAlpha(0.5);
-        swirl2 = this.add.sprite(230, 813, 'swirSprite').setAlpha(0.5).setFrame(1);
-        
+        createEnemies(this);
         buildLevel();
         
         movementTweenMage = this.tweens.add({
