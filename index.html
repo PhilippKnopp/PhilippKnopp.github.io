@@ -206,13 +206,13 @@
                         showActions(activeChar);
                     } else if (attackButton.mode == "planning cc" && this.occupiedBy == "idol") {
                         this.checkForNeighbors();
-                        let activeCharIndex = figuresOnMap.findIndex(findActiveChar);
-                        if (this.neighbors.includes(activeCharIndex) == true) {
-                            eventDispatch (figuresOnMap[activeCharIndex], "e7");
+                        let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+                        if (this.neighbors.includes(activeChar.onTile) == true) {
+                            eventDispatch (activeChar, "e7");
                         }
                         this.neighbors.length = 0;
                         returnCursorToNormal();
-                        showActions(figuresOnMap[activeCharIndex]);
+                        showActions(activeChar);
                     } else if (attackButton.mode == "planning rc" && this.occupiedBy == "idol") {
                         let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
                         if (lineOfSight (activeChar, this.name) == true) {
