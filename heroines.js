@@ -183,6 +183,9 @@ class Figure extends Phaser.GameObjects.Sprite {
     
     showFace() {
         console.log("showFace()");  // <––––––––––––––––––––––––––––––––––
+            console.log(attackButton.mode);
+            console.log(searchButton.mode);
+            console.log(moveButton.mode);
         if (figuresOnMap.findIndex(findActiveChar) == -1 || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
             faceButton.x = this.x-60;
             faceButton.y = this.y;
