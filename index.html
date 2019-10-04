@@ -339,12 +339,6 @@
         specialButton.setDepth(1);
         
         faceButton = this.add.sprite(400, 400, 'faceSprite').setAlpha(0);
-        faceButton.setInteractive();
-        faceButton.on("pointerup", function pointerUp() {
-            returnCursorToNormal();
-            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-            showActions(activeChar);
-		});
         faceButton.setDepth(1);
         
         cancelButton = this.add.sprite(400, 400, 'cancelSprite').setAlpha(0);
@@ -784,7 +778,10 @@
                 tileArray[120].state = 7;
                 crystal1Img.setAlpha(0);
                 addXP(12);
-            } 
+            }
+            console.log(attackButton.mode);
+            console.log(searchButton.mode);
+            console.log(moveButton.mode);
         };
     }
     
