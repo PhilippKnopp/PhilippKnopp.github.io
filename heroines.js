@@ -30,7 +30,6 @@ class Figure extends Phaser.GameObjects.Sprite {
         };
         
         this.enterTile = function () {
-            console.log("Figur enterTile()");  // <––––––––––––––––––––––––––––––––––
             tileArray[this.onTile].occupiedBy = "";
             this.onTile = this.pathToTravel[0];
             this.pathToTravel.shift();
@@ -42,7 +41,6 @@ class Figure extends Phaser.GameObjects.Sprite {
         };
         
         this.attack = function (enemy) {
-            console.log("Figur attack()");  // <––––––––––––––––––––––––––––––––––
             if (attackButton.mode == "planning cc" && this.stealth == true) { // hinterhältiger Angriff
                 let attackroll = getRandomInt(this.dieSize, this.explodes) + getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {
@@ -52,8 +50,9 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.setAlpha(1);
             } else if (attackButton.mode == "planning rc") { // Magieangriff
                 let attackroll = getRandomInt(this.dieSize, this.explodes);
-                console.log("implement aoe Damage");
-            } else if (attackButton.mode == "planning cc") { // standard Attacke für Barb und Schurke im Nahkampf
+                enemy.health -= 1;
+                attackroll -= 1;
+            } else if (attackButton.mode == "planning cc") { // standard Attacke im Nahkampf
                 let attackroll = getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {
                     enemy.health -= attackroll;
@@ -66,12 +65,13 @@ class Figure extends Phaser.GameObjects.Sprite {
                 addXP(enemy.loot);
                 checkFightmode();
             }
-            returnCursorToNormal();
-            showActions(this);
+            if (attackroll == 0) {
+                returnCursorToNormal();
+                showActions(this);
+            }
         }
         
         this.moveNow = function () {
-            console.log("moveNow()");  // <––––––––––––––––––––––––––––––––––
             if (this.pathToTravel.length > 0 && this == barb) {
                 movementTweenBarb.data[0].start = this.x;
                 movementTweenBarb.data[1].start = this.y;
@@ -96,7 +96,6 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     activateFigure() {
-        console.log("activateFigure()");  // <––––––––––––––––––––––––––––––––––
         if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none") {
             deactivateFigures();
 

@@ -46,7 +46,11 @@ class Enemy extends Phaser.GameObjects.Sprite {
             tileArray[activeChar.onTile].neighbors.length = 0;
         } else if (attackButton.mode == "planning rc") {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-            activeChar.attack(this);
+            if (lineOfSight (activeChar, this.onTile) == true) { // Line of sight to enemy: Ranged Attack
+                activeChar.attack(this);
+            } else { // No Line of sight to enemy: I Can Not See That
+                showText("", activeChar, textL1[1]);
+            }
         } else if (searchButton.mode == "planning") {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             if (lineOfSight (activeChar, this.onTile) == true) {
