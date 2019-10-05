@@ -40,6 +40,41 @@ class Figure extends Phaser.GameObjects.Sprite {
             };
         };
         
+        this.rangedAttack = function (enemy) {
+            if (rangedDamage[0] == 0) {
+                rangedDamage[0] = getRandomInt(this.dieSize, this.explodes);
+            }
+            let distantEnemies = [];
+            for (var i = 0; i < tileArray.length; i++) {
+                if (lineOfSight(_this, i) == true && (tileArray[i].occupiedBy == "enemy" || tileArray[i].occupiedBy == "idol")) {
+                    distantEnemies.push(i);
+                }
+            }
+            if (distantEnemies.length == 1) {
+                while (rangedDamage[0] > 0) {
+                    rangedDamage[0]--;
+                    rangedDamage.push(distantEnemies[0]);
+                }
+            } else {
+                rangedDamage[0]--;
+                enemy.health--;
+            }
+            if (enemy.health <= 0) {
+                tileArray[enemy.onTile].occupiedBy = "";
+                enemy.setAlpha(0);
+                figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
+                addXP(enemy.loot);
+                checkFightmode();
+            }
+            if (rangedDamage[0] == 0) {
+                returnCursorToNormal();
+                showActions(this);
+            } else {
+                enemyHealthBar.clear();
+                enemy.showFace();
+            }
+        }
+        
         this.attack = function (enemy) {
             if (attackButton.mode == "planning cc" && this.stealth == true) { // hinterhältiger Angriff
                 let attackroll = getRandomInt(this.dieSize, this.explodes) + getRandomInt(this.dieSize, this.explodes);
@@ -48,10 +83,6 @@ class Figure extends Phaser.GameObjects.Sprite {
                 }
                 this.stealth = false;
                 this.setAlpha(1);
-            } else if (attackButton.mode == "planning rc") { // Magieangriff
-                let attackroll = getRandomInt(this.dieSize, this.explodes);
-                enemy.health -= 1;
-                attackroll -= 1;
             } else if (attackButton.mode == "planning cc") { // standard Attacke im Nahkampf
                 let attackroll = getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {
@@ -65,10 +96,8 @@ class Figure extends Phaser.GameObjects.Sprite {
                 addXP(enemy.loot);
                 checkFightmode();
             }
-            if (attackroll == 0) {
-                returnCursorToNormal();
-                showActions(this);
-            }
+            returnCursorToNormal();
+            showActions(this);
         }
         
         this.moveNow = function () {
