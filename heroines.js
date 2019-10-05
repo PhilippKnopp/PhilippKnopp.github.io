@@ -53,7 +53,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             if (distantEnemies.length == 1) {
                 while (rangedDamage[0] > 0) {
                     rangedDamage[0]--;
-                    rangedDamage.push(distantEnemies[0]);
+                    enemy.health--;
                 }
             } else {
                 rangedDamage[0]--;
