@@ -81,14 +81,16 @@ class Enemy extends Phaser.GameObjects.Sprite {
             
             enemyHealthBar.x = faceButton.x;
             enemyHealthBar.y = faceButton.y;
+            enemyHealthBar.setAlpha(1);
+            enemyHealthBase.x = faceButton.x;
+            enemyHealthBase.y = faceButton.y;
+            enemyHealthBase.setAlpha(1);
             enemyHealthBarMask.clear();
             enemyHealthBarMask.beginPath();
             enemyHealthBarMask.lineStyle(5, 0, 1);
-            enemyHealthBarMask.arc(faceButton.x, faceButton.y, 92, Phaser.Math.DegToRad(270-((75/this.fullHealth)*this.health)), Phaser.Math.DegToRad(270+((75/this.fullHealth)*this.health)));
+            enemyHealthBarMask.arc(faceButton.x, faceButton.y, 46, Phaser.Math.DegToRad(270-((75/this.fullHealth)*this.health)), Phaser.Math.DegToRad(270+((75/this.fullHealth)*this.health)));
             enemyHealthBarMask.strokePath();
             enemyHealthBarMask.closePath();
-            enemyHealthBase.setAlpha(1);
-            enemyHealthBar.setAlpha(1);
             
             switch(this.name) {
                 case "Cave Crawler":
