@@ -70,6 +70,9 @@ class Enemy extends Phaser.GameObjects.Sprite {
     hideFace () {
         if (figuresOnMap.findIndex(findActiveChar) == -1 || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
             faceButton.setAlpha(0);
+            enemyHealthBar.setAlpha(0);
+            enemyHealthBase.setAlpha(0);
+            enemyHealthBarMask.clear();
         }
     }
     
@@ -85,10 +88,9 @@ class Enemy extends Phaser.GameObjects.Sprite {
             enemyHealthBase.x = faceButton.x;
             enemyHealthBase.y = faceButton.y;
             enemyHealthBase.setAlpha(1);
-            enemyHealthBarMask.clear();
             enemyHealthBarMask.beginPath();
-            enemyHealthBarMask.lineStyle(5, 0, 1);
-            enemyHealthBarMask.arc(faceButton.x, faceButton.y, 46, Phaser.Math.DegToRad(270-((75/this.fullHealth)*this.health)), Phaser.Math.DegToRad(270+((75/this.fullHealth)*this.health)));
+            enemyHealthBarMask.lineStyle(10, 0, 1);
+            enemyHealthBarMask.arc(faceButton.x, faceButton.y, 47, Phaser.Math.DegToRad(270-((75/this.fullHealth)*this.health)), Phaser.Math.DegToRad(270+((75/this.fullHealth)*this.health)));
             enemyHealthBarMask.strokePath();
             enemyHealthBarMask.closePath();
             

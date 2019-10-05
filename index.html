@@ -342,9 +342,9 @@
         
         faceButton = this.add.sprite(400, 400, 'faceSprite').setAlpha(0);
         faceButton.setDepth(1);
+        enemyHealthBarMask = this.add.graphics();
         enemyHealthBase = this.add.sprite(400, 400, 'enemyHealthSprite').setAlpha(0).setFrame(1);
         enemyHealthBar = this.add.sprite(400, 400, 'enemyHealthSprite').setAlpha(0);
-        enemyHealthBarMask = this.add.graphics();
         enemyHealthBarMask.x = 0;
         enemyHealthBarMask.y = 0;
         enemyHealthBar.mask = new Phaser.Display.Masks.BitmapMask(this, enemyHealthBarMask);
