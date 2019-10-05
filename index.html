@@ -55,7 +55,7 @@
     
     var doorButton, moveButton, attackButton, searchButton,
         faceButton, specialButton, cancelButton;
-    var enemyHealthBase, enemyHealthBar;
+    var enemyHealthBase, enemyHealthBar, enemyHealthBarMask;
     var textBackButton, textNextButton, textNewButton;
     
     var mapImg;
@@ -345,13 +345,9 @@
         enemyHealthBase = this.add.sprite(400, 400, 'enemyHealthSprite').setAlpha(0).setFrame(1);
         enemyHealthBar = this.add.sprite(400, 400, 'enemyHealthSprite').setAlpha(0);
         enemyHealthBarMask = this.add.graphics();
-        enemyHealthBarMask = 400;
-        enemyHealthBarMask = 400;
+        enemyHealthBarMask.x = 0;
+        enemyHealthBarMask.y = 0;
         enemyHealthBar.mask = new Phaser.Display.Masks.BitmapMask(this, enemyHealthBarMask);
-        enemyHealthBar.clear();
-        enemyHealthBar.lineStyle(5, 0, 1);
-        enemyHealthBar.arc(0, 0, 90, Phaser.Math.DegToRad(270-((75/fullHealth)*health)), Phaser.Math.DegToRad(270+((75/fullHealth)*health)));
-        enemyHealthBar.strokePath();
         
         cancelButton = this.add.sprite(400, 400, 'cancelSprite').setAlpha(0);
         cancelButton.setInteractive();
