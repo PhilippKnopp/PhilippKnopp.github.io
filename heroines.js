@@ -46,7 +46,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             let distantEnemies = [];
             for (var i = 0; i < tileArray.length; i++) {
-                if (lineOfSight(this, i) == true && (tileArray[i].occupiedBy == "enemy" || tileArray[i].occupiedBy == "idol")) {
+                if (lineOfSight(this, i) == true && (tileArray[i].occupiedBy == "enemy")) {
                     distantEnemies.push(i);
                 }
             }
