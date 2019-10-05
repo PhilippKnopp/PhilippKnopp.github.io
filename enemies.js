@@ -82,15 +82,15 @@ class Enemy extends Phaser.GameObjects.Sprite {
             faceButton.y = this.y;
             faceButton.setAlpha(1);
             
-            enemyHealthBar.x = faceButton.x;
+            enemyHealthBar.x = faceButton.x-1;
             enemyHealthBar.y = faceButton.y;
             enemyHealthBar.setAlpha(1);
-            enemyHealthBase.x = faceButton.x;
+            enemyHealthBase.x = faceButton.x-1;
             enemyHealthBase.y = faceButton.y;
             enemyHealthBase.setAlpha(1);
             enemyHealthBarMask.beginPath();
-            enemyHealthBarMask.lineStyle(10, 0, 0);
-            enemyHealthBarMask.arc(faceButton.x, faceButton.y, 47, Phaser.Math.DegToRad(270-((75/this.fullHealth)*this.health)), Phaser.Math.DegToRad(270+((75/this.fullHealth)*this.health)));
+            enemyHealthBarMask.lineStyle(8, 0, 1);
+            enemyHealthBarMask.arc(faceButton.x-1, faceButton.y, 47, Phaser.Math.DegToRad(270-((75/this.fullHealth)*this.health)), Phaser.Math.DegToRad(270+((75/this.fullHealth)*this.health)));
             enemyHealthBarMask.strokePath();
             enemyHealthBarMask.closePath();
             
