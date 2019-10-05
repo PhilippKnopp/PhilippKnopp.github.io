@@ -7,6 +7,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.active = false;
         this.dieSize;
         this.explodes = false;
+        this.fullHealth;
         this.health;
         this.movement = 6;
         this.moved = 0;
@@ -78,6 +79,15 @@ class Enemy extends Phaser.GameObjects.Sprite {
             faceButton.y = this.y;
             faceButton.setAlpha(1);
             
+            enemyHealthBar.x = faceButton.x;
+            enemyHealthBar.y = faceButton.y;
+            enemyHealthBarMask.clear();
+            loadBar.beginPath();
+            enemyHealthBar.lineStyle(5, 0, 1);
+            enemyHealthBar.arc(faceButton.x, faceButton.y, 92, Phaser.Math.DegToRad(270-((75/fullHealth)*health)), Phaser.Math.DegToRad(270+((75/fullHealth)*health)));
+            enemyHealthBar.strokePath();
+            loadBar.closePath();
+            
             switch(this.name) {
                 case "Cave Crawler":
                     faceButton.setFrame(3);
@@ -108,6 +118,7 @@ function createEnemies (_this) {
         caveCrawler.onTile = caveCrawlerStartingPosition[level][k];
         caveCrawler.pathToTravel.push(caveCrawlerStartingPosition[level][k]);
         caveCrawler.dieSize = 4;
+        caveCrawler.fullHealth = 2;
         caveCrawler.health = 2;
         caveCrawler.def = 2;
         caveCrawler.name = "Cave Crawler";
@@ -122,6 +133,7 @@ function createEnemies (_this) {
         paleAcolyte.onTile = paleAcolyteStartingPosition[level][j];
         paleAcolyte.pathToTravel.push(paleAcolyteStartingPosition[level][j]);
         paleAcolyte.dieSize = 6;
+        paleAcolyte.fullHealth = 6;
         paleAcolyte.health = 6;
         paleAcolyte.def = 3;
         paleAcolyte.name = "Pale Acolyte";
@@ -136,6 +148,7 @@ function createEnemies (_this) {
         palePriest.onTile = palePriestStartingPosition[level][i];
         palePriest.pathToTravel.push(palePriestStartingPosition[level][i]);
         palePriest.dieSize = 8;
+        palePriest.fullHealth = 8;
         palePriest.health = 8;
         palePriest.def = 4;
         palePriest.name = "Pale Priest";
@@ -153,6 +166,7 @@ function createEnemies (_this) {
         ordrak.onTile = ordrakStartingPosition[level][l];
         ordrak.pathToTravel.push(ordrakStartingPosition[level][l]);
         ordrak.dieSize = 8;
+        ordrak.fullHealth = 12;
         ordrak.health = 12;
         ordrak.def = 4;
         ordrak.name = "Ordrak";
