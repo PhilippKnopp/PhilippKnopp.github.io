@@ -212,7 +212,6 @@ function showActions(_this) {
         _this.stealth == true;
     }
     
-    console.log("showActions()");  // <––––––––––––––––––––––––––––––––––
     hideActions();
     let buttonXpos = 60;
     tileArray[_this.onTile].checkForNeighbors();
@@ -340,6 +339,9 @@ function hideActions() {
     searchButton.setAlpha(0);
     specialButton.setAlpha(0);
     cancelButton.setAlpha(0);
+    enemyHealthBar.setAlpha(0);
+    enemyHealthBase.setAlpha(0);
+    enemyHealthBarMask.clear();
 }
 
 function deactivateFigures() {
