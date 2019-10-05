@@ -340,7 +340,7 @@ function hideActions() {
     specialButton.setAlpha(0);
     cancelButton.setAlpha(0);
     enemyHealthBase.setAlpha(0);
-    enemyHealthBarMask.clear();
+    enemyHealthBar.clear();
 }
 
 function deactivateFigures() {

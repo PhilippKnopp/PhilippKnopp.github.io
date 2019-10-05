@@ -343,11 +343,11 @@
         faceButton = this.add.sprite(400, 400, 'faceSprite').setAlpha(0);
         faceButton.setDepth(1);
         enemyHealthBase = this.add.sprite(400, 400, 'enemyHealthSprite').setAlpha(0).setFrame(1);
-        enemyHealthBarMask = this.add.graphics();
-        enemyHealthBarMask.x = 0;
-        enemyHealthBarMask.y = 0;
+        enemyHealthBar = this.add.graphics();
+        enemyHealthBar.x = 0;
+        enemyHealthBar.y = 0;
         enemyHealthBase.setDepth(1);
-        enemyHealthBarMask.setDepth(1);
+        enemyHealthBar.setDepth(1);
         
         cancelButton = this.add.sprite(400, 400, 'cancelSprite').setAlpha(0);
         cancelButton.setInteractive();

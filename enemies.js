@@ -71,7 +71,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
         if (figuresOnMap.findIndex(findActiveChar) == -1 || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
             faceButton.setAlpha(0);
             enemyHealthBase.setAlpha(0);
-            enemyHealthBarMask.clear();
+            enemyHealthBar.clear();
         }
     }
     
@@ -81,17 +81,16 @@ class Enemy extends Phaser.GameObjects.Sprite {
             faceButton.y = this.y;
             faceButton.setAlpha(1);
             
-            //enemyHealthBar.x = faceButton.x-1;
-            //enemyHealthBar.y = faceButton.y;
-            //enemyHealthBar.setAlpha(1);
-            enemyHealthBase.x = faceButton.x-1;
-            enemyHealthBase.y = faceButton.y;
-            enemyHealthBase.setAlpha(1);
-            enemyHealthBarMask.beginPath();
-            enemyHealthBarMask.lineStyle(6, 0xababab, 1);
-            enemyHealthBarMask.arc(faceButton.x-1, faceButton.y, 48, Phaser.Math.DegToRad(270-((75/this.fullHealth)*this.health)), Phaser.Math.DegToRad(270+((75/this.fullHealth)*this.health)));
-            enemyHealthBarMask.strokePath();
-            enemyHealthBarMask.closePath();
+            if (attackButton.mode == "planning rc") {
+                enemyHealthBase.x = faceButton.x-2;
+                enemyHealthBase.y = faceButton.y;
+                enemyHealthBase.setAlpha(1);
+                enemyHealthBar.beginPath();
+                enemyHealthBar.lineStyle(5, 0xababab, 1);
+                enemyHealthBar.arc(faceButton.x-2, faceButton.y, 48, Phaser.Math.DegToRad(270-((75/this.fullHealth)*this.health)), Phaser.Math.DegToRad(270+((75/this.fullHealth)*this.health)));
+                enemyHealthBar.strokePath();
+                enemyHealthBar.closePath();
+            }
             
             switch(this.name) {
                 case "Cave Crawler":
