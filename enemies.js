@@ -70,7 +70,6 @@ class Enemy extends Phaser.GameObjects.Sprite {
     hideFace () {
         if (figuresOnMap.findIndex(findActiveChar) == -1 || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
             faceButton.setAlpha(0);
-            enemyHealthBar.setAlpha(0);
             enemyHealthBase.setAlpha(0);
             enemyHealthBarMask.clear();
         }
