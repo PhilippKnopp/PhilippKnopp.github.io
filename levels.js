@@ -366,6 +366,8 @@ var textL1 = [
 /*35*/    "A just reward for not beeing careful enough.",
 /*36*/    "With coordinated and fast movements Leng pulls out her tools and starts working through the cracks of the floor in front of her. She unhinges a lever, disabeling the presure plates ahead.",
 /*37*/    "Caelith closes her eyes and invisible tendrils start to manipulate the mechanism, unhinging a lever and disabeling the presure plates ahead.",
+/*38*/    "The doors open to a huge cathedral like room. The chanting stops immediately.",
+/*39*/    "Who are you! My brothers and sisters, protect us from the blind and evil ways of the surface!",
 ];
 
 var textL1Enemy = [

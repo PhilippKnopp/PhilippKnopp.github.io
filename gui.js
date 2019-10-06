@@ -64,7 +64,6 @@ function guiBuilder(_this) {
     });
 
 ////////////// Text Messages //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     
     Info1 = _this.add.text(950, 40, "", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
     Info1.showMessage = function (text) {

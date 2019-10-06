@@ -138,12 +138,6 @@
         trap1Sprt = this.add.sprite(438, 501, 'trap1Sprite').setAlpha(0);
         circle1Img = this.add.image(230, 800, 'circle1').setAlpha(0);
 		
-		/*var buildLevelButton = this.add.text(800, 115, "Insert Walls", { fontFamily: "Verdana" });
-		buildLevelButton.setInteractive();
-		buildLevelButton.on("pointerup", function pointerUp() {
-			buildLevel();
-		});*/
-		
 		let index = 0;
 		for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
 			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
@@ -762,8 +756,8 @@
             showText (textL1[21]);
         } else if (eventKey == "0e3") {     // erster Gang
             showText (textL1[22], activeChar, textL1[23]);
-        } else if (eventKey == "e4") {      // nach dem öffnen der zweiten Türe in den Raum
-            
+        } else if (eventKey == "e4") {      // nach dem öffnen der zweiten Türe in den Hauptraum
+            showText (textL1[38], figuresOnMap[figuresOnMap.length - 2], textL1[39]);
         } else if (eventKey == "6e5") {     // zweiter Gang
             showText (textL1[22], activeChar, textL1[23]);
         } else if (eventKey == "6e6") {
