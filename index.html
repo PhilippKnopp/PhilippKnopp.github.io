@@ -223,6 +223,23 @@
                         showActions(activeChar);
                     }
 				});
+                tile.on("pointerover", function pointerOver () {
+                    if (this.occupiedBy != "idol" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
+                        let pathHighlight = showPath(figuresOnMap.findIndex(findActiveChar), this.name);
+                        for (var i = 0; i < pathHighlight.length; i++) {
+                            tileArray[i].setFrame(1);
+                        }
+                    } else if (moveButton.mode == "planning") {
+                        this.setFrame(2);
+                    }
+                });
+                tile.on("pointerout", function pointerOut () {
+                    if (this.occupiedBy != "idol" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
+                        for (var i = 0; i < tileArray.length; i++) {
+                            tileArray[i].setFrame(0);
+                        }
+                    }
+                });
 				tile.neighbors = [];
 				tile.neighborsDistance = [];
 				tile.checkForNeighbors = function () {
@@ -602,7 +619,83 @@
         let los_blocked = losPathDifficulty.includes(0); // testet ob in dem Array "losPathDifficulty" eine 0 vorkommt (dort kann man nicht hinlaufen)
         return !los_blocked; // gibt "true" zurück, wenn man in direkter Linie zum angesehenen Punkt laufen/schwimmen/... könnte.
     }
-    
+
+    function showPath (startIndex, endIndex) {
+        
+        var mappedList = [];
+        var frontierList = [];
+        var frontierListValues = [];
+        var activeNode;
+        var pathFound = false;
+        var pathToTravel = [];
+
+        // finde A und füge ihn der frontierList hinzu {name, wayPointUsefulness}
+        tileArray[startIndex].entryPoint = "Start";
+        tileArray[startIndex].distanceTravelled = 0;
+        tileArray[startIndex].wayPointUsefulness = tileArray[startIndex].distanceTravelled + tileArray[startIndex].estimatedWayToB(endIndex);
+        frontierList.push(tileArray[startIndex]);
+        
+        // gehe folgende Schleife solange durch bis es einen Weg gibt
+        mapperLoop: while (pathFound == false) {
+
+            // gehe frontierList durch nach niedrigster wayPointUsefulness
+            frontierListValues.length = 0;
+            for (var i = 0; i < frontierList.length; i++) {
+                frontierListValues.push(frontierList[i].wayPointUsefulness);
+            };
+            if (frontierList.length == 0) {
+                return;
+            };
+            activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
+
+            // Wenn Knoten mit Niedrigster wayPointUsefulness schon das Ziel ist, ist A* fertig
+            if (frontierList[activeNode].name == endIndex) {
+                pathFound = true; // unterbricht das Pfadsuchen
+                let backtraceIndex = endIndex; // Sucht den Index des Zielfeldes
+                pathToTravel.unshift(backtraceIndex); // Fügt das Zielfeld dem Pfad hinzu
+
+                while (tileArray[tileArray[backtraceIndex].entryPoint].name != startIndex) {
+                    pathToTravel.unshift(tileArray[backtraceIndex].entryPoint);
+                    backtraceIndex = tileArray[backtraceIndex].entryPoint;
+                }
+
+                break mapperLoop;
+            }
+
+            // berechne für diesen alle neighbors
+            frontierList[activeNode].checkForNeighbors();
+
+            // Füge Neighbors des aktuellen Knotens der Frontierlist hinzu
+            for (var i = 0; i < frontierList[activeNode].neighbors.length; i++) {
+
+                let distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
+                if (containsObject(frontierList[activeNode].neighbors[i], frontierList)) {
+                    if (distanceTravelled < frontierList[activeNode].neighbors[i].distanceTravelled) {
+                        frontierList[activeNode].neighbors[i].distanceTravelled = distanceTravelled;
+                        frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB(endIndex);
+                        frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
+                    }
+                } else if (containsObject(frontierList[activeNode].neighbors[i], mappedList)) {
+                    continue;
+                } else if (frontierList[activeNode].neighbors[i].occupiedBy == "enemy" && tileArray[startIndex].occupiedBy == "figure") {
+                    continue;
+                } else {
+                    frontierList[activeNode].neighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
+                    frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB(endIndex);
+                    frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
+                    frontierList.push(frontierList[activeNode].neighbors[i]);
+                }
+            };
+
+            // Füge den aktiven Knoten der mappedList hinzu und Lösche den aktven Knoten aus der frontierList
+            mappedList.push(frontierList[activeNode]);
+            frontierList.splice(activeNode,1);
+        }
+
+        clearNodes();
+        return pathToTravel;
+    }
+
     function calculatePath (activeChar, endIndex) {
         
         var mappedList = [];
@@ -787,13 +880,13 @@
     function addXP (number) {
         xp += number;
         xpText.setText(xp);
-        if (0 <= xp && xp < 5) {
+        if (0 <= xp && xp < 15) {
             xpIcon.setFrame(0);
-        } else if (5 <= xp && xp < 10) {
+        } else if (5 <= xp && xp < 30) {
             xpIcon.setFrame(1);
-        } else if (10 <= xp && xp < 15) {
+        } else if (10 <= xp && xp < 45) {
             xpIcon.setFrame(2);
-        } else if (15 <= xp && xp < 20) {
+        } else if (15 <= xp && xp < 60) {
             xpIcon.setFrame(3);
         } else if (20 <= xp) {
             xpIcon.setFrame(4);
