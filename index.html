@@ -229,7 +229,7 @@
                         let pathHighlight = showPath(startTile, this.name);
                         console.log(showPath(startTile, this.name));
                         for (var i = 0; i < pathHighlight.length; i++) {
-                            tileArray[i].setFrame(1);
+                            tileArray[pathHighlight[i]].setFrame(1);
                         }
                     } else if (moveButton.mode == "planning") {
                         this.setFrame(2);
