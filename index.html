@@ -227,6 +227,7 @@
                     if (this.occupiedBy != "idol" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
                         let startTile = figuresOnMap[figuresOnMap.findIndex(findActiveChar)].onTile;
                         let pathHighlight = showPath(startTile, this.name);
+                        console.log(showPath(startTile, this.name));
                         for (var i = 0; i < pathHighlight.length; i++) {
                             tileArray[i].setFrame(1);
                         }
