@@ -177,9 +177,15 @@
 					if (this.occupiedBy != "idol" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
                         calculatePath(figuresOnMap[activeChar], this.name);
+                        for (var i = 0; i < tileArray.length; i++) {
+                            tileArray[i].setFrame(0);
+                        }
                     } else if (moveButton.mode == "planning") {
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
                         showText ("", figuresOnMap[activeChar], textL1[17]);
+                        for (var i = 0; i < tileArray.length; i++) {
+                            tileArray[i].setFrame(0);
+                        }
                     }
                     if (searchButton.mode == "planning") {
                         console.log(this.name + " - x: " + this.x + " - y: " + this.y);
