@@ -225,7 +225,7 @@
 				});
                 tile.on("pointerover", function pointerOver () {
                     if (this.occupiedBy != "idol" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
-                        let pathHighlight = showPath(figuresOnMap.findIndex(findActiveChar), this.name);
+                        var pathHighlight = showPath(figuresOnMap.findIndex(findActiveChar), this.name);
                         for (var i = 0; i < pathHighlight.length; i++) {
                             tileArray[i].setFrame(1);
                         }
