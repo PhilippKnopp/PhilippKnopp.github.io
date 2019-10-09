@@ -693,7 +693,7 @@
             frontierList.splice(activeNode,1);
         }
         
-        movementStopper: for (var l = 0; l < pathToTravel.length, l++) {
+        movementStopper: for (var l = 0; l < pathToTravel.length; l++) {
             if (tileArray[pathToTravel[l]].distanceTravelled > 6) {
                 pathToTravel.length = (l-1);
                 break movementStopper;
@@ -779,7 +779,7 @@
         }
         
         if (fightmode == true) {
-            movementStopper: for (var l = 0; l < activeChar.pathToTravel.length, l++) {
+            movementStopper: for (var l = 0; l < activeChar.pathToTravel.length; l++) {
                 if (tileArray[activeChar.pathToTravel[l]].distanceTravelled > 6) {
                     activeChar.pathToTravel.length = (l-1);
                     break movementStopper;
