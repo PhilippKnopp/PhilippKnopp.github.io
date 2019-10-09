@@ -224,10 +224,9 @@
                     }
 				});
                 tile.on("pointerover", function pointerOver () {
-                    if (this.occupiedBy != "idol" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
+                    if (this.occupiedBy != "idol" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning" && fightmode == true) {
                         let startTile = figuresOnMap[figuresOnMap.findIndex(findActiveChar)].onTile;
                         let pathHighlight = showPath(startTile, this.name);
-                        console.log(showPath(startTile, this.name));
                         for (var i = 0; i < pathHighlight.length; i++) {
                             tileArray[pathHighlight[i]].setFrame(1);
                         }
@@ -236,7 +235,7 @@
                     }
                 });
                 tile.on("pointerout", function pointerOut () {
-                    if (this.occupiedBy != "idol" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
+                    if (moveButton.mode == "planning") {
                         for (var i = 0; i < tileArray.length; i++) {
                             tileArray[i].setFrame(0);
                         }
@@ -693,7 +692,14 @@
             mappedList.push(frontierList[activeNode]);
             frontierList.splice(activeNode,1);
         }
-
+        
+        movementStopper: for (var l = 0; l < pathToTravel.length, l++) {
+            if (tileArray[pathToTravel[l]].distanceTravelled > 6) {
+                pathToTravel.length = (l-1);
+                break movementStopper;
+            }
+        }
+        
         clearNodes();
         return pathToTravel;
     }
@@ -771,7 +777,16 @@
             mappedList.push(frontierList[activeNode]);
             frontierList.splice(activeNode,1);
         }
-
+        
+        if (fightmode == true) {
+            movementStopper: for (var l = 0; l < activeChar.pathToTravel.length, l++) {
+                if (tileArray[activeChar.pathToTravel[l]].distanceTravelled > 6) {
+                    activeChar.pathToTravel.length = (l-1);
+                    break movementStopper;
+                }
+            }
+        }
+        
         clearNodes();
         returnCursorToNormal();
         moveButton.mode = "moving";
