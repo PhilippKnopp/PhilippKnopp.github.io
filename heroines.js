@@ -22,7 +22,6 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.on("pointerover", this.showFace, this);
         
         this.setOnMap = function () {
-            console.log("Figur setOnMap()");  // <––––––––––––––––––––––––––––––––––
             tileArray[this.onTile].occupiedBy = "figure";
             this.setAlpha(1);
             this.x = tileArray[this.onTile].x;
@@ -166,7 +165,6 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     checkStealth() {
-        console.log("checkStealth()");  // <––––––––––––––––––––––––––––––––––
         let enemyIndexes = [];
         let enemyDefs = [];
         // Alle Feinde auflisten
@@ -192,7 +190,6 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     checkIfHidden() {
-        console.log("checkIfHidden()");  // <––––––––––––––––––––––––––––––––––
         // Schaut ob ein Feind Sichtlinie zum Rogue hat
         for (var i = 0; i < figuresOnMap.length; i++) {
             if (tileArray[figuresOnMap[i].onTile].occupiedBy == "enemy" && lineOfSight(this, figuresOnMap[i].onTile) == true) {
@@ -203,14 +200,12 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     hideFace() {
-        console.log("hideFace()");  // <––––––––––––––––––––––––––––––––––
         if (figuresOnMap.findIndex(findActiveChar) == -1 || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
             faceButton.setAlpha(0);
         }
     }
     
     showFace() {
-        console.log("showFace()");  // <––––––––––––––––––––––––––––––––––
         if (figuresOnMap.findIndex(findActiveChar) == -1 || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
             faceButton.x = this.x-60;
             faceButton.y = this.y;
@@ -359,7 +354,6 @@ function showActions(_this) {
 }
 
 function hideActions() {
-    console.log("hideActions()");  // <––––––––––––––––––––––––––––––––––
     faceButton.setAlpha(0);
     doorButton.setAlpha(0);
     moveButton.setAlpha(0);
@@ -372,7 +366,6 @@ function hideActions() {
 }
 
 function deactivateFigures() {
-    console.log("deactivateFigures()");  // <––––––––––––––––––––––––––––––––––
     for (var i = 0; i < figuresOnMap.length; i++) {
         figuresOnMap[i].active = false;
         figuresOnMap[i].setFrame(0);
