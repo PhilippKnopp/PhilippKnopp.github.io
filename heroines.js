@@ -130,6 +130,9 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     activateFigure() {
+        console.log(this.actions);
+        console.log(this.movement-this.moved);
+        
         if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none" && (fightmode == false || (this.actions != 0 || (this.movement-this.moved) >= 1 ))) {
             deactivateFigures();
 
