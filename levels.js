@@ -204,6 +204,15 @@ function disableTrap1() {
 }
 
 function doors(char, tile) {
+    
+    if (fightmode == true) {
+        if (char.moved >= 1) {
+            char.moved--;
+        } else {
+            char.actions--;
+        }
+    }
+    
     if (tile == 290 || tile == 291 || tile == 292 || tile == 340 || tile == 341 || tile == 342) {
         if (tileArray[tile].state == "0dc") {
             tileArray[290].state = "0do";

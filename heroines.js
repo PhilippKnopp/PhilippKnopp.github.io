@@ -76,6 +76,9 @@ class Figure extends Phaser.GameObjects.Sprite {
         
         this.attack = function (enemy) {
             this.actions -= 1;
+            if (this.actions == 0) {
+                this.moved == 0;
+            }
             
             if (attackButton.mode == "planning cc" && this.stealth == true) { // hinterhältiger Angriff
                 let attackroll = getRandomInt(this.dieSize, this.explodes) + getRandomInt(this.dieSize, this.explodes);
@@ -102,9 +105,6 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         this.moveNow = function () {
-            if (this.moved == 0) {
-                this.actions -= 1;
-            }
             
             if (this.pathToTravel.length > 0 && this == barb) {
                 movementTweenBarb.data[0].start = this.x;
@@ -130,7 +130,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     activateFigure() {
-        if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none" && (fightmode == false || (this.actions > 0 || (this.movement-this.moved) >= 1 ))) {
+        if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none" && (fightmode == false || (this.actions != 0 || (this.movement-this.moved) >= 1 ))) {
             deactivateFigures();
 
             this.active = true;
@@ -237,6 +237,11 @@ class Figure extends Phaser.GameObjects.Sprite {
 
 function showActions(_this) {
     
+    if (fightmode == false || (this.actions != 0 || (this.movement-this.moved) >= 1 )) {
+        deactivateFigures();
+        return;
+    }
+    
     if (_this == rogue && fightmode == false) {
         _this.stealth == true;
     }
@@ -250,7 +255,7 @@ function showActions(_this) {
     faceButton.setAlpha(1);
     
     // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
-    if (tileArray[_this.onTile].neighbors.length != 0) {
+    if (tileArray[_this.onTile].neighbors.length != 0 && (fightmode == false || (this.movement-this.moved) >= 1) ) {
         moveButton.x = _this.x+buttonXpos;
         moveButton.y = _this.y;
         moveButton.setAlpha(1);
@@ -258,30 +263,32 @@ function showActions(_this) {
     }
     
     // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
-    let adjacentEnemies = false;
-    for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
-        if (tileArray[_this.onTile].neighbors[i].occupiedBy == "enemy" || tileArray[_this.onTile].neighbors[i].occupiedBy == "idol") {
-            adjacentEnemies = true;
-        }
-    }
-    if (adjacentEnemies == true) {
-        attackButton.x = _this.x+buttonXpos;
-        attackButton.y = _this.y;
-        attackButton.setAlpha(1);
-        buttonXpos += 85;
-    } else if (_this == mage) {
-        let distantEnemies = false;
-        for (var i = 0; i < tileArray.length; i++) {
-            if (lineOfSight(_this, i) == true && (tileArray[i].occupiedBy == "enemy" || tileArray[i].occupiedBy == "idol")) {
-                distantEnemies = true;
+    if (fightmode == false || this.actions >= 0 || (this.movement-this.moved) >= 6 ) {
+        let adjacentEnemies = false;
+        for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
+            if (tileArray[_this.onTile].neighbors[i].occupiedBy == "enemy" || tileArray[_this.onTile].neighbors[i].occupiedBy == "idol") {
+                adjacentEnemies = true;
             }
         }
-        if (distantEnemies == true) {
+        if (adjacentEnemies == true) {
             attackButton.x = _this.x+buttonXpos;
             attackButton.y = _this.y;
             attackButton.setAlpha(1);
-            attackButton.mode = "possible rc";
             buttonXpos += 85;
+        } else if (_this == mage) {
+            let distantEnemies = false;
+            for (var i = 0; i < tileArray.length; i++) {
+                if (lineOfSight(_this, i) == true && (tileArray[i].occupiedBy == "enemy" || tileArray[i].occupiedBy == "idol")) {
+                    distantEnemies = true;
+                }
+            }
+            if (distantEnemies == true) {
+                attackButton.x = _this.x+buttonXpos;
+                attackButton.y = _this.y;
+                attackButton.setAlpha(1);
+                attackButton.mode = "possible rc";
+                buttonXpos += 85;
+            }
         }
     }
     
@@ -300,18 +307,20 @@ function showActions(_this) {
     }
     
     // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist
-    let adjacentTrap = false;
-    for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
-        if (tileArray[_this.onTile].neighbors[i].state == "0t1" && trap1Sprt.alpha !=0 && trap1Sprt.frame != 1) {
-            adjacentTrap = true;
+    if (fightmode == false || this.actions >= 0 || (this.movement-this.moved) >= 6 ) {
+        let adjacentTrap = false;
+        for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
+            if (tileArray[_this.onTile].neighbors[i].state == "0t1" && trap1Sprt.alpha !=0 && trap1Sprt.frame != 1) {
+                adjacentTrap = true;
+            }
         }
-    }
-    if ((_this == mage || _this == rogue) && adjacentTrap == true ) {
-        specialButton.x = _this.x+buttonXpos;
-        specialButton.y = _this.y;
-        specialButton.setAlpha(1);
-        buttonXpos += 85;
-        specialButton.mode = "disableTrap";
+        if ((_this == mage || _this == rogue) && adjacentTrap == true ) {
+            specialButton.x = _this.x+buttonXpos;
+            specialButton.y = _this.y;
+            specialButton.setAlpha(1);
+            buttonXpos += 85;
+            specialButton.mode = "disableTrap";
+        }
     }
     
     // bietet den "Cancel-Button" an.
