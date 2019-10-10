@@ -240,7 +240,7 @@ class Figure extends Phaser.GameObjects.Sprite {
 
 function showActions(_this) {
     
-    if (fightmode == false || (this.actions != 0 || (this.movement-this.moved) >= 1 )) {
+    if (fightmode == true && (this.actions == 0 && (this.movement-this.moved) <= 1 )) {
         deactivateFigures();
         return;
     }
