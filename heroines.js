@@ -273,7 +273,7 @@ function showActions(_this) {
     }
     
     // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
-    if (fightmode == false || (_this.actions >= 0 || (_this.movement-_this.moved) >= 6) ) {
+    if (fightmode == false || _this.actions >= 0 || (_this.movement-_this.moved) >= 6 ) {
         let adjacentEnemies = false;
         for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
             if (tileArray[_this.onTile].neighbors[i].occupiedBy == "enemy" || tileArray[_this.onTile].neighbors[i].occupiedBy == "idol") {
