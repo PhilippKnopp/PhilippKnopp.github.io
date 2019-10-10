@@ -70,6 +70,7 @@
     
     var figuresOnMap = [];
     var turnOver = [];
+    var charsStillAlive = 3;
     var Info1, InfoName, Info2, Info3;
     var textHistory = [];
     var textHistoryIndex = -1;
@@ -811,14 +812,12 @@
             }
         }
         // Alle Feinde, zu denen LoS besteht, werden wieder sichtbar
-        for (var j = 0; j < 3; j++) {
-            if (tileArray[figuresOnMap[j].onTile].occupiedBy == "figure") {
-                for (var k = 0; k < enemyIndexes.length; k++) {
-                    if (lineOfSight (figuresOnMap[j], enemyIndexes[k].onTile)) {
-                        enemyIndexes[k].setAlpha(1);
-                        if (figuresOnMap[j].stealth == false) {
-                            enemyIndexes[k].alarmed = true;
-                        }
+        for (var j = 0; j < charsStillAlive; j++) {
+            for (var k = 0; k < enemyIndexes.length; k++) {
+                if (lineOfSight (figuresOnMap[j], enemyIndexes[k].onTile)) {
+                    enemyIndexes[k].setAlpha(1);
+                    if (figuresOnMap[j].stealth == false) {
+                        enemyIndexes[k].alarmed = true;
                     }
                 }
             }
@@ -836,8 +835,11 @@
         }
     }
     
-    function completeTurn() {
-        if (mage.actions == 0 && rogue.actions == 0 && barb.actions == 0 && (mage.movement-mage.moved) < 1 && (rogue.movement-rogue.moved) <= 1 && (barb.movement-barb.moved) <= 1) {
+    function completeTurn(char) {
+        if (turnOver.includes(char.name) == false ) {
+            turnOver.push(char.name);
+        }
+        if (turnOver.length == charsStillAlive) {
             enemyTurn();
         }
     }

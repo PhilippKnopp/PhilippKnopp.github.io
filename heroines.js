@@ -43,8 +43,8 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.rangedAttack = function (enemy) {
             if (this.actions > 0) {
                 this.actions--;
-            } else if (this.actions == 0 && this.moved >= 6) {
-                this.moved -= 6;
+            } else if (this.actions == 0 && this.moved == 0) {
+                this.moved += 6;
             }
             
             if (rangedDamage[0] == 0) {
@@ -247,6 +247,7 @@ class Figure extends Phaser.GameObjects.Sprite {
 function showActions(_this) {
     
     if (fightmode == true && (_this.actions == 0 && (_this.movement-_this.moved) < 1 )) {
+        completeTurn(_this);
         deactivateFigures();
         return;
     }
@@ -375,6 +376,11 @@ function showActions(_this) {
     }
     
     tileArray[_this.onTile].neighbors.length = 0;
+    
+    if (doorButton.alpha == 0 && moveButton.alpha == 0 && attackButton.alpha == 0 && specialButton.alpha == 0 ) {
+        completeTurn(this);
+    }
+    
 }
 
 function hideActions() {
