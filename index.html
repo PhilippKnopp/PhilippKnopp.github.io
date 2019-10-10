@@ -825,6 +825,17 @@
         checkFightmode();
     }
     
+    function tileVisibility () {
+        for (var i = 0; i < tileArray.length; i++) {
+            if (lineOfSight (figuresOnMap[0], i) || lineOfSight (figuresOnMap[1], i) || lineOfSight (figuresOnMap[2], i)) {
+                tileArray[i].setFrame(0);
+            } else {
+                tileArray[i].setFrame(2);
+            }
+        }
+        
+    }
+    
     function clearNodes() {
         tileArray.forEach(function(element) {
             element.neighbors.length = 0;
