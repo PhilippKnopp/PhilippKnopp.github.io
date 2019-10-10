@@ -82,11 +82,10 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         this.attack = function (enemy) {
-            console.log(this.actions);
             if (this.actions > 0) {
                 this.actions--;
-            } else if (this.actions == 0 && this.moved >= 6) {
-                this.moved -= 6;
+            } else if (this.actions == 0 && this.moved == 0) {
+                this.moved += 6;
             }
             
             if (attackButton.mode == "planning cc" && this.stealth == true) { // hinterhältiger Angriff
