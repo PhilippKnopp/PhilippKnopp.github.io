@@ -82,7 +82,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         this.attack = function (enemy) {
-            
+            console.log(this.actions);
             if (this.actions > 0) {
                 this.actions--;
             } else if (this.actions == 0 && this.moved >= 6) {
@@ -140,7 +140,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     
     activateFigure() {
         
-        if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none" && (fightmode == false || (this.actions != 0 || (this.movement-this.moved) >= 1 ))) {
+        if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none" && (fightmode == false || (this.actions > 0 || (this.movement-this.moved) >= 1 ))) {
             deactivateFigures();
 
             this.active = true;
