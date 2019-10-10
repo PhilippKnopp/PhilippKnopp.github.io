@@ -785,14 +785,13 @@
         
         if (fightmode == true) {
             movementStopper: for (var l = 0; l < activeChar.pathToTravel.length; l++) {
-                if (tileArray[activeChar.pathToTravel[l]].distanceTravelled > 6) {
-                    activeChar.pathToTravel.length = (l);
+                if (tileArray[activeChar.pathToTravel[l]].distanceTravelled > (activeChar.movement-activeChar.moved)) {
+                    activeChar.pathToTravel.length = l;
                     break movementStopper;
                 }
             }
         }
         
-        console.log(tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].distanceTravelled);
         activeChar.moved += tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].distanceTravelled;
         console.log(activeChar.moved);
         

@@ -75,6 +75,8 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         this.attack = function (enemy) {
+            this.actions -= 1;
+            
             if (attackButton.mode == "planning cc" && this.stealth == true) { // hinterhältiger Angriff
                 let attackroll = getRandomInt(this.dieSize, this.explodes) + getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {
@@ -100,6 +102,10 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         this.moveNow = function () {
+            if (this.moved == 0) {
+                this.actions -= 1;
+            }
+            
             if (this.pathToTravel.length > 0 && this == barb) {
                 movementTweenBarb.data[0].start = this.x;
                 movementTweenBarb.data[1].start = this.y;
@@ -124,7 +130,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     activateFigure() {
-        if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none") {
+        if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none" && (fightmode == false || (this.actions > 0 || (this.movement-this.moved) >= 1 ))) {
             deactivateFigures();
 
             this.active = true;
