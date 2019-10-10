@@ -701,13 +701,8 @@
         movementStopper: for (var l = 0; l < pathToTravel.length; l++) {
             if (tileArray[pathToTravel[l]].distanceTravelled > (activeChar.movement-activeChar.moved)) {
                 console.log(pathToTravel);
-                console.log(tileArray[pathToTravel[l]].distanceTravelled);
-                console.log(activeChar.moved);
                 pathToTravel.length = (l);
-                activeChar.moved = tileArray[pathToTravel[l]].distanceTravelled;
                 console.log(pathToTravel);
-                console.log(tileArray[pathToTravel[l]].distanceTravelled);
-                console.log(activeChar.moved);
                 break movementStopper;
             }
         }
@@ -798,6 +793,10 @@
                 }
             }
         }
+        
+        console.log(tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].distanceTravelled);
+        activeChar.moved += tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].distanceTravelled;
+        console.log(activeChar.moved);
         
         clearNodes();
         returnCursorToNormal();
