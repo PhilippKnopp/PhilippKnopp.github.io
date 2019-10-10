@@ -258,7 +258,7 @@ function showActions(_this) {
     faceButton.setAlpha(1);
     
     // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
-    if (tileArray[_this.onTile].neighbors.length != 0 || (fightmode == true && (this.movement-this.moved) >= 1) ) {
+    if (tileArray[_this.onTile].neighbors.length != 0 && (fightmode == false || (this.movement-this.moved) >= 1) ) {
         moveButton.x = _this.x+buttonXpos;
         moveButton.y = _this.y;
         moveButton.setAlpha(1);
@@ -266,7 +266,7 @@ function showActions(_this) {
     }
     
     // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
-    if (fightmode == false || this.actions >= 0 || (this.movement-this.moved) >= 6 ) {
+    if (fightmode == false || (this.actions >= 0 || (this.movement-this.moved) >= 6) ) {
         let adjacentEnemies = false;
         for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
             if (tileArray[_this.onTile].neighbors[i].occupiedBy == "enemy" || tileArray[_this.onTile].neighbors[i].occupiedBy == "idol") {
