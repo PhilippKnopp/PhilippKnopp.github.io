@@ -697,10 +697,14 @@
             frontierList.splice(activeNode,1);
         }
         
+        let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
         movementStopper: for (var l = 0; l < pathToTravel.length; l++) {
-            console.log(tileArray[pathToTravel[l]].distanceTravelled);
-            if (tileArray[pathToTravel[l]].distanceTravelled > 6) {
+            if (tileArray[pathToTravel[l]].distanceTravelled >= (activeChar.movement-activeChar.moved)) {
                 pathToTravel.length = (l);
+                activeChar.moved -= tileArray[pathToTravel[l]].distanceTravelled;
+                console.log(pathToTravel);
+                console.log(tileArray[pathToTravel[l]].distanceTravelled);
+                console.log(activeChar.moved);
                 break movementStopper;
             }
         }
