@@ -700,7 +700,7 @@
         let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
         movementStopper: for (var l = 0; l < pathToTravel.length; l++) {
             if (tileArray[pathToTravel[l]].distanceTravelled > (activeChar.movement-activeChar.moved)) {
-                onsole.log(pathToTravel);
+                console.log(pathToTravel);
                 console.log(tileArray[pathToTravel[l]].distanceTravelled);
                 console.log(activeChar.moved);
                 pathToTravel.length = (l);
