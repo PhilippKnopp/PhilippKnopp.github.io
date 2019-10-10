@@ -75,8 +75,10 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         this.attack = function (enemy) {
-            this.actions -= 1;
-            if (this.actions == 0) {
+            
+            if (this.actions > 0) {
+                this.actions--;
+            } else if (this.actions == 0 && this.moved >= 6) {
                 this.moved == 0;
             }
             
@@ -130,8 +132,6 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     activateFigure() {
-        console.log(this.actions);
-        console.log(this.movement-this.moved);
         
         if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none" && (fightmode == false || (this.actions != 0 || (this.movement-this.moved) >= 1 ))) {
             deactivateFigures();
@@ -310,7 +310,7 @@ function showActions(_this) {
     }
     
     // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist
-    if (fightmode == false || this.actions >= 0 || (this.movement-this.moved) >= 6 ) {
+    if (fightmode == false || _this.actions >= 0 || (_this.movement-_this.moved) >= 6 ) {
         let adjacentTrap = false;
         for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
             if (tileArray[_this.onTile].neighbors[i].state == "0t1" && trap1Sprt.alpha !=0 && trap1Sprt.frame != 1) {
