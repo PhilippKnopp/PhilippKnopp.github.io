@@ -69,6 +69,7 @@
     var eventReminder = {e2:false, e4:false};
     
     var figuresOnMap = [];
+    var turnOver = [];
     var Info1, InfoName, Info2, Info3;
     var textHistory = [];
     var textHistoryIndex = -1;
@@ -833,7 +834,12 @@
                 tileArray[i].setFrame(2);
             }
         }
-        
+    }
+    
+    function completeTurn() {
+        if (mage.actions == 0 && rogue.actions == 0 && barb.actions == 0 && (mage.movement-mage.moved) < 1 && (rogue.movement-rogue.moved) <= 1 && (barb.movement-barb.moved) <= 1) {
+            enemyTurn();
+        }
     }
     
     function clearNodes() {
@@ -855,8 +861,7 @@
     }
 
     function containsObject(obj, list) {
-        var i;
-        for (i = 0; i < list.length; i++) {
+        for (var i = 0; i < list.length; i++) {
             if (list[i] === obj) {
                 return true;
             }
@@ -877,7 +882,6 @@
     }
     
     function eventDispatch (activeChar, eventKey) {
-        console.log(eventReminder);
         if (eventKey == "0t1") {
             trap1(activeChar);
             activeChar.moveNow;

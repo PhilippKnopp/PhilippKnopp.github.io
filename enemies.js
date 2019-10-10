@@ -184,3 +184,9 @@ function createEnemies (_this) {
     }
 
 }
+
+function enemyTurn() {
+    
+    
+    replenishActions();
+}

@@ -11,7 +11,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.health;
         this.movement = 6;
         this.moved = 0;
-        this.actions = 2;
+        this.actions = 1;
         this.pathToTravel = [];
         this.def = 4;
         this.description;
@@ -34,13 +34,19 @@ class Figure extends Phaser.GameObjects.Sprite {
             this.pathToTravel.shift();
             tileArray[this.onTile].occupiedBy = "figure";
             enemyVisibility();
-            tileVisibility();
+            // tileVisibility();
             if (typeof tileArray[this.onTile].state === 'string') {
                 eventDispatch(this, tileArray[this.onTile].state);
             };
         };
         
         this.rangedAttack = function (enemy) {
+            if (this.actions > 0) {
+                this.actions--;
+            } else if (this.actions == 0 && this.moved >= 6) {
+                this.moved -= 6;
+            }
+            
             if (rangedDamage[0] == 0) {
                 rangedDamage[0] = getRandomInt(this.dieSize, this.explodes);
             }
@@ -80,7 +86,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             if (this.actions > 0) {
                 this.actions--;
             } else if (this.actions == 0 && this.moved >= 6) {
-                this.moved == 0;
+                this.moved -= 6;
             }
             
             if (attackButton.mode == "planning cc" && this.stealth == true) { // hinterhältiger Angriff
@@ -241,7 +247,7 @@ class Figure extends Phaser.GameObjects.Sprite {
 
 function showActions(_this) {
     
-    if (fightmode == true && (_this.actions == 0 && (_this.movement-_this.moved) <= 1 )) {
+    if (fightmode == true && (_this.actions == 0 && (_this.movement-_this.moved) < 1 )) {
         deactivateFigures();
         return;
     }
@@ -392,4 +398,15 @@ function deactivateFigures() {
     attackButton.mode = "none";
     moveButton.mode = "none";
     searchButton.mode = "none";
+}
+
+function replenishActions() {
+    mage.actions = 1;
+    mage.moved = 0;
+    rogue.actions = 1;
+    rogue.moved = 0;
+    barb.actions = 1;
+    barb.moved = 0;
+    
+    deactivateFigures();
 }
