@@ -379,6 +379,8 @@ function showActions(_this) {
     
     if (doorButton.alpha == 0 && moveButton.alpha == 0 && attackButton.alpha == 0 && (specialButton.alpha == 0 || _this != rogue) ) {
         completeTurn(_this);
+        hideActions();
+        deactivateFigures();
     }
     
 }
