@@ -38,9 +38,12 @@ class Enemy extends Phaser.GameObjects.Sprite {
             }
             
             let attackroll = getRandomInt(this.dieSize, this.explodes);
+            let damageroll = Math.min(attackroll, getRandomInt(this.dieSize, this.explodes))
             if (attackroll >= hero.def) {
-                hero.health -= attackroll;
+                hero.health -= damageroll;
             }
+            
+            console.log("attack: " + attackroll + ";  damage: " + damageroll + ";  hero: " + hero.health);
             
             if (hero.health <= 0) {
                 hero.setAlpha(0.2);
