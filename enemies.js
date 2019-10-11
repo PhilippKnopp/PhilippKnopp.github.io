@@ -10,7 +10,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.fullHealth;
         this.health;
         this.movement = 6;
-        this.moved = 0;
+        this.movementCounter = 6;
         this.pathToTravel = [];
         this.def;
         this.alarmed = false;
@@ -33,8 +33,8 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.attack = function (hero) {
             if (this.actions > 0) {
                 this.actions--;
-            } else if (this.actions == 0 && this.moved == 0) {
-                this.moved += 6;
+            } else if (this.actions == 0 && this.movementCounter >= 6) {
+                this.movementCounter -= 6;
             }
             
             let attackroll = getRandomInt(this.dieSize, this.explodes);

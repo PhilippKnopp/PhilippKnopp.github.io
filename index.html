@@ -702,7 +702,7 @@
         
         let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
         movementStopper: for (var l = 0; l < pathToTravel.length; l++) {
-            if (tileArray[pathToTravel[l]].distanceTravelled > (activeChar.movement-activeChar.moved)) {
+            if (tileArray[pathToTravel[l]].distanceTravelled > (activeChar.movementCounter)) {
                 pathToTravel.length = l;
                 break movementStopper;
             }
@@ -788,15 +788,14 @@
         
         if (fightmode == true) {
             movementStopper: for (var l = 0; l < activeChar.pathToTravel.length; l++) {
-                if (tileArray[activeChar.pathToTravel[l]].distanceTravelled > (activeChar.movement-activeChar.moved)) {
+                if (tileArray[activeChar.pathToTravel[l]].distanceTravelled > (activeChar.movementCounter)) {
                     activeChar.pathToTravel.length = l;
                     break movementStopper;
                 }
             }
         }
         
-        activeChar.moved += tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].distanceTravelled;
-        console.log(activeChar.moved);
+        activeChar.movementCounter -= tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].distanceTravelled;
         
         clearNodes();
         returnCursorToNormal();

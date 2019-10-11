@@ -10,8 +10,9 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.stealth = false;
         this.health;
         this.movement = 6;
-        this.moved = 0;
+        this.movementCounter = 6;
         this.actions = 1;
+        this.actionsCounter = 1;
         this.pathToTravel = [];
         this.def = 4;
         this.description;
@@ -43,8 +44,8 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.rangedAttack = function (enemy) {
             if (this.actions > 0) {
                 this.actions--;
-            } else if (this.actions == 0 && this.moved == 0) {
-                this.moved += 6;
+            } else if (this.actions == 0 && this.movementCounter == 6) {
+                this.movementCounter -= 6;
             }
             
             if (rangedDamage[0] == 0) {
@@ -84,8 +85,8 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.attack = function (enemy) {
             if (this.actions > 0) {
                 this.actions--;
-            } else if (this.actions == 0 && this.moved == 0) {
-                this.moved += 6;
+            } else if (this.actions == 0 && this.movementCounter == this.movement) {
+                this.movementCounter -= 6;
             }
             
             if (attackButton.mode == "planning cc" && this.stealth == true) { // hinterhältiger Angriff
@@ -135,11 +136,15 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
         }
         
+        this.checkHealth function () {
+            
+        }
+        
     }
     
     activateFigure() {
         
-        if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none" && (fightmode == false || (this.actions > 0 || (this.movement-this.moved) >= 1 ))) {
+        if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none" && (fightmode == false || (this.actions > 0 || (this.movementCounter) >= 1 ))) {
             deactivateFigures();
 
             this.active = true;
@@ -246,7 +251,7 @@ class Figure extends Phaser.GameObjects.Sprite {
 
 function showActions(_this) {
     
-    if (fightmode == true && (_this.actions == 0 && (_this.movement-_this.moved) < 1 )) {
+    if (fightmode == true && (_this.actions == 0 && (_this.movementCounter) < 1 )) {
         completeTurn(_this);
         deactivateFigures();
         return;
@@ -265,7 +270,7 @@ function showActions(_this) {
     faceButton.setAlpha(1);
     
     // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
-    if (tileArray[_this.onTile].neighbors.length != 0 && (fightmode == false || (_this.movement-_this.moved) >= 1)) {
+    if (tileArray[_this.onTile].neighbors.length != 0 && (fightmode == false || (_this.movementCounter) >= 1)) {
         moveButton.x = _this.x+buttonXpos;
         moveButton.y = _this.y;
         moveButton.setAlpha(1);
@@ -273,7 +278,7 @@ function showActions(_this) {
     }
     
     // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
-    if (fightmode == false || _this.actions > 0 || ((_this.movement-_this.moved) >= 6 && _this.actions == 0) ) {
+    if (fightmode == false || _this.actions > 0 || ((_this.movementCounter) >= 6 && _this.actions == 0) ) {
         let adjacentEnemies = false;
         for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
             if (tileArray[_this.onTile].neighbors[i].occupiedBy == "enemy" || tileArray[_this.onTile].neighbors[i].occupiedBy == "idol") {
@@ -317,7 +322,7 @@ function showActions(_this) {
     }
     
     // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist
-    if (fightmode == false || _this.actions >= 0 || (_this.movement-_this.moved) >= 6 ) {
+    if (fightmode == false || _this.actions >= 0 || (_this.movementCounter) >= 6 ) {
         let adjacentTrap = false;
         for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
             if (tileArray[_this.onTile].neighbors[i].state == "0t1" && trap1Sprt.alpha !=0 && trap1Sprt.frame != 1) {
@@ -409,11 +414,11 @@ function deactivateFigures() {
 
 function replenishActions() {
     mage.actions = 1;
-    mage.moved = 0;
+    mage.movementCounter = mage.movement;
     rogue.actions = 1;
-    rogue.moved = 0;
+    rogue.movementCounter = rogue.movement;
     barb.actions = 1;
-    barb.moved = 0;
+    barb.movementCounter = barb.movement;
     
     deactivateFigures();
 }
