@@ -30,6 +30,23 @@ class Enemy extends Phaser.GameObjects.Sprite {
             this.y = tileArray[this.onTile].y;
         };
         
+        this.attack = function (hero) {
+            if (this.actions > 0) {
+                this.actions--;
+            } else if (this.actions == 0 && this.moved == 0) {
+                this.moved += 6;
+            }
+            
+            let attackroll = getRandomInt(this.dieSize, this.explodes);
+            if (attackroll >= hero.def) {
+                hero.health -= attackroll;
+            }
+            
+            if (hero.health <= 0) {
+                hero.setAlpha(0.2);
+            }
+        }
+        
     }
     
     activateFigure () {
@@ -183,10 +200,4 @@ function createEnemies (_this) {
         figuresOnMap.push(ordrak);
     }
 
-}
-
-function enemyTurn() {
-    
-    
-    replenishActions();
 }
