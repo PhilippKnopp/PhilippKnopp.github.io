@@ -378,7 +378,7 @@ function showActions(_this) {
     tileArray[_this.onTile].neighbors.length = 0;
     
     if (doorButton.alpha == 0 && moveButton.alpha == 0 && attackButton.alpha == 0 && (specialButton.alpha == 0 || _this != rogue) ) {
-        completeTurn(this);
+        completeTurn(_this);
     }
     
 }
