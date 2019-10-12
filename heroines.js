@@ -42,9 +42,9 @@ class Figure extends Phaser.GameObjects.Sprite {
         };
         
         this.rangedAttack = function (enemy) {
-            if (this.actions > 0) {
-                this.actions--;
-            } else if (this.actions == 0 && this.movementCounter == 6) {
+            if (this.actionsCounter > 0) {
+                this.actionsCounter--;
+            } else if (this.actionsCounter == 0 && this.movementCounter == 6) {
                 this.movementCounter -= 6;
             }
             
@@ -83,9 +83,9 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         this.attack = function (enemy) {
-            if (this.actions > 0) {
-                this.actions--;
-            } else if (this.actions == 0 && this.movementCounter == this.movement) {
+            if (this.actionsCounter > 0) {
+                this.actionsCounter--;
+            } else if (this.actionsCounter == 0 && this.movementCounter >= 6) {
                 this.movementCounter -= 6;
             }
             
@@ -136,15 +136,19 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
         }
         
-        this.checkHealth function () {
-            
+        this.checkHealth = function () {
+            if (this.health <= 0) {
+                this.setAlpha(0.2);
+                this.movement = 3;
+                this.actions = 0;
+            }
         }
         
     }
     
     activateFigure() {
         
-        if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none" && (fightmode == false || (this.actions > 0 || (this.movementCounter) >= 1 ))) {
+        if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none" && (fightmode == false || (this.actionsCounter > 0 || (this.movementCounter) >= 1 ))) {
             deactivateFigures();
 
             this.active = true;
@@ -251,7 +255,7 @@ class Figure extends Phaser.GameObjects.Sprite {
 
 function showActions(_this) {
     
-    if (fightmode == true && (_this.actions == 0 && (_this.movementCounter) < 1 )) {
+    if (fightmode == true && (_this.actionsCounter == 0 && (_this.movementCounter) < 1 )) {
         completeTurn(_this);
         deactivateFigures();
         return;
@@ -278,7 +282,7 @@ function showActions(_this) {
     }
     
     // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
-    if (fightmode == false || _this.actions > 0 || ((_this.movementCounter) >= 6 && _this.actions == 0) ) {
+    if (fightmode == false || _this.actionsCounter > 0 || ((_this.movementCounter) >= 6 && _this.actionsCounter == 0) ) {
         let adjacentEnemies = false;
         for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
             if (tileArray[_this.onTile].neighbors[i].occupiedBy == "enemy" || tileArray[_this.onTile].neighbors[i].occupiedBy == "idol") {
@@ -322,7 +326,7 @@ function showActions(_this) {
     }
     
     // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist
-    if (fightmode == false || _this.actions >= 0 || (_this.movementCounter) >= 6 ) {
+    if (fightmode == false || _this.actionsCounter >= 0 || (_this.movementCounter) >= 6 ) {
         let adjacentTrap = false;
         for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
             if (tileArray[_this.onTile].neighbors[i].state == "0t1" && trap1Sprt.alpha !=0 && trap1Sprt.frame != 1) {
@@ -413,11 +417,11 @@ function deactivateFigures() {
 }
 
 function replenishActions() {
-    mage.actions = 1;
+    mage.actionsCounter = mage.actions;
     mage.movementCounter = mage.movement;
-    rogue.actions = 1;
+    rogue.actionsCounter = rogue.actions;
     rogue.movementCounter = rogue.movement;
-    barb.actions = 1;
+    barb.actionsCounter = barb.actions;
     barb.movementCounter = barb.movement;
     
     deactivateFigures();

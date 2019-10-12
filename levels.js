@@ -206,10 +206,10 @@ function disableTrap1() {
 function doors(char, tile) {
     
     if (fightmode == true) {
-        if (char.moved >= 1) {
-            char.moved--;
+        if (char.movementCounter >= 1) {
+            char.movementCounter--;
         } else {
-            char.actions--;
+            char.actionsCounter--;
         }
     }
     

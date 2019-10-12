@@ -30,24 +30,15 @@ class Enemy extends Phaser.GameObjects.Sprite {
             this.y = tileArray[this.onTile].y;
         };
         
-        this.attack = function (hero) {
-            if (this.actions > 0) {
-                this.actions--;
-            } else if (this.actions == 0 && this.movementCounter >= 6) {
-                this.movementCounter -= 6;
-            }
-            
+        this.attack = function (heroine) {
             let attackroll = getRandomInt(this.dieSize, this.explodes);
             let damageroll = Math.min(attackroll, getRandomInt(this.dieSize, this.explodes))
-            if (attackroll >= hero.def) {
-                hero.health -= damageroll;
+            if (attackroll >= heroine.def) {
+                heroine.health -= damageroll;
             }
             
-            console.log("attack: " + attackroll + ";  damage: " + damageroll + ";  hero: " + hero.health);
-            
-            if (hero.health <= 0) {
-                hero.setAlpha(0.2);
-            }
+            console.log("attack: " + attackroll + ";  damage: " + damageroll + ";  hero: " + heroine.health);
+            heroine.checkHealth();
         }
         
     }
