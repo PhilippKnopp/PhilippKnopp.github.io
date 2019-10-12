@@ -1,4 +1,7 @@
 // JS Document
+
+////////// Bewegt die Gegner in Kampfsituationen //////////////////////////////////////////////////////////
+
 function enemyTurn() {
     
     for (let i = 1; i < figuresOnMap.length; i++) {
@@ -10,8 +13,9 @@ function enemyTurn() {
         }
     }
     
-    replenishActions();
+    replenishActions();     // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
 }
+
 
 function enemyPlanMove (enemy) {
     let victimOfChoice = barb;
@@ -22,6 +26,7 @@ function enemyPlanMove (enemy) {
     actionStack.push("attack", victimOfChoice);
     return actionStack;
 }
+
 
 function enemyDo (enemy, action, target) {
     switch(action) {
