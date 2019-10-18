@@ -114,6 +114,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         this.moveNow = function () {
+            console.log(this);
             
             if (this.pathToTravel.length > 0 && this == barb) {
                 movementTweenBarb.data[0].start = this.x;
@@ -159,6 +160,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.setAlpha(0.5);
             }
             
+            console.log(this);
             showActions(this);
             
         } else if (searchButton.mode == "planning") {
