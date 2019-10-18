@@ -44,7 +44,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.rangedAttack = function (enemy) {
             if (this.actionsCounter > 0) {
                 this.actionsCounter--;
-            } else if (this.actionsCounter == 0 && this.movementCounter == 6) {
+            } else if (this.actionsCounter == 0 && this.movementCounter >= 6) {
                 this.movementCounter -= 6;
             }
             
@@ -279,7 +279,7 @@ function showActions(_this) {
     faceButton.setAlpha(1);
     
     // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
-    if (tileArray[_this.onTile].neighbors.length != 0 && (fightmode == false || (_this.movementCounter) >= 1)) {
+    if (tileArray[_this.onTile].neighbors.length != 0 && (fightmode == false || _this.movementCounter >= 1)) {
         moveButton.x = _this.x+buttonXpos;
         moveButton.y = _this.y;
         moveButton.setAlpha(1);
