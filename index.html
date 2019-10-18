@@ -944,14 +944,21 @@
             }
         }
         if (alarmedEnemies == 0) {
+            if (fightmode == true) {
+                fightmode = false;
+                gameModeIcon.setFrame(0);
+                gameModeText.setText("Exploration");
+            }
             fightmode = false;
             gameModeIcon.setFrame(0);
             gameModeText.setText("Exploration");
         } else {
-            fightmode = true;
-            gameModeIcon.setFrame(1);
-            gameModeText.setText("Skirmish");
-            //replenishActions();
+            if (fightmode == false) {
+                fightmode = true;
+                gameModeIcon.setFrame(1);
+                gameModeText.setText("Skirmish");
+                replenishActions();
+            }
         }
     }
     
