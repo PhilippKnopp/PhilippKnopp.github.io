@@ -840,6 +840,7 @@
             turnOver.push(char.name);
         }
         if (turnOver.length == charsStillAlive) {
+            turnOver.length = 0;
             enemyTurn();
         }
     }
