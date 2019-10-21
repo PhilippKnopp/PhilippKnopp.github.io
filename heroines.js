@@ -262,8 +262,9 @@ function showActions(_this) {
     console.log(_this.movementCounter);
     
     if (fightmode == true && (_this.actionsCounter == 0 && (_this.movementCounter) < 1 )) {
-        completeTurn(_this);
+        hideActions();
         deactivateFigures();
+        completeTurn(_this);
         return;
     }
     
@@ -393,9 +394,9 @@ function showActions(_this) {
     tileArray[_this.onTile].neighbors.length = 0;
     
     if (doorButton.alpha == 0 && moveButton.alpha == 0 && attackButton.alpha == 0 && (specialButton.alpha == 0 || _this != rogue) ) {
-        completeTurn(_this);
         hideActions();
         deactivateFigures();
+        completeTurn(_this);
     }
     
 }
