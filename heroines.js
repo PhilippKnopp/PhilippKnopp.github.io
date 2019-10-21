@@ -35,6 +35,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             this.pathToTravel.shift();
             tileArray[this.onTile].occupiedBy = "figure";
             enemyVisibility();
+            checkFightmode();
             // tileVisibility();
             if (typeof tileArray[this.onTile].state === 'string') {
                 eventDispatch(this, tileArray[this.onTile].state);
@@ -428,6 +429,4 @@ function replenishActions() {
     rogue.movementCounter = rogue.movement;
     barb.actionsCounter = barb.actions;
     barb.movementCounter = barb.movement;
-    
-    deactivateFigures();
 }

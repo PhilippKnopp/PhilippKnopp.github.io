@@ -330,10 +330,17 @@ function doors(char, tile) {
             tileArray[394].walkable = [0,1,1,1,1,1,0,0];
         }
     }
-    enemyVisibility();
-    checkFightmode();
+
     clearNodes();
-    showActions(char);
+    
+    // Ist dutch das öffnen der Tür ein Feind in Alarmbereitschaft versetzt worden?
+    let fightmodeNow = fightmode;       // Aktueller Spielmodus: Erkuden oder Kampf
+    enemyVisibility();                  // Schaut ob durch das Öffnen der Tür mehr Feinde sichtbar wurden und setzt diese in Alarmbereitschaft
+    checkFightmode();                   // Sind jetzt Feinde in Alarmbereitschaft, die es vorher nicht waren werden alle Chars deaktiviert und die Aktionen aufgefüllt
+    if (fightmodeNow == fightmode) {    // Wenn weiterhin der gleiche Kampf ist oder normal weiter Erkundet wird:
+        showActions(char);              // Wird der Char wieder aktiviert und kann normal weitermachen
+    }
+    
 }
 
 var textL1 = [

@@ -823,7 +823,6 @@
                 }
             }
         }
-        checkFightmode();
     }
     
     function tileVisibility () {
@@ -949,15 +948,13 @@
                 gameModeIcon.setFrame(0);
                 gameModeText.setText("Exploration");
             }
-            fightmode = false;
-            gameModeIcon.setFrame(0);
-            gameModeText.setText("Exploration");
         } else {
             if (fightmode == false) {
                 fightmode = true;
                 gameModeIcon.setFrame(1);
                 gameModeText.setText("Skirmish");
                 replenishActions();
+                deactivateFigures();
             }
         }
     }
