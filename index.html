@@ -22,7 +22,7 @@
 	
 <script>
 	
-    console.log("Version 0.21");
+    console.log("Version 0.21a");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -493,7 +493,6 @@
     }
 
     function buildLevel() {
-        console.log(figuresOnMap);
         let levelMap = returnLevelType(1);
         for (var i = 0; i < tileArray.length; i++) {
             tileArray[i].state = levelMap[i];
@@ -889,7 +888,7 @@
             trap1(activeChar);
             activeChar.moveNow;
         } else if (eventKey == "e1") {      // start von Level 1
-            showText (textL1[0], figuresOnMap[7], textL1Enemy[0]);
+            showText (textL1[0], figuresOnMap[7], textL1Enemy[0], textL1[9]);
         } else if (eventKey == "e2" && eventReminder.e2 != true) {      // nach dem öffnen der ersten Türe in den tempel
             eventReminder.e2 = true;
             showText (textL1[21]);

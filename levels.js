@@ -344,7 +344,7 @@ function doors(char, tile) {
 }
 
 var textL1 = [
-/*0*/   "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local\nguardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two\npale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are\nholding a woman captive.\nShe is not the girl they wanted to rescue, but she seems to be in need for their help anyway.\nThe young adventurers hear one of the creatures speaking with a coarse voice.",
+/*0*/   "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local\nguardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two\npale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are\nholding a woman captive.\nShe is not the girl they wanted to rescue, but she seems to be in need for their help anyway.",
 /*1*/    "I can't see that.",
 /*2*/    "A cold and dark cave. The walls are rough and wet.\nThere is an impressive temple, that was cut out of the stone next to a lake.",
 /*3*/    "Even though the water is crystal clear the surface of the lake only reflects the dark surroundings. That makes it impossible to tell how deep the lake truly is.",
@@ -353,7 +353,7 @@ var textL1 = [
 /*6*/    "A barren, elongated room. A part of the wall is missing and gives way to a hole in the ground that is filled\nwith rubble. Something seems wrong.",
 /*7*/    "There is a trap that was supposed to push victims through a moovable wall into a pit filled with spikes.",
 /*8*/    "The pit is about three meters deep. Once the pit was filled with spikes, but most of them rusted away.",
-/*9*/    "Click on a Character to activate it\nDepending on Position, you can select various Actions.",
+/*9*/    "Click on a Character to activate it\nDepending on the Character's position and abilities, you can select various actions.",
 /*10*/    "A stone block engraved with religious runes.",
 /*11*/    "A huge, cathedral like room, that is illuminated by blue, flickering candles. There are no pews, only an\naltair in front of a podium. In the middle of the podium there is a pedestral with a dark idol\nstanding upon it. The writhing shadows in the corners of this room seem threatening and darker than they are supposed to.",
 /*12*/    "An austere corridor. The walls were cut into the rock in a way to give them a look as if they were made out\nof big, smooth stoneblocks.",
