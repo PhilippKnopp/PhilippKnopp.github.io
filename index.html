@@ -177,7 +177,7 @@
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
                     // nichts ist auf der Tile und diese ist von einer Seite aus begehbar
-					if (this.occupiedBy != "idol" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning") {
+					if (moveButton.mode == "planning" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol") {
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
                         calculatePath(figuresOnMap[activeChar], this.name);
                         for (var i = 0; i < tileArray.length; i++) {
@@ -233,7 +233,7 @@
                     }
 				});
                 tile.on("pointerover", function pointerOver () {
-                    if (this.occupiedBy != "idol" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && moveButton.mode == "planning" && fightmode == true) {
+                    if (moveButton.mode == "planning" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol" && fightmode == true) {
                         let startTile = figuresOnMap[figuresOnMap.findIndex(findActiveChar)].onTile;
                         let pathHighlight = showPath(startTile, this.name);
                         for (var i = 0; i < pathHighlight.length; i++) {
@@ -652,7 +652,7 @@
                 frontierListValues.push(frontierList[i].wayPointUsefulness);
             };
             if (frontierList.length == 0) {
-                return;
+                return [];
             };
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
 
@@ -738,7 +738,6 @@
             };
             if (frontierList.length == 0) {
                 showText("", activeChar, textL1[18]);
-                console.log(activeChar.name+" should be shown");
                 return;
             };
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
