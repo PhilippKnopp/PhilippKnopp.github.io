@@ -185,7 +185,7 @@
                         }
                     } else if (moveButton.mode == "planning") {
                         let activeChar = figuresOnMap.findIndex(findActiveChar);
-                        showText ("", figuresOnMap[activeChar], textL1[17]);
+                        showText("", figuresOnMap[activeChar], textL1[17]);
                         for (var i = 0; i < tileArray.length; i++) {
                             tileArray[i].setFrame(0);
                         }
@@ -738,6 +738,7 @@
             };
             if (frontierList.length == 0) {
                 showText("", activeChar, textL1[18]);
+                console.log(activeChar.name+" should be shown");
                 return;
             };
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));

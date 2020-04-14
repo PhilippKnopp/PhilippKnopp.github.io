@@ -153,6 +153,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             deactivateFigures();
 
             this.active = true;
+            console.log(this.name+" is now active.");
             this.setFrame(1);
             
             if (this == rogue && (this.checkIfHidden() == true || this.stealth == true)) {
