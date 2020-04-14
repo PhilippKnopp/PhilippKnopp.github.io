@@ -70,11 +70,12 @@ function guiBuilder(_this) {
         Info1.setText(text);
     };
     
-    InfoName = _this.add.text(950, Info1.getBottomLeft().y+20, "", { fontFamily: "Verdana" , color: '#914a23', lineSpacing: 12}).setFontStyle('bold');
+    InfoName = _this.add.text(950, Info1.getBottomLeft().y+20, "", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12}).setFontStyle('bold');
     InfoName.showName = function (char) {
         if (typeof char === 'object') {
             InfoName.setText(char.name + ": ");
             InfoName.setColor(char.color);
+            console.log(char.color);
         } else {
             InfoName.setText(char);
             InfoName.setColor('#999999');
