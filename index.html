@@ -793,9 +793,8 @@
                     break movementStopper;
                 }
             }
+            activeChar.movementCounter -= tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].distanceTravelled;
         }
-        
-        activeChar.movementCounter -= tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].distanceTravelled;
         
         clearNodes();
         returnCursorToNormal();
