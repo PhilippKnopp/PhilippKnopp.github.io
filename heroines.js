@@ -167,9 +167,9 @@ class Figure extends Phaser.GameObjects.Sprite {
         } else if (searchButton.mode == "planning") {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             if (lineOfSight (activeChar, this.onTile) == true) {
-                showText(textL1Chars[this.description]);
+                showText("", activeChar, textL1Chars[this.description]);
             } else {
-                showText(textL1[1]);
+                showText("", activeChar, textL1[1]);
             }
             returnCursorToNormal();
             showActions(activeChar);
