@@ -22,7 +22,7 @@
 	
 <script>
 	
-    console.log("Version 0.2");
+    console.log("Version 0.21");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -493,6 +493,7 @@
     }
 
     function buildLevel() {
+        console.log(figuresOnMap);
         let levelMap = returnLevelType(1);
         for (var i = 0; i < tileArray.length; i++) {
             tileArray[i].state = levelMap[i];
@@ -796,7 +797,6 @@
         }
         
         activeChar.movementCounter -= tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].distanceTravelled;
-        console.log(activeChar);
         
         clearNodes();
         returnCursorToNormal();
