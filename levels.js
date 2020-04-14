@@ -344,7 +344,7 @@ function doors(char, tile) {
 }
 
 var textL1 = [
-/*0*/   "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local\nguardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two\npale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are\nholding a woman captive.\nShe is not the girl they came to look for, but sems to be in need for their help anyway, as the young\nadventurers hear one of them hissing in a coarse voice.", 
+/*0*/   "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local\nguardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two\npale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are\nholding a woman captive.\nShe is not the girl they wanted to rescue, but she seems to be in need for their help anyway.\nThe young adventurers hear one of the creatures speaking with a coarse voice.",
 /*1*/    "I can't see that.",
 /*2*/    "A cold and dark cave. The walls are rough and wet.\nThere is an impressive temple, that was cut out of the stone next to a lake.",
 /*3*/    "Even though the water is crystal clear the surface of the lake only reflects the dark surroundings. That makes it impossible to tell how deep the lake truly is.",
