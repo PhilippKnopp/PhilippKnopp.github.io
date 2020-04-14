@@ -92,7 +92,7 @@ function guiBuilder(_this) {
         Info2.setPosition(InfoName.getBottomRight().x, InfoName.getTopRight().y);
     };
     
-    Info3 = _this.add.text(950, Info2.getBottomLeft().y+30, "", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
+    Info3 = _this.add.text(950, Info2.getBottomLeft().y+30, "", { fontFamily: "Verdana" , color: '#003F5E', lineSpacing: 12 });
     Info3.showMessage = function (text) {
         Info3.setText(text);
         Info3.setPosition(950, Info2.getBottomLeft().y+30);
