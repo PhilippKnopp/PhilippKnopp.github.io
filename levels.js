@@ -353,7 +353,7 @@ var textL1 = [
 /*6*/    "A barren, elongated room. A part of the wall is missing and gives way to a hole in the ground that is filled\nwith rubble. Something seems wrong.",
 /*7*/    "There is a trap that was supposed to push victims through a moovable wall into a pit filled with spikes.",
 /*8*/    "The pit is about three meters deep. Once the pit was filled with spikes, but most of them rusted away.",
-/*9*/    "Click on a Character to activate it\nDepending on the Character's position and abilities, you can select various actions.",
+/*9*/    "Hover over the tokens on the map to see a portrait or click on one of the heroines to activate her.\nDepending on the heroines's position and abilities, you can select various actions.",
 /*10*/    "A stone block engraved with religious runes.",
 /*11*/    "A huge, cathedral like room, that is illuminated by blue, flickering candles. There are no pews, only an\naltair in front of a podium. In the middle of the podium there is a pedestral with a dark idol\nstanding upon it. The writhing shadows in the corners of this room seem threatening and darker than they are supposed to.",
 /*12*/    "An austere corridor. The walls were cut into the rock in a way to give them a look as if they were made out\nof big, smooth stoneblocks.",
