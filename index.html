@@ -49,10 +49,10 @@
     
     var game = new Phaser.Game(config);
     var objects = {};
-    var tileArray = [];
-    var matrixWidth = 25;
-    var matrixHeight = 40;
-    var movementTweenBarb, movementTweenMage, movementTweenRogue;
+    var tileArray = []; // Array mit allen Spielfeldern des Levels
+    var matrixWidth = 25; // Spielfeldbreite
+    var matrixHeight = 40; // Spielfeldhöhe
+    var movementTweenBarb, movementTweenMage, movementTweenRogue; // Bewegungsanimationen
     
     var doorButton, moveButton, attackButton, searchButton,
         faceButton, specialButton, cancelButton;
@@ -66,11 +66,11 @@
     var swirl1, swirl2;
     
     var mage, rogue, barb;
-    var rangedDamage = [0];
-    var eventReminder = {e2:false, e4:false};
+    var rangedDamage = [0];  // Überschüssiger Schaden der Magierin kann auf zusätzliche Ziele verteilt werden
+    var eventReminder = {e2:false, e4:false}; // Dinge die nur einmal passieren sollen
     
     var figuresOnMap = [];
-    var turnOver = [];
+    var turnOver = []; // Array mit allen Helden die in der aktuellen runde schon agiert haben.
     var charsStillAlive = 3;
     var Info1, InfoName, Info2, Info3;
     var textHistory = [];
@@ -889,7 +889,7 @@
             trap1(activeChar);
             activeChar.moveNow;
         } else if (eventKey == "e1") {      // start von Level 1
-            showText (textL1[0], figuresOnMap[3], textL1Enemy[0]);
+            showText (textL1[0], figuresOnMap[4], textL1Enemy[0]);
         } else if (eventKey == "e2" && eventReminder.e2 != true) {      // nach dem öffnen der ersten Türe in den tempel
             eventReminder.e2 = true;
             showText (textL1[21]);

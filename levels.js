@@ -333,7 +333,7 @@ function doors(char, tile) {
 
     clearNodes();
     
-    // Ist dutch das öffnen der Tür ein Feind in Alarmbereitschaft versetzt worden?
+    // Ist durch das öffnen der Tür ein Feind in Alarmbereitschaft versetzt worden?
     let fightmodeNow = fightmode;       // Aktueller Spielmodus: Erkuden oder Kampf
     enemyVisibility();                  // Schaut ob durch das Öffnen der Tür mehr Feinde sichtbar wurden und setzt diese in Alarmbereitschaft
     checkFightmode();                   // Sind jetzt Feinde in Alarmbereitschaft, die es vorher nicht waren werden alle Chars deaktiviert und die Aktionen aufgefüllt
@@ -378,7 +378,7 @@ var textL1 = [
 /*31*/    "We should press on.",
 /*32*/    "As Leng tries to disable the trap the old mechanism breaks spraying the surroundings with a hail of wooden and metal shrapnel.",
 /*33*/    "...",
-/*34*/    "Caelith closes her eyes and invisible tendrils start to manipulate the mechanism. But she misjudges the state of the materials and the trap breaksspraying the surroundings with a hail of wooden and metal shrapnel.",
+/*34*/    "Caelith closes her eyes and invisible tendrils start to manipulate the mechanism. But she misjudges the state of the materials and the trap breaks, spraying the surroundings with a hail of wooden and metal shrapnel.",
 /*35*/    "A just reward for not beeing careful enough.",
 /*36*/    "With coordinated and fast movements Leng pulls out her tools and starts working through the cracks of the floor in front of her. She unhinges a lever, disabeling the presure plates ahead.",
 /*37*/    "Caelith closes her eyes and invisible tendrils start to manipulate the mechanism, unhinging a lever and disabeling the presure plates ahead.",
