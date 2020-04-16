@@ -22,7 +22,7 @@
 	
 <script>
 	
-    console.log("Version 0.21c");
+    console.log("Version 0.21d");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -646,13 +646,14 @@
         // gehe folgende Schleife solange durch bis es einen Weg gibt
         mapperLoop: while (pathFound == false) {
 
-            // gehe frontierList durch nach niedrigster wayPointUsefulness
+            // gehe frontierList durch nach niedrigster wayPointUsefulness oder
             frontierListValues.length = 0;
             for (var i = 0; i < frontierList.length; i++) {
                 frontierListValues.push(frontierList[i].wayPointUsefulness);
             };
             if (frontierList.length == 0) {
-                return [];
+                pathToTravel = [];
+                break mapperLoop;
             };
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
 
@@ -738,7 +739,8 @@
             };
             if (frontierList.length == 0) {
                 showText("", activeChar, textL1[18]);
-                return;
+                activeChar.pathToTravel.length = 0;
+                break mapperLoop;
             };
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
 
@@ -793,7 +795,9 @@
                     break movementStopper;
                 }
             }
-            activeChar.movementCounter -= tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].distanceTravelled;
+            if (activeChar.pathToTravel.length != 0) {
+                activeChar.movementCounter -= tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].distanceTravelled;
+            }
         }
         
         clearNodes();
