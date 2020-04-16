@@ -153,7 +153,6 @@ class Figure extends Phaser.GameObjects.Sprite {
             deactivateFigures();
 
             this.active = true;
-            console.log(this.name+" is now active.");
             this.setFrame(1);
             
             if (this == rogue && (this.checkIfHidden() == true || this.stealth == true)) {
@@ -261,9 +260,7 @@ function showActions(_this) {
     console.log(_this.movementCounter);
     
     if (fightmode == true && (_this.actionsCounter == 0 && (_this.movementCounter) < 1 )) {
-        hideActions();
-        deactivateFigures();
-        completeTurn(_this);
+        completeTurn(_this);    // beendet Zug für diese Heldin und checkt ob dadurch der Zug für alle beendet ist
         return;
     }
     

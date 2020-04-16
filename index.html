@@ -838,12 +838,15 @@
     }
     
     function completeTurn(char) {
+        hideActions();
+        deactivateFigures();
         if (turnOver.includes(char.name) == false ) {
             turnOver.push(char.name);
         }
         if (turnOver.length == charsStillAlive) {
             turnOver.length = 0;
-            enemyTurn();
+            enemyTurn();    // Aktive Gegner agieren
+            replenishActions();     // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
         }
     }
     
@@ -955,7 +958,6 @@
             gameModeIcon.setFrame(1);
             gameModeText.setText("Skirmish");
             replenishActions();
-            deactivateFigures();
         }
     }
     
