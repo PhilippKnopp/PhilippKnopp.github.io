@@ -22,7 +22,7 @@
 	
 <script>
 	
-    console.log("Version 0.21e");
+    console.log("Version 0.21f");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -191,7 +191,7 @@
                         }
                     }
                     if (searchButton.mode == "planning") {
-                        console.log(this.name + " - x: " + this.x + " - y: " + this.y);
+                        //console.log(this.name + " - x: " + this.x + " - y: " + this.y);
                         let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
                         if (lineOfSight (activeChar, this.name) == true) {
                             showText(textL1[this.info]);
@@ -775,6 +775,8 @@
                     continue;
                 } else if (frontierList[activeNode].neighbors[i].occupiedBy == "enemy" && tileArray[activeChar.onTile].occupiedBy == "figure") {
                     continue;
+                } else if (frontierList[activeNode].neighbors[i].occupiedBy == "figure" && tileArray[activeChar.onTile].occupiedBy == "enemy") {
+                    continue;
                 } else {
                     frontierList[activeNode].neighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
                     frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB(endIndex);
@@ -794,6 +796,9 @@
                     activeChar.pathToTravel.length = l;
                     break movementStopper;
                 }
+            }
+            if (tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].occupiedBy == "figure" || tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].occupiedBy == "enemy") {
+                activeChar.pathToTravel.length = l-1;
             }
             if (activeChar.pathToTravel.length != 0) {
                 activeChar.movementCounter -= tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].distanceTravelled;
