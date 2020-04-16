@@ -22,7 +22,7 @@
 	
 <script>
 	
-    console.log("Version 0.21f");
+    console.log("Version 0.21g");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -797,10 +797,10 @@
                     break movementStopper;
                 }
             }
-            if (tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].occupiedBy == "figure" || tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].occupiedBy == "enemy") {
-                activeChar.pathToTravel.length = l-1;
-            }
-            if (activeChar.pathToTravel.length != 0) {
+            if (activeChar.pathToTravel.length > 0) {
+                if (tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].occupiedBy == "figure" || tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].occupiedBy == "enemy") {
+                    activeChar.pathToTravel.length = activeChar.pathToTravel.length-1;
+                }
                 activeChar.movementCounter -= tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].distanceTravelled;
             }
         }
