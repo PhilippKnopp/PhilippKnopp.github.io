@@ -75,7 +75,6 @@ function guiBuilder(_this) {
         if (typeof char === 'object') {
             InfoName.setText(char.name + ": ");
             InfoName.setColor(char.color);
-            console.log(char.color);
         } else {
             InfoName.setText(char);
             InfoName.setColor('#999999');
