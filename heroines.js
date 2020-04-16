@@ -43,18 +43,14 @@ class Figure extends Phaser.GameObjects.Sprite {
         };
         
         this.rangedAttack = function (enemy) {
-            console.log("mage a " + attackButton.mode);
             if (this.actionsCounter > 0) {
-                console.log("mage b");
                 this.actionsCounter--;
-            } else if (this.actionsCounter == 0 && this.movementCounter >= 6) {
+            } else if (this.actionsCounter == 0 && this.movementCounter >= 6 && rangedDamage[0] > 0) {
                 this.movementCounter -= 6;
-                console.log("mage c");
             }
             
             if (rangedDamage[0] == 0) {
                 rangedDamage[0] = getRandomInt(this.dieSize, this.explodes);
-                console.log("mage d");
             }
             let distantEnemies = [];
             for (var i = 0; i < tileArray.length; i++) {
@@ -72,20 +68,16 @@ class Figure extends Phaser.GameObjects.Sprite {
                 enemy.health--;
             }
             if (enemy.health <= 0) {
-                console.log("mage e");
                 tileArray[enemy.onTile].occupiedBy = "";
                 enemy.setAlpha(0);
                 figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
                 addXP(enemy.loot);
                 checkFightmode();
-                console.log("mage f");
             }
             if (rangedDamage[0] == 0) {
-                console.log("mage g");
                 returnCursorToNormal();
                 showActions(this);
             } else {
-                console.log("mage h");
                 enemyHealthBar.clear();
                 enemy.showFace();
             }
@@ -293,7 +285,7 @@ function showActions(_this) {
     }
     
     // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
-    if (fightmode == false || _this.actionsCounter > 0 || ((_this.movementCounter) >= 6 && _this.actionsCounter == 0) ) {
+    if (fightmode == false || _this.actionsCounter > 0 || (_this.movementCounter >= 6 && _this.actionsCounter == 0) ) {
         let adjacentEnemies = false;
         for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
             if (tileArray[_this.onTile].neighbors[i].occupiedBy == "enemy" || tileArray[_this.onTile].neighbors[i].occupiedBy == "idol") {
