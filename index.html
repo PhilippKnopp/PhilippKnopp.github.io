@@ -84,6 +84,8 @@
     var level = 1;
     var fightmode = false;
     
+    var bgmusic;
+    
     // Funktion die alle Bilder lädt
     function preload() {
         this.load.image('map-lvl-1', 'img/map-lvl-1.png');
@@ -122,6 +124,8 @@
         this.load.spritesheet('textNewSprite', 'img/textNew.png', { frameWidth: 84, frameHeight: 46 });
         this.load.spritesheet('gameModeSprite', 'img/mode.png', { frameWidth: 86, frameHeight: 86 });
         this.load.spritesheet('xpSprite', 'img/xp.png', { frameWidth: 86, frameHeight: 86 });
+        
+        this.load.audio("bgMusic_Cave1", "sound/lvl1_BG.mp3");
         
 	}
 
@@ -458,6 +462,11 @@
             },
             onCompleteScope: movementTweenBarb
         });
+        
+        bgmusic = game.sound.add(bgMusic[level]);
+        bgmusic.volume = 1;
+        bgmusic.loop = true;
+        bgmusic.play();
         
 	}
     
