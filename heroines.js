@@ -94,6 +94,9 @@ class Figure extends Phaser.GameObjects.Sprite {
                 let attackroll = getRandomInt(this.dieSize, this.explodes) + getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {
                     enemy.health -= attackroll;
+                    melee_hits[getRandomInt(melee_hits.length, false)-1].play;
+                } else {
+                    melee_misses[getRandomInt(melee_misses.length, false)-1].play;
                 }
                 this.stealth = false;
                 this.setAlpha(1);
@@ -101,6 +104,9 @@ class Figure extends Phaser.GameObjects.Sprite {
                 let attackroll = getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {
                     enemy.health -= attackroll;
+                    melee_hits[getRandomInt(melee_hits.length, false)-1].play;
+                } else {
+                    melee_misses[getRandomInt(melee_misses.length, false)-1].play;
                 }
             }
             if (enemy.health <= 0) {

@@ -85,6 +85,9 @@
     var fightmode = false;
     
     var bgmusic;
+    var m_hit_1, m_hit_2, m_hit_3, m_hit_4, m_miss_1, m_hit_2;
+    var melee_hits = [m_hit_1, m_hit_2, m_hit_3, m_hit_4];
+    var melee_misses = [m_miss_1, m_hit_2];
     
     // Funktion die alle Bilder lädt
     function preload() {
@@ -126,7 +129,12 @@
         this.load.spritesheet('xpSprite', 'img/xp.png', { frameWidth: 86, frameHeight: 86 });
         
         this.load.audio("lvl_1_BG_Music", ["sound/lvl1_BG.mp3","sound/lvl1_BG.ogg"]);
-        
+        this.load.audio("melee_hit_1_sound", ["sound/sword_1_sound.mp3","sound/sword_1_sound.ogg"]);
+        this.load.audio("melee_hit_2_sound", ["sound/sword_2_sound.mp3","sound/sword_2_sound.ogg"]);
+        this.load.audio("melee_hit_3_sound", ["sound/sword_3_sound.mp3","sound/sword_3_sound.ogg"]);
+        this.load.audio("melee_hit_4_sound", ["sound/sword_4_sound.mp3","sound/sword_4_sound.ogg"]);
+        this.load.audio("melee_miss_1_sound", ["sound/sword_5_sound.mp3","sound/sword_5_sound.ogg"]);
+        this.load.audio("melee_miss_2_sound", ["sound/sword_6_sound.mp3","sound/sword_6_sound.ogg"]);
 	}
 
     // Funktion die alle Sachen erstellt
@@ -467,7 +475,12 @@
         bgmusic.volume = 0.3;
         bgmusic.loop = true;
         bgmusic.play();
-        console.log(bgmusic);
+        m_hit_1 = game.sound.add("melee_hit_1_sound");
+        m_hit_2 = game.sound.add("melee_hit_2_sound");
+        m_hit_3 = game.sound.add("melee_hit_3_sound");
+        m_hit_4 = game.sound.add("melee_hit_4_sound");
+        m_miss_1 = game.sound.add("melee_miss_1_sound");
+        m_miss_2 = game.sound.add("melee_miss_2_sound");
         
 	}
     
