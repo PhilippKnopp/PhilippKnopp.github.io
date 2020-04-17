@@ -136,7 +136,7 @@ var paleAcolyteStartingPosition = [0,[207,258,490,611,744,765,792]];
 var palePriestStartingPosition = [0,[703,707,778,782,830,866]];
 var ordrakStartingPosition = [0,[755]];
 
-var bgMusic = [0, "bgMusic_Cave1"];
+var bgMusic = [0, "lvl_1_BG_Music"];
 
 function returnLevelType(level) {
 	if (level == 1) {
