@@ -194,7 +194,6 @@ function disableTrap1() {
         } 
     }
     addXP(8);
-    showActions(activeChar);
     trap1Sprt.setAlpha(1);
     trap1Sprt.setFrame(1);
     tileArray[437].state = 0;
@@ -203,6 +202,7 @@ function disableTrap1() {
     tileArray[463].state = 0;
     tileArray[487].state = 0;
     tileArray[488].state = 0;
+    showActions(activeChar);
 }
 
 function doors(char, tile) {
@@ -336,12 +336,12 @@ function doors(char, tile) {
     clearNodes();
     
     // Ist durch das öffnen der Tür ein Feind in Alarmbereitschaft versetzt worden?
-    let fightmodeNow = fightmode;       // Aktueller Spielmodus: Erkuden oder Kampf
+    //let fightmodeNow = fightmode;       // Aktueller Spielmodus: Erkuden oder Kampf
     enemyVisibility();                  // Schaut ob durch das Öffnen der Tür mehr Feinde sichtbar wurden und setzt diese in Alarmbereitschaft
-    checkFightmode();                   // Sind jetzt Feinde in Alarmbereitschaft, die es vorher nicht waren werden alle Chars deaktiviert und die Aktionen aufgefüllt
-    if (fightmodeNow == fightmode) {    // Wenn weiterhin der gleiche Kampf ist oder normal weiter Erkundet wird:
+    checkFightmode();                   // Sind jetzt Feinde in Alarmbereitschaft, die es vorher nicht waren werden die Aktionen aufgefüllt
+    //if (fightmodeNow == fightmode) {    // Wenn weiterhin der gleiche Kampf ist oder normal weiter Erkundet wird:
         showActions(char);              // Wird der Char wieder aktiviert und kann normal weitermachen
-    }
+    //}
     
 }
 
@@ -374,13 +374,13 @@ var textL1 = [
 /*25*/    "Leng, remind me why I am doing this?",
 /*26*/    "Rhiva tries with an iron determination to retrieve the item from the bottom of the lake. After some time\nshe resurfaces almost unconscious.",
 /*27*/    "I can try again!",
-/*28*/    "Leng dives deep and deeper to the bottom of the icy lake. Her eyes adjust quickly to the complete\ndarkness of the lake. As she reaches for the glowing crystals she feels that something large started moving in the water.",
+/*28*/    "Leng dives deep and deeper to the bottom of the icy lake. Her eyes adjust quickly to the complete\ndarkness of the lake. As she reaches for the glowing crystals she feels that something large starts to\nmove in the water.",
 /*29*/    "I've got it. We should go... \nNow!",
 /*30*/    "A calm and very deep lake.",
 /*31*/    "We should press on.",
 /*32*/    "As Leng tries to disable the trap the old mechanism breaks spraying the surroundings with a hail of wooden and metal shrapnel.",
 /*33*/    "...",
-/*34*/    "Caelith closes her eyes and invisible tendrils start to manipulate the mechanism. But she misjudges the state of the materials and the trap breaks, spraying the surroundings with a hail of wooden and metal shrapnel.",
+/*34*/    "Caelith closes her eyes and invisible tendrils start to manipulate the mechanism. But she misjudges the\nstate of the materials and the trap breaks, spraying the surroundings with a hail of wooden and metal shrapnel.",
 /*35*/    "A just reward for not beeing careful enough.",
 /*36*/    "With coordinated and fast movements Leng pulls out her tools and starts working through the cracks of the\nfloor in front of her. She unhinges a lever, disabeling the presure plates ahead.",
 /*37*/    "Caelith closes her eyes and invisible tendrils start to manipulate the mechanism, unhinging a lever and disabeling the presure plates ahead.",
