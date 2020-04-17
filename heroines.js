@@ -69,20 +69,19 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             if (enemy.health <= 0) {
                 tileArray[enemy.onTile].occupiedBy = "";
-                console.log(attackButton.mode);
                 enemy.hideFace();
-                console.log(faceButton.alpha);
                 enemy.setAlpha(0);
                 figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
                 addXP(enemy.loot);
                 checkFightmode();
+            } else {
+                enemyHealthBar.clear();
+                enemy.showFace();
+                console.log("variante1");
             }
             if (rangedDamage[0] == 0) {
                 returnCursorToNormal();
                 showActions(this);
-            } else {
-                enemyHealthBar.clear();
-                enemy.showFace();
             }
         }
         
