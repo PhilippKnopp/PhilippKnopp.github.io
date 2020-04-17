@@ -45,7 +45,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.rangedAttack = function (enemy) {
             if (this.actionsCounter > 0) {
                 this.actionsCounter--;
-            } else if (this.actionsCounter == 0 && this.movementCounter >= 6 && rangedDamage[0] > 0) {
+            } else if (this.actionsCounter == 0 && this.movementCounter >= 6 && rangedDamage[0] == 0) {
                 this.movementCounter -= 6;
             }
             
