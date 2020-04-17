@@ -71,6 +71,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 tileArray[enemy.onTile].occupiedBy = "";
                 console.log(attackButton.mode);
                 enemy.hideFace();
+                console.log(faceButton.alpha);
                 enemy.setAlpha(0);
                 figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
                 addXP(enemy.loot);
