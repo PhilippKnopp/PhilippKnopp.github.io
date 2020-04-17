@@ -69,7 +69,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             if (enemy.health <= 0) {
                 tileArray[enemy.onTile].occupiedBy = "";
-                enemy.hideFace();
+                //enemy.hideFace();
                 enemy.setAlpha(0);
                 figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
                 addXP(enemy.loot);
@@ -77,7 +77,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             } else {
                 enemyHealthBar.clear();
                 enemy.showFace();
-                console.log("variante1");
+                console.log("variante2");
             }
             if (rangedDamage[0] == 0) {
                 returnCursorToNormal();
