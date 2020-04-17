@@ -475,12 +475,12 @@
         bgmusic.volume = 0.3;
         bgmusic.loop = true;
         bgmusic.play();
-        m_hit_1 = game.sound.add("melee_hit_1_sound");
-        m_hit_2 = game.sound.add("melee_hit_2_sound");
-        m_hit_3 = game.sound.add("melee_hit_3_sound");
-        m_hit_4 = game.sound.add("melee_hit_4_sound");
-        m_miss_1 = game.sound.add("melee_miss_1_sound");
-        m_miss_2 = game.sound.add("melee_miss_2_sound");
+        melee_hits[0] = game.sound.add("melee_hit_1_sound");
+        melee_hits[1] = game.sound.add("melee_hit_2_sound");
+        melee_hits[2] = game.sound.add("melee_hit_3_sound");
+        melee_hits[3] = game.sound.add("melee_hit_4_sound");
+        melee_misses[0] = game.sound.add("melee_miss_1_sound");
+        melee_misses[1] = game.sound.add("melee_miss_2_sound");
         
 	}
     
