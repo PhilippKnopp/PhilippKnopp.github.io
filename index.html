@@ -85,7 +85,7 @@
     var fightmode = false;
     
     // Funktion die alle Bilder lädt
-    function preload() {
+    function preload() { console.log(arguments.callee.name);
         this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.image('crystal1', 'img/crystal1.png');
         this.load.image('door1', 'img/door1.png');
@@ -126,7 +126,7 @@
 	}
 
     // Funktion die alle Sachen erstellt
-	function create() {
+	function create() { console.log(arguments.callee.name);
 		objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0C0E11');
         guiBuilder(this); // Greift auf gui.js zu und erstellt viele der User Interface Elemente
@@ -484,15 +484,15 @@
         swirl2.rotation -= 0.02;
     }
 
-    function findActiveChar(element) {
+    function findActiveChar(element) { console.log(arguments.callee.name);
         return element.active == true;
     }
     
-    function findDeadChar(element) {
+    function findDeadChar(element) { console.log(arguments.callee.name);
         return element.health <= 0;
     }
 
-    function buildLevel() {
+    function buildLevel() { console.log(arguments.callee.name);
         let levelMap = returnLevelType(1);
         for (var i = 0; i < tileArray.length; i++) {
             tileArray[i].state = levelMap[i];
@@ -515,7 +515,7 @@
         eventDispatch("", "e1");
     }
 
-    function lineOfSight (activeChar, endIndex) {
+    function lineOfSight (activeChar, endIndex) { console.log(arguments.callee.name);
         let aX = activeChar.onTile % matrixWidth;
         let aY = Math.floor(activeChar.onTile / matrixWidth);
         
@@ -628,7 +628,7 @@
         return !los_blocked; // gibt "true" zurück, wenn man in direkter Linie zum angesehenen Punkt laufen/schwimmen/... könnte.
     }
 
-    function showPath (startIndex, endIndex) {
+    function showPath (startIndex, endIndex) { console.log(arguments.callee.name);
         
         var mappedList = [];
         var frontierList = [];
@@ -713,7 +713,7 @@
         return pathToTravel;
     }
 
-    function calculatePath (activeChar, endIndex) {
+    function calculatePath (activeChar, endIndex) { console.log(arguments.callee.name);
         
         var mappedList = [];
         var frontierList = [];
@@ -810,7 +810,7 @@
         moveButton.mode = "moving";
     }
 
-    function enemyVisibility () {
+    function enemyVisibility () { console.log(arguments.callee.name);
         let enemyIndexes = [];
         // Alle Feinde werden unsichtbar
         for (var i = 0; i < figuresOnMap.length; i++) {
@@ -832,7 +832,7 @@
         }
     }
     
-    function tileVisibility () {
+    function tileVisibility () { console.log(arguments.callee.name);
         for (var i = 0; i < tileArray.length; i++) {
             if (lineOfSight (figuresOnMap[0], i) || lineOfSight (figuresOnMap[1], i) || lineOfSight (figuresOnMap[2], i)) {
                 tileArray[i].setFrame(0);
@@ -842,7 +842,7 @@
         }
     }
     
-    function completeTurn(char) {
+    function completeTurn(char) { console.log(arguments.callee.name);
         hideActions();
         deactivateFigures();
         if (turnOver.includes(char.name) == false ) {
@@ -855,7 +855,7 @@
         }
     }
     
-    function clearNodes() {
+    function clearNodes() { console.log(arguments.callee.name);
         tileArray.forEach(function(element) {
             element.neighbors.length = 0;
             element.neighborsDistance.length = 0;
@@ -865,7 +865,7 @@
         });
     }
 
-    function returnCursorToNormal() {
+    function returnCursorToNormal() { console.log(arguments.callee.name);
         hideActions();
         moveButton.setScale(1);
         searchButton.setScale(1);
@@ -873,7 +873,7 @@
         attackButton.mode = "none";
     }
 
-    function containsObject(obj, list) {
+    function containsObject(obj, list) { console.log(arguments.callee.name);
         for (var i = 0; i < list.length; i++) {
             if (list[i] === obj) {
                 return true;
@@ -883,7 +883,7 @@
         return false;
     }
     
-    function showText (text1 = "", char = "", text2 = "", text3 = "") {
+    function showText (text1 = "", char = "", text2 = "", text3 = "") { console.log(arguments.callee.name);
 
         Info1.showMessage(text1);
         InfoName.showName(char);
@@ -894,7 +894,7 @@
         textHistoryIndex += 4;
     }
     
-    function eventDispatch (activeChar, eventKey) {
+    function eventDispatch (activeChar, eventKey) { console.log(arguments.callee.name);
         if (eventKey == "0t1") {
             trap1(activeChar);
             activeChar.moveNow;
@@ -930,7 +930,7 @@
         };
     }
     
-    function addXP (number) {
+    function addXP (number) { console.log(arguments.callee.name);
         xp += number;
         xpText.setText(xp);
         if (0 <= xp && xp < 15) {
@@ -946,7 +946,7 @@
         }
     }
     
-    function checkFightmode() {
+    function checkFightmode() { console.log(arguments.callee.name);
         let alarmedEnemies = 0;
         for (var i = 0; i < figuresOnMap.length; i++) {
             if (tileArray[figuresOnMap[i].onTile].occupiedBy == "enemy" && figuresOnMap[i].alarmed == true) {
