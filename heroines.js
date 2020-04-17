@@ -69,6 +69,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             if (enemy.health <= 0) {
                 tileArray[enemy.onTile].occupiedBy = "";
+                console.log(attackButton.mode);
                 enemy.hideFace();
                 enemy.setAlpha(0);
                 figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
