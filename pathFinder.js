@@ -89,9 +89,11 @@ function calculatePath (startIndex, endIndex) {
     }
     
     // wenn das Ziefeld der Bewegung besetzt ist wird es gekürzt bis die Bewegung auf einem leeren Feld endet oder keine Bewegung zustande kommt
-    while (pathToTravel.length > 0) {
+    endIsFree while (pathToTravel.length > 0) {
         if (tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy == "figure" || tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy == "enemy") {
             pathToTravel.length = pathToTravel.length-1;
+        } else {
+            break endIsFree;
         }
     }
     
