@@ -54,6 +54,7 @@
     var matrixWidth = 25; // Spielfeldbreite
     var matrixHeight = 40; // Spielfeldhöhe
     var movementTweenBarb, movementTweenMage, movementTweenRogue; // Bewegungsanimationen
+    movementTweenBarb = 1;
     
     var doorButton, moveButton, attackButton, searchButton,
         faceButton, specialButton, cancelButton;
@@ -433,12 +434,9 @@
         createEnemies(this);
         buildLevel();
         
-        var movementTweenNames = [];
-        movementTweenNames.push(movementTweenBarb, movementTweenRogue, movementTweenMage);
+        var movementTweenNames = ["movementTweenBarb", "movementTweenRogue", "movementTweenMage"];
         
         for (var k = 0; k < movementTweenNames.length; k++) {
-            console.log("figuresOnMap[k] " +figuresOnMap[k]);
-            console.log("window[movementTweenNames[k]] " +window[movementTweenNames[k]]);
             window[movementTweenNames[k]] = this.tweens.add({
                 targets: figuresOnMap[k],
                 x: { value: function () {
@@ -452,7 +450,7 @@
                 onComplete: function () {
                     figuresOnMap[k].enterTile();
                 },
-                onCompleteScope: movementTweenNames[k]
+                onCompleteScope: window[movementTweenNames[k]]
             });
         }
         
