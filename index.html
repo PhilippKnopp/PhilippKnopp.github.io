@@ -437,6 +437,7 @@
         var movementTweenNames = ["movementTweenBarb", "movementTweenRogue", "movementTweenMage"];
         
         for (var k = 0; k < movementTweenNames.length; k++) {
+            console.log(k);
             window[movementTweenNames[k]] = this.tweens.add({
                 targets: figuresOnMap[k],
                 x: { value: function () {
