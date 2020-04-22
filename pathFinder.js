@@ -1,3 +1,8 @@
+// JS Document
+
+////////// Berechnet Wege und Distanzen und Sichtlinien //////////////////////////////////////////////////////////
+
+
 function calculatePath (startIndex, endIndex) {
     // startIndex soll der Index im TileArray sein, endIndex soll der Index im TileArray sein
     

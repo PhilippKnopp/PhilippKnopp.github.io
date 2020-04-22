@@ -399,17 +399,6 @@
         
         
         // Erstellt die drei Spielfiguren
-        mage = new Figure ({scene:this, x:20, y:20}, 'mageSprite');
-        mage.onTile = mageStartingPosition[level];
-        mage.pathToTravel.push(mageStartingPosition[level]);
-        mage.dieSize = 4;
-        mage.explodes = true;
-        mage.health = 4;
-        mage.name = "Caelith";
-        mage.color = "#455059";
-        mage.description = 0;
-        figuresOnMap.push(mage);
-        
         barb = new Figure ({scene:this, x:20, y:20}, 'barbSprite');
         barb.onTile = barbStartingPosition[level];
         barb.pathToTravel.push(barbStartingPosition[level]);
@@ -429,6 +418,17 @@
         rogue.color = "#003F5E";
         rogue.description = 2;
         figuresOnMap.push(rogue);
+        
+        mage = new Figure ({scene:this, x:20, y:20}, 'mageSprite');
+        mage.onTile = mageStartingPosition[level];
+        mage.pathToTravel.push(mageStartingPosition[level]);
+        mage.dieSize = 4;
+        mage.explodes = true;
+        mage.health = 4;
+        mage.name = "Caelith";
+        mage.color = "#455059";
+        mage.description = 0;
+        figuresOnMap.push(mage);
         
         createEnemies(this);
         buildLevel();

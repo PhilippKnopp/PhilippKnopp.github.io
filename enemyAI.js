@@ -43,12 +43,12 @@ function enemyPlanMove (enemy) {
                 victimRanking[i] += 1;
             }
             
-            // Priorisiere Helden die näher stehen (Faktor 1)
+            // Priorisiere Helden die näher stehen (Faktor 2)
             let path = calculatePath(enemy.onTile, figuresOnMap[i].onTile);
             if (tileArray[figuresOnMap[i].onTile].neighbors.includes(enemy.onTile)) {
-                victimRanking[i] += 2;
+                victimRanking[i] += 4;
             } else if (path.second > 0 && path.second <= enemy.movementCounter) {
-                victimRanking[i] += 1;
+                victimRanking[i] += 2;
             }
             
             // ersetzt das aktuelle Opfer durch ein potenziell besseres
