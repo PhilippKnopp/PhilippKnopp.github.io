@@ -23,7 +23,7 @@
 	
 <script>
 	
-    console.log("Version 0.24");
+    console.log("Version 0.24a");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -433,10 +433,10 @@
         createEnemies(this);
         buildLevel();
         
-        let movementTweenNames = [];
+        var movementTweenNames = [];
         movementTweenNames.push(movementTweenBarb, movementTweenRogue, movementTweenMage);
         
-        for (let k = 0; k < movementTweenNames.length; k++) {
+        for (var k = 0; k < movementTweenNames.length; k++) {
             movementTweenNames[k] = this.tweens.add({
             targets: figuresOnMap[k],
             x: { value: function () {
