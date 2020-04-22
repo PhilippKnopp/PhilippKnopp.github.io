@@ -1,8 +1,5 @@
 function calculatePath (startIndex, endIndex) {
     // startIndex soll der Index im TileArray sein, endIndex soll der Index im TileArray sein
-
-    console.log("startIndex " + startIndex);
-    console.log("endIndex " + endIndex);
     
     var mappedList = [];
     var frontierList = [];
@@ -40,8 +37,6 @@ function calculatePath (startIndex, endIndex) {
             let backtraceIndex = endIndex; // Sucht den Index des Zielfeldes
             pathToTravel.unshift(backtraceIndex); // Fügt das Zielfeld dem Pfad hinzu
             
-            console.log("backtraceIndex " + backtraceIndex);
-            console.log("tileArray[backtraceIndex].entryPoint " + tileArray[backtraceIndex].entryPoint);
             while (tileArray[tileArray[backtraceIndex].entryPoint].name != startIndex) {
                 pathToTravel.unshift(tileArray[backtraceIndex].entryPoint);
                 backtraceIndex = tileArray[backtraceIndex].entryPoint;
