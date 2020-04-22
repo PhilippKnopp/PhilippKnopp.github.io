@@ -1,6 +1,9 @@
 function calculatePath (startIndex, endIndex) {
     // startIndex soll der Index im TileArray sein, endIndex soll der Index im TileArray sein
 
+    console.log("startIndex " + startIndex);
+    console.log("endIndex " + endIndex);
+    
     var mappedList = [];
     var frontierList = [];
     var frontierListValues = [];
