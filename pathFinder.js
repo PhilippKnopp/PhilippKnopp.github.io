@@ -10,7 +10,6 @@ function calculatePath (startIndex, endIndex) {
     var distance = 0;
 
     var activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-    console.log("Braucht es den activeChar.pathToTravel auf null setzer: " + activeChar.pathToTravel);
     
     // finde A und füge ihn der frontierList hinzu {name, wayPointUsefulness}
     tileArray[startIndex].entryPoint = "Start";

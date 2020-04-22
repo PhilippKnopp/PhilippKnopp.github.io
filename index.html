@@ -191,7 +191,6 @@
 				tile.on("pointerup", function pointerUp () {
                     // nichts ist auf der Tile und diese ist von einer Seite aus begehbar
 					if (moveButton.mode == "planning" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol") {
-                        console.log("Marco");
                         let activeCharIndex = figuresOnMap.findIndex(findActiveChar);
                         let path = calculatePath(figuresOnMap[activeCharIndex].onTile, this.name);
                         if (path.first.length == 0) {
@@ -204,7 +203,6 @@
                         returnCursorToNormal();
                         moveButton.mode = "moving";
                         for (var i = 0; i < tileArray.length; i++) {
-                            console.log("Polo");
                             tileArray[i].setFrame(0);
                         }
                     } else if (moveButton.mode == "planning") {
