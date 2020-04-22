@@ -23,7 +23,7 @@
 	
 <script>
 	
-    console.log("Version 0.23a");
+    console.log("Version 0.24");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -433,7 +433,28 @@
         createEnemies(this);
         buildLevel();
         
-        movementTweenMage = this.tweens.add({
+        let movementTweenNames = [];
+        movementTweenNames.push(movementTweenBarb, movementTweenRogue, movementTweenMage);
+        
+        for (let k = 0; k < movementTweenNames.length; k++) {
+            movementTweenNames[k] = this.tweens.add({
+            targets: figuresOnMap[k],
+            x: { value: function () {
+                return tileArray[figuresOnMap[k].pathToTravel[0]].x;
+            }},
+            y: { value: function () { 
+                return tileArray[figuresOnMap[k].pathToTravel[0]].y;
+            }},
+            duration: 250,
+            ease: 'Sine.easeInOut',
+            onComplete: function () {
+                figuresOnMap[k].enterTile();
+            },
+            onCompleteScope: movementTweenNames[k]
+            });
+        }
+        
+        /*movementTweenMage = this.tweens.add({
             targets: mage,
             x: { value: function () {
                 return tileArray[mage.pathToTravel[0]].x;
@@ -479,7 +500,7 @@
                 barb.enterTile();
             },
             onCompleteScope: movementTweenBarb
-        });
+        });*/
         
         bgmusic = game.sound.add(bgMusic[level]);
         bgmusic.volume = 0.3;
