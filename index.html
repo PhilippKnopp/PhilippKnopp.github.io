@@ -435,21 +435,23 @@
         buildLevel();
         
         var movementTweenNames = ["movementTweenBarb", "movementTweenRogue", "movementTweenMage"];
+        var figureNames = ["barb", "rogue", "mage"];
         
         for (var k = 0; k < movementTweenNames.length; k++) {
             console.log(k);
+            console.log(window[figureNames[k]]);
             window[movementTweenNames[k]] = this.tweens.add({
-                targets: figuresOnMap[k],
+                targets: window[figureNames[k]],
                 x: { value: function () {
-                    return tileArray[figuresOnMap[k].pathToTravel[0]].x;
+                    return tileArray[window[figureNames[k]].pathToTravel[0]].x;
                 }},
                 y: { value: function () { 
-                    return tileArray[figuresOnMap[k].pathToTravel[0]].y;
+                    return tileArray[window[figureNames[k]].pathToTravel[0]].y;
                 }},
                 duration: 250,
                 ease: 'Sine.easeInOut',
                 onComplete: function () {
-                    window["mage"].enterTile();
+                    window[figureNames[k]].enterTile();
                 },
                 onCompleteScope: window[movementTweenNames[k]]
             });
