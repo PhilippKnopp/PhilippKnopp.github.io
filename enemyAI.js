@@ -15,6 +15,7 @@ function enemyTurn() {
                 enemyDo(figuresOnMap[i], actionStack[j], actionStack[j+1]);
             }
             figuresOnMap[i].active = false;
+            console.log("figuresOnMap "+figuresOnMap);
         }
     }
     
