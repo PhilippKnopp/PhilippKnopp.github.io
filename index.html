@@ -449,7 +449,7 @@
                 duration: 250,
                 ease: 'Sine.easeInOut',
                 onComplete: function () {
-                    figuresOnMap[k].enterTile();
+                    window["mage"].enterTile();
                 },
                 onCompleteScope: window[movementTweenNames[k]]
             });
