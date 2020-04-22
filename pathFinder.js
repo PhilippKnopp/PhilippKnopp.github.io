@@ -37,9 +37,16 @@ function calculatePath (startIndex, endIndex) {
             let backtraceIndex = endIndex; // Sucht den Index des Zielfeldes
             pathToTravel.unshift(backtraceIndex); // Fügt das Zielfeld dem Pfad hinzu
             
+            console.log("wenn " + tileArray[tileArray[backtraceIndex].entryPoint].name);
+            console.log("ist nicht gleich " + startIndex);
+            
             while (tileArray[tileArray[backtraceIndex].entryPoint].name != startIndex) {
+                console.log("dann füge " + tileArray[backtraceIndex].entryPoint);
+                console.log("an den " + pathToTravel);
                 pathToTravel.unshift(tileArray[backtraceIndex].entryPoint);
+                console.log("um das zu bekommen " + pathToTravel);
                 backtraceIndex = tileArray[backtraceIndex].entryPoint;
+                console.log("und der neue Backtraceindex ist " + tileArray[backtraceIndex].entryPoint);
             }
             
             break mapperLoop;
