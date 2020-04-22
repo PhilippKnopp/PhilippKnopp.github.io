@@ -31,7 +31,7 @@ function enemyPlanMove (enemy) {
     
     // das Opfer der Wahl wird definiert
     for (var i = 0; i < figuresOnMap.length; i++) {
-        if (figuresOnMap[i].color != "#878787") {
+        if (figuresOnMap[i].color != "#878787" && figuresOnMap[i].health > 0) {
             
             tileArray[figuresOnMap[i].onTile].checkForNeighbors();
             victimRanking.push(0);
