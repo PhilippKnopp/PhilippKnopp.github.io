@@ -437,6 +437,8 @@
         movementTweenNames.push(movementTweenBarb, movementTweenRogue, movementTweenMage);
         
         for (var k = 0; k < movementTweenNames.length; k++) {
+            console.log("figuresOnMap[k] " +figuresOnMap[k]);
+            console.log("window[movementTweenNames[k]] " +window[movementTweenNames[k]]);
             window[movementTweenNames[k]] = this.tweens.add({
                 targets: figuresOnMap[k],
                 x: { value: function () {
