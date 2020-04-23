@@ -16,7 +16,7 @@ function createMovementTweens(_this, target, tweenName) {
         onComplete: function () {
             target.enterTile();
         },
-        onCompleteScope: tweenName;
+        onCompleteScope: tweenName
     });
     
     /*movementTweenMage = _this.tweens.add({
