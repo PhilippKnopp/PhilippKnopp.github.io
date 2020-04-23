@@ -2,8 +2,24 @@
 
 ////////// Erstellt alle Tweens (kleine Animationen) //////////////////////////////////////////////////////////
 
-function createMovementTweens(_this) {
-    movementTweenMage = _this.tweens.add({
+function createMovementTweens(_this, target, tweenName) {
+    tweenName = _this.tweens.add({
+        targets: target,
+        x: { value: function () {
+            return tileArray[target.pathToTravel[0]].x;
+        }},
+        y: { value: function () { 
+            return tileArray[target.pathToTravel[0]].y;
+        }},
+        duration: 250,
+        ease: 'Sine.easeInOut',
+        onComplete: function () {
+            target.enterTile();
+        },
+        onCompleteScope: tweenName
+    });
+    
+    /*movementTweenMage = _this.tweens.add({
         targets: mage,
         x: { value: function () {
             return tileArray[mage.pathToTravel[0]].x;
@@ -82,4 +98,5 @@ function createMovementTweens(_this) {
         },
         onCompleteScope: movementTweenPaleAcolyte
     });
+    */
 }
