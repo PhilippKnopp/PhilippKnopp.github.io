@@ -76,6 +76,7 @@ function enemyDo (enemy, action, target) {
             enemy.pathToTravel.push(target);
             moveButton.mode = "moving";
             console.log("move");
+            console.log(enemy.pathToTravel);
             break;
         default:
             break;
