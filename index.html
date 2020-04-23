@@ -24,7 +24,7 @@
 	
 <script>
 	
-    console.log("Version 0.24 test A");
+    console.log("Version 0.24 test B");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -409,7 +409,6 @@
         barb.color = "#914A23";
         barb.description = 1;
         figuresOnMap.push(barb);
-        createMovementTweens(this, barb, movementTweenBarb);
         
         rogue = new Figure ({scene:this, x:20, y:20}, 'rogueSprite');
         rogue.onTile = rogueStartingPosition[level];
@@ -420,7 +419,6 @@
         rogue.color = "#003F5E";
         rogue.description = 2;
         figuresOnMap.push(rogue);
-        createMovementTweens(this, rogue, movementTweenRogue);
         
         mage = new Figure ({scene:this, x:20, y:20}, 'mageSprite');
         mage.onTile = mageStartingPosition[level];
@@ -432,10 +430,14 @@
         mage.color = "#455059";
         mage.description = 0;
         figuresOnMap.push(mage);
-        createMovementTweens(this, mage, movementTweenMage);
         
         createEnemies(this);
         buildLevel();
+        
+        createMovementTweens(this, barb, movementTweenBarb);
+        createMovementTweens(this, rogue, movementTweenRogue);
+        createMovementTweens(this, mage, movementTweenMage);
+        
         
         bgmusic = game.sound.add(bgMusic[level]);
         bgmusic.volume = 0.3;
