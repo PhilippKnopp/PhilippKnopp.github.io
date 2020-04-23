@@ -23,7 +23,7 @@
 	
 <script>
 	
-    console.log("Version 0.24test1");
+    console.log("Version 0.24test2");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -437,9 +437,8 @@
         var movementTweenNames = ["movementTweenBarb", "movementTweenRogue", "movementTweenMage"];
         var figureNames = ["barb", "rogue", "mage"];
         
-        for (var k = 0; k < movementTweenNames.length; k++) {
-            console.log(k);
-            console.log(window[figureNames[k]]);
+        for (var k = 0; k < 1; k++) {
+        //for (var k = 0; k < movementTweenNames.length; k++) {
             window[movementTweenNames[k]] = this.tweens.add({
                 targets: window[figureNames[k]],
                 x: { value: function () {
@@ -458,7 +457,7 @@
             console.log(movementTweenBarb);
         }
         
-        /*movementTweenMage = this.tweens.add({
+        movementTweenMage = this.tweens.add({
             targets: mage,
             x: { value: function () {
                 return tileArray[mage.pathToTravel[0]].x;
@@ -474,7 +473,7 @@
             onCompleteScope: movementTweenMage
         });
         
-        movementTweenRogue = this.tweens.add({
+        /*movementTweenRogue = this.tweens.add({
             targets: rogue,
             x: { value: function () {
                 return tileArray[rogue.pathToTravel[0]].x;
