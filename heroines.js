@@ -5,6 +5,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.setAlpha(0);
         this.onTile;
         this.active = false;
+        this.hasActed = false;
         this.dieSize;
         this.explodes = false;
         this.stealth = false;
@@ -13,6 +14,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.movementCounter = 6;
         this.actions = 1;
         this.actionsCounter = 1;
+        this.actionStack =[];
         this.pathToTravel = [];
         this.def = 4;
         this.description;

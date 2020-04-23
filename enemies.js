@@ -11,6 +11,8 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.health;
         this.movement = 6;
         this.movementCounter = 6;
+        this.actionStack =[];
+        this.hasActed = false;
         this.pathToTravel = [];
         this.def;
         this.alarmed = false;
@@ -56,24 +58,22 @@ class Enemy extends Phaser.GameObjects.Sprite {
         
         this.moveNow = function () {
             
-            if (this.pathToTravel.length > 0 && this == caveCrawler) {
+            if (this.pathToTravel.length > 0 && this.name == "Cave Crawler") {
                 movementTweenCaveCrawler.data[0].start = this.x;
                 movementTweenCaveCrawler.data[1].start = this.y;
                 movementTweenCaveCrawler.restart();
-            } else if (this.pathToTravel.length > 0 && this == paleAcolyte) {
+            } else if (this.pathToTravel.length > 0 && this.name == "Pale Acolyte") {
                 movementTweenPaleAcolyte.data[0].start = this.x;
                 movementTweenPaleAcolyte.data[1].start = this.y;
                 movementTweenPaleAcolyte.restart();
-            } else if (this.pathToTravel.length > 0 && this == palePriest) {
+            } else if (this.pathToTravel.length > 0 && this.name == "Pale Priest") {
                 movementTweenPalePriest.data[0].start = this.x;
                 movementTweenPalePriest.data[1].start = this.y;
                 movementTweenPalePriest.restart();
-            } else if (this.pathToTravel.length > 0 && this == ordrak) {
+            } else if (this.pathToTravel.length > 0 && this.name == "Ordrak") {
                 movementTweenOrdrak.data[0].start = this.x;
                 movementTweenOrdrak.data[1].start = this.y;
                 movementTweenOrdrak.restart();
-            } else {
-                moveButton.mode = "none";
             }
         }
         

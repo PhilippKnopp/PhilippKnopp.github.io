@@ -5,19 +5,6 @@
 
 // Geht alarmierte Gegner durch und startet die Zugplanung für diese.
 // Danach wird der geplante Zug für den Gegner durchgeführt und es wird mit dem nächsten Gegner weitergemacht.
-function enemyTurn() {
-    
-    for (var i = 1; i < figuresOnMap.length; i++) {
-        if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true) {
-            let actionStack = enemyPlanMove(figuresOnMap[i]);
-            for (let j = 0; j < actionStack.length; j += 2) {
-                enemyDo(figuresOnMap[i], actionStack[j], actionStack[j+1]);
-            }
-        }
-    }
-    
-}
-
 
 function enemyPlanMove (enemy) {
     let victimOfChoice;
@@ -56,8 +43,8 @@ function enemyPlanMove (enemy) {
         }
     }
     
-    if (enemy.name == "Cave Crawler") {
-        actionStack.push("move", enemy.onTile-1);
+    if (enemy.name == "Ordrak") {
+        enemy.pathToTravel.push(191);
     }
     actionStack.push("attack", victimOfChoice);
     return actionStack;
@@ -69,10 +56,6 @@ function enemyDo (enemy, action, target) {
         case "attack":
             enemy.attack(target);
             console.log("attack");
-            break;
-        case "move":
-            enemy.pathToTravel.push(target);
-            enemy.moveNow();
             break;
         default:
             break;

@@ -24,7 +24,7 @@
 	
 <script>
 	
-    console.log("Version 0.24 test G");
+    console.log("Version 0.24 test H");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -74,6 +74,7 @@
     
     var figuresOnMap = [];
     var turnOver = []; // Array mit allen Helden die in der aktuellen runde schon agiert haben.
+    var enemyTurnActive = false;
     var charsStillAlive = 3;
     var Info1, InfoName, Info2, Info3;
     var textHistory = [];
@@ -471,6 +472,24 @@
             attackButton.y = this.game.input.activePointer.y + 50;
         }
         
+        if (enemyTurnActive == true && movementTweenCaveCrawler.isPlaying() == false && movementTweenPaleAcolyte.isPlaying() == false && movementTweenPalePriest.isPlaying() == false && movementTweenOrdrak.isPlaying() == false) {
+            for (let i = 1; i < figuresOnMap.length; i++) {
+                if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].pathToTravel.length > 0) {
+                    figuresOnMap[i].moveNow();
+                    i = figuresOnMap.length;
+                } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length > 0) {
+                    enemyDo(figuresOnMap[i], actionStack[0], actionStack[1]);
+                    i = figuresOnMap.length;
+                } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length == 0 && figuresOnMap[i].hasActed == false) {
+                    figuresOnMap[i].actionStack = enemyPlanMove(figuresOnMap[i]);
+                    figuresOnMap[i].hasActed = true;
+                    i = figuresOnMap.length;
+                } else if (i < figuresOnMap.length) {
+                    enemyTurnActive = false;
+                }
+            }
+        }
+        
         swirl1.rotation += 0.01;
         swirl2.rotation -= 0.02;
     }
@@ -541,13 +560,13 @@
     function completeTurn(char) { 
         hideActions();
         deactivateFigures();
-        if (turnOver.includes(char.name) == false ) {
+        if (turnOver.includes(char.name) == false) {
             turnOver.push(char.name);
         }
         if (turnOver.length == charsStillAlive) {
             turnOver.length = 0;
-            enemyTurn();    // Aktive Gegner agieren
             replenishActions();     // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
+            enemyTurnActive = true; // in update function werden jetzt die Gegner gesteuert
         }
     }
     
