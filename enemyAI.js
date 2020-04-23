@@ -58,7 +58,9 @@ function enemyPlanMove (enemy) {
         }
     }
     
-    //actionStack.push("move", placeOfChoice);
+    if (enemy.name == "Cave Crawler") {
+        actionStack.push("move", enemy.onTile-1);
+    }
     actionStack.push("attack", victimOfChoice);
     return actionStack;
 }
@@ -69,6 +71,11 @@ function enemyDo (enemy, action, target) {
         case "attack":
             enemy.attack(target);
             console.log("attack");
+            break;
+        case "move":
+            enemy.pathToTravel.push(target);
+            moveButton.mode = "moving";
+            console.log("move");
             break;
         default:
             break;
