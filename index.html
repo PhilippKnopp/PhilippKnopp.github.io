@@ -478,7 +478,7 @@
                     figuresOnMap[i].moveNow();
                     i = figuresOnMap.length;
                 } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length > 0) {
-                    enemyDo(figuresOnMap[i], actionStack[0], actionStack[1]);
+                    enemyDo(figuresOnMap[i], figuresOnMap[i].actionStack[0], figuresOnMap[i].actionStack[1]);
                     i = figuresOnMap.length;
                 } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length == 0 && figuresOnMap[i].hasActed == false) {
                     figuresOnMap[i].actionStack = enemyPlanMove(figuresOnMap[i]);
