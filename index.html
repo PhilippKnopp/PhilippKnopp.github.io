@@ -12,6 +12,7 @@
 <script src="levels.js"></script>
 <script src="heroines.js"></script>
 <script src="enemies.js"></script>
+<script src="animations.js"></script>
 <script src="random.js"></script>
 <script src="gui.js"></script>
 <script src="enemyAI.js"></script>
@@ -23,7 +24,7 @@
 	
 <script>
 	
-    console.log("Version 0.24test3");
+    console.log("Version 0.24 test A");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -53,8 +54,7 @@
     var tileArray = []; // Array mit allen Spielfeldern des Levels
     var matrixWidth = 25; // Spielfeldbreite
     var matrixHeight = 40; // Spielfeldhöhe
-    var movementTweenBarb, movementTweenMage, movementTweenRogue; // Bewegungsanimationen
-    movementTweenBarb = 1;
+    var movementTweenBarb, movementTweenMage, movementTweenRogue, movementTweenCaveCrawler, movementTweenPaleAcolyte, movementTweenPalePriest, movementTweenOrdrak; // Bewegungsanimationen
     
     var doorButton, moveButton, attackButton, searchButton,
         faceButton, specialButton, cancelButton;
@@ -433,78 +433,7 @@
         
         createEnemies(this);
         buildLevel();
-        
-        var movementTweenNames = ["movementTweenBarb", "movementTweenRogue", "movementTweenMage"];
-        var figureNames = ["barb", "rogue", "mage"];
-        
-        for (var k = 0; k < 1; k++) {
-        //for (var k = 0; k < movementTweenNames.length; k++) {
-            window[movementTweenNames[k]] = this.tweens.add({
-                targets: window[figureNames[k]],
-                x: { value: function () {
-                    return tileArray[window[figureNames[k]].pathToTravel[0]].x;
-                }},
-                y: { value: function () { 
-                    return tileArray[window[figureNames[k]].pathToTravel[0]].y;
-                }},
-                duration: 250,
-                ease: 'Sine.easeInOut',
-                onComplete: function () {
-                    window[figureNames[k]].enterTile();
-                },
-                onCompleteScope: window[movementTweenNames[k]]
-            });
-            console.log(movementTweenBarb);
-        }
-        
-        movementTweenMage = this.tweens.add({
-            targets: mage,
-            x: { value: function () {
-                return tileArray[mage.pathToTravel[0]].x;
-            }},
-            y: { value: function () { 
-                return tileArray[mage.pathToTravel[0]].y;
-            }},
-            duration: 250,
-            ease: 'Sine.easeInOut',
-            onComplete: function () {
-                mage.enterTile();
-            },
-            onCompleteScope: movementTweenMage
-        });
-        console.log(movementTweenMage);
-        
-        /*movementTweenRogue = this.tweens.add({
-            targets: rogue,
-            x: { value: function () {
-                return tileArray[rogue.pathToTravel[0]].x;
-            }},
-            y: { value: function () { 
-                return tileArray[rogue.pathToTravel[0]].y;
-            }},
-            duration: 250,
-            ease: 'Sine.easeInOut',
-            onComplete: function () {
-                rogue.enterTile();
-            },
-            onCompleteScope: movementTweenRogue
-        });
-        
-        movementTweenBarb = this.tweens.add({
-            targets: barb,
-            x: { value: function () {
-                return tileArray[barb.pathToTravel[0]].x;
-            }},
-            y: { value: function () { 
-                return tileArray[barb.pathToTravel[0]].y;
-            }},
-            duration: 250,
-            ease: 'Sine.easeInOut',
-            onComplete: function () {
-                barb.enterTile();
-            },
-            onCompleteScope: movementTweenBarb
-        });*/
+        createMovementTweens(this);
         
         bgmusic = game.sound.add(bgMusic[level]);
         bgmusic.volume = 0.3;
@@ -523,7 +452,7 @@
         if (moveButton.mode == "planning") {
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
-        } else if (moveButton.mode == "moving" && movementTweenBarb.isPlaying() == false && movementTweenRogue.isPlaying() == false && movementTweenMage.isPlaying() == false) {
+        } else if (moveButton.mode == "moving" && movementTweenBarb.isPlaying() == false && movementTweenRogue.isPlaying() == false && movementTweenMage.isPlaying() == false && movementTweenCaveCrawler.isPlaying() == false && movementTweenPaleAcolyte.isPlaying() == false && movementTweenPalePriest.isPlaying() == false && movementTweenOrdrak.isPlaying() == false) {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.moveNow();
         }

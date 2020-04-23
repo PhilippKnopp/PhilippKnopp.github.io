@@ -30,6 +30,19 @@ class Enemy extends Phaser.GameObjects.Sprite {
             this.y = tileArray[this.onTile].y;
         };
         
+        this.enterTile = function () {
+            tileArray[this.onTile].occupiedBy = "";
+            this.onTile = this.pathToTravel[0];
+            this.pathToTravel.shift();
+            tileArray[this.onTile].occupiedBy = "enemy";
+            enemyVisibility();
+            checkFightmode();
+            /* tileVisibility();
+             if (typeof tileArray[this.onTile].state === 'string') {
+                eventDispatch(this, tileArray[this.onTile].state);
+            };*/
+        };
+        
         this.attack = function (heroine) {
             let attackroll = getRandomInt(this.dieSize, this.explodes);
             let damageroll = Math.min(attackroll, getRandomInt(this.dieSize, this.explodes))
@@ -39,6 +52,29 @@ class Enemy extends Phaser.GameObjects.Sprite {
             
             console.log("attack: " + attackroll + ";  damage: " + damageroll + ";  hero: " + heroine.health);
             heroine.checkHealth();
+        }
+        
+        this.moveNow = function () {
+            
+            if (this.pathToTravel.length > 0 && this == caveCrawler) {
+                movementTweenCaveCrawler.data[0].start = this.x;
+                movementTweenCaveCrawler.data[1].start = this.y;
+                movementTweenCaveCrawler.restart();
+            } else if (this.pathToTravel.length > 0 && this == paleAcolyte) {
+                movementTweenPaleAcolyte.data[0].start = this.x;
+                movementTweenPaleAcolyte.data[1].start = this.y;
+                movementTweenPaleAcolyte.restart();
+            } else if (this.pathToTravel.length > 0 && this == palePriest) {
+                movementTweenPalePriest.data[0].start = this.x;
+                movementTweenPalePriest.data[1].start = this.y;
+                movementTweenPalePriest.restart();
+            } else if (this.pathToTravel.length > 0 && this == ordrak) {
+                movementTweenOrdrak.data[0].start = this.x;
+                movementTweenOrdrak.data[1].start = this.y;
+                movementTweenOrdrak.restart();
+            } else {
+                moveButton.mode = "none";
+            }
         }
         
     }
