@@ -9,12 +9,10 @@ function enemyTurn() {
     
     for (var i = 1; i < figuresOnMap.length; i++) {
         if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true) {
-            figuresOnMap[i].active = true;
             let actionStack = enemyPlanMove(figuresOnMap[i]);
             for (let j = 0; j < actionStack.length; j += 2) {
                 enemyDo(figuresOnMap[i], actionStack[j], actionStack[j+1]);
             }
-            figuresOnMap[i].active = false;
         }
     }
     
@@ -74,9 +72,7 @@ function enemyDo (enemy, action, target) {
             break;
         case "move":
             enemy.pathToTravel.push(target);
-            moveButton.mode = "moving";
-            console.log("move");
-            console.log(enemy.pathToTravel);
+            enemy.moveNow();
             break;
         default:
             break;

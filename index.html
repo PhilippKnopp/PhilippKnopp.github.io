@@ -24,7 +24,7 @@
 	
 <script>
 	
-    console.log("Version 0.24 test F");
+    console.log("Version 0.24 test G");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -456,7 +456,7 @@
         if (moveButton.mode == "planning") {
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
-        } else if (moveButton.mode == "moving" && movementTweenBarb.isPlaying() == false && movementTweenRogue.isPlaying() == false && movementTweenMage.isPlaying() == false && movementTweenCaveCrawler.isPlaying() == false && movementTweenPaleAcolyte.isPlaying() == false && movementTweenPalePriest.isPlaying() == false && movementTweenOrdrak.isPlaying() == false) {
+        } else if (moveButton.mode == "moving" && movementTweenBarb.isPlaying() == false && movementTweenRogue.isPlaying() == false) {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.moveNow();
         }
