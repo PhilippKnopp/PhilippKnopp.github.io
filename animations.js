@@ -3,7 +3,7 @@
 ////////// Erstellt alle Tweens (kleine Animationen) //////////////////////////////////////////////////////////
 
 function createMovementTweens(_this, target, tweenName) {
-    tweenName = _this.tweens.add({
+    window[tweenName] = _this.tweens.add({
         targets: target,
         x: { value: function () {
             return tileArray[target.pathToTravel[0]].x;
@@ -16,7 +16,7 @@ function createMovementTweens(_this, target, tweenName) {
         onComplete: function () {
             target.enterTile();
         },
-        onCompleteScope: tweenName
+        onCompleteScope: window[tweenName]
     });
     
     /*movementTweenMage = _this.tweens.add({

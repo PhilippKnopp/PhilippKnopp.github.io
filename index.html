@@ -24,7 +24,7 @@
 	
 <script>
 	
-    console.log("Version 0.24 test B");
+    console.log("Version 0.24 test C");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -55,6 +55,7 @@
     var matrixWidth = 25; // Spielfeldbreite
     var matrixHeight = 40; // Spielfeldhöhe
     var movementTweenBarb, movementTweenMage, movementTweenRogue, movementTweenCaveCrawler, movementTweenPaleAcolyte, movementTweenPalePriest, movementTweenOrdrak; // Bewegungsanimationen
+    var movementTweenNames = ["movementTweenBarb", "movementTweenRogue", "movementTweenMage", "movementTweenCaveCrawler", "movementTweenPaleAcolyte", "movementTweenPalePriest", "movementTweenOrdrak"];
     
     var doorButton, moveButton, attackButton, searchButton,
         faceButton, specialButton, cancelButton;
@@ -434,9 +435,9 @@
         createEnemies(this);
         buildLevel();
         
-        createMovementTweens(this, barb, movementTweenBarb);
-        createMovementTweens(this, rogue, movementTweenRogue);
-        createMovementTweens(this, mage, movementTweenMage);
+        createMovementTweens(this, barb, movementTweenNames[0]);
+        createMovementTweens(this, rogue, movementTweenNames[1]);
+        createMovementTweens(this, mage, movementTweenNames[2]);
         
         
         bgmusic = game.sound.add(bgMusic[level]);
