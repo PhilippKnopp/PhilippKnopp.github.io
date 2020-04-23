@@ -180,6 +180,7 @@ function createEnemies (_this) {
         caveCrawler.description = 3;
         caveCrawler.loot = 1;
         figuresOnMap.push(caveCrawler);
+        createMovementTweens(_this, caveCrawler, movementTweenNames[3]);
     }
     
     // Pale Acolyte
