@@ -196,6 +196,7 @@ function createEnemies (_this) {
         paleAcolyte.description = 4;
         paleAcolyte.loot = 3;
         figuresOnMap.push(paleAcolyte);
+        createMovementTweens(_this, paleAcolyte, movementTweenNames[4]);
     }
     
     // Pale Priest
@@ -211,6 +212,7 @@ function createEnemies (_this) {
         palePriest.description = 5;
         palePriest.loot = 4;
         figuresOnMap.push(palePriest);
+        createMovementTweens(_this, palePriest, movementTweenNames[5]);
     }
     
     // Schatten Abwehr Effekt für Ordrak
@@ -229,6 +231,7 @@ function createEnemies (_this) {
         ordrak.description = 6;
         ordrak.loot = 20;
         figuresOnMap.push(ordrak);
+        createMovementTweens(_this, ordrak, movementTweenNames[6]);
     }
 
 }
