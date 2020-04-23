@@ -24,7 +24,7 @@
 	
 <script>
 	
-    console.log("Version 0.24 test H");
+    console.log("Version 0.24 test I");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -474,7 +474,9 @@
         
         if (enemyTurnActive == true && movementTweenCaveCrawler.isPlaying() == false && movementTweenPaleAcolyte.isPlaying() == false && movementTweenPalePriest.isPlaying() == false && movementTweenOrdrak.isPlaying() == false) {
             for (let i = 1; i < figuresOnMap.length; i++) {
-                if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].pathToTravel.length > 0) {
+                if (figuresOnMap[i].color != "#878787") {
+                    // gehe in nächste Schleife
+                } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].pathToTravel.length > 0) {
                     figuresOnMap[i].moveNow();
                     i = figuresOnMap.length;
                 } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length > 0) {
@@ -484,8 +486,12 @@
                     figuresOnMap[i].actionStack = enemyPlanMove(figuresOnMap[i]);
                     figuresOnMap[i].hasActed = true;
                     i = figuresOnMap.length;
-                } else if (i < figuresOnMap.length) {
+                } else {
                     enemyTurnActive = false;
+                    for (let j = 0; j < figuresOnMap.length; j++) {
+                        figuresOnMap[j].hasActed = false;
+                    }
+                    replenishActions();     // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
                 }
             }
         }
@@ -565,7 +571,6 @@
         }
         if (turnOver.length == charsStillAlive) {
             turnOver.length = 0;
-            replenishActions();     // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
             enemyTurnActive = true; // in update function werden jetzt die Gegner gesteuert
         }
     }
