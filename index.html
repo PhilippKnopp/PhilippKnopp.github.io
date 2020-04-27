@@ -488,6 +488,7 @@
                     break;
                 } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length == 0 && figuresOnMap[i].hasActed == false) {
                     console.log("plane Jetzt " + i);
+                    figuresOnMap[i].setFrame(1);
                     figuresOnMap[i].actionStack = enemyPlanMove(figuresOnMap[i]);
                     figuresOnMap[i].hasActed = true;
                     break;
