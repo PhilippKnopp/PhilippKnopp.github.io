@@ -81,6 +81,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 enemy.showFace();
             }
             if (rangedDamage[0] == 0) {
+                console.log("returnCursorToNormal");
                 returnCursorToNormal();
                 showActions(this);
             }
@@ -269,6 +270,7 @@ function showActions(_this) {
     console.log(_this.movementCounter);
     
     if (fightmode == true && (_this.actionsCounter == 0 && (_this.movementCounter) < 1 )) {
+        console.log("completeTurn");
         completeTurn(_this);    // beendet Zug für diese Heldin und checkt ob dadurch der Zug für alle beendet ist
         return;
     }

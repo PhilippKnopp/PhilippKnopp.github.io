@@ -24,7 +24,7 @@
 	
 <script>
 	
-    console.log("Version 0.24 test K");
+    console.log("Version 0.24 test L");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -454,6 +454,7 @@
 	}
     
     function update () {
+        console.log("update");
         if (moveButton.mode == "planning") {
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
@@ -564,8 +565,8 @@
     }
     
     function completeTurn(char) {
-        console.log("hideActions");
-        hideActions();
+        console.log("returnCursorToNormal + hideActions");
+        returnCursorToNormal();
         console.log("deactivateFigures");
         deactivateFigures();
         if (turnOver.includes(char.name) == false) {
