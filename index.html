@@ -24,7 +24,7 @@
 	
 <script>
 	
-    console.log("Version 0.24 test J");
+    console.log("Version 0.24 test K");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -477,15 +477,15 @@
                 if (figuresOnMap[i].color != "#878787") {
                     // gehe in nächste Schleife
                 } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].pathToTravel.length > 0) {
+                    i = figuresOnMap.length;
                     figuresOnMap[i].moveNow();
-                    i = figuresOnMap.length;
                 } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length > 0) {
-                    enemyDo(figuresOnMap[i], figuresOnMap[i].actionStack[0], figuresOnMap[i].actionStack[1]);
                     i = figuresOnMap.length;
+                    enemyDo(figuresOnMap[i], figuresOnMap[i].actionStack[0], figuresOnMap[i].actionStack[1]);
                 } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length == 0 && figuresOnMap[i].hasActed == false) {
+                    i = figuresOnMap.length;
                     figuresOnMap[i].actionStack = enemyPlanMove(figuresOnMap[i]);
                     figuresOnMap[i].hasActed = true;
-                    i = figuresOnMap.length;
                 } else {
                     enemyTurnActive = false;
                     for (let j = 0; j < figuresOnMap.length; j++) {

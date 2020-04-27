@@ -44,7 +44,7 @@ function enemyPlanMove (enemy) {
     }
     
     if (enemy.name == "Ordrak") {
-        enemy.pathToTravel.push(191);
+        enemy.pathToTravel.push(190);
     }
     actionStack.push("attack", victimOfChoice);
     return actionStack;
