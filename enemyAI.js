@@ -56,7 +56,6 @@ function enemyDo (enemy, action, target) {
         case "attack":
             enemy.actionStack.length = 0;
             enemy.attack(target);
-            console.log("attack");
             break;
         default:
             break;

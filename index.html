@@ -476,23 +476,23 @@
         if (enemyTurnActive == true && movementTweenCaveCrawler.isPlaying() == false && movementTweenPaleAcolyte.isPlaying() == false && movementTweenPalePriest.isPlaying() == false && movementTweenOrdrak.isPlaying() == false) {
             for (let i = 1; i < figuresOnMap.length; i++) {
                 if (figuresOnMap[i].color != "#878787") {
-                    conslole.log("nur die Heldin " + i);
+                    console.log("nur die Heldin " + i);
                     // gehe in nächste Schleife
                 } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].pathToTravel.length > 0) {
-                    conslole.log("bewege Jetzt " + i);
+                    console.log("bewege Jetzt " + i);
                     figuresOnMap[i].moveNow();
                     break;
                 } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length > 0) {
-                    conslole.log("agiere Jetzt " + i);
+                    console.log("agiere Jetzt " + i);
                     enemyDo(figuresOnMap[i], figuresOnMap[i].actionStack[0], figuresOnMap[i].actionStack[1]);
                     break;
                 } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length == 0 && figuresOnMap[i].hasActed == false) {
-                    conslole.log("plane Jetzt " + i);
+                    console.log("plane Jetzt " + i);
                     figuresOnMap[i].actionStack = enemyPlanMove(figuresOnMap[i]);
                     figuresOnMap[i].hasActed = true;
                     break;
                 } else if (i == figuresOnMap.length-1) {
-                    conslole.log("alle sind durch " + i);
+                    console.log("alle sind durch " + i);
                     enemyTurnActive = false;
                     for (let j = 0; j < figuresOnMap.length; j++) {
                         figuresOnMap[j].hasActed = false;
@@ -570,16 +570,14 @@
     }
     
     function completeTurn(char) {
-        console.log("hideActions");
+        console.log("completeTurn " + char.name);
         hideActions();
-        console.log("deactivateFigures");
         deactivateFigures();
         if (turnOver.includes(char.name) == false) {
             turnOver.push(char.name);
         }
         if (turnOver.length == charsStillAlive) {
             turnOver.length = 0;
-            console.log("enemyTurnActive");
             enemyTurnActive = true; // in update function werden jetzt die Gegner gesteuert
         }
     }
