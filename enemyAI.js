@@ -54,6 +54,7 @@ function enemyPlanMove (enemy) {
 function enemyDo (enemy, action, target) {
     switch(action) {
         case "attack":
+            enemy.actionStack.length = 0;
             enemy.attack(target);
             console.log("attack");
             break;
