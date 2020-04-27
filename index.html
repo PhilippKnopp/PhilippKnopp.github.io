@@ -563,14 +563,17 @@
         }
     }
     
-    function completeTurn(char) { 
+    function completeTurn(char) {
+        console.log("hideActions");
         hideActions();
+        console.log("deactivateFigures");
         deactivateFigures();
         if (turnOver.includes(char.name) == false) {
             turnOver.push(char.name);
         }
         if (turnOver.length == charsStillAlive) {
             turnOver.length = 0;
+            console.log("enemyTurnActive");
             enemyTurnActive = true; // in update function werden jetzt die Gegner gesteuert
         }
     }
