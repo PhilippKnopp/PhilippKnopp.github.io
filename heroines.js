@@ -83,6 +83,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             if (rangedDamage[0] == 0) {
                 console.log("returnCursorToNormal");
                 returnCursorToNormal();
+                console.log("showActions");
                 showActions(this);
             }
         }
@@ -170,6 +171,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.setAlpha(0.5);
             }
             
+            console.log(showActions);
             showActions(this);
             
         } else if (searchButton.mode == "planning") {
@@ -195,6 +197,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             if (this != activeChar) {
                 showText ("", activeChar, textL1[19]);
             }
+            console.log(showActions);
             showActions(activeChar);
         }
     }

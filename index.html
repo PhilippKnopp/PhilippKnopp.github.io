@@ -565,8 +565,8 @@
     }
     
     function completeTurn(char) {
-        console.log("returnCursorToNormal + hideActions");
-        returnCursorToNormal();
+        console.log("hideActions");
+        hideActions();
         console.log("deactivateFigures");
         deactivateFigures();
         if (turnOver.includes(char.name) == false) {
