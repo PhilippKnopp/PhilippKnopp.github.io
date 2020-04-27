@@ -171,7 +171,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.setAlpha(0.5);
             }
             
-            console.log(showActions);
+            console.log("showActions");
             showActions(this);
             
         } else if (searchButton.mode == "planning") {
