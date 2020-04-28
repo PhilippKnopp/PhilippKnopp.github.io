@@ -10,6 +10,7 @@ function createMovementTweens(_this) {
             if (activeChar != undefined) {
                 return tileArray[activeChar.pathToTravel[0]].x;
             } else {
+                console.log("fire");
                 return 0;
             }
         }},
@@ -18,6 +19,7 @@ function createMovementTweens(_this) {
             if (activeChar != undefined) {
                 return tileArray[activeChar.pathToTravel[0]].y;
             } else {
+                console.log("fire");
                 return 0;
             }
         }},
@@ -30,5 +32,5 @@ function createMovementTweens(_this) {
             }
         },
         onCompleteScope: movementTween
-    });
+    }).stop();
 }
