@@ -162,7 +162,6 @@ function createEnemies (_this) {
     for (var k = 0; k < caveCrawlerStartingPosition[level].length; k++ ) {
         var caveCrawler = new Enemy ({scene:_this, x:20, y:20}, 'e1Sprite');
         caveCrawler.onTile = caveCrawlerStartingPosition[level][k];
-        caveCrawler.pathToTravel.push(caveCrawlerStartingPosition[level][k]);
         caveCrawler.dieSize = 4;
         caveCrawler.fullHealth = 2;
         caveCrawler.health = 2;
@@ -177,7 +176,6 @@ function createEnemies (_this) {
     for (var j = 0; j < paleAcolyteStartingPosition[level].length; j++ ) {
         var paleAcolyte = new Enemy ({scene:_this, x:20, y:20}, 'e2Sprite');
         paleAcolyte.onTile = paleAcolyteStartingPosition[level][j];
-        paleAcolyte.pathToTravel.push(paleAcolyteStartingPosition[level][j]);
         paleAcolyte.dieSize = 6;
         paleAcolyte.fullHealth = 6;
         paleAcolyte.health = 6;
@@ -192,7 +190,6 @@ function createEnemies (_this) {
     for (var i = 0; i < palePriestStartingPosition[level].length; i++ ) {
         var palePriest = new Enemy ({scene:_this, x:20, y:20}, 'e3Sprite');
         palePriest.onTile = palePriestStartingPosition[level][i];
-        palePriest.pathToTravel.push(palePriestStartingPosition[level][i]);
         palePriest.dieSize = 8;
         palePriest.fullHealth = 8;
         palePriest.health = 8;
@@ -210,7 +207,6 @@ function createEnemies (_this) {
     for (var l = 0; l < ordrakStartingPosition[level].length; l++ ) {
         var ordrak = new Enemy ({scene:_this, x:20, y:20}, 'e4Sprite');
         ordrak.onTile = ordrakStartingPosition[level][l];
-        ordrak.pathToTravel.push(ordrakStartingPosition[level][l]);
         ordrak.dieSize = 8;
         ordrak.fullHealth = 12;
         ordrak.health = 12;
