@@ -2,7 +2,7 @@
 
 ////////// Erstellt alle Tweens (kleine Animationen) //////////////////////////////////////////////////////////
 
-function createMovementTweens(_this, target, tweenName) {
+function createMovementTweens(_this) {
     movementTween = _this.tweens.add({
         targets: movementMarker,
         x: { value: function () {
