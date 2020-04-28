@@ -17,8 +17,18 @@ function createMovementTweens(_this) {
         ease: 'Sine.easeInOut',
         onComplete: function () {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-            activeChar.enterTile();
+            if (activeChar != undefined) {
+                activeChar.enterTile();
+            }
         },
         onCompleteScope: movementTween
     }).stop();
+    movementTween.data[0].target = function () {
+        let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+        return tileArray[activeChar.pathToTravel[0]].x;
+    };
+    movementTween.data[1].target = function () {
+        let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+        return tileArray[activeChar.pathToTravel[0]].y;
+    };
 }

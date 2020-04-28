@@ -54,8 +54,9 @@
     var tileArray = []; // Array mit allen Spielfeldern des Levels
     var matrixWidth = 25; // Spielfeldbreite
     var matrixHeight = 40; // Spielfeldhöhe
-    var movementTween;
-    var movementMarker;
+    
+    var movementMarker; // Wird auf der Karte bewegt und die aktive Figur ist an ihn magnetisiert um sich mitzubewegen.
+    var movementTween;  // Animationsbewegung, die den movementMarker bewegt
     
     var doorButton, moveButton, attackButton, searchButton,
         faceButton, specialButton, cancelButton;
@@ -73,6 +74,7 @@
     var eventReminder = {e2:false, e4:false}; // Dinge die nur einmal passieren sollen
     
     var figuresOnMap = [];
+    var activeChar;
     var turnOver = []; // Array mit allen Helden die in der aktuellen runde schon agiert haben.
     var enemyTurnActive = false;
     var charsStillAlive = 3;
@@ -437,8 +439,9 @@
         
         createEnemies(this);
         buildLevel();
-        
         createMovementTweens(this);
+        enemyVisibility();
+        checkFightmode();
         
         bgmusic = game.sound.add(bgMusic[level]);
         bgmusic.volume = 0.3;
@@ -492,6 +495,7 @@
                     break;
                 } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length == 0 && figuresOnMap[i].hasActed == false) {
                     console.log("plane Jetzt " + i);
+                    figuresOnMap[i].active = true;
                     figuresOnMap[i].setFrame(1);
                     figuresOnMap[i].actionStack = enemyPlanMove(figuresOnMap[i]);
                     figuresOnMap[i].hasActed = true;
