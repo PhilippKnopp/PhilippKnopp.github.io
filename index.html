@@ -496,6 +496,8 @@
                 } else if (figuresOnMap[i].color == "#878787" && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length > 0) {
                     console.log("agiere Jetzt " + i);
                     enemyDo(figuresOnMap[i], figuresOnMap[i].actionStack[0], figuresOnMap[i].actionStack[1]);
+                    figuresOnMap[i].active = false;
+                    figuresOnMap[i].setFrame(0);
                     break;
                 } else if (i == figuresOnMap.length-1) {
                     console.log("alle sind durch " + i);
