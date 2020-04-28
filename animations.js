@@ -7,17 +7,27 @@ function createMovementTweens(_this) {
         targets: movementMarker,
         x: { value: function () {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-            return tileArray[activeChar.pathToTravel[0]].x;
+            if (activeChar != undefined) {
+                return tileArray[activeChar.pathToTravel[0]].x;
+            } else {
+                return 0;
+            }
         }},
         y: { value: function () { 
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-            return tileArray[activeChar.pathToTravel[0]].y;
+            if (activeChar != undefined) {
+                return tileArray[activeChar.pathToTravel[0]].y;
+            } else {
+                return 0;
+            }
         }},
         duration: 250,
         ease: 'Sine.easeInOut',
         onComplete: function () {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-            activeChar.enterTile();
+            if (activeChar != undefined) {
+                activeChar.enterTile();
+            }
         },
         onCompleteScope: movementTween
     });
