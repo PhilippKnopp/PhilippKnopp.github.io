@@ -24,7 +24,7 @@
 	
 <script>
 	
-    console.log("Version 0.24 test M");
+    console.log("Version 0.25 test A");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -54,8 +54,8 @@
     var tileArray = []; // Array mit allen Spielfeldern des Levels
     var matrixWidth = 25; // Spielfeldbreite
     var matrixHeight = 40; // Spielfeldhöhe
-    var movementTweenBarb, movementTweenMage, movementTweenRogue, movementTweenCaveCrawler, movementTweenPaleAcolyte, movementTweenPalePriest, movementTweenOrdrak; // Bewegungsanimationen
-    var movementTweenNames = ["movementTweenBarb", "movementTweenRogue", "movementTweenMage", "movementTweenCaveCrawler", "movementTweenPaleAcolyte", "movementTweenPalePriest", "movementTweenOrdrak"];
+    var movementTween;
+    var movementMarker;
     
     var doorButton, moveButton, attackButton, searchButton,
         faceButton, specialButton, cancelButton;
@@ -157,6 +157,8 @@
         idol1Img = this.add.image(516, 995, 'idol1').setAlpha(0);
         trap1Sprt = this.add.sprite(438, 501, 'trap1Sprite').setAlpha(0);
         circle1Img = this.add.image(230, 800, 'circle1').setAlpha(0);
+        
+        movementMarker = this.add.sprite(0, 0, 'tileSprite').setAlpha(0);
 		
 		let index = 0;
 		for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
@@ -436,9 +438,7 @@
         createEnemies(this);
         buildLevel();
         
-        createMovementTweens(this, barb, movementTweenNames[0]);
-        createMovementTweens(this, rogue, movementTweenNames[1]);
-        createMovementTweens(this, mage, movementTweenNames[2]);
+        createMovementTweens(this);
         
         bgmusic = game.sound.add(bgMusic[level]);
         bgmusic.volume = 0.3;
@@ -458,9 +458,13 @@
         if (moveButton.mode == "planning") {
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
-        } else if (moveButton.mode == "moving" && movementTweenBarb.isPlaying() == false && movementTweenRogue.isPlaying() == false && movementTweenMage.isPlaying() == false) {
+        } else if (moveButton.mode == "moving" && movementTween.isPlaying() == false) {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.moveNow();
+        } else if (movementTween.isPlaying() == true) {
+            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+            activeChar.x = movementMarker.x;
+            activeChar.y = movementMarker.y;
         }
         
         if (searchButton.mode == "planning") {
@@ -473,7 +477,7 @@
             attackButton.y = this.game.input.activePointer.y + 50;
         }
         
-        if (enemyTurnActive == true && movementTweenCaveCrawler.isPlaying() == false && movementTweenPaleAcolyte.isPlaying() == false && movementTweenPalePriest.isPlaying() == false && movementTweenOrdrak.isPlaying() == false) {
+        if (enemyTurnActive == true && movementTween.isPlaying() == false) {
             for (let i = 1; i < figuresOnMap.length; i++) {
                 if (figuresOnMap[i].color != "#878787") {
                     console.log("nur die Heldin " + i);

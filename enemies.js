@@ -57,24 +57,11 @@ class Enemy extends Phaser.GameObjects.Sprite {
         }
         
         this.moveNow = function () {
-            
-            if (this.pathToTravel.length > 0 && this.name == "Cave Crawler") {
-                movementTweenCaveCrawler.data[0].start = this.x;
-                movementTweenCaveCrawler.data[1].start = this.y;
-                movementTweenCaveCrawler.restart();
-            } else if (this.pathToTravel.length > 0 && this.name == "Pale Acolyte") {
-                movementTweenPaleAcolyte.data[0].start = this.x;
-                movementTweenPaleAcolyte.data[1].start = this.y;
-                movementTweenPaleAcolyte.restart();
-            } else if (this.pathToTravel.length > 0 && this.name == "Pale Priest") {
-                movementTweenPalePriest.data[0].start = this.x;
-                movementTweenPalePriest.data[1].start = this.y;
-                movementTweenPalePriest.restart();
-            } else if (this.pathToTravel.length > 0 && this.name == "Ordrak") {
-                movementTweenOrdrak.data[0].start = this.x;
-                movementTweenOrdrak.data[1].start = this.y;
-                movementTweenOrdrak.restart();
-            }
+            movementMarker.x = this.x;
+            movementMarker.y = this.y;
+            movementTween.data[0].start = this.x;
+            movementTween.data[1].start = this.y;
+            movementTween.restart();
         }
         
     }
