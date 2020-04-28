@@ -4,7 +4,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         config.scene.add.existing(this);
         this.setAlpha(0);
         this.onTile;
-        this.active = false;
+        this.active = true;
         this.hasActed = false;
         this.dieSize;
         this.explodes = false;

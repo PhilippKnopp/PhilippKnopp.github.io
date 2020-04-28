@@ -41,7 +41,6 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 this.active = false;
                 this.setFrame(0);
             }
-            
             enemyVisibility();
             checkFightmode();
             /* tileVisibility();
