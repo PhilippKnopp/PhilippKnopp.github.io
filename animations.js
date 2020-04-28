@@ -9,12 +9,16 @@ function createMovementTweens(_this) {
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             if (activeChar != undefined) {
                 return tileArray[activeChar.pathToTravel[0]].x;
+            } else {
+                return 0;
             }
         }},
         y: { value: function () { 
             let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             if (activeChar != undefined) {
                 return tileArray[activeChar.pathToTravel[0]].y;
+            } else {
+                return 0;
             }
         }},
         duration: 250,

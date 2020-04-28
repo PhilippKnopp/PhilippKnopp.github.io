@@ -408,7 +408,6 @@
         // Erstellt die drei Spielfiguren
         barb = new Figure ({scene:this, x:20, y:20}, 'barbSprite');
         barb.onTile = barbStartingPosition[level];
-        barb.pathToTravel.push(barbStartingPosition[level]);
         barb.dieSize = 12;
         barb.health = 12;
         barb.name = "Rhiva";
@@ -418,7 +417,6 @@
         
         rogue = new Figure ({scene:this, x:20, y:20}, 'rogueSprite');
         rogue.onTile = rogueStartingPosition[level];
-        rogue.pathToTravel.push(rogueStartingPosition[level]);
         rogue.dieSize = 8;
         rogue.health = 8;
         rogue.name = "Leng";
@@ -428,7 +426,6 @@
         
         mage = new Figure ({scene:this, x:20, y:20}, 'mageSprite');
         mage.onTile = mageStartingPosition[level];
-        mage.pathToTravel.push(mageStartingPosition[level]);
         mage.dieSize = 4;
         mage.explodes = true;
         mage.health = 4;
