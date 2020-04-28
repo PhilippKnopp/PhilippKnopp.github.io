@@ -37,6 +37,11 @@ class Enemy extends Phaser.GameObjects.Sprite {
             this.onTile = this.pathToTravel[0];
             this.pathToTravel.shift();
             tileArray[this.onTile].occupiedBy = "enemy";
+            if (this.pathToTravel.length == 0) {
+                this.active = false;
+                this.setFrame(0);
+            }
+            
             enemyVisibility();
             checkFightmode();
             /* tileVisibility();
