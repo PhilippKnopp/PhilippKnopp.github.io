@@ -156,6 +156,7 @@ class Figure extends Phaser.GameObjects.Sprite {
 
             this.active = true;
             this.setFrame(1);
+            activeChar = this;
             
             if (this == rogue && (this.checkIfHidden() == true || this.stealth == true)) {
                 this.stealth = true;
@@ -165,7 +166,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             showActions(this);
             
         } else if (searchButton.mode == "planning") {
-            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+            //let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             if (lineOfSight (activeChar, this.onTile) == true) {
                 showText("", activeChar, textL1Chars[this.description]);
             } else {
@@ -174,7 +175,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             returnCursorToNormal();
             showActions(activeChar);
         } else if (moveButton.mode == "planning") {
-            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+            //let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             moveButton.mode = "none";
             returnCursorToNormal();
             if (this != activeChar) {
@@ -182,7 +183,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             showActions(activeChar);
         } else if (attackButton.mode == "planning cc" || attackButton.mode == "planning rc") {
-            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
+            //let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             returnCursorToNormal();
             if (this != activeChar) {
                 showText ("", activeChar, textL1[19]);
@@ -415,6 +416,7 @@ function deactivateFigures() {
     for (var i = 0; i < figuresOnMap.length; i++) {
         figuresOnMap[i].active = false;
         figuresOnMap[i].setFrame(0);
+        activeChar = null;
     }
     attackButton.mode = "none";
     moveButton.mode = "none";

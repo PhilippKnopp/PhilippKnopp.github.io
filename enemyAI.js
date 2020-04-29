@@ -44,7 +44,7 @@ function enemyPlanMove (enemy) {
     }
     
     if (enemy.onTile == 116) {
-        enemy.pathToTravel.push(115, 114);
+        enemy.pathToTravel.push(115, 114, 113);
     }
     if (enemy.name == "Ordrak") {
         enemy.pathToTravel.push(190);
@@ -59,7 +59,6 @@ function enemyDo (enemy, action, target) {
         case "attack":
             enemy.actionStack.length = 0;
             enemy.attack(target);
-            enemy.setFrame(1);
             break;
         default:
             break;

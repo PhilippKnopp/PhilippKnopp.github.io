@@ -74,7 +74,7 @@
     var eventReminder = {e2:false, e4:false}; // Dinge die nur einmal passieren sollen
     
     var figuresOnMap = [];
-    var activeChar;
+    var activeChar = null;
     var turnOver = []; // Array mit allen Helden die in der aktuellen runde schon agiert haben.
     var enemyTurnActive = false;
     var charsStillAlive = 3;
@@ -479,6 +479,8 @@
         
         if (enemyTurnActive == true && movementTween.isPlaying() == false) {
             for (let i = 1; i < figuresOnMap.length; i++) {
+                console.log(figuresOnMap[i] instanceof Figure);
+                console.log(figuresOnMap[i] instanceof Enemy);
                 if (figuresOnMap[i].color != "#878787") {
                     console.log("nur die Heldin " + i);
                     // gehe in nächste Schleife
@@ -486,6 +488,7 @@
                     console.log("plane Jetzt " + i);
                     figuresOnMap[i].active = true;
                     figuresOnMap[i].setFrame(1);
+                    activeChar = figuresOnMap[i];
                     figuresOnMap[i].actionStack = enemyPlanMove(figuresOnMap[i]);
                     figuresOnMap[i].hasActed = true;
                     break;
@@ -498,6 +501,7 @@
                     enemyDo(figuresOnMap[i], figuresOnMap[i].actionStack[0], figuresOnMap[i].actionStack[1]);
                     figuresOnMap[i].active = false;
                     figuresOnMap[i].setFrame(0);
+                    activeChar = null;
                     break;
                 } else if (i == figuresOnMap.length-1) {
                     console.log("alle sind durch " + i);
@@ -569,7 +573,7 @@
     
     function tileVisibility () { 
         for (var i = 0; i < tileArray.length; i++) {
-            if (lineOfSight (figuresOnMap[0], i) || lineOfSight (figuresOnMap[1], i) || lineOfSight (figuresOnMap[2], i)) {
+            if ((lineOfSight (figuresOnMap[0], i) && figuresOnMap[0] instanceof Figure ) || (lineOfSight (figuresOnMap[1], i) && figuresOnMap[1] instanceof Figure ) || (lineOfSight (figuresOnMap[2], i) && figuresOnMap[2] instanceof Figure )) {
                 tileArray[i].setFrame(0);
             } else {
                 tileArray[i].setFrame(2);
@@ -614,7 +618,6 @@
                 return true;
             }
         }
-
         return false;
     }
     
