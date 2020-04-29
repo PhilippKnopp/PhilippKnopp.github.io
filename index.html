@@ -263,8 +263,7 @@
 				});
                 tile.on("pointerover", function pointerOver () {
                     if (moveButton.mode == "planning" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol" && fightmode == true) {
-                        let startTile = figuresOnMap[figuresOnMap.findIndex(findActiveChar)].onTile;
-                        let path = calculatePath(startTile, this.name);
+                        let path = calculatePath(activeChar.onTile, this.name);
                         for (var i = 0; i < path.first.length; i++) {
                             tileArray[path.first[i]].setFrame(1);
                         }
