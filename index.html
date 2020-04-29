@@ -548,7 +548,7 @@
         let enemyIndexes = [];
         // Alle Feinde werden unsichtbar
         for (var i = 0; i < figuresOnMap.length; i++) {
-            if (tileArray[figuresOnMap[i].onTile].occupiedBy == "enemy") {
+            if (figuresOnMap[i] instanceof Enemy) {
                 figuresOnMap[i].setAlpha(0);
                 enemyIndexes.push(figuresOnMap[i]);
             }
