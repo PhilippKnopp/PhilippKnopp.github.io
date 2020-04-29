@@ -78,13 +78,13 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 showActions(activeChar);
             }
         } else if (attackButton.mode == "planning rc") {
-            if (lineOfSight (activeChar, this.onTile) == true) { // Line of sight to enemy: Ranged Attack
+            if (lineOfSight (activeChar.onTile, this.onTile) == true) { // Line of sight to enemy: Ranged Attack
                 activeChar.rangedAttack(this);
             } else { // No Line of sight to enemy: I Can Not See That
                 showText("", activeChar, textL1[1]);
             }
         } else if (searchButton.mode == "planning") {
-            if (lineOfSight (activeChar, this.onTile) == true) {
+            if (lineOfSight (activeChar.onTile, this.onTile) == true) {
                 showText(textL1Chars[this.description]);
             } else {
                 showText("", activeChar, textL1[1]);

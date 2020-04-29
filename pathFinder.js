@@ -13,8 +13,6 @@ function calculatePath (startIndex, endIndex) {
     var pathFound = false;
     var pathToTravel = [];
     var distance = 0;
-
-    var activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
     
     // finde A und füge ihn der frontierList hinzu {name, wayPointUsefulness}
     tileArray[startIndex].entryPoint = "Start";
@@ -114,9 +112,9 @@ function calculatePath (startIndex, endIndex) {
     }
 }
 
-function lineOfSight (activeChar, endIndex) {
-    let aX = activeChar.onTile % matrixWidth;
-    let aY = Math.floor(activeChar.onTile / matrixWidth);
+function lineOfSight (startIndex, endIndex) {
+    let aX = startIndex % matrixWidth;
+    let aY = Math.floor(startIndex / matrixWidth);
     
     let bX = endIndex % matrixWidth;
     let bY = Math.floor(endIndex / matrixWidth);
@@ -124,7 +122,7 @@ function lineOfSight (activeChar, endIndex) {
     let difX = aX-bX;
     let difY = aY-bY;
     
-    let index = activeChar.onTile;
+    let index = startIndex;
     
     let diagonals = Math.min(Math.abs(difY), Math.abs(difX)); // die kleinere Differenz in der Entfernung sind die Diagonalen
     let straights = Math.max(Math.abs(difY), Math.abs(difX))-diagonals; // der Rest der Entfernung sind Geraden

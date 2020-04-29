@@ -56,7 +56,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             let distantEnemies = [];
             for (var i = 0; i < tileArray.length; i++) {
-                if (lineOfSight(this, i) == true && (tileArray[i].occupiedBy == "enemy")) {
+                if (lineOfSight(this.onTile, i) == true && (tileArray[i].occupiedBy == "enemy")) {
                     distantEnemies.push(i);
                 }
             }
@@ -167,7 +167,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             
         } else if (searchButton.mode == "planning") {
             //let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-            if (lineOfSight (activeChar, this.onTile) == true) {
+            if (lineOfSight (activeChar.onTile, this.onTile) == true) {
                 showText("", activeChar, textL1Chars[this.description]);
             } else {
                 showText("", activeChar, textL1[1]);
@@ -203,7 +203,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         // Sucht alle Gegner Verteidigungen und sammelt sie in enemyDefs
         for (var k = 0; k < enemyIndexes.length; k++) {
-            if (lineOfSight (this, enemyIndexes[k].onTile)) {
+            if (lineOfSight (this.onTile, enemyIndexes[k].onTile)) {
                 enemyDefs.push(enemyIndexes[k].def);
             }
         }
@@ -220,7 +220,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     checkIfHidden() {
         // Schaut ob ein Feind Sichtlinie zum Rogue hat
         for (var i = 0; i < figuresOnMap.length; i++) {
-            if (tileArray[figuresOnMap[i].onTile].occupiedBy == "enemy" && lineOfSight(this, figuresOnMap[i].onTile) == true) {
+            if (figuresOnMap[i] instanceof Enemy && lineOfSight(this.onTile, figuresOnMap[i].onTile) == true) {
                 return false;
             }
         }
@@ -228,7 +228,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     hideFace() {
-        if (figuresOnMap.findIndex(findActiveChar) == -1 || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
+        if (activeChar == null || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
             faceButton.setAlpha(0);
         }
     }
@@ -303,7 +303,7 @@ function showActions(_this) {
         } else if (_this == mage) {
             let distantEnemies = false;
             for (var i = 0; i < tileArray.length; i++) {
-                if (lineOfSight(_this, i) == true && (tileArray[i].occupiedBy == "enemy" || tileArray[i].occupiedBy == "idol")) {
+                if (lineOfSight(_this.onTile, i) == true && (tileArray[i].occupiedBy == "enemy" || tileArray[i].occupiedBy == "idol")) {
                     distantEnemies = true;
                 }
             }

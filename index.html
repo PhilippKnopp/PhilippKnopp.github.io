@@ -222,7 +222,7 @@
                     if (searchButton.mode == "planning") {
                         //console.log(this.name + " - x: " + this.x + " - y: " + this.y);
                         let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-                        if (lineOfSight (activeChar, this.name) == true) {
+                        if (lineOfSight (activeChar.onTile, this.name) == true) {
                             showText(textL1[this.info]);
                             if (this.info == 3 && crystal1Img.alpha != 0) {
                                 crystal1Img.setAlpha(1);
@@ -254,7 +254,7 @@
                         showActions(activeChar);
                     } else if (attackButton.mode == "planning rc" && this.occupiedBy == "idol") {
                         let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
-                        if (lineOfSight (activeChar, this.name) == true) {
+                        if (lineOfSight (activeChar.onTile, this.name) == true) {
                             eventDispatch (activeChar, "e7");
                         }
                         returnCursorToNormal();
@@ -453,15 +453,13 @@
 	}
     
     function update () {
-        console.log("update");
+        
         if (moveButton.mode == "planning") {
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
         } else if (moveButton.mode == "moving" && movementTween.isPlaying() == false) {
-            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.moveNow();
         } else if (movementTween.isPlaying() == true) {
-            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             activeChar.x = movementMarker.x;
             activeChar.y = movementMarker.y;
         }
@@ -558,7 +556,7 @@
         // Alle Feinde, zu denen LoS besteht, werden wieder sichtbar
         for (var j = 0; j < charsStillAlive; j++) {
             for (var k = 0; k < enemyIndexes.length; k++) {
-                if (lineOfSight (figuresOnMap[j], enemyIndexes[k].onTile)) {
+                if (lineOfSight (figuresOnMap[j].onTile, enemyIndexes[k].onTile)) {
                     enemyIndexes[k].setAlpha(1);
                     if (figuresOnMap[j].stealth == false) {
                         enemyIndexes[k].alarmed = true;
@@ -570,7 +568,7 @@
     
     function tileVisibility () { 
         for (var i = 0; i < tileArray.length; i++) {
-            if ((lineOfSight (figuresOnMap[0], i) && figuresOnMap[0] instanceof Figure ) || (lineOfSight (figuresOnMap[1], i) && figuresOnMap[1] instanceof Figure ) || (lineOfSight (figuresOnMap[2], i) && figuresOnMap[2] instanceof Figure )) {
+            if ((lineOfSight (figuresOnMap[0].onTile, i) && figuresOnMap[0] instanceof Figure ) || (lineOfSight (figuresOnMap[1].onTile, i) && figuresOnMap[1] instanceof Figure ) || (lineOfSight (figuresOnMap[2].onTile, i) && figuresOnMap[2] instanceof Figure )) {
                 tileArray[i].setFrame(0);
             } else {
                 tileArray[i].setFrame(2);
