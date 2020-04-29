@@ -15,7 +15,7 @@ function enemyPlanMove (enemy) {
     
     // das Opfer der Wahl wird definiert
     for (var i = 0; i < figuresOnMap.length; i++) {
-        if (figuresOnMap[i].color != "#878787" && figuresOnMap[i].health > 0) {
+        if (figuresOnMap[i] instanceof Figure && figuresOnMap[i].health > 0) {
             
             tileArray[figuresOnMap[i].onTile].checkForNeighbors();
             victimRanking.push(0);
@@ -43,22 +43,18 @@ function enemyPlanMove (enemy) {
         }
     }
     
-    if (enemy.onTile == 116) {
-        enemy.pathToTravel.push(115, 114, 113);
-    }
-    if (enemy.name == "Ordrak") {
-        enemy.pathToTravel.push(190);
-    }
     actionStack.push("attack", victimOfChoice);
+    // actionStack.push("wait", null);
     return actionStack;
 }
-
 
 function enemyDo (enemy, action, target) {
     switch(action) {
         case "attack":
             enemy.actionStack.length = 0;
             enemy.attack(target);
+            break;
+        case "wait":
             break;
         default:
             break;

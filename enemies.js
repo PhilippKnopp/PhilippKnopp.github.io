@@ -34,13 +34,8 @@ class Enemy extends Phaser.GameObjects.Sprite {
         
         this.enterTile = function () {
             tileArray[this.onTile].occupiedBy = "";
-            this.onTile = this.pathToTravel[0];
-            this.pathToTravel.shift();
+            this.onTile = this.pathToTravel.shift(); // onTile wird zu em ersten Pfadschritt und dieser wird dann entfernt
             tileArray[this.onTile].occupiedBy = "enemy";
-            if (this.pathToTravel.length == 0) {
-                this.active = false;
-                this.setFrame(0);
-            }
             enemyVisibility();
             checkFightmode();
             /* tileVisibility();
@@ -72,7 +67,6 @@ class Enemy extends Phaser.GameObjects.Sprite {
     
     activateFigure () {
         if (attackButton.mode == "planning cc") {
-            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             tileArray[activeChar.onTile].checkForNeighbors();
             if (tileArray[activeChar.onTile].neighbors.includes(tileArray[this.onTile])) {
                 activeChar.attack(this);
@@ -83,14 +77,12 @@ class Enemy extends Phaser.GameObjects.Sprite {
             }
             tileArray[activeChar.onTile].neighbors.length = 0;
         } else if (attackButton.mode == "planning rc") {
-            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             if (lineOfSight (activeChar, this.onTile) == true) { // Line of sight to enemy: Ranged Attack
                 activeChar.rangedAttack(this);
             } else { // No Line of sight to enemy: I Can Not See That
                 showText("", activeChar, textL1[1]);
             }
         } else if (searchButton.mode == "planning") {
-            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             if (lineOfSight (activeChar, this.onTile) == true) {
                 showText(textL1Chars[this.description]);
             } else {
@@ -99,12 +91,9 @@ class Enemy extends Phaser.GameObjects.Sprite {
             returnCursorToNormal();
             showActions(activeChar);
         } else if (moveButton.mode == "planning") {
-            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             moveButton.mode = "none";
             returnCursorToNormal();
-            if (this != activeChar) {
-                showText ("", activeChar, textL1[16]);
-            }
+            showText ("", activeChar, textL1[16]);
             showActions(activeChar);
         }
     }
