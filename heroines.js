@@ -413,6 +413,7 @@ function hideActions() {
 }
 
 function deactivateFigures() {
+    console.log("deactivateFigures");
     for (var i = 0; i < figuresOnMap.length; i++) {
         figuresOnMap[i].active = false;
         figuresOnMap[i].setFrame(0);
