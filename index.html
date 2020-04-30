@@ -24,7 +24,7 @@
 	
 <script>
 	
-    console.log("Version 0.25 test A");
+    console.log("Version 0.25 test B");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -447,7 +447,7 @@
 	}
     
     function update () {
-        
+        this.game.input.activePointer.disable();
         if (moveButton.mode == "planning") {
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
