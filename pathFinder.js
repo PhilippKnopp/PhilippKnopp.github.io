@@ -32,6 +32,8 @@ function calculatePath (startIndex, endIndex) {
             pathToTravel = [];
             break mapperLoop;
         }
+
+        console.log("frontierListValues " + frontierListValues);
         activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
         
         // Wenn Knoten mit Niedrigster wayPointUsefulness schon das Ziel ist, ist A* fertig
