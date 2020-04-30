@@ -240,7 +240,6 @@
                         showActions(activeChar);
                     } else if (attackButton.mode == "planning cc" && this.occupiedBy == "idol") {
                         this.checkForNeighbors();
-                        let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
                         for (let i = 0; i < this.neighbors.length; i++) {
                             if (this.neighbors[i].name == activeChar.onTile) {
                                 eventDispatch (activeChar, "e7");
@@ -329,7 +328,6 @@
         doorButton = this.add.sprite(400, 400, 'doorSprite').setAlpha(0);
         doorButton.setInteractive();
 		doorButton.on("pointerup", function pointerUp() {
-            let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             doors(activeChar, activeChar.onTile);
 		});
         doorButton.setDepth(1);
@@ -507,10 +505,6 @@
         
         swirl1.rotation += 0.01;
         swirl2.rotation -= 0.02;
-    }
-
-    function findActiveChar(element) { 
-        return element.active == true;
     }
     
     function findDeadChar(element) {

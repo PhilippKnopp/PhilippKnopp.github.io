@@ -180,7 +180,6 @@ function trap1(victim) {
 }
 
 function disableTrap1() {
-    let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
     if (getRandomInt(activeChar.dieSize, activeChar.explodes) <= 3) {
         activeChar.health -= 1;
         if (activeChar == rogue) {

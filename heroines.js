@@ -166,7 +166,6 @@ class Figure extends Phaser.GameObjects.Sprite {
             showActions(this);
             
         } else if (searchButton.mode == "planning") {
-            //let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             if (lineOfSight (activeChar.onTile, this.onTile) == true) {
                 showText("", activeChar, textL1Chars[this.description]);
             } else {
@@ -175,7 +174,6 @@ class Figure extends Phaser.GameObjects.Sprite {
             returnCursorToNormal();
             showActions(activeChar);
         } else if (moveButton.mode == "planning") {
-            //let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             moveButton.mode = "none";
             returnCursorToNormal();
             if (this != activeChar) {
@@ -183,7 +181,6 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             showActions(activeChar);
         } else if (attackButton.mode == "planning cc" || attackButton.mode == "planning rc") {
-            //let activeChar = figuresOnMap[figuresOnMap.findIndex(findActiveChar)];
             returnCursorToNormal();
             if (this != activeChar) {
                 showText ("", activeChar, textL1[19]);
@@ -234,7 +231,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     showFace() {
-        if (figuresOnMap.findIndex(findActiveChar) == -1 || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
+        if (activeChar == null || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
             faceButton.x = this.x-60;
             faceButton.y = this.y;
             faceButton.setAlpha(1);
