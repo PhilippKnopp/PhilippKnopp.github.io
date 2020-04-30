@@ -20,13 +20,13 @@ function enemyPlanMove (enemy) {
             // Schaut ob die Heldin überhaupt angegriffen werden kann.
             tileArray[figuresOnMap[i].onTile].checkForNeighbors();
             let heroinIsViable = false;
-            for (let j = 0; j < tileArray[figuresOnMap[i].onTile].neighbours.length; j++) {
-                if (tileArray[figuresOnMap[i].onTile].neighbours[j].occupiedBy == "figure" || tileArray[figuresOnMap[i].onTile].neighbours[j].occupiedBy == "enemy"){
+            for (let j = 0; j < tileArray[figuresOnMap[i].onTile].neighbors.length; j++) {
+                if (tileArray[figuresOnMap[i].onTile].neighbors[j].occupiedBy == "figure" || tileArray[figuresOnMap[i].onTile].neighbors[j].occupiedBy == "enemy"){
                     console.log(j + "ist schon besetzt");
                     continue; // Platz ist schon besetzt => nächsten freien Patz anschauen
                 }
-                let path = calculatePath (enemy.onTile, tileArray[figuresOnMap[i].onTile].neighbours[j]);
-                if (tileArray[figuresOnMap[i].onTile].neighbours[j] == enemy.onTile) {  // die Distanz ist 0 weil dieser Gegner schon auf dem richtigen Feld steht
+                let path = calculatePath (enemy.onTile, tileArray[figuresOnMap[i].onTile].neighbors[j]);
+                if (tileArray[figuresOnMap[i].onTile].neighbors[j] == enemy.onTile) {  // die Distanz ist 0 weil dieser Gegner schon auf dem richtigen Feld steht
                     console.log("Gegner steht schon daneben");
                     heroinIsViable = true;
                     break;
@@ -74,8 +74,8 @@ function enemyPlanMove (enemy) {
             }
             
             // Priorisiert Helden die bereits mit einem Gegner kämpfen (Faktor 1)
-            for (let j = 0; j < tileArray[figuresOnMap[i].onTile].neighbours.length; j++) {
-                if (tileArray[figuresOnMap[i].onTile].neighbours[j].occupiedBy == "enemy" && tileArray[figuresOnMap[i].onTile].neighbours[j] != enemy.onTile) {
+            for (let j = 0; j < tileArray[figuresOnMap[i].onTile].neighbors.length; j++) {
+                if (tileArray[figuresOnMap[i].onTile].neighbors[j].occupiedBy == "enemy" && tileArray[figuresOnMap[i].onTile].neighbors[j] != enemy.onTile) {
                     console.log("Flankiert +1");
                     victimRanking[i] += 1;
                     break;  // Bonus wird nur einmal vergeben.
