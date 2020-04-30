@@ -513,8 +513,11 @@
         return element.active == true;
     }
     
-    function findDeadChar(element) { 
-        return element.health <= 0;
+    function findDeadChar(element) {
+        if (element instanceof Enemy) {
+            return element.health <= 0;
+        }
+        return false;
     }
 
     function buildLevel() { 
