@@ -70,11 +70,11 @@
     var swirl1, swirl2;
     
     var mage, rogue, barb;
-    var rangedDamage = [0];  // Überschüssiger Schaden der Magierin kann auf zusätzliche Ziele verteilt werden
+    var rangedDamage = [0]; // Überschüssiger Schaden der Magierin kann auf zusätzliche Ziele verteilt werden
     var eventReminder = {e2:false, e4:false}; // Dinge die nur einmal passieren sollen
     
     var figuresOnMap = [];
-    var activeChar = null;
+    var activeChar = null;  // Variable in der die Spielfigut gespeichert wird, die gerade aktiv ist um schnell darauf zugreifen zu können.
     var turnOver = []; // Array mit allen Helden die in der aktuellen runde schon agiert haben.
     var enemyTurnActive = false;
     var charsStillAlive = 3;
@@ -456,6 +456,10 @@
         } else if (movementTween.isPlaying() == true) {
             activeChar.x = movementMarker.x;
             activeChar.y = movementMarker.y;
+            if (activeChar.name == "Ordrak") {
+                swirl1.x = movementMarker.x;
+                swirl2.y = movementMarker.y;
+            }
         }
         
         if (searchButton.mode == "planning") {
@@ -471,10 +475,8 @@
         if (enemyTurnActive == true && movementTween.isPlaying() == false) {
             for (let i = 1; i < figuresOnMap.length; i++) {
                 if (figuresOnMap[i] instanceof Figure) {
-                    console.log("nur die Heldin " + i);
                     // gehe in nächste Schleife
                 } else if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length == 0 && figuresOnMap[i].hasActed == false) {
-                    console.log("plane Jetzt " + i);
                     figuresOnMap[i].active = true;
                     figuresOnMap[i].setFrame(1);
                     activeChar = figuresOnMap[i];
@@ -482,18 +484,15 @@
                     figuresOnMap[i].hasActed = true;
                     break;
                 } else if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].pathToTravel.length > 0) {
-                    console.log("bewege Jetzt " + i);
                     figuresOnMap[i].moveNow();
                     break;
                 } else if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length > 0) {
-                    console.log("agiere Jetzt " + i);
                     enemyDo(figuresOnMap[i], figuresOnMap[i].actionStack[0], figuresOnMap[i].actionStack[1]);
                     figuresOnMap[i].active = false;
                     figuresOnMap[i].setFrame(0);
                     activeChar = null;
                     break;
                 } else if (i == figuresOnMap.length-1) {
-                    console.log("alle sind durch " + i);
                     enemyTurnActive = false;
                     for (let j = 0; j < figuresOnMap.length; j++) {
                         figuresOnMap[j].hasActed = false;
