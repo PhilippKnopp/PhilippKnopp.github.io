@@ -475,6 +475,7 @@
         if (enemyTurnActive == true && movementTween.isPlaying() == false) {
             for (let i = 1; i < figuresOnMap.length; i++) {
                 if (figuresOnMap[i] instanceof Figure) {
+                    continue;
                     // gehe in nächste Schleife
                 } else if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length == 0 && figuresOnMap[i].hasActed == false) {
                     figuresOnMap[i].active = true;

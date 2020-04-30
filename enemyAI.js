@@ -25,7 +25,7 @@ function enemyPlanMove (enemy) {
                     console.log(j + "ist schon besetzt");
                     continue; // Platz ist schon besetzt => nächsten freien Patz anschauen
                 }
-                let path = calculatePath (enemy.onTile, tileArray[figuresOnMap[i].onTile].neighbors[j]);
+                let path = calculatePath (enemy.onTile, tileArray[figuresOnMap[i].onTile].neighbors[j].name);
                 if (tileArray[figuresOnMap[i].onTile].neighbors[j] == enemy.onTile) {  // die Distanz ist 0 weil dieser Gegner schon auf dem richtigen Feld steht
                     console.log("Gegner steht schon daneben");
                     heroinIsViable = true;
