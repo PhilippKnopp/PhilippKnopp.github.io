@@ -77,7 +77,7 @@ function enemyPlanMove (enemy) {
             
             // Priorisiert Helden die bereits mit einem Gegner kämpfen (Faktor 1)
             for (let j = 0; j < neighborsCopy.length; j++) {
-                if (neighborsCopy[j].occupiedBy == "enemy" && neighborsCopy.neighbors[j] != enemy.onTile) {
+                if (neighborsCopy[j].occupiedBy == "enemy" && neighborsCopy[j] != enemy.onTile) {
                     console.log("Flankiert +1");
                     victimRanking[i] += 1;
                     break;  // Bonus wird nur einmal vergeben.
