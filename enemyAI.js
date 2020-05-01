@@ -120,7 +120,7 @@ function enemyPlanMove (enemy) {
             
             // ersetzt den aktuellen Wunschort durch einen potenziell besseren
             if (placeOfChoice == undefined || Math.min(...placeRanking) == placeRanking[i]) {
-                placeOfChoice = placeRanking[i].name;
+                placeOfChoice = neighborsCopy2[i].name;
             }
         }
         
