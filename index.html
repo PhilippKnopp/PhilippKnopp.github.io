@@ -24,7 +24,7 @@
 	
 <script>
 	
-    console.log("Version 0.25 test D");
+    console.log("Version 0.26");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -570,7 +570,6 @@
     }
     
     function completeTurn(char) {
-        console.log("completeTurn " + char.name);
         hideActions();
         deactivateFigures();
         if (turnOver.includes(char.name) == false) {
@@ -683,12 +682,13 @@
             fightmode = false;
             gameModeIcon.setFrame(0);
             gameModeText.setText("Exploration");
+            turnOver.length = 0;
+            enemyTurnActive = false;
             replenishActions();
         } else if (alarmedEnemies > 0 && fightmode == false) {
             fightmode = true;
             gameModeIcon.setFrame(1);
             gameModeText.setText("Skirmish");
-            replenishActions();
         }
     }
     

@@ -17,16 +17,19 @@ function enemyPlanMove (enemy) {
     for (var i = 0; i < figuresOnMap.length; i++) {
         if (figuresOnMap[i] instanceof Figure && figuresOnMap[i].health > 0 && figuresOnMap[i].stealth == false) {
             
-            // Schaut ob die Heldin überhaupt angegriffen werden kann.
             tileArray[figuresOnMap[i].onTile].checkForNeighbors();
+            let neighborsCopy = [...tileArray[figuresOnMap[i].onTile].neighbors];
+            clearNodes();
+            
+            // Schaut ob die Heldin überhaupt angegriffen werden kann.
             let heroinIsViable = false;
-            for (let j = 0; j < tileArray[figuresOnMap[i].onTile].neighbors.length; j++) {
-                if (tileArray[figuresOnMap[i].onTile].neighbors[j].occupiedBy == "figure" || tileArray[figuresOnMap[i].onTile].neighbors[j].occupiedBy == "enemy"){
+            for (let j = 0; j < neighborsCopy.length; j++) {
+                if (neighborsCopy[j].occupiedBy == "figure" || neighborsCopy[j].occupiedBy == "enemy"){
                     console.log(j + "ist schon besetzt");
                     continue; // Platz ist schon besetzt => nächsten freien Patz anschauen
                 }
-                let path = calculatePath (enemy.onTile, tileArray[figuresOnMap[i].onTile].neighbors[j].name);
-                if (tileArray[figuresOnMap[i].onTile].neighbors[j] == enemy.onTile) {  // die Distanz ist 0 weil dieser Gegner schon auf dem richtigen Feld steht
+                let path = calculatePath (enemy.onTile, neighborsCopy[j].name);
+                if (neighborsCopy[j] == enemy.onTile) {  // die Distanz ist 0 weil dieser Gegner schon auf dem richtigen Feld steht
                     console.log("Gegner steht schon daneben");
                     heroinIsViable = true;
                     break;
@@ -39,7 +42,6 @@ function enemyPlanMove (enemy) {
             
             // Wenn die Heldin nicht angegriffen werden kann gehe zur nächsten
             if (heroinIsViable == false) {
-                clearNodes();
                 continue;
             }
             
@@ -59,7 +61,7 @@ function enemyPlanMove (enemy) {
             
             // Priorisiere Helden die näher stehen (Faktor 2)
             let path = calculatePath(enemy.onTile, figuresOnMap[i].onTile);
-            if (tileArray[figuresOnMap[i].onTile].neighbors.includes(enemy.onTile)) {
+            if (neighborsCopy.includes(enemy.onTile)) {
                 console.log("Benachbart +4");
                 victimRanking[i] += 4;
             } else if (path.second > 0 && path.second <= enemy.movementCounter) {
@@ -74,8 +76,8 @@ function enemyPlanMove (enemy) {
             }
             
             // Priorisiert Helden die bereits mit einem Gegner kämpfen (Faktor 1)
-            for (let j = 0; j < tileArray[figuresOnMap[i].onTile].neighbors.length; j++) {
-                if (tileArray[figuresOnMap[i].onTile].neighbors[j].occupiedBy == "enemy" && tileArray[figuresOnMap[i].onTile].neighbors[j] != enemy.onTile) {
+            for (let j = 0; j < neighborsCopy.length; j++) {
+                if (neighborsCopy[j].occupiedBy == "enemy" && neighborsCopy.neighbors[j] != enemy.onTile) {
                     console.log("Flankiert +1");
                     victimRanking[i] += 1;
                     break;  // Bonus wird nur einmal vergeben.
@@ -89,18 +91,55 @@ function enemyPlanMove (enemy) {
             if (victimOfChoice == undefined || Math.max(...victimRanking) == victimRanking[i]) {
                 victimOfChoice = figuresOnMap[i];
             }
-            clearNodes();
         }
     }
     
-    console.log(victimRanking);
-    console.log(victimOfChoice.name);
+    // Das Bewegungsziel der Wahl wird definiert
     if (victimOfChoice != undefined) {
+        tileArray[victimOfChoice.onTile].checkForNeighbors();
+        let neighborsCopy2 = [...tileArray[victimOfChoice.onTile].neighbors];
+        clearNodes();
+        
+        // Geht alle 8 Plätze neben dem Opfer der Wahl durch
+        for (let i = 0; i < neighborsCopy2.length; i++) {
+            
+            // Sortiere Platz aus wenn er von jemand anderem besetzt ist
+            if ((neighborsCopy2[i].occupiedBy == "figure" || neighborsCopy2[i].occupiedBy == "enemy") && neighborsCopy2[i].name != enemy.onTile) {
+                continue;
+            }
+            
+            let path = calculatePath(enemy.onTile, neighborsCopy2[i].name);
+            
+            // Sortiere Platz aus wenn es für diesen Gegner keinen Weg dorthin gibt
+            if (path.first.length == 0 && neighborsCopy2[i].name != enemy.onTile) {
+                continue;
+            }
+            
+            // Distanz zum möglichen Platz der Wahl wird als Basis-Auswahlkriterium genommen
+            placeRanking.push(path.second);
+            
+            // ersetzt den aktuellen Wunschort durch einen potenziell besseren
+            if (placeOfChoice == undefined || Math.min(...placeRanking) == placeRanking[i]) {
+                placeOfChoice = placeRanking[i].name;
+            }
+        }
+        
+        // Bewegung wird festgelegt
+        let finalPath = calculatePath(enemy.onTile, placeOfChoice);
+        enemy.pathToTravel = finalPath.first;
+        
+    } else {
+        console.log("implementiere Route wenn kein Held erreichbar ist");
+    }
+    
+    // Der Entschluss was getan wird, wird gefasst
+    tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].checkForNeighbors();
+    if (victimOfChoice != undefined && tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors.includes(victimOfChoice.onTile)) {
         actionStack.push("attack", victimOfChoice);
     } else {
         actionStack.push("wait", null);
     }
-
+    
     return actionStack;
 }
 
