@@ -378,7 +378,7 @@ var textL1 = [
 /*29*/    "I've got it. We should go... \nNow!",
 /*30*/    "A calm and very deep lake.",
 /*31*/    "We should press on.",
-/*32*/    "As Leng tries to disable the trap the old mechanism breaks spraying the surroundings with a hail of wooden and metal shrapnel.",
+/*32*/    "As Leng tries to disable the trap the old mechanism breaks spraying the surroundings with a hail of wooden\nand metal shrapnel.",
 /*33*/    "...",
 /*34*/    "Caelith closes her eyes and invisible tendrils start to manipulate the mechanism. But she misjudges the\nstate of the materials and the trap breaks, spraying the surroundings with a hail of wooden and metal shrapnel.",
 /*35*/    "A just reward for not beeing careful enough.",

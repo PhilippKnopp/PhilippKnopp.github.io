@@ -59,14 +59,20 @@ function enemyPlanMove (enemy) {
                 }
             }
             
-            // Priorisiere Helden die näher stehen (Faktor 2)
+            // Priorisiere Helden die günstig stehen (Faktor 2)
             let path = calculatePath(enemy.onTile, figuresOnMap[i].onTile);
             if (neighborsCopy.includes(enemy.onTile)) {
                 console.log("Benachbart +4");
                 victimRanking[i] += 4;
-            } else if (path.second > 0 && path.second <= enemy.movementCounter) {
+            } else if (path.second <= 2) {
+                console.log("Benachbart +3");
+                victimRanking[i] += 3;
+            } else if (path.second <= 6) {
                 console.log("Benachbart +2");
                 victimRanking[i] += 2;
+            } else if (path.second <= 10) {
+                console.log("Benachbart +1");
+                victimRanking[i] += 1;
             }
             
             // Priorisiere Helden zu denen Line Of Sight besteht (Faktor 4)
@@ -85,7 +91,7 @@ function enemyPlanMove (enemy) {
             }
             
             // Zufall wird in das Verhalten einbezogen (Faktor 1)
-            victimRanking[i] += Math.floor(Math.random() * 2.99); // +0, +1 oder +2
+            victimRanking[i] += Math.floor(Math.random() * 1.99); // +0 oder +1
             
             // ersetzt das aktuelle Opfer durch ein potenziell besseres
             if (victimOfChoice == undefined || Math.max(...victimRanking) == victimRanking[i]) {
@@ -136,6 +142,12 @@ function enemyPlanMove (enemy) {
     tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].checkForNeighbors();
     if (victimOfChoice != undefined && tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors.includes(victimOfChoice.onTile)) {
         actionStack.push("attack", victimOfChoice);
+    } else if (tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors.includes(barb.onTile)) {
+        actionStack.push("attack", barb);
+    } else if (tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors.includes(rogue.onTile)) {
+        actionStack.push("attack", rogue);
+    } else if (tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors.includes(mage.onTile)) {
+        actionStack.push("attack", mage);
     } else {
         actionStack.push("wait", null);
     }
