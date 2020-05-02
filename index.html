@@ -28,7 +28,7 @@
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
-	var config = {
+	const config = {
 		type: Phaser.AUTO,
 		width: 1920,
 		height: 1080,
@@ -488,6 +488,7 @@
                     figuresOnMap[i].moveNow();
                     break;
                 } else if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length > 0) {
+                    console.log("aktion");
                     enemyDo(figuresOnMap[i], figuresOnMap[i].actionStack[0], figuresOnMap[i].actionStack[1]);
                     figuresOnMap[i].active = false;
                     figuresOnMap[i].setFrame(0);
