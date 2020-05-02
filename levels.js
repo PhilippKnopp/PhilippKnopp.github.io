@@ -357,10 +357,10 @@ var textL1 = [
 /*8*/    "The pit is about three meters deep. Once the pit was filled with spikes, but most of them rusted away.",
 /*9*/    "Hover over the tokens on the map to see a portrait or click on one of the heroines to activate her.\nDepending on the heroines's position and abilities, you can select various actions.",
 /*10*/    "A stone block engraved with religious runes.",
-/*11*/    "A huge, cathedral like room, that is illuminated by blue, flickering candles. There are no pews, only an\naltair in front of a podium. In the middle of the podium there is a pedestral with a dark idol\nstanding upon it. The writhing shadows in the corners of this room seem threatening and darker than they are supposed to.",
+/*11*/    "A huge, cathedral like room, that is illuminated by blue, flickering candles. There are no pews, only an\naltair in front of a podium. In the middle of the podium there is a pedestral with a dark idol standing upon\nit. The writhing shadows in the corners of this room seem threatening and darker than they are supposed to.",
 /*12*/    "An austere corridor. The walls were cut into the rock in a way to give them a look as if they were made out\nof big, smooth stoneblocks.",
 /*13*/    "The room has a dome-like ceiling and columns along the walls. The floor is engraved with intricate runes\nand a circle.",
-/*14*/    "An idol of the god in the deep. It looks like it was made during a time when humans had only just learned to\nuse tools. Despite its primitive and threatening looks it still has an aura of superiority\nand knowledge.",
+/*14*/    "An idol of the god in the deep. It looks like it was made during a time when humans had only just learned\nto use tools. Despite its primitive and threatening looks it still has an aura of superiority and knowledge.",
 /*15*/    "With his last hissing breath, a pale priest tells Caelith, that Arowia was sent deeper into the tunnels, as a tribute to an allied faction. Then he dies and the room falls silent. The three heroines look at each other in silence and come to the unspoken agreement that they will not surrender until they end their quest, however slim the odds might be. A few hours of rest later, they search the old temple for a way out and find a steep staircase that leads deeper into the darkness. Knowing full well, that their adventure has only just begun, they start their descent, fighting to keep the last spark of hope alive.",
 /*16*/    "I can not go there, there is only space enough for one.",
 /*17*/    "I can not go there.", // Tile ist nicht betretbar

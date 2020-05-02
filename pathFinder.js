@@ -64,9 +64,9 @@ function calculatePath (startIndex, endIndex) {
                 }
             } else if (containsObject(frontierList[activeNode].neighbors[i], mappedList)) {
                 continue;
-            } else if (frontierList[activeNode].neighbors[i].occupiedBy == "enemy" && tileArray[startIndex].occupiedBy == "figure") {
+            } else if ((frontierList[activeNode].neighbors[i].occupiedBy == "enemy" || frontierList[activeNode].neighbors[i].occupiedBy == "idol") && tileArray[startIndex].occupiedBy == "figure") {
                 continue;
-            } else if (frontierList[activeNode].neighbors[i].occupiedBy == "figure" && tileArray[startIndex].occupiedBy == "enemy") {
+            } else if ((frontierList[activeNode].neighbors[i].occupiedBy == "figure" || frontierList[activeNode].neighbors[i].occupiedBy == "idol") && tileArray[startIndex].occupiedBy == "enemy") {
                 continue;
             } else {
                 frontierList[activeNode].neighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
@@ -93,7 +93,7 @@ function calculatePath (startIndex, endIndex) {
     
     // wenn das Ziefeld der Bewegung besetzt ist wird es gekürzt bis die Bewegung auf einem leeren Feld endet oder keine Bewegung zustande kommt
     endIsFree: while (pathToTravel.length > 0) {
-        if (tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy == "figure" || tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy == "enemy") {
+        if (tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy != "") {
             pathToTravel.length = pathToTravel.length-1;
         } else {
             break endIsFree;

@@ -24,7 +24,7 @@ function enemyPlanMove (enemy) {
             // Schaut ob die Heldin überhaupt angegriffen werden kann.
             let heroinIsViable = false;
             for (let j = 0; j < neighborsCopy.length; j++) {
-                if (neighborsCopy[j].occupiedBy == "figure" || neighborsCopy[j].occupiedBy == "enemy"){
+                if (neighborsCopy[j].occupiedBy != ""){
                     console.log(j + "ist schon besetzt");
                     continue; // Platz ist schon besetzt => nächsten freien Patz anschauen
                 }
@@ -110,7 +110,7 @@ function enemyPlanMove (enemy) {
         for (let i = 0; i < neighborsCopy2.length; i++) {
             
             // Sortiere Platz aus wenn er von jemand anderem besetzt ist
-            if ((neighborsCopy2[i].occupiedBy == "figure" || neighborsCopy2[i].occupiedBy == "enemy") && neighborsCopy2[i].name != enemy.onTile) {
+            if (neighborsCopy2[i].occupiedBy != "" && neighborsCopy2[i].name != enemy.onTile) {
                 continue;
             }
             
