@@ -150,6 +150,7 @@ function enemyDo (enemy, action, target) {
             enemy.attack(target);
             break;
         case "wait":
+            enemy.actionStack.length = 0;
             break;
         default:
             break;
