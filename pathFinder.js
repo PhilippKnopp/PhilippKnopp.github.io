@@ -14,6 +14,14 @@ function calculatePath (startIndex, endIndex) {
     var pathToTravel = [];
     var distance = 0;
     
+    //Fange Ausnahmen ab startIndex = endIndex
+    if (startIndex == endIndex) {
+        return {
+            first: pathToTravel,
+            second: distance
+        }
+    }
+    
     // finde A und füge ihn der frontierList hinzu {name, wayPointUsefulness}
     tileArray[startIndex].entryPoint = "Start";
     tileArray[startIndex].distanceTravelled = 0;
