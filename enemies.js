@@ -33,7 +33,15 @@ class Enemy extends Phaser.GameObjects.Sprite {
         };
         
         this.enterTile = function () {
-            tileArray[this.onTile].occupiedBy = "";
+            let changeTileOccupation = true;
+            for (var i = 0; i < figuresOnMap.length; i++) {
+                if (figuresOnMap[i].onTile == this.onTile && figuresOnMap[i] != this) {
+                    changeTileOccupation = false;
+                }
+            }
+            if (changeTileOccupation == true) {
+                tileArray[this.onTile].occupiedBy = "";
+            }
             this.onTile = this.pathToTravel.shift(); // onTile wird zu em ersten Pfadschritt und dieser wird dann entfernt
             tileArray[this.onTile].occupiedBy = "enemy";
             enemyVisibility();
