@@ -95,7 +95,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         this.attack = function (enemy) {
-            if (this.actionsCounter > 0) {
+            if (this.actionsCounter > 0 && fightmode == true) {
                 this.actionsCounter--;
             } else if (this.actionsCounter == 0 && this.movementCounter >= 6) {
                 this.movementCounter -= 6;
