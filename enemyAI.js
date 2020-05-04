@@ -154,9 +154,10 @@ function enemyPlanMove (enemy) {
     console.log(enemy.pathToTravel);
     console.log(enemy.pathToTravel[enemy.pathToTravel.length-1]);
     tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].checkForNeighbors();
+    console.log(tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors);
     let neighborIndexes = [];
     for (let i = 0; i < tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors; i++) {
-        neighborIndexes.push(tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors[i].name);
+        neighborIndexes.push(tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors[i]);
     }
     console.log(neighborIndexes);
     clearNodes();
