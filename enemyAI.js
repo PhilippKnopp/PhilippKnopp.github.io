@@ -60,6 +60,7 @@ function enemyPlanMove (enemy) {
             }
             
             // Priorisiere Helden die günstig stehen (Faktor 2)
+            console.log(activeChar.movementCounter);
             console.log(enemy.onTile);
             console.log(figuresOnMap[i].onTile);
             let path2 = calculatePath(enemy.onTile, figuresOnMap[i].onTile);
