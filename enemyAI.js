@@ -152,13 +152,17 @@ function enemyPlanMove (enemy) {
     
     // Der Entschluss was getan wird, wird gefasst
     tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].checkForNeighbors();
-    if (victimOfChoice != undefined && tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors.includes(victimOfChoice.onTile)) {
+    let neighborIndexes = [];
+    for (let i = 0; i < tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors; i++) {
+        neighborIndexes.push(tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors[i]);
+    }
+    if (victimOfChoice != undefined && neighborIndexes.includes(victimOfChoice.onTile)) {
         actionStack.push("attack", victimOfChoice);
-    } else if (tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors.includes(barb.onTile)) {
+    } else if (neighborIndexes.includes(barb.onTile)) {
         actionStack.push("attack", barb);
-    } else if (tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors.includes(rogue.onTile)) {
+    } else if (neighborIndexes.includes(rogue.onTile)) {
         actionStack.push("attack", rogue);
-    } else if (tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors.includes(mage.onTile)) {
+    } else if (neighborIndexes.includes(mage.onTile)) {
         actionStack.push("attack", mage);
     } else {
         actionStack.push("wait", null);
