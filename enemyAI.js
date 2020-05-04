@@ -129,13 +129,12 @@ function enemyPlanMove (enemy) {
             let path = calculatePath(enemy.onTile, neighborsCopy[i].name);
             
             // Sortiere Platz aus wenn es für diesen Gegner keinen Weg dorthin gibt
-            if (path3.first.length == 0 && neighborsCopy[i].name != enemy.onTile) {
+            if (path.first.length == 0 && neighborsCopy[i].name != enemy.onTile) {
                 continue;
             }
             
             // Distanz zum möglichen Platz der Wahl wird als Basis-Auswahlkriterium genommen
-            console.log(path3.second);
-            placeRanking.push(path3.second);
+            placeRanking.push(path.second);
             
             // ersetzt den aktuellen Wunschort durch einen potenziell besseren
             if (placeOfChoice == undefined || Math.min(...placeRanking) == placeRanking[i]) {
@@ -164,6 +163,7 @@ function enemyPlanMove (enemy) {
     } else {
         actionStack.push("wait", null);
     }
+    clearNodes();
     
     return actionStack;
 }
