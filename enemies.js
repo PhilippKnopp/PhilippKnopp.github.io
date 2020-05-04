@@ -231,4 +231,15 @@ function createEnemies (_this) {
 function specialAttack(enemy, attackName) {
     console.log("it Worked");
     console.log(enemy.name + " uses: " + attackName);
+    switch(attackName) {
+        case "darkness":
+            swirl1.setAlpha(0.2);
+            swirl2.setAlpha(0.2);
+            enemy.def += 1;
+            break;
+        case "unholy energy":
+            break;
+        default:
+            break;
+    }
 }

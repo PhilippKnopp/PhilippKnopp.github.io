@@ -135,7 +135,9 @@ var barbStartingPosition = [0,232];
 //var paleAcolyteStartingPosition = [0,[207,258,490,611,744,765,792]];
 //var palePriestStartingPosition = [0,[703,707,778,782,830,866]];
 //var ordrakStartingPosition = [0,[755]];
-var palePriestStartingPosition = [0,[207,208,209,210,211,212]];
+var caveCrawlerStartingPosition = [0,[]];
+var paleAcolyteStartingPosition = [0,[]];
+var palePriestStartingPosition = [0,[207,208,209,210,211]];
 var ordrakStartingPosition = [0,[260]];
 
 
