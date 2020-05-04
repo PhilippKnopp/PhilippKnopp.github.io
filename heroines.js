@@ -264,9 +264,6 @@ class Figure extends Phaser.GameObjects.Sprite {
 
 function showActions(_this) {
     
-    console.log(_this.actionsCounter);
-    console.log(_this.movementCounter);
-    
     if (fightmode == true && (_this.actionsCounter == 0 && (_this.movementCounter) < 1 )) {
         completeTurn(_this);    // beendet Zug für diese Heldin und checkt ob dadurch der Zug für alle beendet ist
         return;

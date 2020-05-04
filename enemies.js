@@ -7,6 +7,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.active = false;
         this.dieSize;
         this.explodes = false;
+        this.specialAttack = {roll: [], name: []};
         this.fullHealth;
         this.health;
         this.movement = 6;
@@ -55,7 +56,11 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.attack = function (heroine) {
             let attackroll = getRandomInt(this.dieSize, this.explodes);
             let damageroll = Math.min(attackroll, getRandomInt(this.dieSize, this.explodes))
-            if (attackroll >= heroine.def) {
+            
+            if (this.specialAttack.roll.includes(attackroll)) {
+                console.log(this.specialAttack.name[this.specialAttack.roll.findIndex(attackroll)];
+                specialAttack(this, this.specialAttack.name[this.specialAttack.roll.findIndex(attackroll)]);
+            } else if (attackroll >= heroine.def) {
                 heroine.health -= damageroll;
             }
             
@@ -189,6 +194,8 @@ function createEnemies (_this) {
         var palePriest = new Enemy ({scene:_this, x:20, y:20}, 'e3Sprite');
         palePriest.onTile = palePriestStartingPosition[level][i];
         palePriest.dieSize = 8;
+        ordrak.specialAttack.roll.push(8);
+        ordrak.specialAttack.name.push("unholy energy");
         palePriest.fullHealth = 8;
         palePriest.health = 8;
         palePriest.def = 4;
@@ -206,6 +213,8 @@ function createEnemies (_this) {
         var ordrak = new Enemy ({scene:_this, x:20, y:20}, 'e4Sprite');
         ordrak.onTile = ordrakStartingPosition[level][l];
         ordrak.dieSize = 8;
+        ordrak.specialAttack.roll.push(8);
+        ordrak.specialAttack.name.push("darkness");
         ordrak.fullHealth = 12;
         ordrak.health = 12;
         ordrak.def = 4;
@@ -215,4 +224,11 @@ function createEnemies (_this) {
         figuresOnMap.push(ordrak);
     }
 
+}
+
+////////////// Gegner spezial Attacken   ////////////////////////////////////////////////////////////////////////
+
+function specialAttack(enemy, attackName) {
+    console.log("it Worked");
+    console.log(enemy.name + " uses: " + attackName);
 }
