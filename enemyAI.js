@@ -151,16 +151,11 @@ function enemyPlanMove (enemy) {
     }
     
     // Der Entschluss was getan wird, wird gefasst
-    console.log(enemy.pathToTravel);
-    console.log(enemy.pathToTravel[enemy.pathToTravel.length-1]);
     tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].checkForNeighbors();
-    console.log(tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors);
     let neighborIndexes = [];
-    for (let i = 0; i < tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors; i++) {
+    for (let i = 0; i < tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors.length; i++) {
         neighborIndexes.push(tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors[i].name);
-        console.log(neighborIndexes.push(tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors[i].name));
     }
-    console.log(neighborIndexes);
     clearNodes();
     console.log(neighborIndexes);
     console.log(barb.onTile);
