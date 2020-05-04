@@ -61,6 +61,8 @@ function enemyPlanMove (enemy) {
             
             // Priorisiere Helden die günstig stehen (Faktor 2)
             let path2 = calculatePath(enemy.onTile, figuresOnMap[i].onTile);
+            console.log(enemy.onTile);
+            console.log(figuresOnMap[i].onTile);
             console.log("Ist es wirklich benachbart +3? " + path2.second);
             if (neighborsCopy.includes(enemy.onTile)) {
                 console.log("Benachbart +4");
