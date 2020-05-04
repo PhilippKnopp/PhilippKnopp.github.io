@@ -62,7 +62,7 @@ function enemyPlanMove (enemy) {
             // Priorisiere Helden die günstig stehen (Faktor 2)
             let distancesToThisHeroine = [];
             for (let j = 0; j < neighborsCopy.length; j++) {
-                if (neighborsCopy[j].occupiedBy != ""){
+                if (neighborsCopy[j].occupiedBy != "" && neighborsCopy[j].name != enemy.onTile){
                     continue;
                 }
                 let path = calculatePath(enemy.onTile, neighborsCopy[j].name, true);
@@ -74,16 +74,16 @@ function enemyPlanMove (enemy) {
             }
             let distanceToThisHeroine = Math.min(...distancesToThisHeroine);
             if (distanceToThisHeroine == 0) {
-                console.log("Benachbart +4");
+                console.log("Distanz +4");
                 victimRanking[i] += 4;
             } else if (distanceToThisHeroine <= 2) {
-                console.log("Benachbart +3");
+                console.log("Distanz +3");
                 victimRanking[i] += 3;
             } else if (distanceToThisHeroine <= 6) {
-                console.log("Benachbart +2");
+                console.log("Distanz +2");
                 victimRanking[i] += 2;
             } else if (distanceToThisHeroine <= 10) {
-                console.log("Benachbart +1");
+                console.log("Distanz +1");
                 victimRanking[i] += 1;
             }
             
