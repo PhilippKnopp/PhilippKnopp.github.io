@@ -156,6 +156,8 @@ function enemyPlanMove (enemy) {
     for (let i = 0; i < tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors; i++) {
         neighborIndexes.push(tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors[i]);
     }
+    console.log(neighborIndexes);
+    console.log(victimOfChoice);
     if (victimOfChoice != undefined && neighborIndexes.includes(victimOfChoice.onTile)) {
         actionStack.push("attack", victimOfChoice);
     } else if (neighborIndexes.includes(barb.onTile)) {
@@ -177,9 +179,11 @@ function enemyDo (enemy, action, target) {
         case "attack":
             enemy.actionStack.length = 0;
             enemy.attack(target);
+            console.log("attack");
             break;
         case "wait":
             enemy.actionStack.length = 0;
+            console.log("wait");
             break;
         default:
             break;
