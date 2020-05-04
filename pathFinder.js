@@ -111,6 +111,7 @@ function calculatePath (startIndex, endIndex) {
     // speichert die Entfernung bis zum Ende des Pfades
     if (pathToTravel.length > 0) {
         distance += tileArray[pathToTravel[pathToTravel.length-1]].distanceTravelled;
+        console.log(distance);
     }
     
     // räumt alle Tiles wieder auf
