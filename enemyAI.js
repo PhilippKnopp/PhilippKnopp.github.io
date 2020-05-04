@@ -151,13 +151,19 @@ function enemyPlanMove (enemy) {
     }
     
     // Der Entschluss was getan wird, wird gefasst
+    console.log(enemy.pathToTravel);
+    console.log(enemy.pathToTravel[enemy.pathToTravel.length-1]);
     tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].checkForNeighbors();
     let neighborIndexes = [];
     for (let i = 0; i < tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors; i++) {
         neighborIndexes.push(tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors[i].name);
     }
     console.log(neighborIndexes);
-    console.log(victimOfChoice);
+    clearNodes();
+    console.log(neighborIndexes);
+    console.log(barb.onTile);
+    console.log(rogue.onTile);
+    console.log(mage.onTile);
     if (victimOfChoice != undefined && neighborIndexes.includes(victimOfChoice.onTile)) {
         actionStack.push("attack", victimOfChoice);
     } else if (neighborIndexes.includes(barb.onTile)) {
@@ -169,7 +175,6 @@ function enemyPlanMove (enemy) {
     } else {
         actionStack.push("wait", null);
     }
-    clearNodes();
     
     return actionStack;
 }
