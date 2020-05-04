@@ -194,8 +194,8 @@ function createEnemies (_this) {
         var palePriest = new Enemy ({scene:_this, x:20, y:20}, 'e3Sprite');
         palePriest.onTile = palePriestStartingPosition[level][i];
         palePriest.dieSize = 8;
-        ordrak.specialAttack.roll.push(8);
-        ordrak.specialAttack.name.push("unholy energy");
+        palePriest.specialAttack.roll.push(8);
+        palePriest.specialAttack.name.push("unholy energy");
         palePriest.fullHealth = 8;
         palePriest.health = 8;
         palePriest.def = 4;
