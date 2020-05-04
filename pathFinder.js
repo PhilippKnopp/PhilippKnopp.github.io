@@ -3,7 +3,7 @@
 ////////// Berechnet Wege und Distanzen und Sichtlinien //////////////////////////////////////////////////////////
 
 
-function calculatePath (startIndex, endIndex) {
+function calculatePath (startIndex, endIndex, onlyMeasure = false) {
     // startIndex soll der Index im TileArray sein, endIndex soll der Index im TileArray sein
     
     var mappedList = [];
@@ -90,7 +90,7 @@ function calculatePath (startIndex, endIndex) {
     }
         
     // wenn gerade ein Kampf ist soll die Bewegung begrenzt sein auf die Maximale Bewegungsweite des aktiven Charakters
-    if (fightmode == true) {
+    if (fightmode == true || onlyMeasure = false) {
         movementStopper: for (var l = 0; l < pathToTravel.length; l++) {
             if (tileArray[pathToTravel[l]].distanceTravelled > activeChar.movementCounter) {
                 pathToTravel.length = l;
