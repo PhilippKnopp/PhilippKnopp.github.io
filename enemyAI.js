@@ -61,9 +61,7 @@ function enemyPlanMove (enemy) {
             
             // Priorisiere Helden die günstig stehen (Faktor 2)
             let path2 = calculatePath(enemy.onTile, figuresOnMap[i].onTile);
-            console.log(enemy.onTile);
-            console.log(figuresOnMap[i].onTile);
-            console.log("Ist es wirklich benachbart +3? " + path2.second);
+            console.log("Ist es wirklich benachbart +3? " + path2);
             if (neighborsCopy.includes(enemy.onTile)) {
                 console.log("Benachbart +4");
                 victimRanking[i] += 4;
@@ -125,6 +123,7 @@ function enemyPlanMove (enemy) {
             }
             
             // Distanz zum möglichen Platz der Wahl wird als Basis-Auswahlkriterium genommen
+            console.log(path3.second);
             placeRanking.push(path3.second);
             
             // ersetzt den aktuellen Wunschort durch einen potenziell besseren
