@@ -28,12 +28,12 @@ function enemyPlanMove (enemy) {
                     console.log(j + "ist schon besetzt");
                     continue; // Platz ist schon besetzt => nächsten freien Patz anschauen
                 }
-                let path = calculatePath (enemy.onTile, neighborsCopy[j].name);
+                let path1 = calculatePath (enemy.onTile, neighborsCopy[j].name);
                 if (neighborsCopy[j] == enemy.onTile) {  // die Distanz ist 0 weil dieser Gegner schon auf dem richtigen Feld steht
                     console.log("Gegner steht schon daneben");
                     heroinIsViable = true;
                     break;
-                } else if (path.second != 0) {  // eine Distanz wird zurückgegeben => Man kann auf das Feld laufen!
+                } else if (path1.second != 0) {  // eine Distanz wird zurückgegeben => Man kann auf das Feld laufen!
                     console.log("Gegner kann da hinlaufen");
                     heroinIsViable = true;
                     break;
@@ -60,18 +60,18 @@ function enemyPlanMove (enemy) {
             }
             
             // Priorisiere Helden die günstig stehen (Faktor 2)
-            let path = calculatePath(enemy.onTile, figuresOnMap[i].onTile);
-            console.log("Ist es wirklich benachbart +3? " + path.second);
+            let path2 = calculatePath(enemy.onTile, figuresOnMap[i].onTile);
+            console.log("Ist es wirklich benachbart +3? " + path2.second);
             if (neighborsCopy.includes(enemy.onTile)) {
                 console.log("Benachbart +4");
                 victimRanking[i] += 4;
-            } else if (path.second <= 2) {
+            } else if (path2.second <= 2) {
                 console.log("Benachbart +3");
                 victimRanking[i] += 3;
-            } else if (path.second <= 6) {
+            } else if (path2.second <= 6) {
                 console.log("Benachbart +2");
                 victimRanking[i] += 2;
-            } else if (path.second <= 10) {
+            } else if (path2.second <= 10) {
                 console.log("Benachbart +1");
                 victimRanking[i] += 1;
             }
@@ -115,15 +115,15 @@ function enemyPlanMove (enemy) {
                 continue;
             }
             
-            let path = calculatePath(enemy.onTile, neighborsCopy2[i].name);
+            let path3 = calculatePath(enemy.onTile, neighborsCopy2[i].name);
             
             // Sortiere Platz aus wenn es für diesen Gegner keinen Weg dorthin gibt
-            if (path.first.length == 0 && neighborsCopy2[i].name != enemy.onTile) {
+            if (path3.first.length == 0 && neighborsCopy2[i].name != enemy.onTile) {
                 continue;
             }
             
             // Distanz zum möglichen Platz der Wahl wird als Basis-Auswahlkriterium genommen
-            placeRanking.push(path.second);
+            placeRanking.push(path3.second);
             
             // ersetzt den aktuellen Wunschort durch einen potenziell besseren
             if (placeOfChoice == undefined || Math.min(...placeRanking) == placeRanking[i]) {
