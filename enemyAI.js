@@ -157,10 +157,6 @@ function enemyPlanMove (enemy) {
         neighborIndexes.push(tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors[i].name);
     }
     clearNodes();
-    console.log(neighborIndexes);
-    console.log(barb.onTile);
-    console.log(rogue.onTile);
-    console.log(mage.onTile);
     if (victimOfChoice != undefined && neighborIndexes.includes(victimOfChoice.onTile)) {
         actionStack.push("attack", victimOfChoice);
     } else if (neighborIndexes.includes(barb.onTile)) {
