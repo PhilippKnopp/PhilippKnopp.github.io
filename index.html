@@ -646,6 +646,7 @@
         } else if (eventKey == "6e5") {     // zweiter Gang
             showText (textL1[22], activeChar, textL1[23]);
         } else if (eventKey == "6e6") { // vor dem Bosskampf
+            showText(textL1[43], mage, textL1[44]);
         } else if (eventKey == "e7") {  // Statuette wird zerstört
             addXP (20);
             idol1Img.setAlpha(1);
@@ -660,6 +661,7 @@
                 }
             }
         } else if (eventKey == "e8") {  // ende von Level 1
+            showText (textL1[15]);
         } else if (eventKey == "7e9") { // Kristall im See
             if (fightmode == true) {
                 showText ("", activeChar, textL1[42]);

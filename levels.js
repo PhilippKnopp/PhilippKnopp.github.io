@@ -409,6 +409,8 @@ var textL1 = [
 /*40*/    "Rhiva dives deeper and deeper, with her pride not allowing her to give up. After a while Leng sprints to her\nretrieving Rhivas unconscious Body from the depths of the icy lake.",
 /*41*/    "You are stubborn way past the point of stupidness!",
 /*42*/    "Not while there is a fight!",
+/*43*/    "An unholy ritual can be heard as the heroines descent further down the stairs",
+/*44*/    "We must stop this, they are summoning an ancient an evil creature!",
 ];
 
 var textL1Enemy = [
