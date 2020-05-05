@@ -137,8 +137,8 @@ var barbStartingPosition = [0,232];
 //var ordrakStartingPosition = [0,[755]];
 var caveCrawlerStartingPosition = [0,[]];
 var paleAcolyteStartingPosition = [0,[]];
-var palePriestStartingPosition = [0,[207,208,209,210,211]];
-var ordrakStartingPosition = [0,[260]];
+var palePriestStartingPosition = [0,[210]];
+var ordrakStartingPosition = [0,[]];
 
 
 var bgMusic = [0, "lvl_1_BG_Music"];
