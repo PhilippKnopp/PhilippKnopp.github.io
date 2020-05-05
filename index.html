@@ -717,7 +717,9 @@
             fightmode = true;
             gameModeIcon.setFrame(1);
             gameModeText.setText("Skirmish");
-            activeChar.pathToTravel.length = 0;
+            if (activeChar != null) {
+                activeChar.pathToTravel.length = 0;
+            }
         }
     }
     
