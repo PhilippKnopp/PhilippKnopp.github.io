@@ -358,10 +358,11 @@ function ritual(char, energy) {
     if (eventReminder.ritualProgress <= 0) {
         circle1Img.setAlpha(1);
         eventReminder.ritual = "succesful";
+        showText(textL1[45]);
     } else {
         circle1Img.setAlpha(1-(eventReminder.ritualProgress/13));
         eventReminder.ritual = "started";
-        ordrak.setAlpha(1-(eventReminder.ritualProgress/26));
+        figuresOnMap[figuresOnMap.length-1].setAlpha(1-(eventReminder.ritualProgress/26));
     }
 }
 
@@ -411,6 +412,7 @@ var textL1 = [
 /*42*/    "Not while there is a fight!",
 /*43*/    "An unholy ritual can be heard as the heroines descent further down the stairs",
 /*44*/    "We must stop this, they are summoning an ancient an evil creature!",
+/*45*/    "Shadows",
 ];
 
 var textL1Enemy = [
