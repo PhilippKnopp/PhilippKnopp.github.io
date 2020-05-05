@@ -550,9 +550,11 @@
         let enemyIndexes = [];
         // Alle Feinde werden unsichtbar
         for (var i = 0; i < figuresOnMap.length; i++) {
-            if (figuresOnMap[i] instanceof Enemy && (figuresOnMap[i].name != "Ordrak" || eventReminder.ritualProgress <= 0)) {
+            if (figuresOnMap[i] instanceof Enemy) {
                 figuresOnMap[i].setAlpha(0);
-                enemyIndexes.push(figuresOnMap[i]);
+                if (figuresOnMap[i].name != "Ordrak" || eventReminder.ritualProgress <= 0) {
+                    enemyIndexes.push(figuresOnMap[i]);
+                }
             }
         }
         // Alle Feinde, zu denen LoS besteht, werden wieder sichtbar
