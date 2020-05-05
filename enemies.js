@@ -54,7 +54,8 @@ class Enemy extends Phaser.GameObjects.Sprite {
         };
         
         this.attack = function (heroine) {
-            let attackroll = getRandomInt(this.dieSize, this.explodes);
+            //let attackroll = getRandomInt(this.dieSize, this.explodes);
+            let attackroll = 8;
             let damageroll = Math.min(attackroll, getRandomInt(this.dieSize, this.explodes))
             
             if (this.specialAttack.roll.includes(attackroll)) {
@@ -231,9 +232,8 @@ function specialAttack(enemy, attackName) {
     console.log(enemy.name + " uses: " + attackName);
     switch(attackName) {
         case "darkness":
-            swirl1.setAlpha(0.1);
-            swirl2.setAlpha(0.1);
-            console.log(swirl1.alpha);
+            swirl1.setAlpha(swirl1.alpha + 0.2);
+            swirl2.setAlpha(swirl1.alpha + 0.2);
             enemy.def += 1;
             break;
         case "unholy energy":
