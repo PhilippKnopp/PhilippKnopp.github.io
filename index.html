@@ -551,6 +551,7 @@
         for (var i = 0; i < figuresOnMap.length; i++) {
             if (figuresOnMap[i] instanceof Enemy) {
                 figuresOnMap[i].setAlpha(0);
+                enemyIndexes.push(figuresOnMap[i]);
             }
         }
         // Alle Feinde, zu denen LoS besteht, werden wieder sichtbar
