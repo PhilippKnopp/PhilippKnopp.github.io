@@ -362,7 +362,6 @@ function ritual(char, energy) {
     } else {
         circle1Img.setAlpha(1-(eventReminder.ritualProgress/13));
         eventReminder.ritual = "started";
-        figuresOnMap[figuresOnMap.length-1].setAlpha(1-(eventReminder.ritualProgress/26));
     }
 }
 
