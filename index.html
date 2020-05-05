@@ -558,7 +558,7 @@
         for (var j = 0; j < charsStillAlive; j++) {
             for (var k = 0; k < enemyIndexes.length; k++) {
                 if (lineOfSight (figuresOnMap[j].onTile, enemyIndexes[k].onTile) && figuresOnMap[j].health > 0) {
-                    if (enemyIndexes[k].name != "Ordrak" || eventReminder.ritualState = "succesful") {
+                    if (enemyIndexes[k].name != "Ordrak" || eventReminder.ritualState == "succesful") {
                         enemyIndexes[k].setAlpha(1);
                         if (figuresOnMap[j].stealth == false) {
                             enemyIndexes[k].alarmed = true;
