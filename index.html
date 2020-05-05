@@ -71,7 +71,7 @@
     
     var mage, rogue, barb;
     var rangedDamage = [0]; // Überschüssiger Schaden der Magierin kann auf zusätzliche Ziele verteilt werden
-    var eventReminder = {e2:false, e4:false}; // Dinge die nur einmal passieren sollen
+    var eventReminder = {e2:false, e4:false, e7:false, ritualStart:false, ritualProgress: 20, rutualEnd: false}; // Dinge die nur einmal passieren sollen
     
     var figuresOnMap = [];
     var activeChar = null;  // Variable in der die Spielfigut gespeichert wird, die gerade aktiv ist um schnell darauf zugreifen zu können.
@@ -487,6 +487,10 @@
                     activeChar = figuresOnMap[i];
                     figuresOnMap[i].actionStack = enemyPlanMove(figuresOnMap[i]);
                     figuresOnMap[i].hasActed = true;
+                    if (eventReminder.e7 == true && figuresOnMap[i].name == "Ordrak" && figuresOnMap[i].health < figuresOnMap[i].fullHealth) {
+                        figuresOnMap[i].health += 1;
+                        console.log("Ordrak heals through Idol");
+                    }
                     break;
                 } else if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].pathToTravel.length > 0) {
                     figuresOnMap[i].moveNow();
@@ -644,20 +648,39 @@
         } else if (eventKey == "e7") {  // Statuette wird zerstört
             addXP (20);
             idol1Img.setAlpha(1);
+            eventReminder.e7 = true;
+            for (let i = 0; i < figuresOnMap.length; i++) {
+                if (figuresOnMap[i].name == "Pale Priest") {
+                    figuresOnMap[i].specialAttack.roll.push(7);
+                    figuresOnMap[i].specialAttack.name.push("unholy energy");
+                } else if (figuresOnMap[i].name == "Ordrak") {
+                    figuresOnMap[i].specialAttack.roll.push(7);
+                    figuresOnMap[i].specialAttack.name.push("darkness");
+                }
+            }
         } else if (eventKey == "e8") {  // ende von Level 1
         } else if (eventKey == "7e9") { // Kristall im See
-            if (activeChar == mage) {
-                showText (textL1[24], activeChar, textL1[25]);
-            } else if (activeChar == barb) {
-                showText (textL1[26], activeChar, textL1[27]);
-                activeChar.health -= 1;
-            } else if (activeChar == rogue) {
-                showText (textL1[28], activeChar, textL1[29]);
-                tileArray[120].state = 7;
-                crystal1Img.setAlpha(0);
-                addXP(12);
+            if (fightmode == true) {
+                showText ("", activeChar, textL1[42]);
+            } else {
+                if (activeChar == mage) {
+                    showText (textL1[24], activeChar, textL1[25]);
+                } else if (activeChar == barb) {
+                    activeChar.health -= 12;
+                    activeChar.checkHealth();
+                    if (activeChar.health > 0) {
+                        showText (textL1[26], activeChar, textL1[27]);
+                    } else {
+                        showText (textL1[40], rogue, textL1[41]);
+                    }
+                } else if (activeChar == rogue) {
+                    showText (textL1[28], activeChar, textL1[29]);
+                    tileArray[120].state = 7;
+                    crystal1Img.setAlpha(0);
+                    addXP(12);
+                }
             }
-        };
+        }
     }
     
     function addXP (number) { 

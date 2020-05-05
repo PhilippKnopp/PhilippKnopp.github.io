@@ -377,7 +377,7 @@ var textL1 = [
 /*24*/    "Caelith tries to retrieve the item from the bottom of the lake. But it is more likely for her to suffer from\nhypothermia than to reach it.",
 /*25*/    "Leng, remind me why I am doing this?",
 /*26*/    "Rhiva tries with an iron determination to retrieve the item from the bottom of the lake. After some time\nshe resurfaces almost unconscious.",
-/*27*/    "I can try again!",
+/*27*/    "I can try again.",
 /*28*/    "Leng dives deep and deeper to the bottom of the icy lake. Her eyes adjust quickly to the complete\ndarkness of the lake. As she reaches for the glowing crystals she feels that something large starts to\nmove in the water.",
 /*29*/    "I've got it. We should go... \nNow!",
 /*30*/    "A calm and very deep lake.",
@@ -390,6 +390,9 @@ var textL1 = [
 /*37*/    "Caelith closes her eyes and invisible tendrils start to manipulate the mechanism, unhinging a lever and disabeling the presure plates ahead.",
 /*38*/    "The doors open to a huge cathedral like room. The chanting stops immediately.",
 /*39*/    "Who are you! My brothers and sisters, protect us from the blind and evil ways of the surface!",
+/*40*/    "Rhiva dives deeper and deeper, with her pride not allowing her to give up. After a while Leng sprints to her retrieving Rhivas unconscious Body from the depths of the icy lake.",
+/*41*/    "You are stubborn way past the point of stupidness!",
+/*42*/    "Not while there is a fight!",
 ];
 
 var textL1Enemy = [
