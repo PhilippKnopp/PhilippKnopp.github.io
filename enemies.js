@@ -58,13 +58,12 @@ class Enemy extends Phaser.GameObjects.Sprite {
             let damageroll = Math.min(attackroll, getRandomInt(this.dieSize, this.explodes))
             
             if (this.specialAttack.roll.includes(attackroll)) {
-                console.log(this.specialAttack.name[this.specialAttack.roll.findIndex((element) => element == attackroll)]);
                 specialAttack(this, this.specialAttack.name[this.specialAttack.roll.findIndex((element) => element == attackroll)]);
             } else if (attackroll >= heroine.def) {
                 heroine.health -= damageroll;
+                console.log("attack: " + attackroll + ";  damage: " + damageroll + ";  hero: " + heroine.health);
             }
             
-            console.log("attack: " + attackroll + ";  damage: " + damageroll + ";  hero: " + heroine.health);
             heroine.checkHealth();
         }
         
@@ -162,7 +161,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
 function createEnemies (_this) {
     
     // Cave Crawler
-    for (var k = 0; k < caveCrawlerStartingPosition[level].length; k++ ) {
+    for (let k = 0; k < caveCrawlerStartingPosition[level].length; k++ ) {
         var caveCrawler = new Enemy ({scene:_this, x:20, y:20}, 'e1Sprite');
         caveCrawler.onTile = caveCrawlerStartingPosition[level][k];
         caveCrawler.dieSize = 4;
@@ -176,7 +175,7 @@ function createEnemies (_this) {
     }
     
     // Pale Acolyte
-    for (var j = 0; j < paleAcolyteStartingPosition[level].length; j++ ) {
+    for (let j = 0; j < paleAcolyteStartingPosition[level].length; j++ ) {
         var paleAcolyte = new Enemy ({scene:_this, x:20, y:20}, 'e2Sprite');
         paleAcolyte.onTile = paleAcolyteStartingPosition[level][j];
         paleAcolyte.dieSize = 6;
@@ -190,7 +189,7 @@ function createEnemies (_this) {
     }
     
     // Pale Priest
-    for (var i = 0; i < palePriestStartingPosition[level].length; i++ ) {
+    for (let i = 0; i < palePriestStartingPosition[level].length; i++ ) {
         var palePriest = new Enemy ({scene:_this, x:20, y:20}, 'e3Sprite');
         palePriest.onTile = palePriestStartingPosition[level][i];
         palePriest.dieSize = 8;
@@ -209,7 +208,7 @@ function createEnemies (_this) {
     swirl1 = _this.add.sprite(230, 813, 'swirSprite').setAlpha(0);
     swirl2 = _this.add.sprite(230, 813, 'swirSprite').setAlpha(0).setFrame(1);
     // Ordrak
-    for (var l = 0; l < ordrakStartingPosition[level].length; l++ ) {
+    for (let l = 0; l < ordrakStartingPosition[level].length; l++) {
         var ordrak = new Enemy ({scene:_this, x:20, y:20}, 'e4Sprite');
         ordrak.onTile = ordrakStartingPosition[level][l];
         ordrak.dieSize = 8;
@@ -229,15 +228,24 @@ function createEnemies (_this) {
 ////////////// Gegner spezial Attacken   ////////////////////////////////////////////////////////////////////////
 
 function specialAttack(enemy, attackName) {
-    console.log("it Worked");
     console.log(enemy.name + " uses: " + attackName);
     switch(attackName) {
         case "darkness":
-            swirl1.setAlpha(0.2);
-            swirl2.setAlpha(0.2);
+            swirl1.setAlpha(0.1);
+            swirl2.setAlpha(0.1);
+            console.log(swirl1.alpha);
             enemy.def += 1;
             break;
         case "unholy energy":
+            for (let i = 0; i < figuresOnMap.length; i++) {
+                if (figuresOnMap[i] instanceof Figure && lineOfSight (enemy.onTile, figuresOnMap[i].onTile)) {
+                    figuresOnMap[i].health -= 1;
+                    figuresOnMap[i].checkHealth();
+                } else if (figuresOnMap[i] instanceof Enemy && lineOfSight (enemy.onTile, figuresOnMap[i].onTile) && figuresOnMap[i].health < figuresOnMap[i].fullHealth) {
+                    figuresOnMap[i].health += 1;
+                }
+                console.log(figuresOnMap[i].health);
+            }
             break;
         default:
             break;
