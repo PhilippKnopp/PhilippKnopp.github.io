@@ -27,10 +27,12 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.on("pointerover", this.showFace, this);
         
         this.setOnMap = function () {
-            tileArray[this.onTile].occupiedBy = "enemy";
-            this.setAlpha(1);
-            this.x = tileArray[this.onTile].x;
-            this.y = tileArray[this.onTile].y;
+            if (this.name != "Ordrak" || eventReminder.ritualState == "succesful") {
+                tileArray[this.onTile].occupiedBy = "enemy";
+                this.setAlpha(1);
+                this.x = tileArray[this.onTile].x;
+                this.y = tileArray[this.onTile].y;
+            }
         };
         
         this.enterTile = function () {
