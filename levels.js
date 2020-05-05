@@ -127,18 +127,22 @@ var level1Connections = [
     [0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]
 ];
 
-var mageStartingPosition = [0,378];
-var rogueStartingPosition = [0,353];
-var barbStartingPosition = [0,232];
+//var mageStartingPosition = [0,378];
+//var rogueStartingPosition = [0,353];
+//var barbStartingPosition = [0,232];
 
 //var caveCrawlerStartingPosition = [0,[116,168,192,193]];
 //var paleAcolyteStartingPosition = [0,[207,258,490,611,744,765,792]];
 //var palePriestStartingPosition = [0,[703,707,778,782,830,866]];
 //var ordrakStartingPosition = [0,[755]];
+
+var mageStartingPosition = [0,611];
+var rogueStartingPosition = [0,610];
+var barbStartingPosition = [0,609];
 var caveCrawlerStartingPosition = [0,[]];
 var paleAcolyteStartingPosition = [0,[]];
-var palePriestStartingPosition = [0,[210]];
-var ordrakStartingPosition = [0,[]];
+var palePriestStartingPosition = [0,[707,778,782,830,866]];
+var ordrakStartingPosition = [0,[755]];
 
 
 var bgMusic = [0, "lvl_1_BG_Music"];
@@ -390,7 +394,7 @@ var textL1 = [
 /*37*/    "Caelith closes her eyes and invisible tendrils start to manipulate the mechanism, unhinging a lever and disabeling the presure plates ahead.",
 /*38*/    "The doors open to a huge cathedral like room. The chanting stops immediately.",
 /*39*/    "Who are you! My brothers and sisters, protect us from the blind and evil ways of the surface!",
-/*40*/    "Rhiva dives deeper and deeper, with her pride not allowing her to give up. After a while Leng sprints to her retrieving Rhivas unconscious Body from the depths of the icy lake.",
+/*40*/    "Rhiva dives deeper and deeper, with her pride not allowing her to give up. After a while Leng sprints to her\nretrieving Rhivas unconscious Body from the depths of the icy lake.",
 /*41*/    "You are stubborn way past the point of stupidness!",
 /*42*/    "Not while there is a fight!",
 ];
