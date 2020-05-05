@@ -353,15 +353,28 @@ function doors(char, tile) {
     
 }
 
-function ritual(char, energy) {
+function ritual(energy = 0, priestDied = false) {
     eventReminder.ritualProgress -= energy;
     if (eventReminder.ritualProgress <= 0) {
+        eventReminder.ritualProgress = 0;
         circle1Img.setAlpha(1);
-        eventReminder.ritual = "succesful";
+        eventReminder.ritualState = "succesful";
         showText(textL1[45]);
     } else {
         circle1Img.setAlpha(1-(eventReminder.ritualProgress/13));
-        eventReminder.ritual = "started";
+        eventReminder.ritualState = "started";
+    }
+    if (priestDied == true && eventReminder.ritualProgress > 0) {
+        eventReminder.ritualMembers -= 1;
+        if (eventReminder.ritualState <= 0) {
+            eventReminder.ritualState = "failed";
+            circle1Img.setAlpha(0);
+            let ordrak = figuresOnMap[figuresOnMap.findIndex((element) => element.name == "Ordrak")]
+            ordrak.health = 0;
+            tileArray[ordrak.onTile].occupiedBy = "";
+            figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
+            addXP(ordrak.loot);
+        }
     }
 }
 

@@ -202,9 +202,9 @@ function enemyDo (enemy, action, target) {
             let attackroll = getRandomInt(enemy.dieSize, enemy.explodes);
             if (enemy.specialAttack.roll.includes(attackroll)) {
                 specialAttack(enemy, enemy.specialAttack.name[enemy.specialAttack.roll.findIndex((element) => element == attackroll)]);
-                ritual(enemy, 2);
+                ritual(2);
             } else {
-                ritual(enemy, 1);
+                ritual(1);
             }
             break;
         default:

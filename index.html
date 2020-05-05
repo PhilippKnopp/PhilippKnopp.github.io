@@ -71,7 +71,7 @@
     
     var mage, rogue, barb;
     var rangedDamage = [0]; // Überschüssiger Schaden der Magierin kann auf zusätzliche Ziele verteilt werden
-    var eventReminder = {e2:false, e4:false, e7:false, ritualProgress: 13, rutual: "not started"}; // Dinge die nur einmal passieren sollen
+    var eventReminder = {e2:false, e4:false, e6:false, e7:false, ritualProgress: 13, ritualMembers: 5, ritualState: ""}; // Dinge die nur einmal passieren sollen
     
     var figuresOnMap = [];
     var activeChar = null;  // Variable in der die Spielfigut gespeichert wird, die gerade aktiv ist um schnell darauf zugreifen zu können.
@@ -558,7 +558,7 @@
         for (var j = 0; j < charsStillAlive; j++) {
             for (var k = 0; k < enemyIndexes.length; k++) {
                 if (lineOfSight (figuresOnMap[j].onTile, enemyIndexes[k].onTile) && figuresOnMap[j].health > 0) {
-                    if (enemyIndexes[k].name != "Ordrak" || eventReminder.ritualProgress <= 0) {
+                    if (enemyIndexes[k].name != "Ordrak" || eventReminder.ritualState = "succesful") {
                         enemyIndexes[k].setAlpha(1);
                         if (figuresOnMap[j].stealth == false) {
                             enemyIndexes[k].alarmed = true;
@@ -645,7 +645,8 @@
             showText (textL1[38], figuresOnMap[figuresOnMap.length - 2], textL1[39]);
         } else if (eventKey == "6e5") {     // zweiter Gang
             showText (textL1[22], activeChar, textL1[23]);
-        } else if (eventKey == "6e6") { // vor dem Bosskampf
+        } else if (eventKey == "6e6" && eventReminder.e6 != true) { // vor dem Bosskampf
+            eventReminder.e6 = true;
             showText(textL1[43], mage, textL1[44]);
         } else if (eventKey == "e7") {  // Statuette wird zerstört
             addXP (20);
@@ -683,6 +684,8 @@
                     addXP(12);
                 }
             }
+        } else if (eventKey == "e10") {
+            
         }
     }
     

@@ -83,6 +83,11 @@ class Figure extends Phaser.GameObjects.Sprite {
                 enemy.setAlpha(0);
                 figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
                 addXP(enemy.loot);
+                if (enemy.name == "Ordrak") {
+                    circle1Img.setAlpha(0);
+                } else if (enemy.onTile == 703 || enemy.onTile == 707 || enemy.onTile == 778 || enemy.onTile == 782 || enemy.onTile == 830) {
+                    ritual(0, true);
+                }
                 checkFightmode();
             } else {
                 enemyHealthBar.clear();
@@ -129,7 +134,8 @@ class Figure extends Phaser.GameObjects.Sprite {
                 addXP(enemy.loot);
                 if (enemy.name == "Ordrak") {
                     circle1Img.setAlpha(0);
-                    eventReminder.ritualProgress = 0;
+                } else if (enemy.onTile == 703 || enemy.onTile == 707 || enemy.onTile == 778 || enemy.onTile == 782 || enemy.onTile == 830) {
+                    ritual(0, true);
                 }
                 checkFightmode();
             }
@@ -158,6 +164,9 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.setAlpha(0.2);
                 this.movement = 3;
                 this.actions = 0;
+                if (barb.health <= 0 && rogue.health <= 0 && mage.health <= 0) {
+                    //restartLevel();
+                }
             }
         }
         
