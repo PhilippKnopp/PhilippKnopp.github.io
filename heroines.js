@@ -111,6 +111,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 }
                 this.stealth = false;
                 this.setAlpha(1);
+                enemyVisibility();
                 checkFightmode();
             } else if (attackButton.mode == "planning cc") { // standard Attacke im Nahkampf
                 let attackroll = getRandomInt(this.dieSize, this.explodes);
