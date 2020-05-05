@@ -164,6 +164,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.setAlpha(0.2);
                 this.movement = 3;
                 this.actions = 0;
+                enemyVisibility();
                 if (barb.health <= 0 && rogue.health <= 0 && mage.health <= 0) {
                     //restartLevel();
                 }
