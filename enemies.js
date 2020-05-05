@@ -54,9 +54,8 @@ class Enemy extends Phaser.GameObjects.Sprite {
         };
         
         this.attack = function (heroine) {
-            //let attackroll = getRandomInt(this.dieSize, this.explodes);
-            let attackroll = 8;
-            let damageroll = Math.min(attackroll, getRandomInt(this.dieSize, this.explodes))
+            let attackroll = getRandomInt(this.dieSize, this.explodes);
+            let damageroll = Math.min(attackroll, getRandomInt(this.dieSize, this.explodes));
             
             if (this.specialAttack.roll.includes(attackroll)) {
                 specialAttack(this, this.specialAttack.name[this.specialAttack.roll.findIndex((element) => element == attackroll)]);
@@ -244,7 +243,6 @@ function specialAttack(enemy, attackName) {
                 } else if (figuresOnMap[i] instanceof Enemy && lineOfSight (enemy.onTile, figuresOnMap[i].onTile) && figuresOnMap[i].health < figuresOnMap[i].fullHealth) {
                     figuresOnMap[i].health += 1;
                 }
-                console.log(figuresOnMap[i].health);
             }
             break;
         default:

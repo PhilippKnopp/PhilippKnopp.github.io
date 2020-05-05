@@ -13,6 +13,12 @@ function enemyPlanMove (enemy) {
     let placeRanking = [];
     let actionStack = [];
     
+    // Spezielle Aktionen für bestimmte Level
+    if (level == 1 && enemy.name == "Pale Priest" && (enemy.onTile == 703 || enemy.onTile == 707 || enemy.onTile == 778 || enemy.onTile == 782 || enemy.onTile == 830) && eventReminder.ritualProgress > 0) {
+        actionStack.push("ritual", null);
+        return actionStack;
+    }
+    
     // das Opfer der Wahl wird definiert
     for (var i = 0; i < figuresOnMap.length; i++) {
         if (figuresOnMap[i] instanceof Figure && figuresOnMap[i].health > 0 && figuresOnMap[i].stealth == false) {
@@ -189,6 +195,17 @@ function enemyDo (enemy, action, target) {
         case "wait":
             enemy.actionStack.length = 0;
             console.log("wait");
+            break;
+        case "ritual":
+            enemy.actionStack.length = 0;
+            console.log("ritual");
+            eventReminder.ritualProgress -= 1;
+            let attackroll = getRandomInt(enemy.dieSize, enemy.explodes);
+            console.log("attackroll in Ritual:" + attackroll);
+            if (enemy.specialAttack.roll.includes(attackroll)) {
+                specialAttack(enemy, enemy.specialAttack.name[enemy.specialAttack.roll.findIndex((element) => element == attackroll)]);
+                eventReminder.ritualProgress -= 1;
+            }
             break;
         default:
             break;
