@@ -199,12 +199,12 @@ function enemyDo (enemy, action, target) {
         case "ritual":
             enemy.actionStack.length = 0;
             console.log("ritual");
-            eventReminder.ritualProgress -= 1;
             let attackroll = getRandomInt(enemy.dieSize, enemy.explodes);
-            console.log("attackroll in Ritual:" + attackroll);
             if (enemy.specialAttack.roll.includes(attackroll)) {
                 specialAttack(enemy, enemy.specialAttack.name[enemy.specialAttack.roll.findIndex((element) => element == attackroll)]);
-                eventReminder.ritualProgress -= 1;
+                ritual(enemy, 2);
+            } else {
+                ritual(enemy, 1);
             }
             break;
         default:

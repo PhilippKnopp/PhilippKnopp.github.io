@@ -353,6 +353,16 @@ function doors(char, tile) {
     
 }
 
+function ritual(char, energy) {
+    eventReminder.ritualProgress -= energy;
+    if (eventReminder.ritualProgress <= 0) {
+        circle1Img.setAlpha(1);
+        console.log("ritual erfolgreich");
+    } else {
+        circle1Img.setAlpha(1-(eventReminder.ritualProgress/20));
+    }
+}
+
 var textL1 = [
 /*0*/   "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local\nguardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two\npale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are\nholding a woman captive.\nShe is not the girl they wanted to rescue, but she seems to be in need for their help anyway.",
 /*1*/    "I can't see that.",
