@@ -50,10 +50,10 @@
 ////////////// Variablen, die in der App verwendet werden   //////////////////////////////////////////////////////////////////////////////////////////
     
     var game = new Phaser.Game(config);
-    var objects = {};
+    var objects = {};   // enthält die Kammera...
     var tileArray = []; // Array mit allen Spielfeldern des Levels
-    var matrixWidth = 25; // Spielfeldbreite
-    var matrixHeight = 40; // Spielfeldhöhe
+    var matrixWidth = 25;   // Spielfeldbreite
+    var matrixHeight = 40;  // Spielfeldhöhe
     
     var movementMarker; // Wird auf der Karte bewegt und die aktive Figur ist an ihn magnetisiert um sich mitzubewegen.
     var movementTween;  // Animationsbewegung, die den movementMarker bewegt
