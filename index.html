@@ -496,7 +496,6 @@
                     figuresOnMap[i].moveNow();
                     break;
                 } else if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length > 0) {
-                    console.log("aktion");
                     enemyDo(figuresOnMap[i], figuresOnMap[i].actionStack[0], figuresOnMap[i].actionStack[1]);
                     figuresOnMap[i].active = false;
                     figuresOnMap[i].setFrame(0);
