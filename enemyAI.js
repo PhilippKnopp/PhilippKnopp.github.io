@@ -150,11 +150,18 @@ function enemyPlanMove (enemy) {
         console.log("implementiere Route wenn kein Held erreichbar ist");
     }
     
-    // Der Entschluss was getan wird, wird gefasst
-    tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].checkForNeighbors();
+    // Der Entschluss was getan wird, wird erneut gefasst, nachdem die Bewegung vorbei ist
     let neighborIndexes = [];
-    for (let i = 0; i < tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors.length; i++) {
-        neighborIndexes.push(tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors[i].name);
+    if (enemy.pathToTravel.length > 0) {    // Gegner hat sich bewegt, was kann er auf dem letzten Feld seiner Bewegung tun?
+        tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].checkForNeighbors();
+        for (let i = 0; i < tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors.length; i++) {
+            neighborIndexes.push(tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors[i].name);
+        }
+    } else {    // Gegner hat sich nicht bewegt, was kann er auf seinem Feld tun?
+        tileArray[enemy.onTile].checkForNeighbors();
+        for (let i = 0; i < tileArray[enemy.onTile].neighbors.length; i++) {
+            neighborIndexes.push(tileArray[enemy.onTile].neighbors[i].name);
+        }
     }
     clearNodes();
     if (victimOfChoice != undefined && neighborIndexes.includes(victimOfChoice.onTile)) {
