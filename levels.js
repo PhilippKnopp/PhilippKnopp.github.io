@@ -23,9 +23,9 @@ var level1Type = [
     5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, "0dc", "0dc", "0dc", 0, 0, 0, 5, 5, 5, 5,
     5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5,
     5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, "0dc", "0dc", "0dc", 0, 0, 0, 0, 5, 5, 5,
-    5, 5, 5, 5, 5, 0, 0, 0, 0, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, "6e5", 5,
+    5, 5, 5, 5, 5, 0, 0, 0, 0, "6e6", 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, "6e5", 5,
     5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5,
-    5, 5, 5, 5, 5, "6e6", 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5,
+    5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5,
     5, 5, 5, 0, 0, 0, 0, 0, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5,
     5, 5, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5,
     5, 5, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5,
@@ -136,9 +136,9 @@ var level1Connections = [
 //var palePriestStartingPosition = [0,[703,707,778,782,830,866]];
 //var ordrakStartingPosition = [0,[755]];
 
-var mageStartingPosition = [0,611];
-var rogueStartingPosition = [0,610];
-var barbStartingPosition = [0,609];
+var mageStartingPosition = [0,612];
+var rogueStartingPosition = [0,611];
+var barbStartingPosition = [0,610];
 var caveCrawlerStartingPosition = [0,[]];
 var paleAcolyteStartingPosition = [0,[]];
 var palePriestStartingPosition = [0,[707,778,782,830,866]];
