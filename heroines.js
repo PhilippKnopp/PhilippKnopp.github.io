@@ -127,6 +127,10 @@ class Figure extends Phaser.GameObjects.Sprite {
                 enemy.setAlpha(0);
                 figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
                 addXP(enemy.loot);
+                if (enemy.name == "Ordrak") {
+                    circle1Img.setAlpha(0);
+                    eventReminder.ritualProgress = 0;
+                }
                 checkFightmode();
             }
             returnCursorToNormal();

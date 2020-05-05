@@ -357,9 +357,11 @@ function ritual(char, energy) {
     eventReminder.ritualProgress -= energy;
     if (eventReminder.ritualProgress <= 0) {
         circle1Img.setAlpha(1);
-        console.log("ritual erfolgreich");
+        eventReminder.ritual = "succesful";
     } else {
-        circle1Img.setAlpha(1-(eventReminder.ritualProgress/20));
+        circle1Img.setAlpha(1-(eventReminder.ritualProgress/13));
+        eventReminder.ritual = "started";
+        ordrak.setAlpha(1-(eventReminder.ritualProgress/26));
     }
 }
 
