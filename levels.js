@@ -141,7 +141,7 @@ var rogueStartingPosition = [0,611];
 var barbStartingPosition = [0,610];
 var caveCrawlerStartingPosition = [0,[]];
 var paleAcolyteStartingPosition = [0,[]];
-var palePriestStartingPosition = [0,[707,778,782,830,866]];
+var palePriestStartingPosition = [0,[703,707,778,782,830]];
 var ordrakStartingPosition = [0,[755]];
 
 
