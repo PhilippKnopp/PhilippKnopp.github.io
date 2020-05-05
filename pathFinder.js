@@ -90,7 +90,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
     }
         
     // wenn gerade ein Kampf ist soll die Bewegung begrenzt sein auf die Maximale Bewegungsweite des aktiven Charakters
-    if (fightmode == true || onlyMeasure == false) {
+    if (fightmode == true && onlyMeasure == false) {
         movementStopper: for (var l = 0; l < pathToTravel.length; l++) {
             if (tileArray[pathToTravel[l]].distanceTravelled > activeChar.movementCounter) {
                 pathToTravel.length = l;
