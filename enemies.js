@@ -49,8 +49,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
             tileArray[this.onTile].occupiedBy = "enemy";
             enemyVisibility();
             checkFightmode();
-            /* tileVisibility();
-             if (typeof tileArray[this.onTile].state === 'string') {
+            /*if (typeof tileArray[this.onTile].state === 'string') {
                 eventDispatch(this, tileArray[this.onTile].state);
             };*/
         };
@@ -88,6 +87,8 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 addXP(this.loot);
                 if (this.name == "Ordrak") {
                     circle1Img.setAlpha(0);
+                    swirl1.setAlpha(0);
+                    swirl2.setAlpha(0);
                 } else if (this.onTile == 703 || this.onTile == 707 || this.onTile == 778 || this.onTile == 782 || this.onTile == 830) {
                     ritual(0, true);
                 }

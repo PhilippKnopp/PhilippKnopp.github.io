@@ -127,23 +127,14 @@ var level1Connections = [
     [0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]
 ];
 
-//var mageStartingPosition = [0,378];
-//var rogueStartingPosition = [0,353];
-//var barbStartingPosition = [0,232];
+var mageStartingPosition = [0,378];
+var rogueStartingPosition = [0,353];
+var barbStartingPosition = [0,232];
 
-//var caveCrawlerStartingPosition = [0,[116,168,192,193]];
-//var paleAcolyteStartingPosition = [0,[207,258,490,611,744,765,792]];
-//var palePriestStartingPosition = [0,[703,707,778,782,830,866]];
-//var ordrakStartingPosition = [0,[755]];
-
-var mageStartingPosition = [0,612];
-var rogueStartingPosition = [0,611];
-var barbStartingPosition = [0,610];
-var caveCrawlerStartingPosition = [0,[]];
-var paleAcolyteStartingPosition = [0,[]];
-var palePriestStartingPosition = [0,[703,707,778,782,830]];
+var caveCrawlerStartingPosition = [0,[116,168,192,193]];
+var paleAcolyteStartingPosition = [0,[207,258,490,611,744,765,792]];
+var palePriestStartingPosition = [0,[703,707,778,782,830,866]];
 var ordrakStartingPosition = [0,[755]];
-
 
 var bgMusic = [0, "lvl_1_BG_Music"];
 
