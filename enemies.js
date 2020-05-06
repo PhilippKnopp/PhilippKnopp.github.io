@@ -60,6 +60,9 @@ class Enemy extends Phaser.GameObjects.Sprite {
             let damageroll = Math.min(attackroll, getRandomInt(this.dieSize, this.explodes));
             
             if (this.specialAttack.roll.includes(attackroll)) {
+                if (attackroll == 7) {
+                    showText(textL1[49], barb, textL1[50]);
+                }
                 specialAttack(this, this.specialAttack.name[this.specialAttack.roll.findIndex((element) => element == attackroll)]);
             } else if (attackroll >= heroine.def) {
                 heroine.health -= damageroll;
@@ -248,7 +251,6 @@ function createEnemies (_this) {
 ////////////// Gegner spezial Attacken   ////////////////////////////////////////////////////////////////////////
 
 function specialAttack(enemy, attackName) {
-    console.log(enemy.name + " uses: " + attackName);
     switch(attackName) {
         case "darkness":
             swirl1.setAlpha(swirl1.alpha + 0.2);

@@ -431,6 +431,8 @@ var textL1 = [
 /*46*/    "The ages old relic breaks in half.",
 /*47*/    "We might have done something good.",
 /*48*/    "... or very dangerous.",
+/*49*/    "Something seems to be pushing the adversaries way beyond their capabilities.",
+/*50*/    "It feels like something very angry is watching us!",
 ];
 
 var textL1Enemy = [
