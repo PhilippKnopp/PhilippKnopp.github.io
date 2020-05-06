@@ -367,9 +367,9 @@ function ritual(energy, priestDied = false) {
         circle1Img.setAlpha(1-(eventReminder.ritualProgress/13));
         eventReminder.ritualState = "started";
     }
-    if (priestDied == true && eventReminder.ritualProgress > 0) {
+    if (priestDied == true && eventReminder.ritualState != "succesful") {
         eventReminder.ritualMembers -= 1;
-        if (eventReminder.ritualState <= 0) {
+        if (eventReminder.ritualMembers <= 0) {
             eventReminder.ritualState = "failed";
             circle1Img.setAlpha(0);
             let ordrak = figuresOnMap[figuresOnMap.findIndex((element) => element.name == "Ordrak")];
@@ -377,6 +377,7 @@ function ritual(energy, priestDied = false) {
             tileArray[755].walkable = [1,1,1,1,1,1,1,1];
             figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
             addXP(ordrak.loot);
+            eventDispatch (activeChar, "e8");
         }
     }
 }
