@@ -85,7 +85,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 addXP(this.loot);
                 if (this.name == "Ordrak") {
                     circle1Img.setAlpha(0);
-                } else if (enemy.onTile == 703 || enemy.onTile == 707 || enemy.onTile == 778 || enemy.onTile == 782 || enemy.onTile == 830) {
+                } else if (this.onTile == 703 || this.onTile == 707 || this.onTile == 778 || this.onTile == 782 || this.onTile == 830) {
                     ritual(0, true);
                 }
                 if (figuresOnMap.length == 3) {
