@@ -632,7 +632,7 @@
     
     function addTextToArchive (text_1 = "", text_2 = "", text_3 = "", text_4 = "", text_5 = "", text_6 = "") {
         
-        if (text_1 != textHistory[textHistoryIndex-11] || text_2 != textHistory[textHistoryIndex-10] || text_3 != textHistory[textHistoryIndex-9] || text_4 != textHistory[textHistoryIndex-8] || text_5 != textHistory[textHistoryIndex-7] || text_6 != textHistory[textHistoryIndex-6] ||) {
+        if (text_1 != textHistory[textHistoryIndex-11] || text_2 != textHistory[textHistoryIndex-10] || text_3 != textHistory[textHistoryIndex-9] || text_4 != textHistory[textHistoryIndex-8] || text_5 != textHistory[textHistoryIndex-7] || text_6 != textHistory[textHistoryIndex-6]) {
             textHistory.push(text_1, text_2, text_3, text_4, text_5, text_6);
             textHistoryIndex += 6;
             console.log("add to text Archive");
