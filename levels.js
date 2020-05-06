@@ -426,7 +426,7 @@ var textL1 = [
 /*41*/    "You are stubborn way past the point of stupidness!",
 /*42*/    "Not while there is a fight!",
 /*43*/    "An unholy ritual can be heard as the heroines descent further down the stairs",
-/*44*/    "We must stop this, they are summoning an ancient an evil creature!",
+/*44*/    "It sounds like they are summoning something.",
 /*45*/    "Oily smoke and shadows start to form a large figure in the middle of the summoning circle.",
 /*46*/    "The ages old relic breaks in half.",
 /*47*/    "We might have done something good.",
