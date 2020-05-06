@@ -220,7 +220,6 @@
                     if (searchButton.mode == "planning") {
                         //console.log(this.name + " - x: " + this.x + " - y: " + this.y);
                         if (lineOfSight (activeChar.onTile, this.name) == true) {
-                            showText(textL1[this.info]);
                             if (this.info == 3 && crystal1Img.alpha != 0) {
                                 crystal1Img.setAlpha(1);
                                 tileArray[120].state = "7e9";
