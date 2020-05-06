@@ -618,15 +618,17 @@
         return false;
     }
     
-    function showText (text1 = "", char = "", text2 = "", text3 = "") { 
+    function showText (info1 = "", char1 = "", text1 = "", char2 = "", text2 = "", help = "") {
 
-        Info1.showMessage(text1);
-        InfoName.showName(char);
-        Info2.showMessage(text2);
-        Info3.showMessage(text3);
+        Info1.showMessage(info1);
+        InfoName1.showName(char1);
+        InfoDialog1.showMessage(text1);
+        InfoName2.showName(char2);
+        InfoDialog2.showMessage(text2);
+        Info3.showMessage(help);
         
-        textHistory.push(Info1.text, InfoName.text, Info2.text, Info3.text);
-        textHistoryIndex += 4;
+        textHistory.push(Info1.text, InfoName1.text, InfoDialog1.text, InfoName2.text, InfoDialog2.text, Info3.text);
+        textHistoryIndex += 6;
     }
     
     function eventDispatch (activeChar, eventKey) { 
@@ -652,6 +654,7 @@
             addXP (20);
             idol1Img.setAlpha(1);
             eventReminder.e7 = true;
+            showText(textL1[46], mage, textL1[47], rogue, textL1[48]);
             for (let i = 0; i < figuresOnMap.length; i++) {
                 if (figuresOnMap[i].name == "Pale Priest") {
                     figuresOnMap[i].specialAttack.roll.push(7);

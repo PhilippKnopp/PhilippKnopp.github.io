@@ -11,10 +11,10 @@ function guiBuilder(_this) {
     });
     textBackButton.on("pointerdown", function pointerDown() {
         this.setFrame(2);
-        if (textHistoryIndex > 3) {
-            showText (textHistory[textHistoryIndex-7], textHistory[textHistoryIndex-6], textHistory[textHistoryIndex-5], textHistory[textHistoryIndex-4]);
-            textHistoryIndex -= 8;
-            textHistory.splice(textHistory.length-4, 4);
+        if (textHistoryIndex > 5) {
+            showText (textHistory[textHistoryIndex-11], textHistory[textHistoryIndex-10], textHistory[textHistoryIndex-9], textHistory[textHistoryIndex-8], textHistory[textHistoryIndex-7], textHistory[textHistoryIndex-6]);
+            textHistoryIndex -= 12;
+            textHistory.splice(textHistory.length-6, 6);
         }
     });
     textBackButton.on("pointerup", function pointerUp() {
@@ -31,9 +31,9 @@ function guiBuilder(_this) {
     });
     textNextButton.on("pointerdown", function pointerDown() {
         this.setFrame(2);
-        if (textHistoryIndex < textHistory.length-4) {
-            showText (textHistory[textHistoryIndex+1], textHistory[textHistoryIndex+2], textHistory[textHistoryIndex+3], textHistory[textHistoryIndex+4]);
-            textHistory.splice(textHistory.length-4, 4);
+        if (textHistoryIndex < textHistory.length-6) {
+            showText (textHistory[textHistoryIndex+1], textHistory[textHistoryIndex+2], textHistory[textHistoryIndex+3], textHistory[textHistoryIndex+4], textHistory[textHistoryIndex+5], textHistory[textHistoryIndex+6]);
+            textHistory.splice(textHistory.length-6, 6);
         }
     });
     textNextButton.on("pointerup", function pointerUp() {
@@ -50,9 +50,9 @@ function guiBuilder(_this) {
     });
     textNewButton.on("pointerdown", function pointerDown() {
         this.setFrame(2);
-        if (textHistoryIndex < textHistory.length-4) {
-            showText (textHistory[textHistory.length-4], textHistory[textHistory.length-3], textHistory[textHistory.length-2], textHistory[textHistory.length-1]);
-            textHistory.splice(textHistory.length-4, 4);
+        if (textHistoryIndex < textHistory.length-6) {
+            showText (textHistory[textHistory.length-6], textHistory[textHistory.length-5], textHistory[textHistory.length-4], textHistory[textHistory.length-3], textHistory[textHistory.length-2], textHistory[textHistory.length-1]);
+            textHistory.splice(textHistory.length-6, 6);
             textHistoryIndex = textHistory.length-1;
         }
     });
@@ -65,37 +65,65 @@ function guiBuilder(_this) {
 
 ////////////// Text Messages //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
+    // beschreibender Text
     Info1 = _this.add.text(950, 40, "", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
     Info1.showMessage = function (text) {
         Info1.setText(text);
     };
     
-    InfoName = _this.add.text(950, Info1.getBottomLeft().y+20, "", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12}).setFontStyle('bold');
-    InfoName.showName = function (char) {
+    // Dialog Name 1
+    InfoName1 = _this.add.text(950, Info1.getBottomLeft().y+20, "", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12}).setFontStyle('bold');
+    InfoName1.showName = function (char) {
         if (typeof char === 'object') {
-            InfoName.setText(char.name + ": ");
-            InfoName.setColor(char.color);
+            InfoName1.setText(char.name + ": ");
+            InfoName1.setColor(char.color);
         } else {
-            InfoName.setText(char);
-            InfoName.setColor('#999999');
+            InfoName1.setText(char);
+            InfoName1.setColor('#999999');
         }
         if (Info1.text == "") {
-            InfoName.setPosition(950, 40);
+            InfoName1.setPosition(950, 40);
         } else {
-            InfoName.setPosition(950, Info1.getBottomLeft().y+20);
+            InfoName1.setPosition(950, Info1.getBottomLeft().y+20);
         }
     };
     
-    Info2 = _this.add.text(InfoName.getBottomRight().x, InfoName.getTopRight().y, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12 });
-    Info2.showMessage = function (text) {
-        Info2.setText(text);
-        Info2.setPosition(InfoName.getBottomRight().x, InfoName.getTopRight().y);
+    // Dialog Text 1
+    InfoDialog1 = _this.add.text(InfoName1.getBottomRight().x, InfoName1.getTopRight().y, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12 });
+    InfoDialog1.showMessage = function (text) {
+        InfoDialog1.setText(text);
+        InfoDialog1.setPosition(InfoName1.getBottomRight().x, InfoName1.getTopRight().y);
     };
     
-    Info3 = _this.add.text(950, Info2.getBottomLeft().y+30, "", { fontFamily: "Verdana" , color: '#003F5E', lineSpacing: 12 });
+    // Dialog Name 2
+    InfoName2 = _this.add.text(950, InfoName1.getBottomLeft().y+20, "", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12}).setFontStyle('bold');
+    InfoName2.showName = function (char) {
+        if (typeof char === 'object') {
+            InfoName2.setText(char.name + ": ");
+            InfoName2.setColor(char.color);
+        } else {
+            InfoName2.setText(char);
+            InfoName2.setColor('#999999');
+        }
+        if (InfoName1.text == "") {
+            InfoName2.setPosition(950, InfoName1.getBottomLeft().y);
+        } else {
+            InfoName2.setPosition(950, InfoName1.getBottomLeft().y+20);
+        }
+    };
+    
+    // Dialog Text 2
+    InfoDialog2 = _this.add.text(InfoName2.getBottomRight().x, InfoName2.getTopRight().y, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12 });
+    InfoDialog2.showMessage = function (text) {
+        InfoDialog2.setText(text);
+        InfoDialog2.setPosition(InfoName2.getBottomRight().x, InfoName2.getTopRight().y);
+    };
+    
+    // Hilfe
+    Info3 = _this.add.text(950, InfoDialog2.getBottomLeft().y+30, "", { fontFamily: "Verdana" , color: '#003F5E', lineSpacing: 12 });
     Info3.showMessage = function (text) {
         Info3.setText(text);
-        Info3.setPosition(950, Info2.getBottomLeft().y+30);
+        Info3.setPosition(950, InfoDialog2.getBottomLeft().y+30);
     };
     
 ////////////// UI Icons //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
