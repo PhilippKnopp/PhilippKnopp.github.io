@@ -77,6 +77,24 @@ class Enemy extends Phaser.GameObjects.Sprite {
             movementTween.restart();
         }
         
+        this.checkHealth = function () {
+            if (this.health <= 0) {
+                this.setAlpha(0);
+                tileArray[this.onTile].occupiedBy = "";
+                figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
+                addXP(this.loot);
+                if (this.name == "Ordrak") {
+                    circle1Img.setAlpha(0);
+                } else if (enemy.onTile == 703 || enemy.onTile == 707 || enemy.onTile == 778 || enemy.onTile == 782 || enemy.onTile == 830) {
+                    ritual(0, true);
+                }
+                if (figuresOnMap.length == 3) {
+                    eventDispatch (activeChar, "e8");
+                }
+                checkFightmode();
+            }
+        }
+        
     }
     
     activateFigure () {

@@ -77,22 +77,11 @@ class Figure extends Phaser.GameObjects.Sprite {
                 rangedDamage[0]--;
                 enemy.health--;
             }
-            if (enemy.health <= 0) {
-                tileArray[enemy.onTile].occupiedBy = "";
-                enemy.hideFace();
-                enemy.setAlpha(0);
-                figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
-                addXP(enemy.loot);
-                if (enemy.name == "Ordrak") {
-                    circle1Img.setAlpha(0);
-                } else if (enemy.onTile == 703 || enemy.onTile == 707 || enemy.onTile == 778 || enemy.onTile == 782 || enemy.onTile == 830) {
-                    ritual(0, true);
-                }
-                checkFightmode();
-            } else {
+            if (enemy.health > 0) {
                 enemyHealthBar.clear();
                 enemy.showFace();
             }
+            enemy.checkHealth();
             if (rangedDamage[0] == 0) {
                 returnCursorToNormal();
                 showActions(this);
@@ -126,18 +115,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 } else {
                     melee_misses[getRandomInt(melee_misses.length, false)-1].play();
                 }
-            }
-            if (enemy.health <= 0) {
-                tileArray[enemy.onTile].occupiedBy = "";
-                enemy.setAlpha(0);
-                figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
-                addXP(enemy.loot);
-                if (enemy.name == "Ordrak") {
-                    circle1Img.setAlpha(0);
-                } else if (enemy.onTile == 703 || enemy.onTile == 707 || enemy.onTile == 778 || enemy.onTile == 782 || enemy.onTile == 830) {
-                    ritual(0, true);
-                }
-                checkFightmode();
+                enemy.checkHealth();
             }
             returnCursorToNormal();
             showActions(this);

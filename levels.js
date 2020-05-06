@@ -377,7 +377,6 @@ function ritual(energy, priestDied = false) {
             tileArray[755].walkable = [1,1,1,1,1,1,1,1];
             figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
             addXP(ordrak.loot);
-            eventDispatch (activeChar, "e8");
         }
     }
 }
