@@ -12,13 +12,12 @@ function guiBuilder(_this) {
     textBackButton.on("pointerdown", function pointerDown() {
         this.setFrame(2);
         if (textHistoryIndex > 5) {
-            showText (textHistory[textHistoryIndex-11], textHistory[textHistoryIndex-10], textHistory[textHistoryIndex-9], textHistory[textHistoryIndex-8], textHistory[textHistoryIndex-7], textHistory[textHistoryIndex-6]);
-            textHistoryIndex -= 12;
-            textHistory.splice(textHistory.length-6, 6);
+            showText (textHistory[textHistoryIndex-11], textHistory[textHistoryIndex-10], textHistory[textHistoryIndex-9], textHistory[textHistoryIndex-8], textHistory[textHistoryIndex-7], textHistory[textHistoryIndex-6], false);
+            textHistoryIndex -= 6;
         }
     });
     textBackButton.on("pointerup", function pointerUp() {
-        this.setFrame(0);
+        this.setFrame(1);
     });
     textBackButton.on("pointerout", function pointerOut() {
         this.setFrame(0);
@@ -32,12 +31,12 @@ function guiBuilder(_this) {
     textNextButton.on("pointerdown", function pointerDown() {
         this.setFrame(2);
         if (textHistoryIndex < textHistory.length-6) {
-            showText (textHistory[textHistoryIndex+1], textHistory[textHistoryIndex+2], textHistory[textHistoryIndex+3], textHistory[textHistoryIndex+4], textHistory[textHistoryIndex+5], textHistory[textHistoryIndex+6]);
-            textHistory.splice(textHistory.length-6, 6);
+            showText (textHistory[textHistoryIndex+1], textHistory[textHistoryIndex+2], textHistory[textHistoryIndex+3], textHistory[textHistoryIndex+4], textHistory[textHistoryIndex+5], textHistory[textHistoryIndex+6], false);
+            textHistoryIndex += 6;
         }
     });
     textNextButton.on("pointerup", function pointerUp() {
-        this.setFrame(0);
+        this.setFrame(1);
     });
     textNextButton.on("pointerout", function pointerOut() {
         this.setFrame(0);
@@ -51,13 +50,12 @@ function guiBuilder(_this) {
     textNewButton.on("pointerdown", function pointerDown() {
         this.setFrame(2);
         if (textHistoryIndex < textHistory.length-6) {
-            showText (textHistory[textHistory.length-6], textHistory[textHistory.length-5], textHistory[textHistory.length-4], textHistory[textHistory.length-3], textHistory[textHistory.length-2], textHistory[textHistory.length-1]);
-            textHistory.splice(textHistory.length-6, 6);
+            showText (textHistory[textHistory.length-6], textHistory[textHistory.length-5], textHistory[textHistory.length-4], textHistory[textHistory.length-3], textHistory[textHistory.length-2], textHistory[textHistory.length-1], false);
             textHistoryIndex = textHistory.length-1;
         }
     });
     textNewButton.on("pointerup", function pointerUp() {
-        this.setFrame(0);
+        this.setFrame(1);
     });
     textNewButton.on("pointerout", function pointerOut() {
         this.setFrame(0);
