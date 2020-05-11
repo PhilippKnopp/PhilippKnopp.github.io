@@ -554,7 +554,6 @@
     }
 
     function buildLevel() {
-        console.log("does this happen?");
         let levelMap = returnLevelType(1);
         for (var i = 0; i < tileArray.length; i++) {
             tileArray[i].state = levelMap[i];
@@ -816,19 +815,19 @@
             let enemyObject = game.scene.scenes[0].children.list[i];
             
             if (enemyObject instanceof Enemy && enemyObject.name == "Cave Crawler") {
-                enemyObject.health = enemyObject.fullhealth;
+                enemyObject.health = 2;
                 enemyObject.onTile = caveCrawlerStartingPosition[level][cavecrawlerStartingPostionIndex];
                 cavecrawlerStartingPostionIndex++;
                 figuresOnMap.push(enemyObject);
             }
             if (enemyObject instanceof Enemy && enemyObject.name == "Pale Acolyte") {
-                enemyObject.health = enemyObject.fullhealth;
+                enemyObject.health = 6;
                 enemyObject.onTile = paleAcolyteStartingPosition[level][paleAcolyteStartingPostionIndex];
                 paleAcolyteStartingPostionIndex++;
                 figuresOnMap.push(enemyObject);
             }
             if (enemyObject instanceof Enemy && enemyObject.name == "Pale Priest") {
-                enemyObject.health = enemyObject.fullhealth;
+                enemyObject.health = 8;
                 enemyObject.onTile = palePriestStartingPosition[level][palePriestStartingPostionIndex];
                 enemyObject.specialAttack.roll.length = 1;
                 enemyObject.specialAttack.name.length = 1;
@@ -836,7 +835,7 @@
                 figuresOnMap.push(enemyObject);
             }
             if (enemyObject instanceof Enemy && enemyObject.name == "Ordrak") {
-                enemyObject.health = enemyObject.fullhealth;
+                enemyObject.health = 8;
                 enemyObject.onTile = ordrakStartingPosition[level][ordrakStartingPostionIndex];
                 enemyObject.specialAttack.roll.length = 1;
                 enemyObject.specialAttack.name.length = 1;
