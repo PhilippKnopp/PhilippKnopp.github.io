@@ -13,7 +13,7 @@ function enemyPlanMove (enemy) {
     let placeRanking = [];
     let actionStack = [];
     
-    let array = Phaser.GameObjects.DisplayList.getChildren();
+    let array = game.scene.getChildren();
     console.log(array);
     
     // Spezielle Aktionen für bestimmte Level
