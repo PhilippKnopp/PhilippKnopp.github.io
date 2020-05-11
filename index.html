@@ -751,6 +751,7 @@
         for (var i = 0; i < figuresOnMap.length; i++) {
             if (tileArray[figuresOnMap[i].onTile].occupiedBy == "enemy" && figuresOnMap[i].alarmed == true) {
                 alarmedEnemies++;
+                console.log(alarmedEnemies);
             }
         }
         if (alarmedEnemies == 0 && fightmode == true) {
@@ -801,22 +802,23 @@
         mage.onTile = mageStartingPosition[level];
         mage.health = mage.fullHealth;
         
+        let cavecrawlerStartingPostionIndex = 0;
+        let paleAcolyteStartingPostionIndex = 0;
+        let palePriestStartingPostionIndex = 0;
+        let ordrakStartingPostionIndex = 0;
         for (let i = 0; i < game.scene.scenes[0].children.list.length; i++) {
-            let cavecrawlerStartingPostionIndex = 0;
             if (game.scene.scenes[0].children.list[i] instanceof Enemy && game.scene.scenes[0].children.list[i].name == "Cave Crawler") {
                 game.scene.scenes[0].children.list[i].health = game.scene.scenes[0].children.list[i].fullhealth;
                 game.scene.scenes[0].children.list[i].onTile = caveCrawlerStartingPosition[level][cavecrawlerStartingPostionIndex];
                 cavecrawlerStartingPostionIndex++;
                 figuresOnMap.push(game.scene.scenes[0].children.list[i]);
             }
-            let paleAcolyteStartingPostionIndex = 0;
             if (game.scene.scenes[0].children.list[i] instanceof Enemy && game.scene.scenes[0].children.list[i].name == "Pale Acolyte") {
                 game.scene.scenes[0].children.list[i].health = game.scene.scenes[0].children.list[i].fullhealth;
                 game.scene.scenes[0].children.list[i].onTile = paleAcolyteStartingPosition[level][paleAcolyteStartingPostionIndex];
                 paleAcolyteStartingPostionIndex++;
                 figuresOnMap.push(game.scene.scenes[0].children.list[i]);
             }
-            let palePriestStartingPostionIndex = 0;
             if (game.scene.scenes[0].children.list[i] instanceof Enemy && game.scene.scenes[0].children.list[i].name == "Pale Priest") {
                 game.scene.scenes[0].children.list[i].health = game.scene.scenes[0].children.list[i].fullhealth;
                 game.scene.scenes[0].children.list[i].onTile = palePriestStartingPosition[level][palePriestStartingPostionIndex];
@@ -825,7 +827,6 @@
                 palePriestStartingPostionIndex++;
                 figuresOnMap.push(game.scene.scenes[0].children.list[i]);
             }
-            let ordrakStartingPostionIndex = 0;
             if (game.scene.scenes[0].children.list[i] instanceof Enemy && game.scene.scenes[0].children.list[i].name == "Ordrak") {
                 game.scene.scenes[0].children.list[i].health = game.scene.scenes[0].children.list[i].fullhealth;
                 game.scene.scenes[0].children.list[i].onTile = ordrakStartingPosition[level][ordrakStartingPostionIndex];
@@ -835,6 +836,8 @@
                 figuresOnMap.push(game.scene.scenes[0].children.list[i]);
             }
         }
+        console.log(figuresOnMap);
+        
         
         buildLevel();
         clearNodes();
