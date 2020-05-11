@@ -13,9 +13,7 @@ function enemyPlanMove (enemy) {
     let placeRanking = [];
     let actionStack = [];
     
-    let array = scene.getChildren();
     let array2 = displayList.getChildren();
-    console.log(array);
     console.log(array2);
     
     // Spezielle Aktionen für bestimmte Level
