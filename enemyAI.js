@@ -13,7 +13,8 @@ function enemyPlanMove (enemy) {
     let placeRanking = [];
     let actionStack = [];
     
-    console.log(config.scene);
+    let array = Phaser.GameObjects.DisplayList.getChildren();
+    console.log(array);
     
     // Spezielle Aktionen für bestimmte Level
     if (level == 1 && enemy.name == "Pale Priest" && (enemy.onTile == 703 || enemy.onTile == 707 || enemy.onTile == 778 || enemy.onTile == 782 || enemy.onTile == 830) && eventReminder.ritualProgress > 0) {
