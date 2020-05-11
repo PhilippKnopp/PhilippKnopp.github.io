@@ -144,7 +144,8 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.actions = 0;
                 enemyVisibility();
                 if (barb.health <= 0 && rogue.health <= 0 && mage.health <= 0) {
-                    //restartLevel();
+                    console.log("RESTART   RESTART   RESTART   RESTART   RESTART   RESTART   ")
+                    restartLevel();
                 }
             }
         }

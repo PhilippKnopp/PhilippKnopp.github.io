@@ -767,7 +767,7 @@
         }
     }
     
-    function restartGame () {
+    function restartLevel () {
         eventReminder = {e2:false, e4:false, e6:false, e7:false, ritualProgress: 13, ritualMembers: 5, ritualState: ""};
         figuresOnMap.length = 3;
         activeChar = null;
@@ -776,7 +776,6 @@
         textHistory.length = 0;
         textHistoryIndex = -1;
         xp = 0;
-        level = 1;
         fightmode = false;
         clearnodes();
         
@@ -793,13 +792,13 @@
         circle1Img.setAlpha(0);
         
         barb.onTile = barbStartingPosition[level];
-        barb.health = 12;
+        barb.health = barb.fullHealth;
         
         rogue.onTile = rogueStartingPosition[level];
-        rogue.health = 8;
+        rogue.health = rogue.fullHealth;
         
         mage.onTile = mageStartingPosition[level];
-        mage.health = 4;
+        mage.health = mage.fullHealth;
         
         for (let i = 0; i < game.scene.scenes[0].children.list.length; i++) {
             let cavecrawlerStartingPostionIndex = 0;
@@ -820,13 +819,17 @@
             if (game.scene.scenes[0].children.list[i] instanceof Enemy && game.scene.scenes[0].children.list[i].name == "Pale Priest") {
                 game.scene.scenes[0].children.list[i].health = game.scene.scenes[0].children.list[i].fullhealth;
                 game.scene.scenes[0].children.list[i].onTile = palePriestStartingPosition[level][palePriestStartingPostionIndex];
+                game.scene.scenes[0].children.list[i].specialAttack.roll.length = 1;
+                game.scene.scenes[0].children.list[i].specialAttack.name.length = 1;
                 palePriestStartingPostionIndex++;
                 figuresOnMap.push(game.scene.scenes[0].children.list[i]);
             }
             let ordrakStartingPostionIndex = 0;
-            if (game.scene.scenes[0].children.list[i] instanceof Enemy && game.scene.scenes[0].children.list[i].name == "Pale Priest") {
+            if (game.scene.scenes[0].children.list[i] instanceof Enemy && game.scene.scenes[0].children.list[i].name == "Ordrak") {
                 game.scene.scenes[0].children.list[i].health = game.scene.scenes[0].children.list[i].fullhealth;
                 game.scene.scenes[0].children.list[i].onTile = ordrakStartingPosition[level][ordrakStartingPostionIndex];
+                game.scene.scenes[0].children.list[i].specialAttack.roll.length = 1;
+                game.scene.scenes[0].children.list[i].specialAttack.name.length = 1;
                 ordrakStartingPostionIndex++;
                 figuresOnMap.push(game.scene.scenes[0].children.list[i]);
             }
