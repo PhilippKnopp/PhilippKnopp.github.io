@@ -430,6 +430,7 @@
         barb.onTile = barbStartingPosition[level];
         barb.dieSize = 12;
         barb.health = 1;
+        barb.fullHealth = 12;
         barb.name = "Rhiva";
         barb.color = "#914A23";
         barb.description = 1;
@@ -439,6 +440,7 @@
         rogue.onTile = rogueStartingPosition[level];
         rogue.dieSize = 8;
         rogue.health = 0;
+        rogue.fullHealth = 8;
         rogue.name = "Leng";
         rogue.color = "#003F5E";
         rogue.description = 2;
@@ -449,6 +451,7 @@
         mage.dieSize = 4;
         mage.explodes = true;
         mage.health = 0;
+        mage.fullHealth = 4;
         mage.name = "Caelith";
         mage.color = "#455059";
         mage.description = 0;
@@ -532,7 +535,9 @@
                         figuresOnMap[j].hasActed = false;
                     }
                     replenishActions();     // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
+                    if (barb.health <= 0 && rogue.health <= 0 && mage.health <= 0) {
                     restartLevel();
+                    }
                 }
             }
         }
@@ -548,7 +553,8 @@
         return false;
     }
 
-    function buildLevel() { 
+    function buildLevel() {
+        console.log("does this happen?");
         let levelMap = returnLevelType(1);
         for (var i = 0; i < tileArray.length; i++) {
             tileArray[i].state = levelMap[i];
@@ -565,7 +571,6 @@
         }
         
         for (var i = 0; i < figuresOnMap.length; i++) {
-            console.log(figuresOnMap[i]);
             figuresOnMap[i].setOnMap();
         }
         
@@ -751,7 +756,6 @@
         for (var i = 0; i < figuresOnMap.length; i++) {
             if (tileArray[figuresOnMap[i].onTile].occupiedBy == "enemy" && figuresOnMap[i].alarmed == true) {
                 alarmedEnemies++;
-                console.log(alarmedEnemies);
             }
         }
         if (alarmedEnemies == 0 && fightmode == true) {
@@ -772,6 +776,7 @@
     }
     
     function restartLevel() {
+        clearNodes();
         eventReminder = {e2:false, e4:false, e6:false, e7:false, ritualProgress: 13, ritualMembers: 5, ritualState: ""};
         figuresOnMap.length = 3;
         activeChar = null;
@@ -807,40 +812,39 @@
         let palePriestStartingPostionIndex = 0;
         let ordrakStartingPostionIndex = 0;
         for (let i = 0; i < game.scene.scenes[0].children.list.length; i++) {
-            if (game.scene.scenes[0].children.list[i] instanceof Enemy && game.scene.scenes[0].children.list[i].name == "Cave Crawler") {
-                game.scene.scenes[0].children.list[i].health = game.scene.scenes[0].children.list[i].fullhealth;
-                game.scene.scenes[0].children.list[i].onTile = caveCrawlerStartingPosition[level][cavecrawlerStartingPostionIndex];
+            
+            let enemyObject = game.scene.scenes[0].children.list[i];
+            
+            if (enemyObject instanceof Enemy && enemyObject.name == "Cave Crawler") {
+                enemyObject.health = enemyObject.fullhealth;
+                enemyObject.onTile = caveCrawlerStartingPosition[level][cavecrawlerStartingPostionIndex];
                 cavecrawlerStartingPostionIndex++;
-                figuresOnMap.push(game.scene.scenes[0].children.list[i]);
+                figuresOnMap.push(enemyObject);
             }
-            if (game.scene.scenes[0].children.list[i] instanceof Enemy && game.scene.scenes[0].children.list[i].name == "Pale Acolyte") {
-                game.scene.scenes[0].children.list[i].health = game.scene.scenes[0].children.list[i].fullhealth;
-                game.scene.scenes[0].children.list[i].onTile = paleAcolyteStartingPosition[level][paleAcolyteStartingPostionIndex];
+            if (enemyObject instanceof Enemy && enemyObject.name == "Pale Acolyte") {
+                enemyObject.health = enemyObject.fullhealth;
+                enemyObject.onTile = paleAcolyteStartingPosition[level][paleAcolyteStartingPostionIndex];
                 paleAcolyteStartingPostionIndex++;
-                figuresOnMap.push(game.scene.scenes[0].children.list[i]);
+                figuresOnMap.push(enemyObject);
             }
-            if (game.scene.scenes[0].children.list[i] instanceof Enemy && game.scene.scenes[0].children.list[i].name == "Pale Priest") {
-                game.scene.scenes[0].children.list[i].health = game.scene.scenes[0].children.list[i].fullhealth;
-                game.scene.scenes[0].children.list[i].onTile = palePriestStartingPosition[level][palePriestStartingPostionIndex];
-                game.scene.scenes[0].children.list[i].specialAttack.roll.length = 1;
-                game.scene.scenes[0].children.list[i].specialAttack.name.length = 1;
+            if (enemyObject instanceof Enemy && enemyObject.name == "Pale Priest") {
+                enemyObject.health = enemyObject.fullhealth;
+                enemyObject.onTile = palePriestStartingPosition[level][palePriestStartingPostionIndex];
+                enemyObject.specialAttack.roll.length = 1;
+                enemyObject.specialAttack.name.length = 1;
                 palePriestStartingPostionIndex++;
-                figuresOnMap.push(game.scene.scenes[0].children.list[i]);
+                figuresOnMap.push(enemyObject);
             }
-            if (game.scene.scenes[0].children.list[i] instanceof Enemy && game.scene.scenes[0].children.list[i].name == "Ordrak") {
-                game.scene.scenes[0].children.list[i].health = game.scene.scenes[0].children.list[i].fullhealth;
-                game.scene.scenes[0].children.list[i].onTile = ordrakStartingPosition[level][ordrakStartingPostionIndex];
-                game.scene.scenes[0].children.list[i].specialAttack.roll.length = 1;
-                game.scene.scenes[0].children.list[i].specialAttack.name.length = 1;
-                ordrakStartingPostionIndex++;
-                figuresOnMap.push(game.scene.scenes[0].children.list[i]);
+            if (enemyObject instanceof Enemy && enemyObject.name == "Ordrak") {
+                enemyObject.health = enemyObject.fullhealth;
+                enemyObject.onTile = ordrakStartingPosition[level][ordrakStartingPostionIndex];
+                enemyObject.specialAttack.roll.length = 1;
+                enemyObject.specialAttack.name.length = 1;
+                figuresOnMap.push(enemyObject);
             }
         }
-        console.log(figuresOnMap);
-        
         
         buildLevel();
-        clearNodes();
         enemyVisibility();
         checkFightmode();
         

@@ -10,6 +10,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.explodes = false;
         this.stealth = false;
         this.health;
+        this.fullHealth;
         this.movement = 6;
         this.movementCounter = 6;
         this.actions = 1;
@@ -143,9 +144,6 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.movement = 3;
                 this.actions = 0;
                 enemyVisibility();
-                if (barb.health <= 0 && rogue.health <= 0 && mage.health <= 0) {
-                    //restartLevel();
-                }
             }
         }
         
