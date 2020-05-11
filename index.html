@@ -428,7 +428,7 @@
         barb = new Figure ({scene:this, x:20, y:20}, 'barbSprite');
         barb.onTile = barbStartingPosition[level];
         barb.dieSize = 12;
-        barb.health = 2;
+        barb.health = 1;
         barb.name = "Rhiva";
         barb.color = "#914A23";
         barb.description = 1;
@@ -437,7 +437,7 @@
         rogue = new Figure ({scene:this, x:20, y:20}, 'rogueSprite');
         rogue.onTile = rogueStartingPosition[level];
         rogue.dieSize = 8;
-        rogue.health = 2;
+        rogue.health = 0;
         rogue.name = "Leng";
         rogue.color = "#003F5E";
         rogue.description = 2;
@@ -447,7 +447,7 @@
         mage.onTile = mageStartingPosition[level];
         mage.dieSize = 4;
         mage.explodes = true;
-        mage.health = 2;
+        mage.health = 0;
         mage.name = "Caelith";
         mage.color = "#455059";
         mage.description = 0;
