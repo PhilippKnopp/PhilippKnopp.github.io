@@ -41,6 +41,7 @@
         },
         scale: { mode: Phaser.Scale.FIT },
         scene: {
+            key: "Level1",
             preload: preload,
             create: create,
             update: update
@@ -531,6 +532,7 @@
                         figuresOnMap[j].hasActed = false;
                     }
                     replenishActions();     // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
+                    restartLevel();
                 }
             }
         }
@@ -777,11 +779,9 @@
         textHistoryIndex = -1;
         xp = 0;
         fightmode = false;
-        console.log(game.scene);
-        game.scene.stop();
-        game.scene.start();
-        /*game.scene.scenes[0].scene.stop();
-        game.scene.scenes[0].scene.start();
+        console.log(game.scene.scenes[0]);
+        game.scene.scenes[0].scene.stop();
+        /*game.scene.scenes[0].scene.start();
         game.scene.scenes[0].scene.restart();
         
         crystal1Img.setAlpha(0.1);
