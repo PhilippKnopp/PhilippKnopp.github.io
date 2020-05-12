@@ -13,6 +13,7 @@ class SceneTitle extends Phaser.Scene {
 		objects.camera.setBackgroundColor('#0C0E11');
         
         var Info = this.add.text(960, 540, "Game Start.", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' });
+        console.log(Info.getCenter());
         var VersionText = this.add.text(960, 820, gameVersion, { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' });
         
         this.input.manager.enabled = true;
