@@ -44,7 +44,7 @@
     
 ////////////// Variablen, die in der App verwendet werden   //////////////////////////////////////////////////////////////////////////////////////////
     
-    var gameVersion = "Version 0.29 test K";
+    var gameVersion = "Version 0.29 test M";
     var game = new Phaser.Game(config);
     var objects = {};   // enthält die Kammera...
     var tileArray = []; // Array mit allen Spielfeldern des Levels
@@ -100,6 +100,7 @@
 
     function buildLevel() {
         console.log("buildLevel");
+        console.log(game.scene);
         let levelMap = returnLevelType(1);
         for (let i = 0; i < tileArray.length; i++) {
             tileArray[i].state = levelMap[i];
@@ -108,7 +109,15 @@
         }
         let levelMapConnections = returnLevelConnections(1);
         for (let i = 0; i < tileArray.length; i++) {
+            if (i == 754) {
+                console.log(tileArray[754].walkable);
+                console.log(tileArray[i].walkable);
+            }
             tileArray[i].walkable = levelMapConnections[i];
+            if (i == 754) {
+                console.log(tileArray[754].walkable);
+                console.log(tileArray[i].walkable);
+            }
         }
         let levelMapInfo = returnLevelInfo(1);
         for (let i = 0; i < tileArray.length; i++) {
