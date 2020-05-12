@@ -87,11 +87,10 @@ function guiBuilder(_this) {
     };
     
     // Dialog Text 1
-    InfoDialog1 = _this.add.text(InfoName1.getBottomRight().x, InfoName1.getTopRight().y, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12, wordWrap: { width: 700, useAdvancedWrap: true } });
+    InfoDialog1 = _this.add.text(InfoName1.getBottomRight().x, InfoName1.getTopRight().y, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12, wordWrap: { width: 750, useAdvancedWrap: true } });
     InfoDialog1.showMessage = function (text) {
         InfoDialog1.setText(text);
         InfoDialog1.setPosition(InfoName1.getBottomRight().x, InfoName1.getTopRight().y);
-        InfoDialog1.data.values.wordWrap.width = 866-InfoName1.width;
     };
     
     // Dialog Name 2
@@ -112,11 +111,10 @@ function guiBuilder(_this) {
     };
     
     // Dialog Text 2
-    InfoDialog2 = _this.add.text(InfoName2.getBottomRight().x, InfoName2.getTopRight().y, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12, wordWrap: { width: 700, useAdvancedWrap: true } });
+    InfoDialog2 = _this.add.text(InfoName2.getBottomRight().x, InfoName2.getTopRight().y, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12, wordWrap: { width: 750, useAdvancedWrap: true } });
     InfoDialog2.showMessage = function (text) {
         InfoDialog2.setText(text);
         InfoDialog2.setPosition(InfoName2.getBottomRight().x, InfoName2.getTopRight().y);
-        InfoDialog2.data.values.wordWrap.width = 866-InfoName2.width;
     };
     
     // Hilfe
