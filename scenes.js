@@ -33,7 +33,7 @@ class SceneGameOver extends Phaser.Scene {
     }
 
     create () {
-		this.cameras.cameras[0].camera.setBackgroundColor('#0C0E11');
+		this.cameras.setBackgroundColor('#0C0E11');
         var Info = this.add.text(960, 540, "Game Over.", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' }).setOrigin( 0.5, 0.5).setX(960);
         
         this.input.manager.enabled = true;
@@ -101,7 +101,7 @@ class SceneGame extends Phaser.Scene {
     // Funktion die alle Sachen erstellt
 	create() {
         
-		this.cameras.cameras[0].camera.setBackgroundColor('#0C0E11');
+		this.cameras.default.setBackgroundColor('#0C0E11');
         guiBuilder(this); // Greift auf gui.js zu und erstellt viele der User Interface Elemente
         
 		mapImg = this.add.image(412, 540, 'map-lvl-1').setAlpha(1);
