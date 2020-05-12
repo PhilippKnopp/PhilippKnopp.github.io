@@ -5,12 +5,14 @@ class SceneTitle extends Phaser.Scene {
     }
 
     preload () {
-        //this.load.image('face', 'assets/pics/bw-face.png');
+        this.load.image('title', 'img/titleScreen.png');
     }
 
     create () {
         objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0C0E11');
+        
+        var title = this.add.image(960, 540, 'title');
         
         var Info = this.add.text(960, 540, "Game Start.", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' }).setOrigin( 0.5, 0.5).setX(960);
         var VersionText = this.add.text(960, 820, gameVersion, { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' }).setOrigin( 0.5, 0.5).setX(960);
