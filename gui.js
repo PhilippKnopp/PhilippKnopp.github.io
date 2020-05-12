@@ -87,7 +87,7 @@ function guiBuilder(_this) {
     };
     
     // Dialog Text 1
-    let widthDialog1 = 1816-InfoName1.getBottomRight().x;
+    let widthDialog1 = 1800-InfoName1.getBottomRight().x;
     InfoDialog1 = _this.add.text(InfoName1.getBottomRight().x, InfoName1.getTopRight().y, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12, wordWrap: { width: widthDialog1, useAdvancedWrap: true } });
     InfoDialog1.showMessage = function (text) {
         InfoDialog1.setText(text);
@@ -112,7 +112,7 @@ function guiBuilder(_this) {
     };
     
     // Dialog Text 2
-    let widthDialog2 = 1816-InfoName2.getBottomRight().x;
+    let widthDialog2 = 1800-InfoName2.getBottomRight().x;
     InfoDialog2 = _this.add.text(InfoName2.getBottomRight().x, InfoName2.getTopRight().y, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12, wordWrap: { width: widthDialog2, useAdvancedWrap: true } });
     InfoDialog2.showMessage = function (text) {
         InfoDialog2.setText(text);
