@@ -8,7 +8,7 @@
     
     <style>* { padding: 0; margin: 0;}</style>
     
-<script src="//cdn.jsdelivr.net/npm/phaser@3.18.1/dist/phaser.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/phaser@3.23.0/dist/phaser.min.js"></script>
 <script src="scenes.js"></script>
 <script src="levels.js"></script>
 <script src="heroines.js"></script>
@@ -24,8 +24,6 @@
 <body style="background-color:#0C0E11; text-align:center;">
 	
 <script>
-	
-    console.log("Version 0.28 test A");
     
 ////////////// configurations Variable, mit der das Spiel gestartet wird  ////////////////////////////////////////////////////////////////////////////
     
@@ -52,6 +50,7 @@
     
 ////////////// Variablen, die in der App verwendet werden   //////////////////////////////////////////////////////////////////////////////////////////
     
+    var version = "Version 0.28 test A";
     var game = new Phaser.Game(config);
     var objects = {};   // enthält die Kammera...
     var tileArray = []; // Array mit allen Spielfeldern des Levels

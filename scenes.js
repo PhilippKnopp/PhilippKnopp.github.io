@@ -12,7 +12,8 @@ class SceneTitle extends Phaser.Scene {
         objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0C0E11');
         
-        var Info = this.add.text(960, 540, "Game Start.", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
+        var Info = this.add.text(960, 540, "Game Start.", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' });
+        var VersionText = this.add.text(960, 820, gameVersion, { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' });
         
         this.input.manager.enabled = true;
         this.input.once('pointerdown', function () {
@@ -35,7 +36,7 @@ class SceneGameOver extends Phaser.Scene {
     create () {
         objects.camera = this.cameras.add(0, 0, 1920, 1080);
 		objects.camera.setBackgroundColor('#0C0E11');
-        var Info = this.add.text(960, 540, "Game Over.", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
+        var Info = this.add.text(960, 540, "Game Over.", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' });
         
         this.input.manager.enabled = true;
         this.input.once('pointerdown', function () {
