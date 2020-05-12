@@ -14,8 +14,7 @@ class SceneTitle extends Phaser.Scene {
         
         var title = this.add.image(960, 540, 'title');
         
-        var Info = this.add.text(960, 540, "Game Start.", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' }).setOrigin( 0.5, 0.5).setX(960);
-        var VersionText = this.add.text(960, 820, gameVersion, { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' }).setOrigin( 0.5, 0.5).setX(960);
+        var VersionText = this.add.text(960, 1020, gameVersion, { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' }).setOrigin( 0.5, 0.5).setX(960).setAlpha(0.5);
         
         this.input.manager.enabled = true;
         this.input.once('pointerdown', function () {
