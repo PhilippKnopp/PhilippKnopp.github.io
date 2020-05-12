@@ -9,8 +9,6 @@ class SceneTitle extends Phaser.Scene {
     }
 
     create () {
-        //objects.camera = this.cameras.add(0, 0, 1920, 1080);
-		//objects.camera.setBackgroundColor('#0C0E11');
         
         var title = this.add.image(960, 540, 'title');
         
@@ -32,12 +30,10 @@ class SceneGameOver extends Phaser.Scene {
     }
 
     preload () {
-        //this.load.image('face', 'assets/pics/bw-face.png');
     }
 
     create () {
-        objects.camera = this.cameras.add(0, 0, 1920, 1080);
-		objects.camera.setBackgroundColor('#0C0E11');
+		this.cameras.cameras[0].camera.setBackgroundColor('#0C0E11');
         var Info = this.add.text(960, 540, "Game Over.", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' }).setOrigin( 0.5, 0.5).setX(960);
         
         this.input.manager.enabled = true;
@@ -105,8 +101,7 @@ class SceneGame extends Phaser.Scene {
     // Funktion die alle Sachen erstellt
 	create() {
         
-		//objects.camera = this.cameras.add(0, 0, 1920, 1080);
-		//objects.camera.setBackgroundColor('#0C0E11');
+		this.cameras.cameras[0].camera.setBackgroundColor('#0C0E11');
         guiBuilder(this); // Greift auf gui.js zu und erstellt viele der User Interface Elemente
         
 		mapImg = this.add.image(412, 540, 'map-lvl-1').setAlpha(1);
@@ -218,6 +213,7 @@ class SceneGame extends Phaser.Scene {
                     }
 				});
                 tile.on("pointerover", function pointerOver () {
+                    console.log(this);
                     if (moveButton.mode == "planning" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol" && fightmode == true) {
                         let path = calculatePath(activeChar.onTile, this.name);
                         for (var i = 0; i < path.first.length; i++) {
