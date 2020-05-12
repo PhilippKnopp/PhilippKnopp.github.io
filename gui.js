@@ -116,7 +116,7 @@ function guiBuilder(_this) {
     InfoDialog2.showMessage = function (text) {
         InfoDialog2.setText(text);
         InfoDialog2.setPosition(InfoName2.getBottomRight().x, InfoName2.getTopRight().y);
-        InfoDialog2.setData({ wordWrap: {width: 1816-InfoName2.getBottomRight().x});
+        InfoDialog2.setData({ wordWrap: {width: 1816-InfoName2.getBottomRight().x}});
     };
     
     // Hilfe
