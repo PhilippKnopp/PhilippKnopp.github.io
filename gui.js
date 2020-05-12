@@ -91,7 +91,7 @@ function guiBuilder(_this) {
     InfoDialog1.showMessage = function (text) {
         InfoDialog1.setText(text);
         InfoDialog1.setPosition(InfoName1.getBottomRight().x, InfoName1.getTopRight().y);
-        InfoDialog1.setData({ wordWrap: {width: 1816-InfoName1.getBottomRight().x});
+        InfoDialog1.setData({ wordWrap: {width: 1816-InfoName1.getBottomRight().x}});
     };
     
     // Dialog Name 2
