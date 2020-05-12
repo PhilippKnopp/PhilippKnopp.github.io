@@ -40,17 +40,11 @@
         },
         scale: { mode: Phaser.Scale.FIT },
         scene: [SceneTitle, SceneGame, SceneGameOver]
-        /*scene: {
-            key: "Level1",
-            preload: preload,
-            create: create,
-            update: update
-        }*/
 	};
     
 ////////////// Variablen, die in der App verwendet werden   //////////////////////////////////////////////////////////////////////////////////////////
     
-    var gameVersion = "Version 0.29 test I";
+    var gameVersion = "Version 0.29 test K";
     var game = new Phaser.Game(config);
     var objects = {};   // enthält die Kammera...
     var tileArray = []; // Array mit allen Spielfeldern des Levels
@@ -105,22 +99,23 @@
     }
 
     function buildLevel() {
+        console.log("buildLevel");
         let levelMap = returnLevelType(1);
-        for (var i = 0; i < tileArray.length; i++) {
+        for (let i = 0; i < tileArray.length; i++) {
             tileArray[i].state = levelMap[i];
             tileArray[i].updateState();
             tileArray[i].occupiedBy = "";
         }
         let levelMapConnections = returnLevelConnections(1);
-        for (var i = 0; i < tileArray.length; i++) {
+        for (let i = 0; i < tileArray.length; i++) {
             tileArray[i].walkable = levelMapConnections[i];
         }
         let levelMapInfo = returnLevelInfo(1);
-        for (var i = 0; i < tileArray.length; i++) {
+        for (let i = 0; i < tileArray.length; i++) {
             tileArray[i].info = levelMapInfo[i];
         }
         
-        for (var i = 0; i < figuresOnMap.length; i++) {
+        for (let i = 0; i < figuresOnMap.length; i++) {
             figuresOnMap[i].setOnMap();
         }
         

@@ -213,7 +213,6 @@ class SceneGame extends Phaser.Scene {
                     }
 				});
                 tile.on("pointerover", function pointerOver () {
-                    console.log(this);
                     if (moveButton.mode == "planning" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol" && fightmode == true) {
                         let path = calculatePath(activeChar.onTile, this.name);
                         for (var i = 0; i < path.first.length; i++) {
@@ -231,7 +230,6 @@ class SceneGame extends Phaser.Scene {
 				tile.neighbors = [];
 				tile.neighborsDistance = [];
 				tile.checkForNeighbors = function () {
-                    
 					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != 0 && tileArray[this.name-1-matrixWidth].walkable[4] != 0) {
 						this.neighbors.push(tileArray[this.name-1-matrixWidth]);
 						this.neighborsDistance.push(1.5*tileArray[this.name-1-matrixWidth].walkable[4]);

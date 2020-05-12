@@ -91,7 +91,7 @@ function guiBuilder(_this) {
     InfoDialog1.showMessage = function (text) {
         InfoDialog1.setText(text);
         InfoDialog1.setPosition(InfoName1.getBottomRight().x, InfoName1.getTopRight().y);
-        InfoDialog1.setData({ wordWrap: {width: (1000-InfoName1.width)}});
+        InfoDialog1.setData({ wordWrap: {width: (700-InfoName1.width)}});
     };
     
     // Dialog Name 2
@@ -116,7 +116,7 @@ function guiBuilder(_this) {
     InfoDialog2.showMessage = function (text) {
         InfoDialog2.setText(text);
         InfoDialog2.setPosition(InfoName2.getBottomRight().x, InfoName2.getTopRight().y);
-        InfoDialog2.setData({ wordWrap: {width: (1000-InfoName2.width)}});
+        InfoDialog2.setData({ wordWrap: {width: (700-InfoName2.width)}});
     };
     
     // Hilfe
