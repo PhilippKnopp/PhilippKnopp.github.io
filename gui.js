@@ -64,13 +64,13 @@ function guiBuilder(_this) {
 ////////////// Text Messages //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     // beschreibender Text
-    Info1 = _this.add.text(950, 40, "", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 });
+    Info1 = _this.add.text(950, 40, "", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, wordWrap: { width: 866, useAdvancedWrap: true } });
     Info1.showMessage = function (text) {
         Info1.setText(text);
     };
     
     // Dialog Name 1
-    InfoName1 = _this.add.text(950, Info1.getBottomLeft().y+20, "", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12}).setFontStyle('bold');
+    InfoName1 = _this.add.text(950, Info1.getBottomLeft().y+20, "", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 }).setFontStyle('bold');
     InfoName1.showName = function (char) {
         if (typeof char === 'object') {
             InfoName1.setText(char.name + ": ");
@@ -87,14 +87,15 @@ function guiBuilder(_this) {
     };
     
     // Dialog Text 1
-    InfoDialog1 = _this.add.text(InfoName1.getBottomRight().x, InfoName1.getTopRight().y, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12 });
+    let widthDialog1 = 1816-InfoName1.getBottomRight().x;
+    InfoDialog1 = _this.add.text(InfoName1.getBottomRight().x, InfoName1.getTopRight().y, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12, wordWrap: { width: widthDialog1, useAdvancedWrap: true } });
     InfoDialog1.showMessage = function (text) {
         InfoDialog1.setText(text);
         InfoDialog1.setPosition(InfoName1.getBottomRight().x, InfoName1.getTopRight().y);
     };
     
     // Dialog Name 2
-    InfoName2 = _this.add.text(950, InfoName1.getBottomLeft().y+20, "", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12}).setFontStyle('bold');
+    InfoName2 = _this.add.text(950, InfoName1.getBottomLeft().y+20, "", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12 }).setFontStyle('bold');
     InfoName2.showName = function (char) {
         if (typeof char === 'object') {
             InfoName2.setText(char.name + ": ");
@@ -111,14 +112,15 @@ function guiBuilder(_this) {
     };
     
     // Dialog Text 2
-    InfoDialog2 = _this.add.text(InfoName2.getBottomRight().x, InfoName2.getTopRight().y, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12 });
+    let widthDialog2 = 1816-InfoName2.getBottomRight().x;
+    InfoDialog2 = _this.add.text(InfoName2.getBottomRight().x, InfoName2.getTopRight().y, "", { fontFamily: "Verdana" , color: '#dddddd', lineSpacing: 12, wordWrap: { width: widthDialog2, useAdvancedWrap: true } });
     InfoDialog2.showMessage = function (text) {
         InfoDialog2.setText(text);
         InfoDialog2.setPosition(InfoName2.getBottomRight().x, InfoName2.getTopRight().y);
     };
     
     // Hilfe
-    Info3 = _this.add.text(950, InfoDialog2.getBottomLeft().y+30, "", { fontFamily: "Verdana" , color: '#003F5E', lineSpacing: 12 });
+    Info3 = _this.add.text(950, InfoDialog2.getBottomLeft().y+30, "", { fontFamily: "Verdana" , color: '#003F5E', lineSpacing: 12, wordWrap: { width: 866, useAdvancedWrap: true } });
     Info3.showMessage = function (text) {
         Info3.setText(text);
         Info3.setPosition(950, InfoDialog2.getBottomLeft().y+30);
