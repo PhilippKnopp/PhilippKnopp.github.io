@@ -9,8 +9,8 @@ class SceneTitle extends Phaser.Scene {
     }
 
     create () {
-        objects.camera = this.cameras.add(0, 0, 1920, 1080);
-		objects.camera.setBackgroundColor('#0C0E11');
+        //objects.camera = this.cameras.add(0, 0, 1920, 1080);
+		//objects.camera.setBackgroundColor('#0C0E11');
         
         var title = this.add.image(960, 540, 'title');
         
@@ -105,13 +105,8 @@ class SceneGame extends Phaser.Scene {
     // Funktion die alle Sachen erstellt
 	create() {
         
-        this.input.manager.enabled = true;
-        this.input.once('pointerdown', function () {
-            this.scene.start('sceneGameOver');
-        }, this);
-        
-		objects.camera = this.cameras.add(0, 0, 1920, 1080);
-		objects.camera.setBackgroundColor('#0C0E11');
+		//objects.camera = this.cameras.add(0, 0, 1920, 1080);
+		//objects.camera.setBackgroundColor('#0C0E11');
         guiBuilder(this); // Greift auf gui.js zu und erstellt viele der User Interface Elemente
         
 		mapImg = this.add.image(412, 540, 'map-lvl-1').setAlpha(1);
@@ -461,6 +456,7 @@ class SceneGame extends Phaser.Scene {
         if (searchButton.mode == "planning") {
             searchButton.x = this.game.input.activePointer.x + 50;
             searchButton.y = this.game.input.activePointer.y + 50;
+            this.scene.start('sceneGameOver');
         }
             
         if (attackButton.mode == "planning rc" || attackButton.mode == "planning cc") {
