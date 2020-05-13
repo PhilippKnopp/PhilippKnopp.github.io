@@ -101,9 +101,11 @@ class SceneGame extends Phaser.Scene {
     // Funktion die alle Sachen erstellt
 	create() {
         
-        restartLevel(); // geht sicher, dass alle Spielübergreifenden Variablen auch bei einem Neustart einen sinnvollen Wert haben
+        // geht sicher, dass alle Spielübergreifenden Variablen auch bei einem Neustart einen sinnvollen Wert haben
+        restartLevel();
         
-        guiBuilder(this); // Greift auf gui.js zu und erstellt viele der User Interface Elemente
+        // Greift auf gui.js zu und erstellt viele der User Interface Elemente
+        guiBuilder(this);
         
 		mapImg = this.add.image(412, 540, 'map-lvl-1').setAlpha(1);
         crystal1Img = this.add.image(620, 137, 'crystal1').setAlpha(0.1);
@@ -122,6 +124,7 @@ class SceneGame extends Phaser.Scene {
 		for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
 			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
                 var tile = this.add.sprite(xPos*26+100, yPos*26+33, 'tileSprite');
+                tileArray.push(tile);
 				tile.state = 0;
                 /*  States:
                     state = 0      normaler Boden          [1,1,1,1,1,1,1,1]
@@ -140,8 +143,10 @@ class SceneGame extends Phaser.Scene {
 				tile.wayPointUsefulness;
 				tile.entryPoint;
                 tile.occupiedBy = "";
+                
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
+                    
                     // nichts ist auf der Tile und diese ist von einer Seite aus begehbar
 					if (moveButton.mode == "planning" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol") {
                         let path = calculatePath(activeChar.onTile, this.name);
@@ -163,8 +168,8 @@ class SceneGame extends Phaser.Scene {
                             tileArray[i].setFrame(0);
                         }
                     }
+                    
                     if (searchButton.mode == "planning") {
-                        //console.log(this.name + " - x: " + this.x + " - y: " + this.y);
                         if (lineOfSight (activeChar.onTile, this.name) == true) {
                             if (this.info == 3 && crystal1Img.alpha != 0) {
                                 crystal1Img.setAlpha(1);
@@ -320,8 +325,8 @@ class SceneGame extends Phaser.Scene {
                         if (this.neighbors[this.neighbors.length-1].occupiedBy != "") {
                             this.neighborsDistance[this.neighborsDistance.length-1] += 1;
                         }
-					};
-				};
+					}
+				}
 				tile.estimatedWayToB = function (b) {
                     let a = this.name;
 					
@@ -329,8 +334,8 @@ class SceneGame extends Phaser.Scene {
 					let yDistance = Math.abs(Math.floor(b/matrixWidth)-Math.floor(a/matrixWidth));
 					let diagonals = Math.min(xDistance, yDistance);
 					return xDistance + yDistance - diagonals/2;
-				};
-				tileArray.push(tile);
+				}
+				
 			}
 		}
         

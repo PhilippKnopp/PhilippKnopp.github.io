@@ -151,6 +151,7 @@ function enemyPlanMove (enemy) {
         // Bewegung wird festgelegt
         let finalPath = calculatePath(enemy.onTile, placeOfChoice);
         enemy.pathToTravel = [...finalPath.first];
+        console.log(finalPath.first);
         
     } else {
         console.log("implementiere Route wenn kein Held erreichbar ist");
