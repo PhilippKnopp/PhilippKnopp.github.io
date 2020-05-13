@@ -45,7 +45,7 @@
     
 ////////////// Variablen, die in der App verwendet werden   //////////////////////////////////////////////////////////////////////////////////////////
     
-    var gameVersion = "Version 0.30 test A";
+    var gameVersion = "Version 0.30 test B";
     var game = new Phaser.Game(config);
     var level = 1;
     
@@ -92,6 +92,9 @@
     var melee_hits = [m_hit_1, m_hit_2, m_hit_3, m_hit_4];
     var melee_misses = [m_miss_1, m_hit_2];
     
+    
+//////////////  Diverse Funktionen   //////////////////////////////////////////////////////////////////////////////////////////
+
     function findDeadChar(element) {
         if (element instanceof Enemy) {
             return element.health <= 0;
@@ -151,7 +154,7 @@
         }
     }
     
-    function tileVisibility () { 
+    /*function tileVisibility () { 
         for (var i = 0; i < tileArray.length; i++) {
             if ((lineOfSight (figuresOnMap[0].onTile, i) && figuresOnMap[0] instanceof Figure ) || (lineOfSight (figuresOnMap[1].onTile, i) && figuresOnMap[1] instanceof Figure ) || (lineOfSight (figuresOnMap[2].onTile, i) && figuresOnMap[2] instanceof Figure )) {
                 tileArray[i].setFrame(0);
@@ -159,7 +162,7 @@
                 tileArray[i].setFrame(2);
             }
         }
-    }
+    }*/
     
     function completeTurn(char) {
         hideActions();
@@ -341,83 +344,6 @@
         
         fightmode = false;
         
-        /*clearNodes();
-        eventReminder = {e2:false, e4:false, e6:false, e7:false, ritualProgress: 13, ritualMembers: 5, ritualState: ""};
-        figuresOnMap.length = 3;
-        activeChar = null;
-        turnOver.length = 0;
-        enemyTurnActive = false;
-        textHistory.length = 0;
-        textHistoryIndex = -1;
-        xp = 0;
-        fightmode = false;
-        
-        crystal1Img.setAlpha(0.1);
-        door1Img.setAlpha(0);
-        door2Img.setAlpha(0);
-        door4Img.setAlpha(0);
-        door5Img.setAlpha(0);
-        door6Img.setAlpha(1);
-        idol1Img.setAlpha(0);
-        trap1Sprt.setAlpha(0);
-        trap1Sprt.setFrame(0);
-        circle1Img.setAlpha(0);
-        
-        barb.onTile = barbStartingPosition[level];
-        barb.health = barb.fullHealth;
-        barb.movement = 6;
-        barb.actions = 1;
-        
-        rogue.onTile = rogueStartingPosition[level];
-        rogue.health = rogue.fullHealth;
-        rogue.movement = 6;
-        rogue.actions = 1;
-        
-        mage.onTile = mageStartingPosition[level];
-        mage.health = mage.fullHealth;
-        mage.movement = 6;
-        mage.actions = 1;
-        
-        let cavecrawlerStartingPostionIndex = 0;
-        let paleAcolyteStartingPostionIndex = 0;
-        let palePriestStartingPostionIndex = 0;
-        let ordrakStartingPostionIndex = 0;
-        for (let i = 0; i < game.scene.scenes[0].children.list.length; i++) {
-            
-            let enemyObject = game.scene.scenes[0].children.list[i];
-            
-            if (enemyObject instanceof Enemy && enemyObject.name == "Cave Crawler") {
-                enemyObject.health = 2;
-                enemyObject.onTile = caveCrawlerStartingPosition[level][cavecrawlerStartingPostionIndex];
-                cavecrawlerStartingPostionIndex++;
-                figuresOnMap.push(enemyObject);
-            }
-            if (enemyObject instanceof Enemy && enemyObject.name == "Pale Acolyte") {
-                enemyObject.health = 6;
-                enemyObject.onTile = paleAcolyteStartingPosition[level][paleAcolyteStartingPostionIndex];
-                paleAcolyteStartingPostionIndex++;
-                figuresOnMap.push(enemyObject);
-            }
-            if (enemyObject instanceof Enemy && enemyObject.name == "Pale Priest") {
-                enemyObject.health = 8;
-                enemyObject.onTile = palePriestStartingPosition[level][palePriestStartingPostionIndex];
-                enemyObject.specialAttack.roll.length = 1;
-                enemyObject.specialAttack.name.length = 1;
-                palePriestStartingPostionIndex++;
-                figuresOnMap.push(enemyObject);
-            }
-            if (enemyObject instanceof Enemy && enemyObject.name == "Ordrak") {
-                enemyObject.health = 8;
-                enemyObject.onTile = ordrakStartingPosition[level][ordrakStartingPostionIndex];
-                enemyObject.specialAttack.roll.length = 1;
-                enemyObject.specialAttack.name.length = 1;
-                figuresOnMap.push(enemyObject);
-            }
-        }
-        
-        buildLevel();
-        enemyVisibility();
-        checkFightmode();*/
     }
     
 </script>
