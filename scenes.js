@@ -101,7 +101,6 @@ class SceneGame extends Phaser.Scene {
     // Funktion die alle Sachen erstellt
 	create() {
         
-		//this.cameras.main.setBackgroundColor('#0C0E11');
         guiBuilder(this); // Greift auf gui.js zu und erstellt viele der User Interface Elemente
         
 		mapImg = this.add.image(412, 540, 'map-lvl-1').setAlpha(1);
@@ -304,6 +303,7 @@ class SceneGame extends Phaser.Scene {
 				tileArray.push(tile);
 			}
 		}
+        console.log(tileArray.length);
         
         doorButton = this.add.sprite(400, 400, 'doorSprite').setAlpha(0);
         doorButton.setInteractive();

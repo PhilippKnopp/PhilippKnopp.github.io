@@ -8,7 +8,6 @@
     
     <style>* { padding: 0; margin: 0;}</style>
     
-<script src="//cdn.jsdelivr.net/npm/phaser@3.23.0/dist/phaser.min.js"></script>
 <script src="scenes.js"></script>
 <script src="levels.js"></script>
 <script src="heroines.js"></script>
@@ -18,6 +17,7 @@
 <script src="gui.js"></script>
 <script src="enemyAI.js"></script>
 <script src="pathFinder.js"></script>
+<script src="//cdn.jsdelivr.net/npm/phaser@3.23.0/dist/phaser.min.js"></script>
 
 </head>
 
@@ -45,7 +45,7 @@
     
 ////////////// Variablen, die in der App verwendet werden   //////////////////////////////////////////////////////////////////////////////////////////
     
-    var gameVersion = "Version 0.29 test M";
+    var gameVersion = "Version 0.29 test N";
     var game = new Phaser.Game(config);
     var objects = {};   // enthält die Kammera...
     var tileArray = []; // Array mit allen Spielfeldern des Levels
@@ -100,8 +100,6 @@
     }
 
     function buildLevel() {
-        console.log("buildLevel");
-        console.log(game.scene);
         let levelMap = returnLevelType(1);
         for (let i = 0; i < tileArray.length; i++) {
             tileArray[i].state = levelMap[i];
@@ -128,6 +126,9 @@
         for (let i = 0; i < figuresOnMap.length; i++) {
             figuresOnMap[i].setOnMap();
         }
+        
+        console.log("buildLevel");
+        console.log(game.scene);
         
         tileArray[941].occupiedBy = "idol";
         eventDispatch("", "e1");
