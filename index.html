@@ -47,7 +47,7 @@
     
     var gameVersion = "Version 0.29 test N";
     var game = new Phaser.Game(config);
-    var objects = {};   // enthält die Kammera...
+    //var objects = {};   // enthält die Kammera...
     var tileArray = []; // Array mit allen Spielfeldern des Levels
     var matrixWidth = 25;   // Spielfeldbreite
     var matrixHeight = 40;  // Spielfeldhöhe
@@ -126,9 +126,6 @@
         for (let i = 0; i < figuresOnMap.length; i++) {
             figuresOnMap[i].setOnMap();
         }
-        
-        console.log("buildLevel");
-        console.log(game.scene);
         
         tileArray[941].occupiedBy = "idol";
         eventDispatch("", "e1");
@@ -332,7 +329,23 @@
     }
     
     function restartLevel() {
-        clearNodes();
+
+        tileArray.length = 0;
+        
+        rangedDamage = [0];
+        eventReminder = {e2:false, e4:false, e6:false, e7:false, ritualProgress: 13, ritualMembers: 5, ritualState: ""};
+        
+        figuresOnMap.length = 0;
+        activeChar = null;
+        turnOver.length = 0;
+        enemyTurnActive = false;
+        textHistory.length = 0;
+        textHistoryIndex = -1;
+        xp = 0;
+        
+        fightmode = false;
+        
+        /*clearNodes();
         eventReminder = {e2:false, e4:false, e6:false, e7:false, ritualProgress: 13, ritualMembers: 5, ritualState: ""};
         figuresOnMap.length = 3;
         activeChar = null;
@@ -408,9 +421,7 @@
         
         buildLevel();
         enemyVisibility();
-        checkFightmode();
-        
-        console.log(game.scene.scenes[0]);
+        checkFightmode();*/
     }
     
 </script>

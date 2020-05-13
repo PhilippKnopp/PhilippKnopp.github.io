@@ -101,6 +101,8 @@ class SceneGame extends Phaser.Scene {
     // Funktion die alle Sachen erstellt
 	create() {
         
+        restartLevel(); // geht sicher, dass alle Spielübergreifenden Variablen auch bei einem Neustart einen sinnvollen Wert haben
+        
         guiBuilder(this); // Greift auf gui.js zu und erstellt viele der User Interface Elemente
         
 		mapImg = this.add.image(412, 540, 'map-lvl-1').setAlpha(1);
@@ -490,7 +492,7 @@ class SceneGame extends Phaser.Scene {
                     }
                     replenishActions();     // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
                     if (barb.health <= 0 && rogue.health <= 0 && mage.health <= 0) {
-                    restartLevel();
+                    console.log("implementiere Game Over");
                     }
                 }
             }
