@@ -47,7 +47,8 @@
     
     var gameVersion = "Version 0.30 test A";
     var game = new Phaser.Game(config);
-    //var objects = {};   // enthält die Kammera...
+    var level = 1;
+    
     var tileArray = []; // Array mit allen Spielfeldern des Levels
     var matrixWidth = 25;   // Spielfeldbreite
     var matrixHeight = 40;  // Spielfeldhöhe
@@ -84,7 +85,6 @@
     var xpIcon;
     var xpText;
     
-    var level = 1;
     var fightmode = false;
     
     var bgmusic;
@@ -100,21 +100,25 @@
     }
 
     function buildLevel() {
+        // Grundlegende Art des Feldes auf der Karte wird eingestellt
         let levelMap = returnLevelType(level);
         for (let i = 0; i < tileArray.length; i++) {
             tileArray[i].state = levelMap[i];
-            tileArray[i].updateState();
-            tileArray[i].occupiedBy = "";
         }
+        
+        // Schwierigkeit das Feld zu betreten wird eingestellt
         let levelMapConnections = returnLevelConnections(level);
         for (let i = 0; i < tileArray.length; i++) {
             tileArray[i].walkable = levelMapConnections[i];
         }
+        
+        // Was wird gesehen wenn man das Feld anschaut
         let levelMapInfo = returnLevelInfo(level);
         for (let i = 0; i < tileArray.length; i++) {
             tileArray[i].info = levelMapInfo[i];
         }
         
+        // Erstellte Figuren werden auf der Karte Platziert und Registriert
         for (let i = 0; i < figuresOnMap.length; i++) {
             figuresOnMap[i].setOnMap();
         }

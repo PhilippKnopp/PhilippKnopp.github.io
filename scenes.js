@@ -123,33 +123,23 @@ class SceneGame extends Phaser.Scene {
 			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
                 var tile = this.add.sprite(xPos*26+100, yPos*26+33, 'tileSprite');
 				tile.state = 0;
+                /*  States:
+                    state = 0      normaler Boden          [1,1,1,1,1,1,1,1]
+					state = "0t1"  Trap
+					state = "0dc"  Türe geschlossen
+					state = "0do"  Türe offen
+					state = 5      Wand                    [0,0,0,0,0,0,0,0]
+					state = 6      Schwieriges Terrain     [2,2,2,2,2,2,2,2]
+					state = 8      Wasser (niedrig)        [2,2,2,2,2,2,2,2]
+					state = 7      Wasser (tief)           [3,3,3,3,3,3,3,3]
+                */
                 tile.name = index++;
                 tile.info = 1;
 				tile.walkable = [1,1,1,1,1,1,1,1];
-				tile.updateState = function () {
-                    if (this.state == 0) { // normaler Boden
-                        this.weight = 1;
-						//this.walkable = [1,1,1,1,1,1,1,1];
-					} else if (this.state == "0t1") { // Trap
-						this.weight = 1;
-						//this.walkable = [1,1,1,1,1,1,1,1];
-					} else if (this.state == "0dc") { // Türe geschlossen
-						this.weight = 1;
-					} else if (this.state == "0do") { // Türe offen
-						this.weight = 1;
-					} else if (this.state == 5) { // Wand
-						//this.walkable = [0,0,0,0,0,0,0,0];
-					} else if (this.state == 6) { // Schwieriges Terrain
-						//this.walkable = [2,2,2,2,2,2,2,2];
-						this.weight = 2;
-					} else if (this.state == 7) { // Wasser
-						//this.walkable = [3,3,3,3,3,3,3,3];
-						this.weight = 3;
-					} else if (this.state == 8) { // Niedriges Wasser
-						//this.walkable = [2,2,2,2,2,2,2,2];
-						this.weight = 2;
-					};
-				};
+                tile.distanceTravelled;
+				tile.wayPointUsefulness;
+				tile.entryPoint;
+                tile.occupiedBy = "";
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
                     // nichts ist auf der Tile und diese ist von einer Seite aus begehbar
@@ -332,9 +322,7 @@ class SceneGame extends Phaser.Scene {
                         }
 					};
 				};
-				tile.weight = 1;
 				tile.estimatedWayToB = function (b) {
-					
                     let a = this.name;
 					
 					let xDistance = (Math.abs(b%matrixWidth-a%matrixWidth));
@@ -342,14 +330,9 @@ class SceneGame extends Phaser.Scene {
 					let diagonals = Math.min(xDistance, yDistance);
 					return xDistance + yDistance - diagonals/2;
 				};
-				tile.distanceTravelled;
-				tile.wayPointUsefulness;
-				tile.entryPoint;
-                tile.occupiedBy = "";
 				tileArray.push(tile);
 			}
 		}
-        console.log(tileArray.length);
         
         doorButton = this.add.sprite(400, 400, 'doorSprite').setAlpha(0);
         doorButton.setInteractive();
