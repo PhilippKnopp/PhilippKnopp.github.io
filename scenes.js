@@ -18,7 +18,7 @@ class SceneTitle extends Phaser.Scene {
         this.input.once('pointerdown', function () {
             this.scene.start('sceneGame');
         }, this);
-        console.log(this);
+        
     }
 
 }
@@ -428,7 +428,7 @@ class SceneGame extends Phaser.Scene {
         barb = new Figure ({scene:this, x:20, y:20}, 'barbSprite');
         barb.onTile = barbStartingPosition[level];
         barb.dieSize = 12;
-        barb.health = 1;
+        barb.health = 12;
         barb.fullHealth = 12;
         barb.name = "Rhiva";
         barb.color = "#914A23";
@@ -438,7 +438,7 @@ class SceneGame extends Phaser.Scene {
         rogue = new Figure ({scene:this, x:20, y:20}, 'rogueSprite');
         rogue.onTile = rogueStartingPosition[level];
         rogue.dieSize = 8;
-        rogue.health = 0;
+        rogue.health = 8;
         rogue.fullHealth = 8;
         rogue.name = "Leng";
         rogue.color = "#003F5E";
@@ -449,7 +449,7 @@ class SceneGame extends Phaser.Scene {
         mage.onTile = mageStartingPosition[level];
         mage.dieSize = 4;
         mage.explodes = true;
-        mage.health = 0;
+        mage.health = 4;
         mage.fullHealth = 4;
         mage.name = "Caelith";
         mage.color = "#455059";
@@ -496,7 +496,6 @@ class SceneGame extends Phaser.Scene {
         if (searchButton.mode == "planning") {
             searchButton.x = this.game.input.activePointer.x + 50;
             searchButton.y = this.game.input.activePointer.y + 50;
-            this.scene.start('sceneGameOver');
         }
             
         if (attackButton.mode == "planning rc" || attackButton.mode == "planning cc") {
@@ -534,9 +533,13 @@ class SceneGame extends Phaser.Scene {
                     for (let j = 0; j < figuresOnMap.length; j++) {
                         figuresOnMap[j].hasActed = false;
                     }
-                    replenishActions();     // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
+                    
+                    // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
+                    replenishActions();
+                    
+                    // Wenn keine der Heldinnen mehr am Leben ist springt das Spiel zur Game-Over-Scene
                     if (barb.health <= 0 && rogue.health <= 0 && mage.health <= 0) {
-                    console.log("implementiere Game Over");
+                        this.scene.start('sceneGameOver');
                     }
                 }
             }
