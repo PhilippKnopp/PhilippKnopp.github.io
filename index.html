@@ -45,7 +45,7 @@
     
 ////////////// Variablen, die in der App verwendet werden   //////////////////////////////////////////////////////////////////////////////////////////
     
-    var gameVersion = "Version 0.29 test N";
+    var gameVersion = "Version 0.30";
     var game = new Phaser.Game(config);
     //var objects = {};   // enthält die Kammera...
     var tileArray = []; // Array mit allen Spielfeldern des Levels
@@ -100,25 +100,17 @@
     }
 
     function buildLevel() {
-        let levelMap = returnLevelType(1);
+        let levelMap = returnLevelType(level);
         for (let i = 0; i < tileArray.length; i++) {
             tileArray[i].state = levelMap[i];
             tileArray[i].updateState();
             tileArray[i].occupiedBy = "";
         }
-        let levelMapConnections = returnLevelConnections(1);
+        let levelMapConnections = returnLevelConnections(level);
         for (let i = 0; i < tileArray.length; i++) {
-            if (i == 754) {
-                console.log(tileArray[754].walkable);
-                console.log(tileArray[i].walkable);
-            }
             tileArray[i].walkable = levelMapConnections[i];
-            if (i == 754) {
-                console.log(tileArray[754].walkable);
-                console.log(tileArray[i].walkable);
-            }
         }
-        let levelMapInfo = returnLevelInfo(1);
+        let levelMapInfo = returnLevelInfo(level);
         for (let i = 0; i < tileArray.length; i++) {
             tileArray[i].info = levelMapInfo[i];
         }
@@ -240,7 +232,7 @@
             showText (textL1[22], activeChar, textL1[23]);
         } else if (eventKey == "e4" && eventReminder.e4 != true) {  // nach dem öffnen der zweiten Türe in den Hauptraum
             eventReminder.e4 = true;
-            showText (textL1[38], figuresOnMap[figuresOnMap.length - 2], textL1[39]);
+            showText (textL1[38], figuresOnMap[figuresOnMap.length - 2], textL1Enemy[1]);
         } else if (eventKey == "6e5") {     // zweiter Gang
             showText (textL1[22], activeChar, textL1[23]);
         } else if (eventKey == "6e6" && eventReminder.e6 != true) { // vor dem Bosskampf

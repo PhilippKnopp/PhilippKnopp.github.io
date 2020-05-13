@@ -409,7 +409,7 @@ var textL1 = [
 /*36*/  "With coordinated and fast movements Leng pulls out her tools and starts working through the cracks of the floor in front of her. She unhinges a lever, disabeling the presure plates ahead.",
 /*37*/  "Caelith closes her eyes and invisible tendrils start to manipulate the mechanism, unhinging a lever and disabeling the presure plates ahead.",
 /*38*/  "The doors open to a huge cathedral like room. The chanting stops immediately.",
-/*39*/  "Who are you! My brothers and sisters, protect us from the blind and evil ways of the surface!",
+/*39*/  "",
 /*40*/  "Rhiva dives deeper and deeper, with her pride not allowing her to give up. After a while Leng sprints to her retrieving Rhivas unconscious Body from the depths of the icy lake.",
 /*41*/  "You are stubborn way past the point of stupidness!",
 /*42*/  "Not while there is a fight!",
@@ -424,8 +424,8 @@ var textL1 = [
 ];
 
 var textL1Enemy = [
-///*0*/   "We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!"
-/*9*/   ".. .. .. .. .. .. .. .. .. .. .. .. .. .. .. . .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. . .. .. .. .. .. .. .. .. .. .. .. .. .."
+/*0*/   "We will skin you and let you drown in your own blood as punishment for praying to treacherous Gods!",
+/*1*/   "Who are you! My brothers and sisters, protect us from the blind and evil ways of the surface!",
 ];
 
 var textL1Chars = [
