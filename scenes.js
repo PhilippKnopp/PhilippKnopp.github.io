@@ -217,7 +217,51 @@ class SceneGame extends Phaser.Scene {
                     if (moveButton.mode == "planning" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol" && fightmode == true) {
                         let path = calculatePath(activeChar.onTile, this.name);
                         for (var i = 0; i < path.first.length; i++) {
-                            tileArray[path.first[i]].setFrame(1);
+                            let difficulty;
+                            if (i == 0) {
+                                if (activeChar.onTile == path.first[i]-matrixWidth-1) {
+                                    difficulty = tileArray[path.first[i]].walkable[0];
+                                } else if (activeChar.onTile == path.first[i]-matrixWidth) {
+                                    difficulty = tileArray[path.first[i]].walkable[1];
+                                } else if (activeChar.onTile == path.first[i]-matrixWidth+1) {
+                                    difficulty = tileArray[path.first[i]].walkable[2];
+                                } else if (activeChar.onTile == path.first[i]+1) {
+                                    difficulty = tileArray[path.first[i]].walkable[3];
+                                } else if (activeChar.onTile == path.first[i]+matrixWidth+1) {
+                                    difficulty = tileArray[path.first[i]].walkable[4];
+                                } else if (activeChar.onTile == path.first[i]+matrixWidth) {
+                                    difficulty = tileArray[path.first[i]].walkable[5];
+                                } else if (activeChar.onTile == path.first[i]+matrixWidth-1) {
+                                    difficulty = tileArray[path.first[i]].walkable[6];
+                                } else if (activeChar.onTile == path.first[i]-1) {
+                                    difficulty = tileArray[path.first[i]].walkable[7];
+                                }
+                            } else {
+                                if (path.first[i-1] == path.first[i]-matrixWidth-1) {
+                                    difficulty = tileArray[path.first[i]].walkable[0];
+                                } else if (path.first[i-1] == path.first[i]-matrixWidth) {
+                                    difficulty = tileArray[path.first[i]].walkable[1];
+                                } else if (path.first[i-1] == path.first[i]-matrixWidth+1) {
+                                    difficulty = tileArray[path.first[i]].walkable[2];
+                                } else if (path.first[i-1] == path.first[i]+1) {
+                                    difficulty = tileArray[path.first[i]].walkable[3];
+                                } else if (path.first[i-1] == path.first[i]+matrixWidth+1) {
+                                    difficulty = tileArray[path.first[i]].walkable[4];
+                                } else if (path.first[i-1] == path.first[i]+matrixWidth) {
+                                    difficulty = tileArray[path.first[i]].walkable[5];
+                                } else if (path.first[i-1] == path.first[i]+matrixWidth-1) {
+                                    difficulty = tileArray[path.first[i]].walkable[6];
+                                } else if (path.first[i-1] == path.first[i]-1) {
+                                    difficulty = tileArray[path.first[i]].walkable[7];
+                                }
+                            }
+                            if (difficulty == 1) {
+                                tileArray[path.first[i]].setFrame(1);
+                            } else if (difficulty == 2) {
+                                tileArray[path.first[i]].setFrame(2);
+                            } else if (difficulty == 3) {
+                                tileArray[path.first[i]].setFrame(3);
+                            }
                         }
                     }
                 });
