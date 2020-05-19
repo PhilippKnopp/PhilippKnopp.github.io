@@ -5,7 +5,7 @@ class SceneTitle extends Phaser.Scene {
     }
 
     preload () {
-        this.load.image('title', 'img/titleScreen.png');
+        this.load.image('title', 'img/Screen_Title.png');
     }
 
     create () {
@@ -13,6 +13,31 @@ class SceneTitle extends Phaser.Scene {
         var title = this.add.image(960, 540, 'title');
         
         var VersionText = this.add.text(960, 1020, gameVersion, { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' }).setOrigin( 0.5, 0.5).setX(960).setAlpha(0.5);
+        
+        this.input.manager.enabled = true;
+        this.input.once('pointerdown', function () {
+            this.scene.start('sceneTravel_1');
+        }, this);
+        
+    }
+
+}
+
+class SceneTravel_1 extends Phaser.Scene {
+
+    constructor () {
+        super({ key: 'sceneTravel_1' });
+    }
+
+    preload () {
+        this.load.image('screen_travel_1', 'img/Screen_Travel_1.png');
+    }
+
+    create () {
+        
+        var title = this.add.image(960, 540, 'screen_travel_1');
+        
+        var Info_Travel = this.add.text(960, 1000, "In the oldest part of the woods, there is a deep cave. Two adventurers are sent there by a local guardsman, to find his missing daughter Arowia.", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, wordWrap: { width: 900, useAdvancedWrap: true }, align: 'center' }).setOrigin( 0.5, 0.5).setX(960);
         
         this.input.manager.enabled = true;
         this.input.once('pointerdown', function () {
@@ -30,7 +55,7 @@ class SceneGameOver extends Phaser.Scene {
     }
 
     preload () {
-        this.load.image('gameOver', 'img/GameOverScreen.png');
+        this.load.image('gameOver', 'img/Screen_GameOver.png');
     }
 
     create () {

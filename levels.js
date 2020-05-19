@@ -370,7 +370,7 @@ function ritual(energy, priestDied = false) {
 }
 
 var textL1 = [
-/*0*/   "In the oldest part of the woods, there is a damp cave. Two adventurers who were sent there by a local guardsman, to find his missing daughter Arowia, are climbing deeper and deeper, until they detect two pale humanoid beings with sharp teeth and black eyes. The heroines observe that these creatures are holding a woman captive. She is not the girl they wanted to rescue, but she seems to be in need for their help anyway.",
+/*0*/   "After climbing deeper and deeper the cave widens to an underground chamber. Two pale humanoid beings with sharp teeth and black eyes are holding a woman captive. She is not the girl they wanted to rescue, but she seems to be in need for their help anyway.",
 /*1*/   "I can't see that.",
 /*2*/   "A cold and dark cave. The walls are rough and wet. There is an impressive temple, that was cut out of the stone next to a lake.",
 /*3*/   "Even though the water is crystal clear the surface of the lake only reflects the dark surroundings. That makes it impossible to tell how deep the lake truly is.",
