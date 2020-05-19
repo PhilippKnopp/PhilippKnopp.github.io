@@ -30,11 +30,11 @@ class SceneGameOver extends Phaser.Scene {
     }
 
     preload () {
+        this.load.image('gameOver', 'img/GameOverScreen.png');
     }
 
     create () {
-		//this.cameras.main.setBackgroundColor('#0C0E11');
-        var Info = this.add.text(960, 540, "Game Over.", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' }).setOrigin( 0.5, 0.5).setX(960);
+        var gameOver = this.add.image(960, 540, 'gameOver');
         
         this.input.manager.enabled = true;
         this.input.once('pointerdown', function () {
