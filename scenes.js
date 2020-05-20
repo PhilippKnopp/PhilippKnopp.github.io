@@ -280,7 +280,7 @@ class SceneGame extends Phaser.Scene {
                             }
                             
                             // Wer gut schwimmen kann, kann sich in tiefem Wasserr leicht bewegen
-                            if (tileArray[path.first[i]].state == 7 && activeChar.skills.swim == true) {
+                            if ((tileArray[path.first[i]].state == 7 || tileArray[path.first[i]].state == "7e9") && activeChar.skills.swim == true) {
                                 difficulty = 1;
                             }
                             
@@ -342,7 +342,7 @@ class SceneGame extends Phaser.Scene {
                     for (let i = 0; i < this.neighbors.length; i++) {
                         // Felder mit tiefem Wasser werden leicht begehbar für gute Schwimmer
                         if (activeChar instanceof Figure) {
-                            if (this.neighbors[i].state == 7 && activeChar.skills.swim == true) {
+                            if ((this.neighbors[i].state == 7 || this.neighbors[i].state == "7e9") && activeChar.skills.swim == true) {
                                 this.neighborsDistance[i] = this.neighborsDistance[i]/3;
                             }
                         }
