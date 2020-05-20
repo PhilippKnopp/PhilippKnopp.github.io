@@ -237,22 +237,29 @@
         if (eventKey == "0t1") {
             trap1(activeChar);
             activeChar.moveNow;
-        } else if (eventKey == "e1") {      // start von Level 1
+        } else if (eventKey == "e1") {
+        // start von Level 1
             showText (textL1[0], figuresOnMap[7], textL1Enemy[0], "", "", textL1[9]);
-        } else if (eventKey == "e2" && eventReminder.e2 != true) {  // nach dem öffnen der ersten Türe in den tempel
+        } else if (eventKey == "e2" && eventReminder.e2 != true) {
+        // nach dem öffnen der ersten Türe in den tempel
             eventReminder.e2 = true;
             showText (textL1[21]);
-        } else if (eventKey == "0e3") {     // erster Gang
+        } else if (eventKey == "0e3") {
+        // erster Gang
             showText (textL1[22], activeChar, textL1[23]);
-        } else if (eventKey == "e4" && eventReminder.e4 != true) {  // nach dem öffnen der zweiten Türe in den Hauptraum
+        } else if (eventKey == "e4" && eventReminder.e4 != true) {
+        // nach dem öffnen der zweiten Türe in den Hauptraum
             eventReminder.e4 = true;
             showText (textL1[38], figuresOnMap[figuresOnMap.length - 2], textL1Enemy[1]);
-        } else if (eventKey == "6e5") {     // zweiter Gang
+        } else if (eventKey == "6e5") {
+        // zweiter Gang
             showText (textL1[22], activeChar, textL1[23]);
-        } else if (eventKey == "6e6" && eventReminder.e6 != true) { // vor dem Bosskampf
+        } else if (eventKey == "6e6" && eventReminder.e6 != true) {
+        // vor dem Bosskampf
             eventReminder.e6 = true;
             showText(textL1[43], mage, textL1[44]);
-        } else if (eventKey == "e7") {  // Statuette wird zerstört
+        } else if (eventKey == "e7") {
+        // Statuette wird zerstört
             addXP (20);
             idol1Img.setAlpha(1);
             eventReminder.e7 = true;
@@ -266,9 +273,11 @@
                     figuresOnMap[i].specialAttack.name.push("darkness");
                 }
             }
-        } else if (eventKey == "e8") {  // ende von Level 1
+        } else if (eventKey == "e8") {
+        // ende von Level 1
             showText (textL1[15]);
-        } else if (eventKey == "7e9") { // Kristall im See
+        } else if (eventKey == "7e9") {
+        // Kristall im See
             if (fightmode == true) {
                 showText ("", activeChar, textL1[42]);
             } else {
@@ -289,8 +298,6 @@
                     addXP(12);
                 }
             }
-        } else if (eventKey == "e10") {
-            
         }
     }
     

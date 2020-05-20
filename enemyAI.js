@@ -176,7 +176,14 @@ function enemyPlanMove (enemy) {
     } else if (neighborIndexes.includes(barb.onTile)) {
         actionStack.push("attack", barb);
     } else if (neighborIndexes.includes(rogue.onTile)) {
-        actionStack.push("attack", rogue);
+        rogue.checkStealth();
+        if (rogue.skills.stealth.active == false) {
+            actionStack.push("attack", rogue);
+        } else if (neighborIndexes.includes(mage.onTile)) {
+            actionStack.push("attack", mage);
+        } else {
+            actionStack.push("wait", null);
+        }
     } else if (neighborIndexes.includes(mage.onTile)) {
         actionStack.push("attack", mage);
     } else {
