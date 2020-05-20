@@ -21,7 +21,7 @@ function enemyPlanMove (enemy) {
     
     // das Opfer der Wahl wird definiert
     for (var i = 0; i < figuresOnMap.length; i++) {
-        if (figuresOnMap[i] instanceof Figure && figuresOnMap[i].health > 0 && figuresOnMap[i].stealth == false) {
+        if (figuresOnMap[i] instanceof Figure && figuresOnMap[i].health > 0 && figuresOnMap[i].skills.stealth.active == false) {
             
             tileArray[figuresOnMap[i].onTile].checkForNeighbors();
             let neighborsCopy = [...tileArray[figuresOnMap[i].onTile].neighbors];

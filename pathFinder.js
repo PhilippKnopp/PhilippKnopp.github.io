@@ -4,7 +4,9 @@
 
 
 function calculatePath (startIndex, endIndex, onlyMeasure = false) {
-    // startIndex soll der Index im TileArray sein, endIndex soll der Index im TileArray sein
+    // startIndex ist der Index im TileArray von dem der Pfad startet
+    // endIndex ist der Index im TileArray zu dem der Pfad geht
+    // onlyMeasure = true begrenzt den Pfad nicht auf die maximale Bewegungsweite während einem Kampf
     
     var mappedList = [];
     var frontierList = [];

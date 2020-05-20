@@ -8,7 +8,6 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.hasActed = false;
         this.dieSize;
         this.explodes = false;
-        this.stealth = false;
         this.health;
         this.fullHealth;
         this.movement = 6;
@@ -19,6 +18,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.pathToTravel = [];
         this.def = 4;
         this.description;
+        this.skills = {stealth: {trained: false, active: false}, swim = false};
         
         this.setInteractive();
         this.on("pointerup", this.activateFigure, this);
@@ -96,7 +96,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.movementCounter -= 6;
             }
             
-            if (attackButton.mode == "planning cc" && this.stealth == true) { // hinterhältiger Angriff
+            if (attackButton.mode == "planning cc" && this.skills.stealth.active == true) { // hinterhältiger Angriff
                 let attackroll = getRandomInt(this.dieSize, this.explodes) + getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {
                     enemy.health -= attackroll;
@@ -104,7 +104,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 } else {
                     melee_misses[getRandomInt(melee_misses.length, false)-1].play();
                 }
-                this.stealth = false;
+                this.skills.stealth.active = false;
                 this.setAlpha(1);
                 enemyVisibility();
                 checkFightmode();
@@ -131,7 +131,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 movementTween.restart();
             } else {
                 moveButton.mode = "none";
-                if (this == rogue && this.stealth == true) {
+                if (this.skills.stealth.active == true) {
                     this.checkStealth();
                 }
                 showActions(this);
@@ -158,8 +158,8 @@ class Figure extends Phaser.GameObjects.Sprite {
             this.setFrame(1);
             activeChar = this;
             
-            if (this == rogue && (this.checkIfHidden() == true || this.stealth == true)) {
-                this.stealth = true;
+            if ((this.skills.stealth.trained && this.checkIfHidden()) || this.skills.stealth.active == true) {
+                this.skills.stealth.active = true;
                 this.setAlpha(0.5);
             }
             
@@ -207,7 +207,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         let stealthRoll = getRandomInt(this.dieSize, false);
         let highestEnemyDef = Math.max(...enemyDefs);
         if (stealthRoll < highestEnemyDef) {
-            this.stealth = false;
+            this.skills.stealth.active = false;
             this.setAlpha(1);
         }
         enemyVisibility();
@@ -259,10 +259,6 @@ function showActions(_this) {
     if (fightmode == true && (_this.actionsCounter == 0 && (_this.movementCounter) < 1 )) {
         completeTurn(_this);    // beendet Zug für diese Heldin und checkt ob dadurch der Zug für alle beendet ist
         return;
-    }
-    
-    if (_this == rogue && fightmode == false) {
-        _this.stealth == true;
     }
     
     hideActions();
@@ -361,7 +357,7 @@ function showActions(_this) {
         case rogue:
             faceButton.setFrame(1);
             doorButton.setFrame(1);
-            if (_this.stealth == true) {
+            if (_this.skills.stealth.active == true) {
                 moveButton.setFrame(3);
             } else {
                 moveButton.setFrame(1);
