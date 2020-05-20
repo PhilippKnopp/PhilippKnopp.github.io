@@ -223,7 +223,7 @@ function doors(char, tile) {
             tileArray[341].state = "0do";
             tileArray[342].state = "0do";
             door1Img.setAlpha(1);
-            eventDispatch(char, "e2");
+            eventDispatch("e2");
             tileArray[315].walkable = [0,1,1,1,1,1,0,0];
             tileArray[316].walkable = [1,1,1,1,1,1,1,1];
             tileArray[317].walkable = [1,1,0,0,0,1,1,1];
@@ -248,7 +248,7 @@ function doors(char, tile) {
             tileArray[591].state = "0do";
             tileArray[592].state = "0do";
             door2Img.setAlpha(1);
-            eventDispatch(char, "e4");
+            eventDispatch("e4");
             tileArray[565].walkable = [0,1,1,1,1,1,0,0];
             tileArray[566].walkable = [1,1,1,1,1,1,1,1];
             tileArray[567].walkable = [1,1,0,0,0,1,1,1];

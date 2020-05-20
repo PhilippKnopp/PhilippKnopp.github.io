@@ -51,7 +51,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             checkFightmode();
             // tileVisibility();
             if (typeof tileArray[this.onTile].state === 'string') {
-                eventDispatch(this, tileArray[this.onTile].state);
+                eventDispatch(tileArray[this.onTile].state);
             };
         };
         
@@ -160,7 +160,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             this.setFrame(1);
             activeChar = this;
             
-            if ((this.skills.stealth.trained && this.checkIfHidden()) || this.skills.stealth.active == true) {
+            if (this.skills.stealth.trained && this.checkIfHidden()) {
                 this.skills.stealth.active = true;
                 this.setAlpha(0.5);
             }

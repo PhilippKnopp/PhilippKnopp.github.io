@@ -218,7 +218,7 @@ class SceneGame extends Phaser.Scene {
                         for (let i = 0; i < this.neighbors.length; i++) {
                             if (this.neighbors[i].name == activeChar.onTile) {
                                 this.occupiedBy = "";
-                                eventDispatch (activeChar, "e7");
+                                eventDispatch ("e7");
                             }
                         }
                         this.neighbors.length = 0;
@@ -227,7 +227,7 @@ class SceneGame extends Phaser.Scene {
                     } else if (attackButton.mode == "planning rc" && this.occupiedBy == "idol") {
                         if (lineOfSight (activeChar.onTile, this.name) == true) {
                             this.occupiedBy = "";
-                            eventDispatch (activeChar, "e7");
+                            eventDispatch ("e7");
                         }
                         returnCursorToNormal();
                         showActions(activeChar);
