@@ -278,6 +278,13 @@ class SceneGame extends Phaser.Scene {
                                     difficulty = tileArray[path.first[i]].walkable[7];
                                 }
                             }
+                            
+                            // Wer gut schwimmen kann, kann sich in tiefem Wasserr leicht bewegen
+                            if (tileArray[path.first[i]].state == 7 && activeChar.skills.swim == true) {
+                                difficulty = 1;
+                            }
+                            
+                            // Tile-Frame wird entsprechend der Schwierigkeit des Geländes eingestellt
                             if (difficulty == 1) {
                                 tileArray[path.first[i]].setFrame(1);
                             } else if (difficulty == 2) {
@@ -336,7 +343,7 @@ class SceneGame extends Phaser.Scene {
                         // Felder mit tiefem Wasser werden leicht begehbar für gute Schwimmer
                         if (activeChar instanceof Figure) {
                             if (this.neighbors[i].state == 7 && activeChar.skills.swim == true) {
-                                this.neighborsDistance[i] == 1;
+                                this.neighborsDistance[i] = this.neighborsDistance[i]/3;
                             }
                         }
                         // Macht Felder schwerer begehbar, wenn jemand darauf steht
