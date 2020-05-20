@@ -18,7 +18,9 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.pathToTravel = [];
         this.def = 4;
         this.description;
-        this.skills = {stealth: {trained: false, active: false}, swim = false};
+        this.skills = {stealth: { trained: false, active: false },
+                       swim:    false
+                      };
         
         this.setInteractive();
         this.on("pointerup", this.activateFigure, this);

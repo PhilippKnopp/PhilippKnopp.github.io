@@ -449,6 +449,8 @@ class SceneGame extends Phaser.Scene {
         rogue.name = "Leng";
         rogue.color = "#003F5E";
         rogue.description = 2;
+        rogue.skills.stealth.trained = true;
+        rogue.skills.swim = true;
         figuresOnMap.push(rogue);
         
         mage = new Figure ({scene:this, x:20, y:20}, 'mageSprite');
