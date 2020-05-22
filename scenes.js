@@ -6,7 +6,6 @@ class SceneTitle extends Phaser.Scene {
 
     preload () {
         this.load.image('title', 'img/Screen_Title.png');
-        console.log(this);
         this.load.image('bAction', 'img/bAction.png');
         this.load.image('rAction', 'img/rAction.png');
         this.load.image('mAction', 'img/mAction.png');
@@ -222,7 +221,7 @@ class SceneGame extends Phaser.Scene {
                         for (let i = 0; i < this.neighbors.length; i++) {
                             if (this.neighbors[i].name == activeChar.onTile) {
                                 this.occupiedBy = "";
-                                eventDispatch (activeChar, "e7");
+                                eventDispatch ("e7");
                             }
                         }
                         this.neighbors.length = 0;
@@ -231,15 +230,18 @@ class SceneGame extends Phaser.Scene {
                     } else if (attackButton.mode == "planning rc" && this.occupiedBy == "idol") {
                         if (lineOfSight (activeChar.onTile, this.name) == true) {
                             this.occupiedBy = "";
-                            eventDispatch (activeChar, "e7");
+                            eventDispatch ("e7");
                         }
                         returnCursorToNormal();
                         showActions(activeChar);
                     }
 				});
                 tile.on("pointerover", function pointerOver () {
-                    if (moveButton.mode == "planning" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol" && fightmode == true) {
+                    // Soll beim Hovern über einer Tile in der Bewegungs-Planung der Pfad dorthin gezeigt werden?
+                    if (moveButton.mode == "planning" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol" /*&& fightmode == true*/) {
+                        // Berechnet Pfad den die Heldin hier her laufen würde
                         let path = calculatePath(activeChar.onTile, this.name);
+                        // Färbt Pfad entsprechend der Schwierigkeit des Terrains ein
                         for (var i = 0; i < path.first.length; i++) {
                             let difficulty;
                             if (i == 0) {
@@ -279,6 +281,13 @@ class SceneGame extends Phaser.Scene {
                                     difficulty = tileArray[path.first[i]].walkable[7];
                                 }
                             }
+                            
+                            // Wer gut schwimmen kann, kann sich in tiefem Wasserr leicht bewegen
+                            if ((tileArray[path.first[i]].state == 7 || tileArray[path.first[i]].state == "7e9") && activeChar.skills.swim == true) {
+                                difficulty = 1;
+                            }
+                            
+                            // Tile-Frame wird entsprechend der Schwierigkeit des Geländes eingestellt
                             if (difficulty == 1) {
                                 tileArray[path.first[i]].setFrame(1);
                             } else if (difficulty == 2) {
@@ -298,63 +307,53 @@ class SceneGame extends Phaser.Scene {
                 });
 				tile.neighbors = [];
 				tile.neighborsDistance = [];
+                // Sammelt Informationen über alle Nachbarfelder
 				tile.checkForNeighbors = function () {
 					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != 0 && tileArray[this.name-1-matrixWidth].walkable[4] != 0) {
 						this.neighbors.push(tileArray[this.name-1-matrixWidth]);
 						this.neighborsDistance.push(1.5*tileArray[this.name-1-matrixWidth].walkable[4]);
-                        if (this.neighbors[this.neighbors.length-1].occupiedBy != "") {
-                            this.neighborsDistance[this.neighborsDistance.length-1] += 1;
-                        }
-					};
+					}
 					if (this.name-matrixWidth >= 0 && tileArray[this.name-matrixWidth].walkable[5] != 0) {
 						this.neighbors.push(tileArray[this.name-matrixWidth]);
 						this.neighborsDistance.push(1*tileArray[this.name-matrixWidth].walkable[5]);
-                        if (this.neighbors[this.neighbors.length-1].occupiedBy != "") {
-                            this.neighborsDistance[this.neighborsDistance.length-1] += 1;
-                        }
-					};
+					}
 					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name-matrixWidth+1].walkable[6] != 0) {
 						this.neighbors.push(tileArray[this.name-matrixWidth+1]);
 						this.neighborsDistance.push(1.5*tileArray[this.name-matrixWidth+1].walkable[6]);
-                        if (this.neighbors[this.neighbors.length-1].occupiedBy != "") {
-                            this.neighborsDistance[this.neighborsDistance.length-1] += 1;
-                        }
-					};
+					}
 					if (this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name+1].walkable[7] != 0) {
 						this.neighbors.push(tileArray[this.name+1]);
 						this.neighborsDistance.push(1*tileArray[this.name+1].walkable[7]);
-                        if (this.neighbors[this.neighbors.length-1].occupiedBy != "") {
-                            this.neighborsDistance[this.neighborsDistance.length-1] += 1;
-                        }
-					};
+					}
 					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name+1+matrixWidth].walkable[0] != 0) {
 						this.neighbors.push(tileArray[this.name+1+matrixWidth]);
 						this.neighborsDistance.push(1.5*tileArray[this.name+1+matrixWidth].walkable[0]);
-                        if (this.neighbors[this.neighbors.length-1].occupiedBy != "") {
-                            this.neighborsDistance[this.neighborsDistance.length-1] += 1;
-                        }
-					};
+					}
 					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && tileArray[this.name+matrixWidth].walkable[1] != 0) {
 						this.neighbors.push(tileArray[this.name+matrixWidth]);
 						this.neighborsDistance.push(1*tileArray[this.name+matrixWidth].walkable[1]);
-                        if (this.neighbors[this.neighbors.length-1].occupiedBy != "") {
-                            this.neighborsDistance[this.neighborsDistance.length-1] += 1;
-                        }
-					};
+					}
 					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && this.name%matrixWidth != 0 && tileArray[this.name-1+matrixWidth].walkable[2] != 0) {
 						this.neighbors.push(tileArray[this.name-1+matrixWidth]);
 						this.neighborsDistance.push(1.5*tileArray[this.name-1+matrixWidth].walkable[2]);
-                        if (this.neighbors[this.neighbors.length-1].occupiedBy != "") {
-                            this.neighborsDistance[this.neighborsDistance.length-1] += 1;
-                        }
-					};
+					}
 					if (this.name%matrixWidth != 0 && tileArray[this.name-1].walkable[3] != 0) {
 						this.neighbors.push(tileArray[this.name-1]);
 						this.neighborsDistance.push(1*tileArray[this.name-1].walkable[3]);
-                        if (this.neighbors[this.neighbors.length-1].occupiedBy != "") {
-                            this.neighborsDistance[this.neighborsDistance.length-1] += 1;
-                        }
 					}
+                    // verändert Distanzen zu Nachbarfeldern je nach Spielsituation
+                    for (let i = 0; i < this.neighbors.length; i++) {
+                        // Felder mit tiefem Wasser werden leicht begehbar für gute Schwimmer
+                        if (activeChar instanceof Figure) {
+                            if ((this.neighbors[i].state == 7 || this.neighbors[i].state == "7e9") && activeChar.skills.swim == true) {
+                                this.neighborsDistance[i] = this.neighborsDistance[i]/3;
+                            }
+                        }
+                        // Macht Felder schwerer begehbar, wenn jemand darauf steht
+                        if (this.neighbors[i].occupiedBy != "") {
+                            this.neighborsDistance[i] += 1;
+                        }
+                    }
 				}
 				tile.estimatedWayToB = function (b) {
                     let a = this.name;
@@ -460,6 +459,8 @@ class SceneGame extends Phaser.Scene {
         rogue.name = "Leng";
         rogue.color = "#003F5E";
         rogue.description = 2;
+        rogue.skills.stealth.trained = true;
+        rogue.skills.swim = true;
         figuresOnMap.push(rogue);
         
         mage = new Figure ({scene:this, x:20, y:20}, 'mageSprite');

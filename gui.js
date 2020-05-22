@@ -132,7 +132,7 @@ function guiBuilder(_this) {
     rActionIcon = _this.add.sprite(1322, 748, 'rAction');
     mActionIcon = _this.add.sprite(1322, 878, 'mAction');
     
-    gameModeText = _this.add.text(1097, 475, "Exploration", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    xpText = _this.add.text(1428, 475, xp, { fontFamily: "Verdana" , color: '#FFFFFF'});
+    gameModeText = _this.add.text(1097, 476, "Exploration", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    xpText = _this.add.text(1428, 476, xp, { fontFamily: "Verdana" , color: '#FFFFFF'});
     
 }
