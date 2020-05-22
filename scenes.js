@@ -7,12 +7,12 @@ class SceneTitle extends Phaser.Scene {
     // Funktion die alle Bilder lädt
     preload () {
         
-        let progressBar = this.add.graphics();
+        let progressBar = this.add.graphics().setOrigin( 0.5, 0.5);
         
         this.load.on('progress', function (value) {
             progressBar.clear();
-            progressBar.fillStyle("#003F5E", 1);
-            progressBar.fillRect(960, 540, 700 * value, 8);
+            progressBar.fillStyle(0x003F5E, 1);
+            progressBar.fillRect(960, 540, 600 * value, 7);
         });
         
         this.load.on('complete', function () {
