@@ -318,6 +318,12 @@
         }
     }
     
+    function updateGUI () {
+        bActionIcon.setAlpha(barb.actionsCounter);
+        rActionIcon.setAlpha(rogue.actionsCounter);
+        mActionIcon.setAlpha(mage.actionsCounter);
+    }
+    
     function checkFightmode() { 
         let alarmedEnemies = 0;
         for (var i = 0; i < figuresOnMap.length; i++) {

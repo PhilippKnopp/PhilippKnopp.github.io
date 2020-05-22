@@ -61,6 +61,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             } else if (this.actionsCounter == 0 && this.movementCounter >= 6 && rangedDamage[0] == 0) {
                 this.movementCounter -= 6;
             }
+            updateGUI();
             
             if (rangedDamage[0] == 0) {
                 rangedDamage[0] = getRandomInt(this.dieSize, this.explodes);
@@ -97,6 +98,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             } else if (this.actionsCounter == 0 && this.movementCounter >= 6) {
                 this.movementCounter -= 6;
             }
+            updateGUI();
             
             if (attackButton.mode == "planning cc" && this.skills.stealth.active == true) { // hinterhältiger Angriff
                 let attackroll = getRandomInt(this.dieSize, this.explodes) + getRandomInt(this.dieSize, this.explodes);
@@ -422,4 +424,5 @@ function replenishActions() {
     rogue.movementCounter = rogue.movement;
     barb.actionsCounter = barb.actions;
     barb.movementCounter = barb.movement;
+    updateGUI();
 }
