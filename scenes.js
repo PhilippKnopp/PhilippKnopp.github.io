@@ -7,9 +7,9 @@ class SceneTitle extends Phaser.Scene {
     // Funktion die alle Bilder lädt
     preload () {
         
-        this.load.image('preload', 'img/screen_Preload.png');
+        this.load.image('preload', 'img/Screen_Preload.png');
         let progressBar = this.add.graphics();
-        var progressScreen = this.add.image(960, 540, 'preload');
+        let progressScreen = this.add.image(960, 540, 'preload');
         
         this.load.on('progress', function (value) {
             progressBar.clear();
