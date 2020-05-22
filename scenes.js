@@ -1,14 +1,69 @@
 class SceneTitle extends Phaser.Scene {
-
+    
     constructor () {
         super({ key: 'sceneTitle' });
     }
-
+    
+    // Funktion die alle Bilder lädt
     preload () {
+        
+        // sceneTitle
         this.load.image('title', 'img/Screen_Title.png');
+        
+        // sceneTravel_1
+        this.load.image('screen_travel_1', 'img/Screen_Travel_1.png');
+        
+        // sceneGameOver
+        this.load.image('gameOver', 'img/Screen_GameOver.png');
+        
+        // sceneGame
+        this.load.image('map-lvl-1', 'img/map-lvl-1.png');
+        this.load.image('crystal1', 'img/crystal1.png');
+        this.load.image('door1', 'img/door1.png');
+        this.load.image('door2', 'img/door2.png');
+        this.load.image('door4', 'img/door4.png');
+        this.load.image('door5', 'img/door5.png');
+        this.load.image('door6', 'img/door6.png');
+        this.load.image('circle1', 'img/circle1.png');
+        this.load.image('idol1', 'img/idol1.png');
+        this.load.image('gui', 'img/GUI.png');
         this.load.image('bAction', 'img/bAction.png');
         this.load.image('rAction', 'img/rAction.png');
         this.load.image('mAction', 'img/mAction.png');
+        this.load.spritesheet('trap1Sprite', 'img/trap1.png', { frameWidth: 79, frameHeight: 78 });
+        
+        this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 26, frameHeight: 26 });
+        
+        this.load.spritesheet('mageSprite', 'img/mToken.png', { frameWidth: 26, frameHeight: 26 });
+        this.load.spritesheet('rogueSprite', 'img/rToken.png', { frameWidth: 26, frameHeight: 26 });
+        this.load.spritesheet('barbSprite', 'img/bToken.png', { frameWidth: 26, frameHeight: 26 });
+        this.load.spritesheet('e1Sprite', 'img/e1Token.png', { frameWidth: 26, frameHeight: 26 });
+        this.load.spritesheet('e2Sprite', 'img/e2Token.png', { frameWidth: 26, frameHeight: 26 });
+        this.load.spritesheet('e3Sprite', 'img/e3Token.png', { frameWidth: 26, frameHeight: 26 });
+        this.load.spritesheet('e4Sprite', 'img/e4Token.png', { frameWidth: 26, frameHeight: 26 });
+        this.load.spritesheet('swirSprite', 'img/swirl.png', { frameWidth: 52, frameHeight: 52 });
+        
+        this.load.spritesheet('doorSprite', 'img/door.png', { frameWidth: 65, frameHeight: 65 });
+        this.load.spritesheet('moveSprite', 'img/move.png', { frameWidth: 65, frameHeight: 65 });
+        this.load.spritesheet('attackSprite', 'img/attack.png', { frameWidth: 65, frameHeight: 65 });
+        this.load.spritesheet('searchSprite', 'img/search.png', { frameWidth: 65, frameHeight: 65 });
+        this.load.spritesheet('cancelSprite', 'img/cancel.png', { frameWidth: 65, frameHeight: 65 });
+        this.load.spritesheet('specialSprite', 'img/special.png', { frameWidth: 65, frameHeight: 65 });
+        this.load.spritesheet('faceSprite', 'img/face.png', { frameWidth: 86, frameHeight: 85 });
+        this.load.spritesheet('enemyHealthSprite', 'img/enemyHealthBar.png', { frameWidth: 101, frameHeight: 101 });
+        this.load.spritesheet('textBackSprite', 'img/textBack.png', { frameWidth: 84, frameHeight: 46 });
+        this.load.spritesheet('textForwardSprite', 'img/textForward.png', { frameWidth: 84, frameHeight: 46 });
+        this.load.spritesheet('textNewSprite', 'img/textNew.png', { frameWidth: 84, frameHeight: 46 });
+        this.load.spritesheet('gameModeSprite', 'img/mode.png', { frameWidth: 86, frameHeight: 86 });
+        this.load.spritesheet('xpSprite', 'img/xp.png', { frameWidth: 86, frameHeight: 86 });
+        
+        this.load.audio("lvl_1_BG_Music", ["sound/lvl1_BG.mp3","sound/lvl1_BG.ogg"]);
+        this.load.audio("melee_hit_1_sound", ["sound/sword_1_sound.mp3","sound/sword_1_sound.ogg"]);
+        this.load.audio("melee_hit_2_sound", ["sound/sword_2_sound.mp3","sound/sword_2_sound.ogg"]);
+        this.load.audio("melee_hit_3_sound", ["sound/sword_3_sound.mp3","sound/sword_3_sound.ogg"]);
+        this.load.audio("melee_hit_4_sound", ["sound/sword_4_sound.mp3","sound/sword_4_sound.ogg"]);
+        this.load.audio("melee_miss_1_sound", ["sound/sword_5_sound.mp3","sound/sword_5_sound.ogg"]);
+        this.load.audio("melee_miss_2_sound", ["sound/sword_6_sound.mp3","sound/sword_6_sound.ogg"]);
     }
 
     create () {
@@ -32,9 +87,9 @@ class SceneTravel_1 extends Phaser.Scene {
         super({ key: 'sceneTravel_1' });
     }
 
-    preload () {
+    /*preload () {
         this.load.image('screen_travel_1', 'img/Screen_Travel_1.png');
-    }
+    }*/
 
     create () {
         
@@ -57,9 +112,9 @@ class SceneGameOver extends Phaser.Scene {
         super({ key: 'sceneGameOver' });
     }
 
-    preload () {
+    /*preload () {
         this.load.image('gameOver', 'img/Screen_GameOver.png');
-    }
+    }*/
 
     create () {
         var gameOver = this.add.image(960, 540, 'gameOver');
@@ -78,7 +133,7 @@ class SceneGame extends Phaser.Scene {
         super({ key: 'sceneGame' });
     }
     
-    // Funktion die alle Bilder lädt
+   /* // Funktion die alle Bilder lädt
     preload() {
         this.load.image('map-lvl-1', 'img/map-lvl-1.png');
         this.load.image('crystal1', 'img/crystal1.png');
@@ -124,7 +179,7 @@ class SceneGame extends Phaser.Scene {
         this.load.audio("melee_hit_4_sound", ["sound/sword_4_sound.mp3","sound/sword_4_sound.ogg"]);
         this.load.audio("melee_miss_1_sound", ["sound/sword_5_sound.mp3","sound/sword_5_sound.ogg"]);
         this.load.audio("melee_miss_2_sound", ["sound/sword_6_sound.mp3","sound/sword_6_sound.ogg"]);
-	}
+	}*/
 
     // Funktion die alle Sachen erstellt
 	create() {
