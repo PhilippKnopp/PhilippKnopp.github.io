@@ -165,6 +165,8 @@ function trap1(victim) {
     tileArray[487].state = 0;
     tileArray[488].state = 0;
     victim.pathToTravel.push(victim.onTile-2);
+    victim.health -= getRandomInt(6);
+    victim.checkHealth();
 }
 
 function disableTrap1() {
