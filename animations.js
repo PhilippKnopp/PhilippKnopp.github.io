@@ -7,7 +7,7 @@ function createMovementTweens(_this) {
         targets: movementMarker,
         x: { value: function () {
             if (activeChar != null) {
-                console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Tween is doing something");
+                console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Tween is updated!");
                 return tileArray[activeChar.pathToTravel[0]].x;
             } else {
                 return 0;
