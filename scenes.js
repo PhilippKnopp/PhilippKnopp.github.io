@@ -526,7 +526,9 @@ class SceneGame extends Phaser.Scene {
         // Plane Bewegung
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
-        } else if (movementTween.isPlaying() == true) {
+        }
+        
+        if (movementTween.isPlaying() == true) {
         // ziehe Token während Bewegung mit
             activeChar.x = movementMarker.x;
             activeChar.y = movementMarker.y;
