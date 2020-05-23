@@ -151,9 +151,9 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.movement = 3;
                 this.actions = 0;
                 this.health = 0;
-                updateGUI();
                 enemyVisibility();
             }
+            updateGUI();
         }
         
     }
