@@ -34,6 +34,26 @@ class Figure extends Phaser.GameObjects.Sprite {
             this.y = tileArray[this.onTile].y;
         };
         
+        this.moveNow = function () {
+            console.log("XXXXXXXXXXXXXXXXXXXXXXXX Held Move Now");
+            console.log(this.pathToTravel);
+            if (this.pathToTravel.length > 0) {
+                let path = calculatePath (this.onTile, this.pathToTravel[0]);
+                this.movementCounter -= path.second;
+                updateGUI();
+                movementMarker.x = this.x;
+                movementMarker.y = this.y;
+                movementTween.data[0].start = this.x;
+                movementTween.data[1].start = this.y;
+                movementTween.restart();
+            } else {
+                if (this.skills.stealth.active == true) {
+                    this.checkStealth();
+                }
+                showActions(this);
+            }
+        }
+        
         this.enterTile = function () {
             console.log("XXXXXXXXXXXXXXXXXXXXXXXX Held Enter Tile");
             let changeTileOccupation = true;
@@ -53,8 +73,8 @@ class Figure extends Phaser.GameObjects.Sprite {
             // tileVisibility();
             if (typeof tileArray[this.onTile].state === 'string') {
                 eventDispatch(tileArray[this.onTile].state);
-            };
-        };
+            }
+        }
         
         this.rangedAttack = function (enemy) {
             if (this.actionsCounter > 0) {
@@ -125,25 +145,6 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             returnCursorToNormal();
             showActions(this);
-        }
-        
-        this.moveNow = function () {
-            console.log("XXXXXXXXXXXXXXXXXXXXXXXX Held Move Now");
-            if (this.pathToTravel.length > 0) {
-                let path = calculatePath (this.onTile, this.pathToTravel[0]);
-                this.movementCounter -= path.second;
-                updateGUI();
-                movementMarker.x = this.x;
-                movementMarker.y = this.y;
-                movementTween.data[0].start = this.x;
-                movementTween.data[1].start = this.y;
-                movementTween.restart();
-            } else {
-                if (this.skills.stealth.active == true) {
-                    this.checkStealth();
-                }
-                showActions(this);
-            }
         }
         
         this.checkHealth = function () {
