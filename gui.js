@@ -134,11 +134,11 @@ function guiBuilder(_this) {
     
     gameModeText = _this.add.text(1097, 476, "Exploration", { fontFamily: "Verdana" , color: '#FFFFFF'});
     xpText = _this.add.text(1428, 476, xp, { fontFamily: "Verdana" , color: '#FFFFFF'});
-    bHpText = _this.add.text(1100, 600, "12//12", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    rHpText = _this.add.text(1110, 710, "8//8", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    mHpText = _this.add.text(1120, 820, "4//4", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    bMovementText = _this.add.text(1120, 605, "6//6", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    rMovementText = _this.add.text(1130, 700, "6//6", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    mMovementText = _this.add.text(1140, 825, "6//6", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    bHpText = _this.add.text(1106, 590, "12//12", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    rHpText = _this.add.text(1106, 730, "8//8", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    mHpText = _this.add.text(1106, 870, "4//4", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    bMovementText = _this.add.text(1140, 625, "6//6", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    rMovementText = _this.add.text(1140, 765, "6//6", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    mMovementText = _this.add.text(1140, 905, "6//6", { fontFamily: "Verdana" , color: '#FFFFFF'});
     
 }
