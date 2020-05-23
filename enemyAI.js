@@ -182,10 +182,12 @@ function enemyPlanMove (enemy) {
             
             // Distanz zum möglichen Platz der Wahl wird als Basis-Auswahlkriterium genommen
             placeRanking.push(path.second);
+            console.log(placeRanking);
             
             // ersetzt den aktuellen Wunschort durch einen potenziell besseren
             if (placeOfChoice == undefined || Math.min(...placeRanking) == placeRanking[i]) {
                 placeOfChoice = neighborsCopy[i].name;
+                console.log(placeOfChoice);
             }
         }
         
