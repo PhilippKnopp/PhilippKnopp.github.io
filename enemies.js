@@ -65,7 +65,6 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 specialAttack(this, this.specialAttack.name[this.specialAttack.roll.findIndex((element) => element == attackroll)]);
             } else if (attackroll >= heroine.def) {
                 heroine.health -= damageroll;
-                console.log("attack: " + attackroll + ";  damage: " + damageroll + ";  hero: " + heroine.health);
             }
             
             heroine.checkHealth();

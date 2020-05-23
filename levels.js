@@ -180,6 +180,7 @@ function trap1(victim) {
 function disableTrap1() {
     if (getRandomInt(activeChar.dieSize, activeChar.explodes) <= 3) {
         activeChar.health -= 1;
+        activeChar.checkHealth();
         if (activeChar == rogue) {
             showText(textL1[32], activeChar, textL1[33]);
         } else if (activeChar == mage) {

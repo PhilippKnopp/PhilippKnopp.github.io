@@ -198,9 +198,9 @@ class SceneGame extends Phaser.Scene {
                             showText("", activeChar, textL1[18]);
                         }
                         activeChar.pathToTravel = path.first;
-                        if (fightmode == true) {
+                        /*if (fightmode == true) {
                             activeChar.movementCounter -= path.second;
-                        }
+                        }*/
                         returnCursorToNormal();
                         moveButton.mode = "moving";
                         for (var i = 0; i < tileArray.length; i++) {
@@ -550,7 +550,6 @@ class SceneGame extends Phaser.Scene {
                     figuresOnMap[i].hasActed = true;
                     if (eventReminder.e7 == true && figuresOnMap[i].name == "Ordrak" && figuresOnMap[i].health < figuresOnMap[i].fullHealth) {
                         figuresOnMap[i].health += 1;
-                        console.log("Ordrak heals through Idol");
                     }
                     break;
                 } else if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].pathToTravel.length > 0) {

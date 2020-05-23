@@ -128,6 +128,9 @@ class Figure extends Phaser.GameObjects.Sprite {
         
         this.moveNow = function () {
             if (this.pathToTravel.length > 0) {
+                let path = calculatePath (this.onTile, this.pathToTravel[0]);
+                this.movementCounter -= path.second;
+                updateGUI();
                 movementMarker.x = this.x;
                 movementMarker.y = this.y;
                 movementTween.data[0].start = this.x;
@@ -147,6 +150,8 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.setAlpha(0.2);
                 this.movement = 3;
                 this.actions = 0;
+                this.health = 0;
+                updateGUI();
                 enemyVisibility();
             }
         }

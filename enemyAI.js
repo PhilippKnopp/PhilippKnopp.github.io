@@ -173,18 +173,18 @@ function enemyPlanMove (enemy) {
     clearNodes();
     if (victimOfChoice != undefined && neighborIndexes.includes(victimOfChoice.onTile)) {
         actionStack.push("attack", victimOfChoice);
-    } else if (neighborIndexes.includes(barb.onTile) && barb.health >= 0) {
+    } else if (neighborIndexes.includes(barb.onTile) && barb.health > 0) {
         actionStack.push("attack", barb);
-    } else if (neighborIndexes.includes(rogue.onTile) && rogue.health >= 0) {
+    } else if (neighborIndexes.includes(rogue.onTile) && rogue.health > 0) {
         rogue.checkStealth();
         if (rogue.skills.stealth.active == false) {
             actionStack.push("attack", rogue);
-        } else if (neighborIndexes.includes(mage.onTile) && mage.health >= 0) {
+        } else if (neighborIndexes.includes(mage.onTile) && mage.health > 0) {
             actionStack.push("attack", mage);
         } else {
             actionStack.push("wait", null);
         }
-    } else if (neighborIndexes.includes(mage.onTile) && mage.health >= 0) {
+    } else if (neighborIndexes.includes(mage.onTile) && mage.health > 0) {
         actionStack.push("attack", mage);
     } else {
         actionStack.push("wait", null);
