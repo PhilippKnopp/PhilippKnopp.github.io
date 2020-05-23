@@ -1,13 +1,15 @@
 class SceneTitle extends Phaser.Scene {
     
     constructor () {
-        super({ key: 'sceneTitle' });
+        super({
+            key: 'sceneTitle',
+            pack: { files: [{ type: 'image', key: 'preload', url: 'img/Screen_Preload.png' }]}
+        });
     }
     
     // Funktion die alle Bilder lädt
     preload () {
         
-        this.load.image('preload', 'img/Screen_Preload.png');
         let progressBar = this.add.graphics();
         let progressScreen = this.add.image(960, 540, 'preload');
         
