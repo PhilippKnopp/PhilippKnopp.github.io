@@ -205,6 +205,7 @@ class SceneGame extends Phaser.Scene {
                         for (var i = 0; i < tileArray.length; i++) {
                             tileArray[i].setFrame(0);
                         }
+                        console.log("XXXXXXXXXXXXXXXXXXXXXXXX Bewegung startet Jetzt");
                         activeChar.moveNow();
                     } else if (moveButton.state == 1) {
                     // Bewegung soll starten, aber hierher geht es nicht

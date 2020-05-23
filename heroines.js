@@ -35,6 +35,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         };
         
         this.enterTile = function () {
+            console.log("XXXXXXXXXXXXXXXXXXXXXXXX Held Enter Tile");
             let changeTileOccupation = true;
             for (var i = 0; i < charsStillAlive; i++) {
                 if (figuresOnMap[i].onTile == this.onTile && figuresOnMap[i] != this) {
@@ -127,6 +128,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         this.moveNow = function () {
+            console.log("XXXXXXXXXXXXXXXXXXXXXXXX Held Move Now");
             if (this.pathToTravel.length > 0) {
                 let path = calculatePath (this.onTile, this.pathToTravel[0]);
                 this.movementCounter -= path.second;
