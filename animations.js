@@ -22,6 +22,7 @@ function createMovementTweens(_this) {
         duration: 250,
         ease: 'Sine.easeInOut',
         onComplete: function () {
+            console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onComplete!!");
             if (activeChar != null) {
                 activeChar.enterTile();
                 activeChar.moveNow();
