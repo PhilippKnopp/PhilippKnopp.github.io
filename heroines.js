@@ -137,7 +137,6 @@ class Figure extends Phaser.GameObjects.Sprite {
                 movementTween.data[1].start = this.y;
                 movementTween.restart();
             } else {
-                moveButton.state = 0;
                 if (this.skills.stealth.active == true) {
                     this.checkStealth();
                 }

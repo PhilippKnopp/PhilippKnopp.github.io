@@ -13,7 +13,6 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.movement = 6;
         this.movementCounter = 6;
         this.actionStack =[];
-        this.hasActed = false;
         this.pathToTravel = [];
         this.def;
         this.alarmed = false;
@@ -54,6 +53,16 @@ class Enemy extends Phaser.GameObjects.Sprite {
             };*/
         };
         
+        this.moveNow = function () {
+            if (this.pathToTravel.length > 0) {
+                movementMarker.x = this.x;
+                movementMarker.y = this.y;
+                movementTween.data[0].start = this.x;
+                movementTween.data[1].start = this.y;
+                movementTween.restart();
+            }
+        }
+        
         this.attack = function (heroine) {
             let attackroll = getRandomInt(this.dieSize, this.explodes);
             let damageroll = Math.min(attackroll, getRandomInt(this.dieSize, this.explodes));
@@ -68,14 +77,6 @@ class Enemy extends Phaser.GameObjects.Sprite {
             }
             
             heroine.checkHealth();
-        }
-        
-        this.moveNow = function () {
-            movementMarker.x = this.x;
-            movementMarker.y = this.y;
-            movementTween.data[0].start = this.x;
-            movementTween.data[1].start = this.y;
-            movementTween.restart();
         }
         
         this.checkHealth = function () {

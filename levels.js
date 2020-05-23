@@ -156,7 +156,6 @@ function returnLevelInfo(level) {
 
 function trap1(victim) {
     victim.pathToTravel.length = 0;
-    tileArray[victim.onTile].occupiedBy = "";
     trap1Sprt.setAlpha(1);
     trap1Sprt.setFrame(1);
     tileArray[437].state = 0;
@@ -165,16 +164,7 @@ function trap1(victim) {
     tileArray[463].state = 0;
     tileArray[487].state = 0;
     tileArray[488].state = 0;
-    if (victim.onTile == 437 || victim.onTile == 438) {
-        victim.onTile = 436;
-    } else if (victim.onTile == 462 || victim.onTile == 463) {
-        victim.onTile = 461;
-    } else if (victim.onTile == 487 || victim.onTile == 488) {
-        victim.onTile = 486;
-    }
-    victim.x = tileArray[victim.onTile].x;
-    victim.y = tileArray[victim.onTile].y;
-    tileArray[victim.onTile].occupiedBy = "figure";
+    victim.pathToTravel.push(victim.onTile-2);
 }
 
 function disableTrap1() {

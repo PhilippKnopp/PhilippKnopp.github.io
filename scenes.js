@@ -191,8 +191,8 @@ class SceneGame extends Phaser.Scene {
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
                     
-                    // nichts ist auf der Tile und diese ist von einer Seite aus begehbar
 					if (moveButton.state == 1 && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol") {
+                    // Bewegung soll starten, nichts ist auf der Tile und diese ist von einer Seite aus begehbar
                         let path = calculatePath(activeChar.onTile, this.name);
                         if (path.first.length == 0) {
                             showText("", activeChar, textL1[18]);
@@ -202,11 +202,12 @@ class SceneGame extends Phaser.Scene {
                             activeChar.movementCounter -= path.second;
                         }*/
                         returnCursorToNormal();
-                        moveButton.state = 2;
                         for (var i = 0; i < tileArray.length; i++) {
                             tileArray[i].setFrame(0);
                         }
+                        activeChar.moveNow();
                     } else if (moveButton.state == 1) {
+                    // Bewegung soll starten, aber hierher geht es nicht
                         showText("", activeChar, textL1[17]);
                         for (var i = 0; i < tileArray.length; i++) {
                             tileArray[i].setFrame(0);
@@ -521,11 +522,11 @@ class SceneGame extends Phaser.Scene {
     update () {
         
         if (moveButton.state == 1) {
+        // Plane Bewegung
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
-        } else if (moveButton.state == 2 && movementTween.isPlaying() == false) {
-            activeChar.moveNow();
         } else if (movementTween.isPlaying() == true) {
+        // ziehe Token während Bewegung mit
             activeChar.x = movementMarker.x;
             activeChar.y = movementMarker.y;
             if (activeChar.name == "Ordrak") {
@@ -537,54 +538,15 @@ class SceneGame extends Phaser.Scene {
         }
         
         if (searchButton.state == 1) {
+        // Plane etwas anzusehen
             searchButton.x = this.game.input.activePointer.x + 50;
             searchButton.y = this.game.input.activePointer.y + 50;
         }
             
         if (attackButton.state == 2 || attackButton.state == 1) {
+        // Plane etwas anzugreifen
             attackButton.x = this.game.input.activePointer.x + 50;
             attackButton.y = this.game.input.activePointer.y + 50;
-        }
-        
-        if (enemyTurnActive == true && movementTween.isPlaying() == false) {
-            for (let i = 1; i < figuresOnMap.length; i++) {
-                if (figuresOnMap[i] instanceof Figure) {
-                    continue;
-                    // gehe in nächste Schleife
-                } else if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length == 0 && figuresOnMap[i].hasActed == false) {
-                    figuresOnMap[i].active = true;
-                    figuresOnMap[i].setFrame(1);
-                    activeChar = figuresOnMap[i];
-                    figuresOnMap[i].actionStack = enemyPlanMove(figuresOnMap[i]);
-                    figuresOnMap[i].hasActed = true;
-                    if (eventReminder.e7 == true && figuresOnMap[i].name == "Ordrak" && figuresOnMap[i].health < figuresOnMap[i].fullHealth) {
-                        figuresOnMap[i].health += 1;
-                    }
-                    break;
-                } else if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].pathToTravel.length > 0) {
-                    figuresOnMap[i].moveNow();
-                    break;
-                } else if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length > 0) {
-                    enemyDo(figuresOnMap[i], figuresOnMap[i].actionStack[0], figuresOnMap[i].actionStack[1]);
-                    figuresOnMap[i].active = false;
-                    figuresOnMap[i].setFrame(0);
-                    activeChar = null;
-                    break;
-                } else if (i == figuresOnMap.length-1) {
-                    enemyTurnActive = false;
-                    for (let j = 0; j < figuresOnMap.length; j++) {
-                        figuresOnMap[j].hasActed = false;
-                    }
-                    
-                    // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
-                    replenishActions();
-                    
-                    // Wenn keine der Heldinnen mehr am Leben ist springt das Spiel zur Game-Over-Scene
-                    if (barb.health <= 0 && rogue.health <= 0 && mage.health <= 0) {
-                        this.scene.start('sceneGameOver');
-                    }
-                }
-            }
         }
         
         swirl1.rotation += 0.01;

@@ -24,6 +24,7 @@ function createMovementTweens(_this) {
         onComplete: function () {
             if (activeChar != null) {
                 activeChar.enterTile();
+                activeChar.moveNow();
             }
         },
         onCompleteScope: movementTween

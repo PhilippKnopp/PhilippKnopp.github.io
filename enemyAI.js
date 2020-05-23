@@ -2,10 +2,41 @@
 
 ////////// Bewegt die Gegner in Kampfsituationen //////////////////////////////////////////////////////////
 
+// Steuert nacheinander jeden alarmierten Gegner und beendet den Gegnerischen Zug
+function enemyTurn () {
+    
+    for (let i = 3; i < figuresOnMap.length; i++) {
+        
+        if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length == 0) {
+            figuresOnMap[i].active = true;
+            figuresOnMap[i].setFrame(1);
+            activeChar = figuresOnMap[i];
+            figuresOnMap[i].actionStack = enemyPlanMove(figuresOnMap[i]);
+            console.log("XXXXXXXXXXXXXXXXXXXX Gegner startet Bewegungsphase");
+            figuresOnMap[i].moveNow();
+        }
+        
+        if (figuresOnMap[i].actionStack.length > 0) {
+            console.log("XXXXXXXXXXXXXXXXXXXX Gegner startet Aktionsphase");
+            enemyDo(figuresOnMap[i], figuresOnMap[i].actionStack[0], figuresOnMap[i].actionStack[1]);
+            figuresOnMap[i].active = false;
+            figuresOnMap[i].setFrame(0);
+            activeChar = null;
+        }
+    }
+    
+    // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
+    replenishActions();
+    enemyTurnActive = false;
+    
+    // Wenn keine der Heldinnen mehr am Leben ist springt das Spiel zur Game-Over-Scene
+    if (barb.health <= 0 && rogue.health <= 0 && mage.health <= 0) {
+        this.scene.start('sceneGameOver');
+    }
+    
+}
 
-// Geht alarmierte Gegner durch und startet die Zugplanung für diese.
-// Danach wird der geplante Zug für den Gegner durchgeführt und es wird mit dem nächsten Gegner weitergemacht.
-
+// Plant Zug für einen Gegner
 function enemyPlanMove (enemy) {
     let victimOfChoice;
     let victimRanking = [];
@@ -14,9 +45,13 @@ function enemyPlanMove (enemy) {
     let actionStack = [];
     
     // Spezielle Aktionen für bestimmte Level
-    if (level == 1 && enemy.name == "Pale Priest" && (enemy.onTile == 703 || enemy.onTile == 707 || enemy.onTile == 778 || enemy.onTile == 782 || enemy.onTile == 830) && eventReminder.ritualProgress > 0) {
-        actionStack.push("ritual", null);
-        return actionStack;
+    if (level == 1) {
+        if ( enemy.name == "Pale Priest" && (enemy.onTile == 703 || enemy.onTile == 707 || enemy.onTile == 778 || enemy.onTile == 782 || enemy.onTile == 830) && eventReminder.ritualProgress > 0) {
+            actionStack.push("ritual", null);
+            return actionStack;
+        } else if (enemy.name == "Ordrak" && eventReminder.e7 == true && enemy.health < enemy.fullHealth) {
+            enemy.health += 1;
+        }
     }
     
     // das Opfer der Wahl wird definiert
