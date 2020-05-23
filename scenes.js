@@ -530,9 +530,7 @@ class SceneGame extends Phaser.Scene {
         
         if (moveButton.state == 3 && movementTween.isPlaying() == false) {
             activeChar.moveNow();
-        }
-        
-        if (movementTween.isPlaying() == true) {
+        } else if (movementTween.isPlaying() == true) {
         // ziehe Token während Bewegung mit
             activeChar.x = movementMarker.x;
             activeChar.y = movementMarker.y;

@@ -35,7 +35,6 @@ class Figure extends Phaser.GameObjects.Sprite {
         };
         
         this.moveNow = function () {
-            moveButton.state = 0;
             if (this.pathToTravel.length > 0) {
                 let path = calculatePath (this.onTile, this.pathToTravel[0]);
                 this.movementCounter -= path.second;
@@ -48,6 +47,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 console.log(movementTween);
                 movementTween.restart();
             } else {
+                moveButton.state = 0;
                 console.log("XXXXXXXXXXXXXXXXXXXXXXXX Held Movement Over");
                 if (this.skills.stealth.active == true) {
                     this.checkStealth();
