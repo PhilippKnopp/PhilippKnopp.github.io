@@ -134,5 +134,11 @@ function guiBuilder(_this) {
     
     gameModeText = _this.add.text(1097, 476, "Exploration", { fontFamily: "Verdana" , color: '#FFFFFF'});
     xpText = _this.add.text(1428, 476, xp, { fontFamily: "Verdana" , color: '#FFFFFF'});
+    bHpText = _this.add.text(1100, 600, barb.health + "//" + barb.fullHealth, { fontFamily: "Verdana" , color: '#FFFFFF'});
+    rHpText = _this.add.text(1110, 710, rogue.health + "//" + rogue.fullHealth, { fontFamily: "Verdana" , color: '#FFFFFF'});
+    mHpText = _this.add.text(1120, 820, mage.health + "//" + mage.fullHealth, { fontFamily: "Verdana" , color: '#FFFFFF'});
+    bMovementText = _this.add.text(1120, 605, barb.movementCounter + "//" + barb.movement, { fontFamily: "Verdana" , color: '#FFFFFF'});
+    rMovementText = _this.add.text(1130, 700, rogue.movementCounter + "//" + rogue.movement, { fontFamily: "Verdana" , color: '#FFFFFF'});
+    mMovementText = _this.add.text(1140, 825, mage.movementCounter + "//" + mage.movement, { fontFamily: "Verdana" , color: '#FFFFFF'});
     
 }
