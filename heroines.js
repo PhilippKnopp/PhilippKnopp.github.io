@@ -39,16 +39,13 @@ class Figure extends Phaser.GameObjects.Sprite {
                 let path = calculatePath (this.onTile, this.pathToTravel[0]);
                 this.movementCounter -= path.second;
                 updateGUI();
-                console.log("XXXXXXXXXXXXXXXXXXXXXXXX Held Move Now");
                 movementMarker.x = this.x;
                 movementMarker.y = this.y;
                 movementTween.data[0].start = this.x;
                 movementTween.data[1].start = this.y;
-                console.log(movementTween);
                 movementTween.restart();
             } else {
                 moveButton.state = 0;
-                console.log("XXXXXXXXXXXXXXXXXXXXXXXX Held Movement Over");
                 if (this.skills.stealth.active == true) {
                     this.checkStealth();
                 }
@@ -57,7 +54,6 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         this.enterTile = function () {
-            console.log("XXXXXXXXXXXXXXXXXXXXXXXX Held Enter Tile");
             let changeTileOccupation = true;
             for (var i = 0; i < charsStillAlive; i++) {
                 if (figuresOnMap[i].onTile == this.onTile && figuresOnMap[i] != this) {
