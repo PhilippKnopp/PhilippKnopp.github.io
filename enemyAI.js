@@ -7,13 +7,15 @@ function enemyTurn () {
     
     for (let i = 3; i < figuresOnMap.length; i++) {
         
-        if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length == 0) {
+        if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length == 0 && figuresOnMap[i].state == 0) {
             figuresOnMap[i].active = true;
             figuresOnMap[i].setFrame(1);
+            figuresOnMap[i].state = 1;
             activeChar = figuresOnMap[i];
             figuresOnMap[i].actionStack = enemyPlanMove(figuresOnMap[i]);
             console.log("XXXXXXXXXXXXXXXXXXXX Gegner startet Bewegungsphase");
-            figuresOnMap[i].moveNow();
+            moveButton.state = 2;
+            return;
         }
         
         if (figuresOnMap[i].actionStack.length > 0) {
@@ -22,6 +24,7 @@ function enemyTurn () {
             figuresOnMap[i].active = false;
             figuresOnMap[i].setFrame(0);
             activeChar = null;
+            return;
         }
     }
     

@@ -205,8 +205,7 @@ class SceneGame extends Phaser.Scene {
                         for (var i = 0; i < tileArray.length; i++) {
                             tileArray[i].setFrame(0);
                         }
-                        console.log("XXXXXXXXXXXXXXXXXXXXXXXX Bewegung startet Jetzt");
-                        moveButton.state = 3;
+                        moveButton.state = 2;
                     } else if (moveButton.state == 1) {
                     // Bewegung soll starten, aber hierher geht es nicht
                         showText("", activeChar, textL1[17]);
@@ -526,19 +525,21 @@ class SceneGame extends Phaser.Scene {
         // Plane Bewegung
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
-        }
-        
-        if (moveButton.state == 3 && movementTween.isPlaying() == false) {
-            activeChar.moveNow();
-        } else if (movementTween.isPlaying() == true) {
-        // ziehe Token während Bewegung mit
-            activeChar.x = movementMarker.x;
-            activeChar.y = movementMarker.y;
-            if (activeChar.name == "Ordrak") {
-                swirl1.x = movementMarker.x;
-                swirl1.y = movementMarker.y;
-                swirl2.x = movementMarker.x;
-                swirl2.y = movementMarker.y;
+        } else if (moveButton.state == 2) {
+        // Bewegung
+            if ( movementTween.isPlaying() == false ) {
+            // Starte einen Schritt
+                activeChar.moveNow();
+            } else {
+            // ziehe Token während dem Schritt mit
+                activeChar.x = movementMarker.x;
+                activeChar.y = movementMarker.y;
+                if (activeChar.name == "Ordrak") {
+                    swirl1.x = movementMarker.x;
+                    swirl1.y = movementMarker.y;
+                    swirl2.x = movementMarker.x;
+                    swirl2.y = movementMarker.y;
+                }
             }
         }
         

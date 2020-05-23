@@ -7,7 +7,6 @@ function createMovementTweens(_this) {
         targets: movementMarker,
         x: { value: function () {
             if (activeChar != null) {
-                console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Tween is updated!");
                 return tileArray[activeChar.pathToTravel[0]].x;
             } else {
                 return 0;
@@ -24,7 +23,6 @@ function createMovementTweens(_this) {
         ease: 'Sine.easeInOut',
         onComplete: function () {
             if (activeChar != null) {
-                console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onComplete");
                 activeChar.enterTile();
             }
         },
