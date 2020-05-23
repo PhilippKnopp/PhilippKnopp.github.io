@@ -100,7 +100,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             updateGUI();
             
-            if (attackButton.mode == "planning cc" && this.skills.stealth.active == true) { // hinterhältiger Angriff
+            if (attackButton.state == 1 && this.skills.stealth.active == true) { // hinterhältiger Angriff
                 let attackroll = getRandomInt(this.dieSize, this.explodes) + getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {
                     enemy.health -= attackroll;
@@ -112,7 +112,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.setAlpha(1);
                 enemyVisibility();
                 checkFightmode();
-            } else if (attackButton.mode == "planning cc") { // standard Attacke im Nahkampf
+            } else if (attackButton.state == 1) { // standard Attacke im Nahkampf
                 let attackroll = getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {
                     enemy.health -= attackroll;
@@ -137,7 +137,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 movementTween.data[1].start = this.y;
                 movementTween.restart();
             } else {
-                moveButton.mode = "none";
+                moveButton.state = 0;
                 if (this.skills.stealth.active == true) {
                     this.checkStealth();
                 }
@@ -160,7 +160,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     
     activateFigure() {
         
-        if (moveButton.mode == "none" && searchButton.mode == "none" && attackButton.mode == "none" && (fightmode == false || (this.actionsCounter > 0 || (this.movementCounter) >= 1 ))) {
+        if (moveButton.state == 0 && searchButton.state == 0 && attackButton.state == 0 && (fightmode == false || (this.actionsCounter > 0 || (this.movementCounter) >= 1 ))) {
             deactivateFigures();
 
             this.active = true;
@@ -174,7 +174,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             
             showActions(this);
             
-        } else if (searchButton.mode == "planning") {
+        } else if (searchButton.state == 1) {
             if (lineOfSight (activeChar.onTile, this.onTile) == true) {
                 showText("", activeChar, textL1Chars[this.description]);
             } else {
@@ -182,14 +182,14 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             returnCursorToNormal();
             showActions(activeChar);
-        } else if (moveButton.mode == "planning") {
-            moveButton.mode = "none";
+        } else if (moveButton.state == 1) {
+            moveButton.state = 0;
             returnCursorToNormal();
             if (this != activeChar) {
                 showText ("", activeChar, textL1[16]);
             }
             showActions(activeChar);
-        } else if (attackButton.mode == "planning cc" || attackButton.mode == "planning rc") {
+        } else if (attackButton.state == 1 || attackButton.state == 2) {
             returnCursorToNormal();
             if (this != activeChar) {
                 showText ("", activeChar, textL1[19]);
@@ -234,13 +234,13 @@ class Figure extends Phaser.GameObjects.Sprite {
     }
     
     hideFace() {
-        if (activeChar == null || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
+        if (activeChar == null || searchButton.state == 1 || attackButton.state == 2 || attackButton.state == 1 || moveButton.state == 1) {
             faceButton.setAlpha(0);
         }
     }
     
     showFace() {
-        if (activeChar == null || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
+        if (activeChar == null || searchButton.state == 1 || attackButton.state == 2 || attackButton.state == 1 || moveButton.state == 1) {
             faceButton.x = this.x-60;
             faceButton.y = this.y;
             faceButton.setAlpha(1);
@@ -310,7 +310,7 @@ function showActions(_this) {
                 attackButton.x = _this.x+buttonXpos;
                 attackButton.y = _this.y;
                 attackButton.setAlpha(1);
-                attackButton.mode = "possible rc";
+                attackButton.state = 3; // possible Ranged Combat
                 buttonXpos += 85;
             }
         }
@@ -343,7 +343,7 @@ function showActions(_this) {
             specialButton.y = _this.y;
             specialButton.setAlpha(1);
             buttonXpos += 85;
-            specialButton.mode = "disableTrap";
+            specialButton.state = 1;
         }
     }
     
@@ -417,9 +417,9 @@ function deactivateFigures() {
         figuresOnMap[i].setFrame(0);
         activeChar = null;
     }
-    attackButton.mode = "none";
-    moveButton.mode = "none";
-    searchButton.mode = "none";
+    attackButton.state = 0;
+    moveButton.state = 0;
+    searchButton.state = 0;
 }
 
 function replenishActions() {

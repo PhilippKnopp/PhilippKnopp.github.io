@@ -45,7 +45,7 @@
     
 ////////////// Variablen, die in der App verwendet werden   //////////////////////////////////////////////////////////////////////////////////////////
     
-    var gameVersion = "Version 0.31 Test G";
+    var gameVersion = "Version 0.31 Test H";
     var game = new Phaser.Game(config);
     var level = 1;
     
@@ -200,7 +200,7 @@
         moveButton.setScale(1);
         searchButton.setScale(1);
         attackButton.setScale(1);
-        attackButton.mode = "none";
+        attackButton.state = 0;
     }
 
     function containsObject(obj, list) { 

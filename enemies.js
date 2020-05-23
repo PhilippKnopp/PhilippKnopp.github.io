@@ -101,7 +101,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
     }
     
     activateFigure () {
-        if (attackButton.mode == "planning cc") {
+        if (attackButton.state == 1) {
             tileArray[activeChar.onTile].checkForNeighbors();
             if (tileArray[activeChar.onTile].neighbors.includes(tileArray[this.onTile])) {
                 tileArray[activeChar.onTile].neighbors.length = 0;
@@ -112,13 +112,13 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 returnCursorToNormal();
                 showActions(activeChar);
             }
-        } else if (attackButton.mode == "planning rc") {
+        } else if (attackButton.state == 2) {
             if (lineOfSight (activeChar.onTile, this.onTile) == true) { // Line of sight to enemy: Ranged Attack
                 activeChar.rangedAttack(this);
             } else { // No Line of sight to enemy: I Can Not See That
                 showText("", activeChar, textL1[1]);
             }
-        } else if (searchButton.mode == "planning") {
+        } else if (searchButton.state == 1) {
             if (lineOfSight (activeChar.onTile, this.onTile) == true) {
                 showText(textL1Chars[this.description]);
             } else {
@@ -126,8 +126,8 @@ class Enemy extends Phaser.GameObjects.Sprite {
             }
             returnCursorToNormal();
             showActions(activeChar);
-        } else if (moveButton.mode == "planning") {
-            moveButton.mode = "none";
+        } else if (moveButton.state == 1) {
+            moveButton.state = 0;
             returnCursorToNormal();
             showText ("", activeChar, textL1[16]);
             showActions(activeChar);
@@ -135,7 +135,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
     }
     
     hideFace () {
-        if (activeChar == null || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
+        if (activeChar == null || searchButton.state == 1 || attackButton.state == 2 || attackButton.state == 1 || moveButton.state == 1) {
             faceButton.setAlpha(0);
             enemyHealthBase.setAlpha(0);
             enemyHealthBar.clear();
@@ -143,12 +143,13 @@ class Enemy extends Phaser.GameObjects.Sprite {
     }
     
     showFace () {
-        if (activeChar == null || searchButton.mode == "planning" || attackButton.mode == "planning rc" || attackButton.mode == "planning cc" || moveButton.mode == "planning") {
+        if (activeChar == null || searchButton.state == 1 || attackButton.state == 2 || attackButton.state == 1 || moveButton.state == 1) {
             faceButton.x = this.x-60;
             faceButton.y = this.y;
             faceButton.setAlpha(1);
             
-            if (attackButton.mode == "planning rc") {
+            // Planning Ranged Attack
+            if (attackButton.state == 2) {
                 enemyHealthBase.x = faceButton.x-2;
                 enemyHealthBase.y = faceButton.y;
                 enemyHealthBase.setAlpha(1);

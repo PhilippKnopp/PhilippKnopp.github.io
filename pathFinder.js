@@ -230,7 +230,7 @@ function lineOfSight (startIndex, endIndex) {
         }
     }
     
-    searchButton.mode = "none";
+    searchButton.state = 0;
     
     let los_blocked = losPathDifficulty.includes(0); // testet ob in dem Array "losPathDifficulty" eine 0 vorkommt (dort kann man nicht hinlaufen)
     return !los_blocked; // gibt "true" zurück, wenn man in direkter Linie zum angesehenen Punkt laufen/schwimmen/... könnte.

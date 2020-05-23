@@ -192,7 +192,7 @@ class SceneGame extends Phaser.Scene {
 				tile.on("pointerup", function pointerUp () {
                     
                     // nichts ist auf der Tile und diese ist von einer Seite aus begehbar
-					if (moveButton.mode == "planning" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol") {
+					if (moveButton.state == 1 && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol") {
                         let path = calculatePath(activeChar.onTile, this.name);
                         if (path.first.length == 0) {
                             showText("", activeChar, textL1[18]);
@@ -202,18 +202,18 @@ class SceneGame extends Phaser.Scene {
                             activeChar.movementCounter -= path.second;
                         }*/
                         returnCursorToNormal();
-                        moveButton.mode = "moving";
+                        moveButton.state = 2;
                         for (var i = 0; i < tileArray.length; i++) {
                             tileArray[i].setFrame(0);
                         }
-                    } else if (moveButton.mode == "planning") {
+                    } else if (moveButton.state == 1) {
                         showText("", activeChar, textL1[17]);
                         for (var i = 0; i < tileArray.length; i++) {
                             tileArray[i].setFrame(0);
                         }
                     }
                     
-                    if (searchButton.mode == "planning") {
+                    if (searchButton.state == 1) {
                         if (lineOfSight (activeChar.onTile, this.name) == true) {
                             if (this.info == 3 && crystal1Img.alpha != 0) {
                                 crystal1Img.setAlpha(1);
@@ -232,7 +232,8 @@ class SceneGame extends Phaser.Scene {
                         }
                         returnCursorToNormal();
                         showActions(activeChar);
-                    } else if (attackButton.mode == "planning cc" && this.occupiedBy == "idol") {
+                    } else if (attackButton.state == 1 && this.occupiedBy == "idol") {
+                    // Das Relikt steht benachbart und man möchte es angreifen
                         this.checkForNeighbors();
                         for (let i = 0; i < this.neighbors.length; i++) {
                             if (this.neighbors[i].name == activeChar.onTile) {
@@ -243,7 +244,8 @@ class SceneGame extends Phaser.Scene {
                         this.neighbors.length = 0;
                         returnCursorToNormal();
                         showActions(activeChar);
-                    } else if (attackButton.mode == "planning rc" && this.occupiedBy == "idol") {
+                    } else if (attackButton.state == 2 && this.occupiedBy == "idol") {
+                    // Das Relikt soll im Fernkampf angegriffen werden
                         if (lineOfSight (activeChar.onTile, this.name) == true) {
                             this.occupiedBy = "";
                             eventDispatch ("e7");
@@ -254,7 +256,7 @@ class SceneGame extends Phaser.Scene {
 				});
                 tile.on("pointerover", function pointerOver () {
                     // Soll beim Hovern über einer Tile in der Bewegungs-Planung der Pfad dorthin gezeigt werden?
-                    if (moveButton.mode == "planning" && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol" /*&& fightmode == true*/) {
+                    if (moveButton.state == 1 && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol") {
                         // Berechnet Pfad den die Heldin hier her laufen würde
                         let path = calculatePath(activeChar.onTile, this.name);
                         // Färbt Pfad entsprechend der Schwierigkeit des Terrains ein
@@ -315,7 +317,7 @@ class SceneGame extends Phaser.Scene {
                     }
                 });
                 tile.on("pointerout", function pointerOut () {
-                    if (moveButton.mode == "planning") {
+                    if (moveButton.state == 1) {
                         for (var i = 0; i < tileArray.length; i++) {
                             tileArray[i].setFrame(0);
                         }
@@ -391,10 +393,12 @@ class SceneGame extends Phaser.Scene {
         doorButton.setDepth(1);
         
         moveButton = this.add.sprite(400, 400, 'moveSprite').setAlpha(0);
-        moveButton.mode = "none";
+        // state: 0 nothing
+        // state: 1 planning
+        // state: 2 moving
         moveButton.setInteractive();
 		moveButton.on("pointerup", function pointerUp() {
-            moveButton.mode = "planning";
+            moveButton.state = 1;
             hideActions();
             moveButton.setAlpha(1);
             moveButton.setScale(0.5);
@@ -402,13 +406,16 @@ class SceneGame extends Phaser.Scene {
         moveButton.setDepth(1);
         
         attackButton = this.add.sprite(400, 400, 'attackSprite').setAlpha(0);
-        attackButton.mode = "none";
+        // state: 0 nothing
+        // state: 1 planning Close Combat
+        // state: 2 planning Ranged Combat
+        // state: 3 possible Ranged Combat
         attackButton.setInteractive();
 		attackButton.on("pointerup", function pointerUp() {
-            if (attackButton.mode == "possible rc") {
-                attackButton.mode = "planning rc";
+            if (attackButton.state == 3) {
+                attackButton.state = 2;
             } else {
-                attackButton.mode = "planning cc";
+                attackButton.state = 1;
             }
             hideActions();
             attackButton.setAlpha(1);
@@ -417,10 +424,11 @@ class SceneGame extends Phaser.Scene {
         attackButton.setDepth(1);
         
         searchButton = this.add.sprite(400, 400, 'searchSprite').setAlpha(0);
-        searchButton.mode = "none";
+        // state: 0 nothing
+        // state: 1 planning
         searchButton.setInteractive();
 		searchButton.on("pointerup", function pointerUp() {
-            searchButton.mode = "planning";
+            searchButton.state = 1;
             hideActions();
             searchButton.setAlpha(1);
             searchButton.setScale(0.5);
@@ -429,11 +437,12 @@ class SceneGame extends Phaser.Scene {
         
         specialButton = this.add.sprite(400, 400, 'specialSprite').setAlpha(0);
         specialButton.setInteractive();
-        specialButton.mode = "";
+        // state: 0 nothing
+        // state: 1 disableTrap
 		specialButton.on("pointerup", function pointerUp() {
-            if (specialButton.mode == "disableTrap" && level == 1) {
+            if (specialButton.state == 1 && level == 1) {
                 disableTrap1();
-                specialButton.mode == "";
+                specialButton.state = 0;
             }
 		});
         specialButton.setDepth(1);
@@ -511,10 +520,10 @@ class SceneGame extends Phaser.Scene {
     
     update () {
         
-        if (moveButton.mode == "planning") {
+        if (moveButton.state == 1) {
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
-        } else if (moveButton.mode == "moving" && movementTween.isPlaying() == false) {
+        } else if (moveButton.state == 2 && movementTween.isPlaying() == false) {
             activeChar.moveNow();
         } else if (movementTween.isPlaying() == true) {
             activeChar.x = movementMarker.x;
@@ -527,12 +536,12 @@ class SceneGame extends Phaser.Scene {
             }
         }
         
-        if (searchButton.mode == "planning") {
+        if (searchButton.state == 1) {
             searchButton.x = this.game.input.activePointer.x + 50;
             searchButton.y = this.game.input.activePointer.y + 50;
         }
             
-        if (attackButton.mode == "planning rc" || attackButton.mode == "planning cc") {
+        if (attackButton.state == 2 || attackButton.state == 1) {
             attackButton.x = this.game.input.activePointer.x + 50;
             attackButton.y = this.game.input.activePointer.y + 50;
         }
