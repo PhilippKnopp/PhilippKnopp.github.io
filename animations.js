@@ -22,11 +22,11 @@ function createMovementTweens(_this) {
         }},
         duration: 250,
         ease: 'Sine.easeInOut',
-        
         onComplete: function () {
             if (activeChar != null) {
                 console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onComplete");
                 activeChar.enterTile();
+                moveButton.state = 3;
             }
         },
         onCompleteScope: movementTween

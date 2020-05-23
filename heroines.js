@@ -35,6 +35,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         };
         
         this.moveNow = function () {
+            moveButton.state = 0;
             if (this.pathToTravel.length > 0) {
                 let path = calculatePath (this.onTile, this.pathToTravel[0]);
                 this.movementCounter -= path.second;
@@ -42,8 +43,6 @@ class Figure extends Phaser.GameObjects.Sprite {
                 console.log("XXXXXXXXXXXXXXXXXXXXXXXX Held Move Now");
                 movementMarker.x = this.x;
                 movementMarker.y = this.y;
-                movementTween.stop();
-                console.log(movementTween);
                 movementTween.data[0].start = this.x;
                 movementTween.data[1].start = this.y;
                 console.log(movementTween);
@@ -77,8 +76,6 @@ class Figure extends Phaser.GameObjects.Sprite {
             if (typeof tileArray[this.onTile].state === 'string') {
                 eventDispatch(tileArray[this.onTile].state);
             }
-            
-            this.moveNow();
         }
         
         this.rangedAttack = function (enemy) {
