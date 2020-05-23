@@ -28,6 +28,7 @@ function createMovementTweens(_this) {
                 activeChar.enterTile();
             }
         },
+        onCompleteScope: movementTween,
         onStart: function () {
             console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onStart");
         },
