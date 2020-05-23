@@ -51,6 +51,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
             /*if (typeof tileArray[this.onTile].state === 'string') {
                 eventDispatch(this, tileArray[this.onTile].state);
             };*/
+            this.moveNow();
         };
         
         this.moveNow = function () {

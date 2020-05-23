@@ -24,11 +24,13 @@ function createMovementTweens(_this) {
         ease: 'Sine.easeInOut',
         onComplete: function () {
             if (activeChar != null) {
-                console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onComplete!!");
+                console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onComplete");
                 activeChar.enterTile();
-                activeChar.moveNow();
             }
         },
-        onCompleteScope: movementTween
+        onStart: function () {
+            console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onStart");
+        },
+        onStartScope: movementTween
     }).stop();
 }
