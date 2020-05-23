@@ -153,7 +153,7 @@ function enemyPlanMove (enemy) {
             victimRanking[i] += Math.floor(Math.random() * 1.99); // +0 oder +1
             
             // ersetzt das aktuelle Opfer durch ein potenziell besseres
-            if (victimOfChoice == undefined || Math.max(...victimRanking) == victimRanking[i]) {
+            if (victimOfChoice == undefined || Math.max(...victimRanking) == victimRanking[victimRanking.length-1]) {
                 victimOfChoice = figuresOnMap[i];
             }
         }
@@ -186,7 +186,7 @@ function enemyPlanMove (enemy) {
             console.log(Math.min(...placeRanking));
             
             // ersetzt den aktuellen Wunschort durch einen potenziell besseren
-            if (placeOfChoice == undefined || Math.min(...placeRanking) == placeRanking[i]) {
+            if (placeOfChoice == undefined || Math.min(...placeRanking) == placeRanking[placeRanking.length-1]) {
                 placeOfChoice = neighborsCopy[i].name;
                 console.log(placeOfChoice);
             }
