@@ -28,7 +28,7 @@ function enemyTurn () {
     }
     
     for (let i = 3; i < figuresOnMap.length; i++) {
-        figuresOnMap.state = 0;
+        figuresOnMap[i].state = 0;
     }
     
     // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
