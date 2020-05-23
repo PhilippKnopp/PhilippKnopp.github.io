@@ -42,6 +42,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 console.log("XXXXXXXXXXXXXXXXXXXXXXXX Held Move Now");
                 movementMarker.x = this.x;
                 movementMarker.y = this.y;
+                movementTween.stop();
                 console.log(movementTween);
                 movementTween.data[0].start = this.x;
                 movementTween.data[1].start = this.y;
