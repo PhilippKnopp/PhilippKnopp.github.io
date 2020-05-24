@@ -1,6 +1,9 @@
 function guiBuilder(_this) {
     
-    gui = _this.add.image(1408, 540, 'gui');
+    var gui = _this.add.image(1408, 540, 'gui');
+    var gui_bg_b = _this.add.image(1167, 618, 'gui_bg');
+    var gui_bg_r = _this.add.image(1167, 748, 'gui_bg');
+    var gui_bg_m = _this.add.image(1167, 878, 'gui_bg');
     
 ////////////// Buttons //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     

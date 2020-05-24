@@ -44,6 +44,7 @@ class SceneTitle extends Phaser.Scene {
         this.load.image('circle1', 'img/circle1.png');
         this.load.image('idol1', 'img/idol1.png');
         this.load.image('gui', 'img/GUI.png');
+        this.load.image('gui_bg', 'img/GUI_Background.png');
         this.load.image('bAction', 'img/bAction.png');
         this.load.image('rAction', 'img/rAction.png');
         this.load.image('mAction', 'img/mAction.png');
@@ -106,7 +107,7 @@ class SceneTravel_1 extends Phaser.Scene {
 
     create () {
         
-        var title = this.add.image(960, 540, 'screen_travel_1');
+        var screen_travel_1 = this.add.image(960, 540, 'screen_travel_1');
         
         var Info_Travel = this.add.text(960, 950, "In the oldest part of the woods, there is a deep cave. Two adventurers are sent there by a local guardsman, to find his missing daughter Arowia.", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, wordWrap: { width: 900, useAdvancedWrap: true }, align: 'center' }).setOrigin( 0.5, 0.5).setX(960);
         
