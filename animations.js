@@ -28,9 +28,8 @@ function createMovementTweens(_this) {
         },
         onCompleteScope: movementTween
     }).stop();
-}
 
-damageBTween = _this.tweens.add({
+    damageBTween = _this.tweens.add({
         targets: barDamageB,
         /*x: { value: function () {
             ((barb.health/barb.fullHealth)*320)+847;
@@ -45,7 +44,7 @@ damageBTween = _this.tweens.add({
         onCompleteScope: movementTween
     }).stop();
 
-damageRTween = _this.tweens.add({
+    damageRTween = _this.tweens.add({
         targets: barDamageR,
         /*x: { value: function () {
             ((barb.health/barb.fullHealth)*320)+847;
@@ -60,7 +59,7 @@ damageRTween = _this.tweens.add({
         onCompleteScope: movementTween
     }).stop();
 
-damageMTween = _this.tweens.add({
+    damageMTween = _this.tweens.add({
         targets: barDamageM,
         /*x: { value: function () {
             ((barb.health/barb.fullHealth)*320)+847;
@@ -74,3 +73,5 @@ damageMTween = _this.tweens.add({
         },
         onCompleteScope: movementTween
     }).stop();
+    
+}
