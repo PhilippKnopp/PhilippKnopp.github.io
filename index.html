@@ -45,7 +45,7 @@
     
 ////////////// Variablen, die in der App verwendet werden   //////////////////////////////////////////////////////////////////////////////////////////
     
-    var gameVersion = "Version 0.32 Test B";
+    var gameVersion = "Version 0.32 Test C";
     var game = new Phaser.Game(config);
     var level = 1;
     
@@ -85,6 +85,8 @@
     var xpIcon;
     var xpText;
     var bActionIcon, rActionIcon, mActionIcon;
+    var barHealthB, barDamageB, barMovementB, barHealthR, barDamageR, barMovementR, barHealthM, barDamageM, barMovementM;
+    var damageBTween, damageRTween, damageMTween;
     var bHpText, rHpText, mHpText, bMovementText, rMovementText, mMovementText;
     
     var fightmode = false;
@@ -324,9 +326,26 @@
         bActionIcon.setAlpha(barb.actionsCounter);
         rActionIcon.setAlpha(rogue.actionsCounter);
         mActionIcon.setAlpha(mage.actionsCounter);
+        
+        barHealthB.x = ((barb.health/barb.fullHealth)*320)+847;
+        barHealthR.x = ((rogue.health/rogue.fullHealth)*320)+847;
+        barHealthM.x = ((mage.health/mage.fullHealth)*320)+847;
+        
+        damageBTween.data[0].start = 1;
+        damageBTween.restart();
+        damageRTween.data[0].start = 1;
+        damageRTween.restart();
+        damageMTween.data[0].start = 1;
+        damageMTween.restart();
+        
+        barMovementB.x = ((barb.movementCounter/barb.movement)*320)+847;
+        barMovementR.x = ((rogue.movementCounter/rogue.movement)*320)+847;
+        barMovementM.x = ((mage.movementCounter/mage.movement)*320)+847;
+        
         bHpText.setText(barb.health + "/" + barb.fullHealth);
         rHpText.setText(rogue.health + "/" + rogue.fullHealth);
         mHpText.setText(mage.health + "/" + mage.fullHealth);
+        
         bMovementText.setText(barb.movementCounter + "/" + barb.movement);
         rMovementText.setText(rogue.movementCounter + "/" + rogue.movement);
         mMovementText.setText(mage.movementCounter + "/" + mage.movement);

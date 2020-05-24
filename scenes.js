@@ -48,6 +48,9 @@ class SceneTitle extends Phaser.Scene {
         this.load.image('bAction', 'img/bAction.png');
         this.load.image('rAction', 'img/rAction.png');
         this.load.image('mAction', 'img/mAction.png');
+        this.load.image('barHealth', 'img/Bar_HP.png');
+        this.load.image('barDamage', 'img/Bar_Damage.png');
+        this.load.image('barMovement', 'img/Bar_Movement.png');
         this.load.spritesheet('trap1Sprite', 'img/trap1.png', { frameWidth: 79, frameHeight: 78 });
         
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 26, frameHeight: 26 });

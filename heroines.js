@@ -83,7 +83,6 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.movementCounter -= 6;
             }
             updateGUI();
-            
             if (rangedDamage[0] == 0) {
                 rangedDamage[0] = getRandomInt(this.dieSize, this.explodes);
             }
@@ -120,7 +119,6 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.movementCounter -= 6;
             }
             updateGUI();
-            
             if (attackButton.state == 1 && this.skills.stealth.active == true) { // hinterhältiger Angriff
                 let attackroll = getRandomInt(this.dieSize, this.explodes) + getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {

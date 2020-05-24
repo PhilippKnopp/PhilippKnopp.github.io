@@ -29,3 +29,48 @@ function createMovementTweens(_this) {
         onCompleteScope: movementTween
     }).stop();
 }
+
+damageBTween = _this.tweens.add({
+        targets: barDamageB,
+        /*x: { value: function () {
+            ((barb.health/barb.fullHealth)*320)+847;
+        }},*/
+        alpha: 0,
+        duration: 250,
+        ease: 'Sine.easeInOut',
+        onComplete: function () {
+            barDamageB.setAlpha(1);
+            barDamageB.x = barHealthB.x;
+        },
+        onCompleteScope: movementTween
+    }).stop();
+
+damageRTween = _this.tweens.add({
+        targets: barDamageR,
+        /*x: { value: function () {
+            ((barb.health/barb.fullHealth)*320)+847;
+        }},*/
+        alpha: 0,
+        duration: 250,
+        ease: 'Sine.easeInOut',
+        onComplete: function () {
+            barDamageR.setAlpha(1);
+            barDamageR.x = barHealthR.x;
+        },
+        onCompleteScope: movementTween
+    }).stop();
+
+damageMTween = _this.tweens.add({
+        targets: barDamageM,
+        /*x: { value: function () {
+            ((barb.health/barb.fullHealth)*320)+847;
+        }},*/
+        alpha: 0,
+        duration: 250,
+        ease: 'Sine.easeInOut',
+        onComplete: function () {
+            barDamageM.setAlpha(1);
+            barDamageM.x = barHealthM.x;
+        },
+        onCompleteScope: movementTween
+    }).stop();
