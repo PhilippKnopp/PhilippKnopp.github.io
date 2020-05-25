@@ -3,6 +3,8 @@
 ////////// Erstellt alle Tweens (kleine Animationen) //////////////////////////////////////////////////////////
 
 function createMovementTweens(_this) {
+    
+    // Bewegt einen Marker von Feld zu Feld mit dem Spielfiguren auf dem Spielfeld bewegt werden
     movementTween = _this.tweens.add({
         targets: movementMarker,
         x: { value: function () {
@@ -28,14 +30,13 @@ function createMovementTweens(_this) {
         },
         onCompleteScope: movementTween
     }).stop();
-
+    
+    // Animiert den Health Bar in der UI, wenn eine Heldin Schaden bekommt
     damageBTween = _this.tweens.add({
         targets: barDamageB,
-        /*x: { value: function () {
-            ((barb.health/barb.fullHealth)*320)+847;
-        }},*/
         alpha: 0,
-        duration: 250,
+        delay: 50,
+        duration: 300,
         ease: 'Sine.easeInOut',
         onComplete: function () {
             barDamageB.setAlpha(1);
@@ -43,14 +44,13 @@ function createMovementTweens(_this) {
         },
         onCompleteScope: movementTween
     }).stop();
-
+    
+    // Animiert den Health Bar in der UI, wenn eine Heldin Schaden bekommt
     damageRTween = _this.tweens.add({
         targets: barDamageR,
-        /*x: { value: function () {
-            ((barb.health/barb.fullHealth)*320)+847;
-        }},*/
         alpha: 0,
-        duration: 250,
+        delay: 50,
+        duration: 300,
         ease: 'Sine.easeInOut',
         onComplete: function () {
             barDamageR.setAlpha(1);
@@ -58,14 +58,13 @@ function createMovementTweens(_this) {
         },
         onCompleteScope: movementTween
     }).stop();
-
+    
+    // Animiert den Health Bar in der UI, wenn eine Heldin Schaden bekommt
     damageMTween = _this.tweens.add({
         targets: barDamageM,
-        /*x: { value: function () {
-            ((barb.health/barb.fullHealth)*320)+847;
-        }},*/
         alpha: 0,
-        duration: 250,
+        delay: 50,
+        duration: 300,
         ease: 'Sine.easeInOut',
         onComplete: function () {
             barDamageM.setAlpha(1);
