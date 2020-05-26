@@ -135,7 +135,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 
                 strikeFX1.x = this.x;
                 strikeFX1.y = this.y;
-                strikeFX1.angle = Phaser.Math.angle.Between(this.x, this.y, enemy.x, enemy.y);
+                strikeFX1.angle = Math.Angle.Between(this.x, this.y, enemy.x, enemy.y);
                 strikeFX1.setDepth(1);
                 strikeFX1.anims.play('strike1');
                 
