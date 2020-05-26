@@ -290,7 +290,7 @@ function doors(char, tile) {
             tileArray[414].state = "0do";
             door5Img.setAlpha(1);
             tileArray[388].walkable = [1,1,0,1,0,1,1,1];
-            tileArray[394].walkable = [0,1,1,1,1,1,0,1];
+            tileArray[389].walkable = [0,1,1,1,1,1,0,1];
         } else if (tileArray[tile].state == "0do") {
             tileArray[363].state = "0dc";
             tileArray[364].state = "0dc";
