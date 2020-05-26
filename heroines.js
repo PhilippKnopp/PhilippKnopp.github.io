@@ -125,36 +125,35 @@ class Figure extends Phaser.GameObjects.Sprite {
         
         this.attack = function (enemy) {
             
-            let stealthPlus = 0;
+            showAttackFX(this, enemy);
             
-            if (this.actionsCounter > 0 && this.skills.stealth.active == false) {
+            if (this.actionsCounter > 0 && fightmode == true) {
                 this.actionsCounter--;
-            } else if (this.actionsCounter == 0 && this.movementCounter >= 6 && this.skills.stealth.active == false) {
+            } else if (this.actionsCounter == 0 && this.movementCounter >= 6) {
                 this.movementCounter -= 6;
-            } else if (this.skills.stealth.active == true) {
+            }
+            updateGUI();
+            
+            let stealthPlus = 0;
+            if (this.skills.stealth.active == true) {
                 stealthPlus += getRandomInt(this.dieSize, this.explodes);
             }
             
-            updateGUI();
+            let attackroll = getRandomInt(this.dieSize, this.explodes) + stealthPlus;
+            if (attackroll >= enemy.def) {
+                enemy.health -= attackroll;
+                melee_hits[getRandomInt(melee_hits.length, false)-1].play();
+            } else {
+                melee_misses[getRandomInt(melee_misses.length, false)-1].play();
+            }
             
-            //if (attackButton.state == 1) {
-                showAttackFX(this, enemy);
-                let attackroll = getRandomInt(this.dieSize, this.explodes) + stealthPlus;
-                if (attackroll >= enemy.def) {
-                    enemy.health -= attackroll;
-                    melee_hits[getRandomInt(melee_hits.length, false)-1].play();
-                } else {
-                    melee_misses[getRandomInt(melee_misses.length, false)-1].play();
-                }
+            if (this.skills.stealth.active == true) {
+                this.skills.stealth.active = false;
+                this.setAlpha(1);
+                enemyVisibility();
+                checkFightmode();
+            }
             
-                if (this.skills.stealth.active == true) {
-                    this.skills.stealth.active = false;
-                    this.setAlpha(1);
-                    enemyVisibility();
-                    checkFightmode();
-                }
-                
-            //}
             enemy.checkHealth();
             returnCursorToNormal();
             showActions(this);
