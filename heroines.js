@@ -93,6 +93,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 }
             }
             
+            showSpellFX(attacker, victim);
             // Schaden Verteilen:
             if (distantEnemies.length == 1) {
                 while (rangedDamage[0] > 0) {
