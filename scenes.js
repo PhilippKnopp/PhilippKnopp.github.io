@@ -556,7 +556,7 @@ class SceneGame extends Phaser.Scene {
             searchButton.y = this.game.input.activePointer.y + 50;
         }
             
-        if (attackButton.state == 2 || attackButton.state == 1) {
+        if (attackButton.state == 1 || attackButton.state == 2) {
         // Plane etwas anzugreifen
             attackButton.x = this.game.input.activePointer.x + 50;
             attackButton.y = this.game.input.activePointer.y + 50;

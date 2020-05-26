@@ -83,5 +83,20 @@ function createFrameAnimations(_this) {
     strikeFX1 = _this.add.sprite(0, 0, 'attackFX1').setAlpha(0);
     strikeFX1.setScale(3);
     _this.anims.create({key: 'strike1', frames: _this.anims.generateFrameNumbers('attackFX1', { start: 0, end: 7, first: 0 })});
-
+    strikeFX1.on('animationcomplete', animComplete, this);
 }
+
+function animComplete (animation, frame) {
+    strikeFX1.setAlpha(0);
+}
+/*
+function animComplete (animation, frame)
+{
+    //  Animation is over, let's fade the sprite out
+    this.tweens.add({
+        targets: gem,
+        duration: 3000,
+        alpha: 0
+    });
+}
+*/
