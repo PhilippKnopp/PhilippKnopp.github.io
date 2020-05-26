@@ -35,8 +35,7 @@ function enemyTurn () {
     
     // Wenn keine der Heldinnen mehr am Leben ist springt das Spiel zur Game-Over-Scene
     if (barb.health <= 0 && rogue.health <= 0 && mage.health <= 0) {
-        game.scene.start('sceneGameOver');
-        //game.scene.keys.XXX
+        game.scene.keys.sceneGame.scene.start('sceneGameOver');
     }
     
 }
