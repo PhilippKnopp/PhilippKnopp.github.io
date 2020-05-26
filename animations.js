@@ -81,15 +81,23 @@ function createMovementTweens(_this) {
 function createFrameAnimations(_this) {
     
     strikeFX1 = _this.add.sprite(0, 0, 'attackFX1').setAlpha(0);
-    strikeFX1.setScale(3);
     _this.anims.create({key: 'strike1', frames: _this.anims.generateFrameNumbers('attackFX1', { start: 0, end: 7, first: 0 })});
     strikeFX1.on('animationcomplete', animComplete, this);
 }
 
 function animComplete (animation, frame) {
-    console.log(this);
     strikeFX1.setAlpha(0);
 }
+
+function showAttackFX(attacker, victim) {
+    strikeFX1.x = attacker.x;
+    strikeFX1.y = attacker.y;
+    strikeFX1.setRotation(Phaser.Math.Angle.Between(attacker.x, attacker.y, victim.x, victim.y)+0.1);
+    strikeFX1.setAlpha(1);
+    strikeFX1.setDepth(1);
+    strikeFX1.anims.play('strike1');
+}
+
 /*
 function animComplete (animation, frame)
 {
