@@ -78,6 +78,8 @@ class SceneTitle extends Phaser.Scene {
         this.load.spritesheet('gameModeSprite', 'img/mode.png', { frameWidth: 86, frameHeight: 86 });
         this.load.spritesheet('xpSprite', 'img/xp.png', { frameWidth: 86, frameHeight: 86 });
         
+        this.load.spritesheet('attackFX1', 'img/strike1.png', { frameWidth: 26, frameHeight: 26});
+        
         this.load.audio("lvl_1_BG_Music", ["sound/lvl1_BG.mp3","sound/lvl1_BG.ogg"]);
         this.load.audio("melee_hit_1_sound", ["sound/sword_1_sound.mp3","sound/sword_1_sound.ogg"]);
         this.load.audio("melee_hit_2_sound", ["sound/sword_2_sound.mp3","sound/sword_2_sound.ogg"]);
@@ -507,6 +509,7 @@ class SceneGame extends Phaser.Scene {
         createEnemies(this);
         buildLevel();
         createMovementTweens(this);
+        createFrameAnimations(this);
         enemyVisibility();
         checkFightmode();
         

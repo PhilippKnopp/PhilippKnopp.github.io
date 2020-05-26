@@ -74,3 +74,13 @@ function createMovementTweens(_this) {
     }).stop();
     
 }
+
+////////// Erstellt alle Frame Animationen //////////////////////////////////////////////////////////
+
+
+function createFrameAnimations(_this) {
+    
+    strikeFX1 = _this.add.sprite(0, 0, 'attackFX1').setAlpha(0);
+    _this.anims.create({key: 'strike1', frames: this.anims.generateFrameNumbers('attackFX1', { start: 0, end: 7, first: 0 }), frameRate: 12, showOnStart: true, hideOnComplete: true});
+
+}

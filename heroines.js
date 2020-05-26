@@ -132,6 +132,11 @@ class Figure extends Phaser.GameObjects.Sprite {
                 enemyVisibility();
                 checkFightmode();
             } else if (attackButton.state == 1) { // standard Attacke im Nahkampf
+                
+                strikeFX1.x = this.x;
+                strikeFX1.y = this.y;
+                strikeFX1.anims.play('strike1');
+                
                 let attackroll = getRandomInt(this.dieSize, this.explodes);
                 if (attackroll >= enemy.def) {
                     enemy.health -= attackroll;
