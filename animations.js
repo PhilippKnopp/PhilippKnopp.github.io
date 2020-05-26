@@ -83,6 +83,9 @@ function createFrameAnimations(_this) {
     strikeFX1 = _this.add.sprite(0, 0, 'attackFX1').setAlpha(0);
     _this.anims.create({key: 'strike1', frames: _this.anims.generateFrameNumbers('attackFX1', { start: 0, end: 7, first: 0 })});
     strikeFX1.on('animationcomplete', animComplete, this);
+    
+    spellFX1 = _this.add.sprite(0, 0, 'spellFX1').setAlpha(0);
+    _this.anims.create({key: 'spell1', frames: _this.anims.generateFrameNumbers('spellFX1', { start: 0, end: 7, first: 0 }), replay: -1});
 }
 
 function animComplete (animation, frame) {
@@ -96,6 +99,15 @@ function showAttackFX(attacker, victim) {
     strikeFX1.setAlpha(1);
     strikeFX1.setDepth(1);
     strikeFX1.anims.play('strike1');
+}
+
+function showSpellFX(attacker, victim) {
+    spellFX1.x = attacker.x;
+    spellFX1.y = attacker.y;
+    spellFX1.setRotation(Phaser.Math.Angle.Between(attacker.x, attacker.y, victim.x, victim.y));
+    spellFX1.setAlpha(1);
+    spellFX1.setDepth(1);
+    spellFX1.anims.play('spell1');
 }
 
 /*

@@ -81,6 +81,7 @@ class SceneTitle extends Phaser.Scene {
         this.load.spritesheet('xpSprite', 'img/xp.png', { frameWidth: 86, frameHeight: 86 });
         
         this.load.spritesheet('attackFX1', 'img/strike1.png', { frameWidth: 78, frameHeight: 78});
+        this.load.spritesheet('spellFX1', 'img/apell1.png', { frameWidth: 150, frameHeight: 50});
         
         this.load.audio("lvl_1_BG_Music", ["sound/lvl1_BG.mp3","sound/lvl1_BG.ogg"]);
         this.load.audio("melee_hit_1_sound", ["sound/sword_1_sound.mp3","sound/sword_1_sound.ogg"]);
