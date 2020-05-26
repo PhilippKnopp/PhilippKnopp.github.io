@@ -16,7 +16,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.actionsCounter = 1;
         this.actionStack =[];
         this.pathToTravel = [];
-        this.def = 4;
+        this.def = 1;
         this.description;
         this.skills = {stealth: { trained: false, active: false },
                        swim:    false

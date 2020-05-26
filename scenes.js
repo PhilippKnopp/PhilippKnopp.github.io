@@ -1,3 +1,5 @@
+// this in Szene ist game.scene.keys.XXX wobei XXX z.B. 'sceneTitle' ohne Anführungszeichen ist
+
 class SceneTitle extends Phaser.Scene {
     
     constructor () {

@@ -13,13 +13,11 @@ function enemyTurn () {
             figuresOnMap[i].state = 1;
             activeChar = figuresOnMap[i];
             figuresOnMap[i].actionStack = enemyPlanMove(figuresOnMap[i]);
-            console.log("XXXXXXXXXXXXXXXXXXXX Gegner startet Bewegungsphase");
             moveButton.state = 2;
             return;
         }
         
         if (figuresOnMap[i].actionStack.length > 0) {
-            console.log("XXXXXXXXXXXXXXXXXXXX Gegner startet Aktionsphase");
             enemyDo(figuresOnMap[i], figuresOnMap[i].actionStack[0], figuresOnMap[i].actionStack[1]);
             figuresOnMap[i].active = false;
             figuresOnMap[i].setFrame(0);
@@ -37,7 +35,8 @@ function enemyTurn () {
     
     // Wenn keine der Heldinnen mehr am Leben ist springt das Spiel zur Game-Over-Scene
     if (barb.health <= 0 && rogue.health <= 0 && mage.health <= 0) {
-        this.scene.start('sceneGameOver');
+        game.scene.start('sceneGameOver');
+        //game.scene.keys.XXX
     }
     
 }

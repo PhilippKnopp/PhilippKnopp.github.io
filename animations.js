@@ -87,6 +87,7 @@ function createFrameAnimations(_this) {
 }
 
 function animComplete (animation, frame) {
+    console.log(this);
     strikeFX1.setAlpha(0);
 }
 /*
