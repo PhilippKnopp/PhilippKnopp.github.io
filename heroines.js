@@ -135,6 +135,8 @@ class Figure extends Phaser.GameObjects.Sprite {
                 
                 strikeFX1.x = this.x;
                 strikeFX1.y = this.y;
+                strikeFX1.setAlpha(1);
+                strikeFX1.setDepth(1);
                 strikeFX1.anims.play('strike1');
                 
                 let attackroll = getRandomInt(this.dieSize, this.explodes);
