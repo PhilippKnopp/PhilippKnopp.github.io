@@ -172,6 +172,8 @@ class SceneGame extends Phaser.Scene {
         
         movementMarker = this.add.sprite(0, 0, 'tileSprite').setAlpha(0);
 		
+        AKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        
 		let index = 0;
 		for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
 			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {

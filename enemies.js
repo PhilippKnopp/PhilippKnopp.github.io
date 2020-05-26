@@ -67,6 +67,9 @@ class Enemy extends Phaser.GameObjects.Sprite {
         }
         
         this.attack = function (heroine) {
+            
+            showAttackFX(this, heroine);
+            
             let attackroll = getRandomInt(this.dieSize, this.explodes);
             let damageroll = Math.min(attackroll, getRandomInt(this.dieSize, this.explodes));
             

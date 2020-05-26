@@ -92,8 +92,15 @@ class Figure extends Phaser.GameObjects.Sprite {
                     distantEnemies.push(i);
                 }
             }
+            
+            // Schaden Verteilen:
             if (distantEnemies.length == 1) {
                 while (rangedDamage[0] > 0) {
+                    rangedDamage[0]--;
+                    enemy.health--;
+                }
+            } else if (AKey.isDown) {
+                while (rangedDamage[0] > 0 && enemy.health > 0) {
                     rangedDamage[0]--;
                     enemy.health--;
                 }
@@ -101,11 +108,15 @@ class Figure extends Phaser.GameObjects.Sprite {
                 rangedDamage[0]--;
                 enemy.health--;
             }
+            
+            // Aktion je nach Zustand des Gegners
             if (enemy.health > 0) {
                 enemyHealthBar.clear();
                 enemy.showFace();
+            } else {
+                enemy.checkHealth();
             }
-            enemy.checkHealth();
+            
             if (rangedDamage[0] == 0) {
                 returnCursorToNormal();
                 showActions(this);
@@ -113,45 +124,38 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         this.attack = function (enemy) {
-            if (this.actionsCounter > 0 && fightmode == true) {
+            
+            let stealthPlus = 0;
+            
+            if (this.actionsCounter > 0 && this.skills.stealth.active == false) {
                 this.actionsCounter--;
-            } else if (this.actionsCounter == 0 && this.movementCounter >= 6) {
+            } else if (this.actionsCounter == 0 && this.movementCounter >= 6 && this.skills.stealth.active == false) {
                 this.movementCounter -= 6;
+            } else if (this.skills.stealth.active == true) {
+                stealthPlus += getRandomInt(this.dieSize, this.explodes);
             }
+            
             updateGUI();
-            if (attackButton.state == 1 && this.skills.stealth.active == true) { // hinterhältiger Angriff
-                let attackroll = getRandomInt(this.dieSize, this.explodes) + getRandomInt(this.dieSize, this.explodes);
+            
+            //if (attackButton.state == 1) {
+                showAttackFX(this, enemy);
+                let attackroll = getRandomInt(this.dieSize, this.explodes) + stealthPlus;
                 if (attackroll >= enemy.def) {
                     enemy.health -= attackroll;
                     melee_hits[getRandomInt(melee_hits.length, false)-1].play();
                 } else {
                     melee_misses[getRandomInt(melee_misses.length, false)-1].play();
                 }
-                this.skills.stealth.active = false;
-                this.setAlpha(1);
-                enemyVisibility();
-                checkFightmode();
-            } else if (attackButton.state == 1) { // standard Attacke im Nahkampf
-                
-                strikeFX1.x = this.x;
-                strikeFX1.y = this.y;
-                console.log(strikeFX1.rotation);
-                console.log(Phaser.Math.Angle.Between(this.x, this.y, enemy.x, enemy.y));
-                strikeFX1.setRotation(Phaser.Math.Angle.Between(this.x, this.y, enemy.x, enemy.y)+0.1);
-                console.log(strikeFX1.rotation);
-                strikeFX1.setAlpha(1);
-                strikeFX1.setDepth(1);
-                strikeFX1.anims.play('strike1');
-                
-                let attackroll = getRandomInt(this.dieSize, this.explodes);
-                if (attackroll >= enemy.def) {
-                    enemy.health -= attackroll;
-                    melee_hits[getRandomInt(melee_hits.length, false)-1].play();
-                } else {
-                    melee_misses[getRandomInt(melee_misses.length, false)-1].play();
+            
+                if (this.skills.stealth.active == true) {
+                    this.skills.stealth.active = false;
+                    this.setAlpha(1);
+                    enemyVisibility();
+                    checkFightmode();
                 }
-                enemy.checkHealth();
-            }
+                
+            //}
+            enemy.checkHealth();
             returnCursorToNormal();
             showActions(this);
         }
