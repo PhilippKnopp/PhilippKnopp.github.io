@@ -81,7 +81,7 @@ function createMovementTweens(_this) {
 function createFrameAnimations(_this) {
     
     strikeFX1 = _this.add.sprite(0, 0, 'attackFX1').setAlpha(0);
-    strikeFX1.setScale(3);
+    //strikeFX1.setScale(3);
     _this.anims.create({key: 'strike1', frames: _this.anims.generateFrameNumbers('attackFX1', { start: 0, end: 7, first: 0 })});
 
 }
