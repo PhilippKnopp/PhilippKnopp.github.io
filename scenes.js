@@ -562,9 +562,9 @@ class SceneGame extends Phaser.Scene {
             }
         }
         
-        if (enemyTurnActive == true && strikeFX1.anims.isPlaying == false) {
-            enemyTurn();
-        }
+        //if (enemyTurnActive == true && strikeFX1.anims.isPlaying == false) {
+        //    enemyTurn();
+        //}
         
         if (searchButton.state == 1) {
         // Plane etwas anzusehen

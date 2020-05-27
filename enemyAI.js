@@ -22,7 +22,7 @@ function enemyTurn () {
             figuresOnMap[i].active = false;
             figuresOnMap[i].setFrame(0);
             activeChar = null;
-            return;
+            //return;
         }
     }
     
