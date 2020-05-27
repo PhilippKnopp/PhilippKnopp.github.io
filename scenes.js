@@ -180,7 +180,6 @@ class SceneGame extends Phaser.Scene {
             completeTurn(barb);
             completeTurn(rogue);
             completeTurn(mage);
-            console.log("SPACE");
         });
         
 		let index = 0;
@@ -563,6 +562,10 @@ class SceneGame extends Phaser.Scene {
             }
         }
         
+        if (enemyTurnActive == true && strikeFX1.anims.isPlaying == false) {
+            enemyTurn();
+        }
+        
         if (searchButton.state == 1) {
         // Plane etwas anzusehen
             searchButton.x = this.game.input.activePointer.x + 50;
@@ -577,12 +580,7 @@ class SceneGame extends Phaser.Scene {
         
         swirl1.rotation += 0.01;
         swirl2.rotation -= 0.02;
-        /*
-        if (Phaser.Input.Keyboard.JustDown(spaceKey)) {
-            completeTurn(barb);
-            completeTurn(rogue);
-            completeTurn(mage);
-        }*/
+        
     }
     
 }
