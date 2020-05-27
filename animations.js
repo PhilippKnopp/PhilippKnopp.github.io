@@ -90,6 +90,9 @@ function createFrameAnimations(_this) {
 
 function animComplete (animation, frame) {
     strikeFX1.setAlpha(0);
+    if (enemyTurnActive == true) {
+        enemyTurn();
+    }
 }
 
 function animStart (animation, frame) {
