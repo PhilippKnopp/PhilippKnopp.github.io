@@ -93,11 +93,11 @@ function animComplete (animation, frame) {
 }
 
 function animStart (animation, frame) {
-    this.tweens.add({
+    this.tweens.add( {
         targets: spellFX1,
-        duration: 150,
+        duration: 300,
         alpha: 1
-    });
+    } );
 }
 
 function showAttackFX(attacker, victim) {
@@ -113,7 +113,6 @@ function showSpellFX(attacker, victim) {
     spellFX1.x = attacker.x;
     spellFX1.y = attacker.y;
     spellFX1.setRotation(Phaser.Math.Angle.Between(attacker.x, attacker.y, victim.x, victim.y));
-    spellFX1.setAlpha(1);
     spellFX1.setDepth(1);
     spellFX1.anims.play('spell1');
 }
