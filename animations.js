@@ -96,10 +96,10 @@ function animStart (animation, frame) {
     
     game.scene.keys.sceneGame.tweens.add( {
         targets: spellFX1,
-        duration: 300,
+        duration: 150,
         alpha: 1,
         onComplete: function () {
-            console.log(this);
+            this.destroy();
         }
     } );
     
@@ -118,6 +118,18 @@ function showSpellFX(attacker, victim) {
     spellFX1.x = attacker.x;
     spellFX1.y = attacker.y;
     spellFX1.setRotation(Phaser.Math.Angle.Between(attacker.x, attacker.y, victim.x, victim.y));
+    
+    game.scene.keys.sceneGame.tweens.add( {
+        targets: spellFX1,
+        duration: Phaser.Math.distance(attacker.x,attacker.y,victim.x,victim.y)*10,
+        x: victim.x,
+        y: victim.y,
+        onComplete: function () {
+            spellFX1.setAlpha(0);
+            this.destroy();
+        }
+    } );
+    
     spellFX1.setDepth(1);
     spellFX1.anims.play('spell1');
 }
