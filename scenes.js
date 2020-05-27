@@ -544,7 +544,7 @@ class SceneGame extends Phaser.Scene {
         // Plane Bewegung
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
-        } else if (moveButton.state == 2) {
+        } else if (moveButton.state == 2 && strikeFX1.anims.isPlaying == false) {
         // Bewegung
             if ( movementTween.isPlaying() == false ) {
             // Starte einen Schritt
@@ -561,10 +561,6 @@ class SceneGame extends Phaser.Scene {
                 }
             }
         }
-        
-        //if (enemyTurnActive == true && strikeFX1.anims.isPlaying == false) {
-        //    enemyTurn();
-        //}
         
         if (searchButton.state == 1) {
         // Plane etwas anzusehen
