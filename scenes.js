@@ -175,11 +175,11 @@ class SceneGame extends Phaser.Scene {
 		
         AKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        spaceKey.on('down', function (key, event) {
-            event.stopPropagation();
+        spaceKey.on("down", function {
             completeTurn(barb);
             completeTurn(rogue);
             completeTurn(mage);
+            console.log("SPACE");
         });
         
 		let index = 0;
@@ -576,6 +576,12 @@ class SceneGame extends Phaser.Scene {
         
         swirl1.rotation += 0.01;
         swirl2.rotation -= 0.02;
+        /*
+        if (Phaser.Input.Keyboard.JustDown(spaceKey)) {
+            completeTurn(barb);
+            completeTurn(rogue);
+            completeTurn(mage);
+        }*/
     }
     
 }

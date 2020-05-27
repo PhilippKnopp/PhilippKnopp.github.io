@@ -101,7 +101,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                     rangedDamage[0]--;
                     enemy.health--;
                 }
-            } else if (AKey.isDown) {
+            } else if (Phaser.Input.Keyboard.JustDown(AKey)) {
                 while (rangedDamage[0] > 0 && enemy.health > 0) {
                     rangedDamage[0]--;
                     enemy.health--;
