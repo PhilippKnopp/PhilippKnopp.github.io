@@ -175,7 +175,8 @@ class SceneGame extends Phaser.Scene {
 		
         AKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        spaceKey.on("down", function {
+        spaceKey.on('down', function (key, event) {
+            event.stopPropagation();
             completeTurn(barb);
             completeTurn(rogue);
             completeTurn(mage);
