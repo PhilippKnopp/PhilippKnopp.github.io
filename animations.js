@@ -83,7 +83,7 @@ function createFrameAnimations(_this) {
     _this.anims.create({key: 'strike1', frames: _this.anims.generateFrameNumbers('attackFX1', { start: 0, end: 7, first: 0 })});
     strikeFX1.on('animationcomplete', animComplete, this);
     
-    spellFX1 = _this.add.sprite(0, 0, 'attackFX10').setAlpha(0).setScale(0.66);
+    spellFX1 = _this.add.sprite(0, 0, 'attackFX10').setAlpha(0).setScale(0.66).setOrigin(0.8, 0.5);
     _this.anims.create({key: 'spell1', frames: _this.anims.generateFrameNumbers('attackFX10', { start: 0, end: 7, first: 0 }), repeat: -1});
     spellFX1.on('animationstart', animStart, this);
 }
@@ -118,7 +118,7 @@ function showSpellFX(attacker, victim) {
     
     game.scene.keys.sceneGame.tweens.add( {
         targets: spellFX1,
-        duration: Phaser.Math.Distance.BetweenPoints(attacker, victim)*10,
+        duration: Phaser.Math.Distance.BetweenPoints(attacker, victim)*100,
         x: victim.x,
         y: victim.y,
         onComplete: function () {
