@@ -85,14 +85,14 @@ function createFrameAnimations(_this) {
     
     spellFX1 = _this.add.sprite(0, 0, 'attackFX10').setAlpha(0).setScale(0.66);
     _this.anims.create({key: 'spell1', frames: _this.anims.generateFrameNumbers('attackFX10', { start: 0, end: 7, first: 0 }), repeat: -1});
-    spellFX1.onStart = animStartCallback;
+    spellFX1.on('animationstart', animStart, this);
 }
 
 function animComplete (animation, frame) {
     strikeFX1.setAlpha(0);
 }
 
-function animStartCallback (sprite, animation) {
+function animStart (animation, frame) {
     
     console.log(this);
     console.log(game.scene.keys.sceneGame);
