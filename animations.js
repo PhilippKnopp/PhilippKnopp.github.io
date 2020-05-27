@@ -132,6 +132,8 @@ function showSpellFX(attacker, victim) {
                 victim.showFace();
             } else {
                 victim.checkHealth();
+                victim.hideFace();
+                enemyHealthBar.clear();
             }
             
             if (rangedDamage[0] == 0) {
