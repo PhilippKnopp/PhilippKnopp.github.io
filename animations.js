@@ -118,7 +118,7 @@ function showSpellFX(attacker, victim) {
     
     game.scene.keys.sceneGame.tweens.add( {
         targets: spellFX1,
-        duration: Phaser.Math.Distance.BetweenPoints(attacker, victim)*100,
+        duration: Phaser.Math.Distance.BetweenPoints(attacker, victim)*0.5+150,
         x: victim.x,
         y: victim.y,
         onComplete: function () {
