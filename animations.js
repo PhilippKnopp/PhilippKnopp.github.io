@@ -94,14 +94,15 @@ function animComplete (animation, frame) {
 
 function animStart (animation, frame) {
     
-    console.log(this);
-    console.log(game.scene.keys.sceneGame);
-    
-    this.tweens.add( {
+    game.scene.keys.sceneGame.tweens.add( {
         targets: spellFX1,
         duration: 300,
-        alpha: 1
+        alpha: 1,
+        onComplete: function () {
+            console.log(this);
+        }
     } );
+    
 }
 
 function showAttackFX(attacker, victim) {
