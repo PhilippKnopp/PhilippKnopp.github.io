@@ -22,6 +22,9 @@ function enemyTurn () {
             figuresOnMap[i].active = false;
             figuresOnMap[i].setFrame(0);
             activeChar = null;
+            while (strikeFX1.anims.isPlaying) {
+                   // be patient
+            }
         }
     }
     
