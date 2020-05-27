@@ -22,9 +22,11 @@ function enemyTurn () {
             figuresOnMap[i].active = false;
             figuresOnMap[i].setFrame(0);
             activeChar = null;
-            while (strikeFX1.anims.isPlaying) {
+            console.log(strikeFX1.anims.isPlaying + "   " + strikeFX1.anims.currentAnim.key === 'strike1');
+            while (strikeFX1.anims.isPlaying && strikeFX1.anims.currentAnim.key === 'strike1') {
                    // be patient
             }
+            console.log(strikeFX1.anims.isPlaying + "   " + strikeFX1.anims.currentAnim.key === 'strike1');
         }
     }
     
