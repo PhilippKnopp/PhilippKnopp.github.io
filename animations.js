@@ -83,9 +83,9 @@ function createFrameAnimations(_this) {
     _this.anims.create({key: 'strike1', frames: _this.anims.generateFrameNumbers('attackFX1', { start: 0, end: 7, first: 0 })});
     strikeFX1.on('animationcomplete', animComplete, this);
     
-    spellFX1 = _this.add.sprite(0, 0, 'spellFX1').setAlpha(0);
+    spellFX1 = _this.add.sprite(0, 0, 'attackFX10').setAlpha(0);
     _this.anims.create({key: 'spell1', frames: _this.anims.generateFrameNumbers('spellFX1', { start: 0, end: 7, first: 0 }), replay: -1});
-    //spellFX1.on('animationstart', animStart, this);
+    spellFX1.on('animationstart', animStart, this);
 }
 
 function animComplete (animation, frame) {

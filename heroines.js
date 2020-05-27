@@ -87,9 +87,9 @@ class Figure extends Phaser.GameObjects.Sprite {
                 rangedDamage[0] = getRandomInt(this.dieSize, this.explodes);
             }
             let distantEnemies = [];
-            for (var i = 0; i < tileArray.length; i++) {
-                if (lineOfSight(this.onTile, i) == true && (tileArray[i].occupiedBy == "enemy")) {
-                    distantEnemies.push(i);
+            for (var i = 2; i < figuresOnMap.length; i++) {
+                if (lineOfSight(this.onTile, figuresOnMap[i].onTile) == true && figuresOnMap[i] instanceof Enemy) {
+                    distantEnemies.push(figuresOnMap[i].onTile);
                 }
             }
             
