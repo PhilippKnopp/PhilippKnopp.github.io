@@ -97,10 +97,7 @@ function animStart (animation, frame) {
     game.scene.keys.sceneGame.tweens.add( {
         targets: spellFX1,
         duration: 150,
-        alpha: 1,
-        onComplete: function () {
-            this.destroy();
-        }
+        alpha: 1
     } );
     
 }
@@ -126,7 +123,6 @@ function showSpellFX(attacker, victim) {
         y: victim.y,
         onComplete: function () {
             spellFX1.setAlpha(0);
-            this.destroy();
         }
     } );
     
