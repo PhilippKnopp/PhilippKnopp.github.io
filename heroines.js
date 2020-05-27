@@ -94,6 +94,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             
             showSpellFX(this, enemy);
+            
             // Schaden Verteilen:
             if (distantEnemies.length == 1) {
                 while (rangedDamage[0] > 0) {
@@ -110,18 +111,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 enemy.health--;
             }
             
-            // Aktion je nach Zustand des Gegners
-            if (enemy.health > 0) {
-                enemyHealthBar.clear();
-                enemy.showFace();
-            } else {
-                enemy.checkHealth();
-            }
-            
-            if (rangedDamage[0] == 0) {
-                returnCursorToNormal();
-                showActions(this);
-            }
+            // Aktion je nach Zustand des Gegners ist jetzt erst wenn Animation den Gegner schon getroffen hat.
         }
         
         this.attack = function (enemy) {

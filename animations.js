@@ -94,6 +94,8 @@ function animComplete (animation, frame) {
 
 function animStart (animation, frame) {
     
+    attackButton.state == 0;
+    
     game.scene.keys.sceneGame.tweens.add( {
         targets: spellFX1,
         duration: 150,
@@ -123,6 +125,19 @@ function showSpellFX(attacker, victim) {
         y: victim.y,
         onComplete: function () {
             spellFX1.setAlpha(0);
+            attackButton.state == 2;
+            
+            if (victim.health > 0) {
+                enemyHealthBar.clear();
+                victim.showFace();
+            } else {
+                victim.checkHealth();
+            }
+            
+            if (rangedDamage[0] == 0) {
+                returnCursorToNormal();
+                showActions(attacker);
+            }
         }
     } );
     
