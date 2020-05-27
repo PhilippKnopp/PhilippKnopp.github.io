@@ -100,6 +100,7 @@
     var melee_misses = [m_miss_1, m_hit_2];
     
     var AKey;
+    var spaceKey;
     
 //////////////  Diverse Funktionen   //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -175,6 +176,7 @@
     function completeTurn(char) {
         hideActions();
         deactivateFigures();
+        
         // Tote Charactere werden ignoriert wenn es um den Zug geht
         for (let i = 0; i < charsStillAlive; i++) {
             if (figuresOnMap[i].health <= 0 && turnOver.includes(figuresOnMap[i].name) == false) {
