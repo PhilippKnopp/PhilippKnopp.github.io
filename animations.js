@@ -93,8 +93,12 @@ function animComplete (animation, frame) {
 }
 
 function animStartCallback (sprite, animation) {
+    
+    console.log(this);
+    console.log(game.scene.keys.sceneGame);
+    
     this.tweens.add( {
-        targets: sprite,
+        targets: spellFX1,
         duration: 300,
         alpha: 1
     } );
