@@ -250,17 +250,25 @@ class Figure extends Phaser.GameObjects.Sprite {
             faceButton.x = this.x-60;
             faceButton.y = this.y;
             faceButton.setAlpha(1);
-            updateGUI();
             
             switch(this) {
                 case mage:
                     faceButton.setFrame(0);
+                    if (mage.health > 0) {
+                        //mPortraitIcon.setFrame(1);
+                    }
                     break;
                 case rogue:
                     faceButton.setFrame(1);
+                    if (rogue.health > 0) {
+                        rPortraitIcon.setFrame(1);
+                    }
                     break;
                 case barb:
                     faceButton.setFrame(2);
+                    if (barb.health > 0) {
+                        //bPortraitIcon.setFrame(1);
+                    }
                     break;
                 default:
                     break;
