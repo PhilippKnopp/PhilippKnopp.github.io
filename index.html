@@ -356,6 +356,33 @@
         bMovementText.setText(barb.movementCounter + "/" + barb.movement);
         rMovementText.setText(rogue.movementCounter + "/" + rogue.movement);
         mMovementText.setText(mage.movementCounter + "/" + mage.movement);
+        
+        //bPortraitIcon.setFrame(2);
+        rPortraitIcon.setFrame(2);
+        //mPortraitIcon.setFrame(2);
+        
+        if (barb.health > 0) {
+            if (activeChar == barb) {
+                //bPortraitIcon.setFrame(1);
+            } else {
+                //bPortraitIcon.setFrame(0);
+            }
+        }
+        if (rogue.health > 0) {
+            if (activeChar == rogue) {
+                rPortraitIcon.setFrame(1);
+            } else {
+                rPortraitIcon.setFrame(0);
+            }
+        }
+        if (mage.health > 0) {
+            if (activeChar == mage) {
+                //mPortraitIcon.setFrame(1);
+            } else {
+                //mPortraitIcon.setFrame(0);
+            }
+        }
+        
     }
     
     function checkFightmode() { 
