@@ -156,4 +156,6 @@ function guiBuilder(_this) {
     rMovementText = _this.add.text(1142, 751, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
     mMovementText = _this.add.text(1142, 881, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
     
+    rPortraitIcon = _this.add.sprite(977, 748, 'rPortraitUISprite');
+    
 }

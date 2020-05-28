@@ -241,6 +241,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     hideFace() {
         if (activeChar == null || searchButton.state == 1 || attackButton.state == 2 || attackButton.state == 1 || moveButton.state == 1) {
             faceButton.setAlpha(0);
+            rPortraitIcon.setFrame(0);
         }
     }
     
@@ -256,6 +257,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                     break;
                 case rogue:
                     faceButton.setFrame(1);
+                    rPortraitIcon.setFrame(1);
                     break;
                 case barb:
                     faceButton.setFrame(2);
@@ -375,6 +377,7 @@ function showActions(_this) {
                 moveButton.setFrame(3);
             } else {
                 moveButton.setFrame(1);
+                rPortraitIcon.setFrame(1);
             }
             attackButton.setFrame(1);
             searchButton.setFrame(1);
@@ -406,6 +409,7 @@ function showActions(_this) {
 
 function hideActions() {
     faceButton.setAlpha(0);
+    rPortraitIcon.setFrame(0);
     doorButton.setAlpha(0);
     moveButton.setAlpha(0);
     attackButton.setAlpha(0);
