@@ -409,7 +409,6 @@ function showActions(_this) {
 
 function hideActions() {
     faceButton.setAlpha(0);
-    rPortraitIcon.setFrame(0);
     doorButton.setAlpha(0);
     moveButton.setAlpha(0);
     attackButton.setAlpha(0);
@@ -424,6 +423,7 @@ function deactivateFigures() {
     for (var i = 0; i < figuresOnMap.length; i++) {
         figuresOnMap[i].active = false;
         figuresOnMap[i].setFrame(0);
+        rPortraitIcon.setFrame(0);
         activeChar = null;
     }
     attackButton.state = 0;
