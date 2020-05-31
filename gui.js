@@ -157,6 +157,6 @@ function guiBuilder(_this) {
     mMovementText = _this.add.text(1142, 881, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
     
     rPortraitIcon = _this.add.sprite(977, 748, 'rPortraitUISprite');
-    rRollText = _this.add.text(977, 748, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '16px', align: 'center'}).setOrigin(0.5).setVisible(false);
+    rRollText = _this.add.text(977, 748, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '40px', align: 'center'}).setOrigin(0.5).setVisible(false);
     
 }
