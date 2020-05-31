@@ -79,26 +79,34 @@ function createMovementTweens(_this) {
 
 function createFrameAnimations(_this) {
     
-    strikeFX1 = _this.add.sprite(0, 0, 'attackFX1').setAlpha(0);
-    _this.anims.create({key: 'strike1', frames: _this.anims.generateFrameNumbers('attackFX1', { start: 0, end: 7 })});
-    strikeFX1.on('animationcomplete', animComplete, this);
+    strikeFX1 = _this.add.sprite(0, 0, 'attackFX1').setVisible(false);
+    _this.anims.create({key: 'strike1', frames: _this.anims.generateFrameNumbers('attackFX1', { start: 0, end: 7 }), showOnStart: true, hideOnComplete: true});
     
     spellFX1 = _this.add.sprite(0, 0, 'attackFX10').setAlpha(0).setScale(0.66).setOrigin(0.8, 0.5);
     _this.anims.create({key: 'spell1', frames: _this.anims.generateFrameNumbers('attackFX10', { start: 0, end: 7 }), repeat: -1});
-    spellFX1.on('animationstart', animStart, this);
+    spellFX1.on('animationstart', spellFX1_animStart, this);
     
     let frameArray1 = [
         {key: "rPortraitUISprite", frame: 3}, {key: "rPortraitUISprite", frame: 4}, {key: "rPortraitUISprite", frame: 5},
         {key: "rPortraitUISprite", frame: 6}, {key: "rPortraitUISprite", frame: 7}, {key: "rPortraitUISprite", frame: 6},
         {key: "rPortraitUISprite", frame: 5}, {key: "rPortraitUISprite", frame: 4}, {key: "rPortraitUISprite", frame: 3}];
-    _this.anims.create({ key: 'rollDie', frames: frameArray1 });
+    _this.anims.create({ key: 'rollDie', frames: frameArray1});
+    rPortraitIcon.on('animationcomplete', rPortraitIcon_animComplete, this);
 }
 
-function animComplete (animation, frame) {
-    strikeFX1.setAlpha(0);
+function rPortraitIcon_animComplete (animation, frame) {
+    rRollText.setVisible(true);
 }
 
-function animStart (animation, frame) {
+function showAttackFX(attacker, victim) {
+    strikeFX1.x = attacker.x;
+    strikeFX1.y = attacker.y;
+    strikeFX1.setRotation(Phaser.Math.Angle.Between(attacker.x, attacker.y, victim.x, victim.y)+0.1);
+    strikeFX1.setDepth(1);
+    strikeFX1.anims.play('strike1');
+}
+
+function spellFX1_animStart (animation, frame) {
     
     attackButton.state == 0;
     
@@ -108,15 +116,6 @@ function animStart (animation, frame) {
         alpha: 1
     } );
     
-}
-
-function showAttackFX(attacker, victim) {
-    strikeFX1.x = attacker.x;
-    strikeFX1.y = attacker.y;
-    strikeFX1.setRotation(Phaser.Math.Angle.Between(attacker.x, attacker.y, victim.x, victim.y)+0.1);
-    strikeFX1.setAlpha(1);
-    strikeFX1.setDepth(1);
-    strikeFX1.anims.play('strike1');
 }
 
 function showSpellFX(attacker, victim) {
