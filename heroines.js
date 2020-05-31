@@ -282,8 +282,12 @@ class Figure extends Phaser.GameObjects.Sprite {
 
 function showActions(_this) {
     
+    // beendet Zug für diese Heldin und checkt ob dadurch der Zug für alle beendet ist
     if (fightmode == true && (_this.actionsCounter == 0 && (_this.movementCounter) < 1 )) {
-        completeTurn(_this);    // beendet Zug für diese Heldin und checkt ob dadurch der Zug für alle beendet ist
+        _this.hasActed = true;
+        returnCursorToNormal();
+        deactivateFigures();
+        completeTurn();
         return;
     }
     
@@ -410,9 +414,10 @@ function showActions(_this) {
     tileArray[_this.onTile].neighbors.length = 0;
     
     if (doorButton.alpha == 0 && moveButton.alpha == 0 && attackButton.alpha == 0 && (specialButton.alpha == 0 || _this != rogue) ) {
-        hideActions();
+        returnCursorToNormal();
         deactivateFigures();
-        completeTurn(_this);
+        _this.hasActed = true;
+        completeTurn();
     }
     
 }
