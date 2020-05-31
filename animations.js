@@ -80,15 +80,18 @@ function createMovementTweens(_this) {
 function createFrameAnimations(_this) {
     
     strikeFX1 = _this.add.sprite(0, 0, 'attackFX1').setAlpha(0);
-    _this.anims.create({key: 'strike1', frames: _this.anims.generateFrameNumbers('attackFX1', { start: 0, end: 7, first: 0 })});
+    _this.anims.create({key: 'strike1', frames: _this.anims.generateFrameNumbers('attackFX1', { start: 0, end: 7 })});
     strikeFX1.on('animationcomplete', animComplete, this);
     
     spellFX1 = _this.add.sprite(0, 0, 'attackFX10').setAlpha(0).setScale(0.66).setOrigin(0.8, 0.5);
-    _this.anims.create({key: 'spell1', frames: _this.anims.generateFrameNumbers('attackFX10', { start: 0, end: 7, first: 0 }), repeat: -1});
+    _this.anims.create({key: 'spell1', frames: _this.anims.generateFrameNumbers('attackFX10', { start: 0, end: 7 }), repeat: -1});
     spellFX1.on('animationstart', animStart, this);
     
-    console.log(_this.anims.generateFrameNumbers('rPortraitUISprite', { start: 3, end: 7, first: 3 }));
-    _this.anims.create({ key: 'rollDie', frames: _this.anims.generateFrameNumbers('rPortraitUISprite', { start: 3, end: 7, first: 3 }) });
+    let frameArray1 = [
+        {key: "rPortraitUISprite", frame: 3}, {key: "rPortraitUISprite", frame: 4}, {key: "rPortraitUISprite", frame: 5},
+        {key: "rPortraitUISprite", frame: 6}, {key: "rPortraitUISprite", frame: 7}, {key: "rPortraitUISprite", frame: 6},
+        {key: "rPortraitUISprite", frame: 5}, {key: "rPortraitUISprite", frame: 4}, {key: "rPortraitUISprite", frame: 3}];
+    _this.anims.create({ key: 'rollDie', frames: frameArray1 });
 }
 
 function animComplete (animation, frame) {
