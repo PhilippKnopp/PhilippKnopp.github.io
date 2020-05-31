@@ -87,6 +87,7 @@ function createFrameAnimations(_this) {
     _this.anims.create({key: 'spell1', frames: _this.anims.generateFrameNumbers('attackFX10', { start: 0, end: 7, first: 0 }), repeat: -1});
     spellFX1.on('animationstart', animStart, this);
     
+    console.log(_this.anims.generateFrameNumbers('rPortraitUISprite', { start: 3, end: 7, first: 3 }));
     _this.anims.create({ key: 'rollDie', frames: _this.anims.generateFrameNumbers('rPortraitUISprite', { start: 3, end: 7, first: 3 }) });
 }
 
