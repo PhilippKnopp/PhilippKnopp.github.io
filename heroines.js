@@ -125,12 +125,14 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             updateGUI();
             
-            let stealthPlus = 0;
+            let attackroll = 0;
+            rPortraitIcon.anims.play('rollDie');
             if (this.skills.stealth.active == true) {
-                stealthPlus += getRandomInt(this.dieSize, this.explodes);
+                attackroll += getRandomInt(this.dieSize, this.explodes, 2);
+            } else {
+                attackroll += getRandomInt(this.dieSize, this.explodes);
             }
             
-            let attackroll = getRandomInt(this.dieSize, this.explodes) + stealthPlus;
             if (attackroll >= enemy.def) {
                 enemy.health -= attackroll;
                 melee_hits[getRandomInt(melee_hits.length, false)-1].play();
@@ -157,8 +159,8 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.actions = 0;
                 this.health = 0;
                 enemyVisibility();
+                updateGUI();
             }
-            updateGUI();
         }
         
     }
