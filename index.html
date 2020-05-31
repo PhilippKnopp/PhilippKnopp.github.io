@@ -400,7 +400,6 @@
             fightmode = false;
             gameModeIcon.setFrame(0);
             gameModeText.setText("Exploration");
-            turnOver.length = 0;
             enemyTurnActive = false;
             replenishActions();
         } else if (alarmedEnemies > 0 && fightmode == false) {
@@ -422,7 +421,6 @@
         
         figuresOnMap.length = 0;
         activeChar = null;
-        turnOver.length = 0;
         enemyTurnActive = false;
         textHistory.length = 0;
         textHistoryIndex = -1;
