@@ -179,9 +179,12 @@ class SceneGame extends Phaser.Scene {
         spaceKey.on('down', function (key, event) {
             if (enemyTurnActive == false) {
                 event.stopPropagation();
-                completeTurn(barb);
-                completeTurn(rogue);
-                completeTurn(mage);
+                for (let i = 0; i < 3; i++) {
+                    figuresOnMap[i].hasActed = true;
+                }
+                hideActions();
+                deactivateFigures();
+                completeTurn();
             }
         });
         

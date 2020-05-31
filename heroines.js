@@ -264,6 +264,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 case rogue:
                     faceButton.setFrame(1);
                     if (rogue.health > 0) {
+                        rRollText.setVisible(false);
                         rPortraitIcon.setFrame(1);
                     }
                     break;
