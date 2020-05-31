@@ -76,7 +76,6 @@
     
     var figuresOnMap = [];
     var activeChar = null;  // Variable in der die Spielfigut gespeichert wird, die gerade aktiv ist um schnell darauf zugreifen zu können.
-    var turnOver = []; // Array mit allen Helden die in der aktuellen runde schon agiert haben.
     var enemyTurnActive = false;
     var charsStillAlive = 3;
     var Info1, InfoName1, InfoDialog1, InfoName2, InfoDialog2, Info3;
@@ -175,24 +174,25 @@
     }*/
     
     function completeTurn(char) {
-        hideActions();
-        deactivateFigures();
         
-        // Tote Charactere werden ignoriert wenn es um den Zug geht
+        let turnOver = 0;
         for (let i = 0; i < charsStillAlive; i++) {
-            if (figuresOnMap[i].health <= 0 && turnOver.includes(figuresOnMap[i].name) == false) {
-                turnOver.push(figuresOnMap[i].name);
+            if (figuresOnMap[i].health <= 0) {
+                turnOver++;
+            } else if (figuresOnMap[i].hasActed == true) {
+                turnOver++;
             }
         }
-        if (turnOver.includes(char.name) == false) {
-            turnOver.push(char.name);
-        }
-        if (turnOver.length == charsStillAlive) {
-            turnOver.length = 0;
+        
+        if (turnOver == 3) {
+            for (let i = 0; i < charsStillAlive; i++) {
+                figuresOnMap[i].hasActed = false;
+            }
             // in update function werden jetzt die Gegner gesteuert
             enemyTurnActive = true;
             enemyTurn();
         }
+        
     }
     
     function clearNodes() { 
@@ -356,10 +356,7 @@
         bMovementText.setText(barb.movementCounter + "/" + barb.movement);
         rMovementText.setText(rogue.movementCounter + "/" + rogue.movement);
         mMovementText.setText(mage.movementCounter + "/" + mage.movement);
-        
-        //bPortraitIcon.setFrame(2);
-        rPortraitIcon.setFrame(2);
-        //mPortraitIcon.setFrame(2);
+
         
         if (barb.health > 0) {
             if (activeChar == barb) {
@@ -367,6 +364,8 @@
             } else {
                 //bPortraitIcon.setFrame(0);
             }
+        } else {
+            //bPortraitIcon.setFrame(2);
         }
         if (rogue.health > 0) {
             if (activeChar == rogue) {
@@ -374,6 +373,8 @@
             } else {
                 rPortraitIcon.setFrame(0);
             }
+        } else {
+            rPortraitIcon.setFrame(2);
         }
         if (mage.health > 0) {
             if (activeChar == mage) {
@@ -381,6 +382,8 @@
             } else {
                 //mPortraitIcon.setFrame(0);
             }
+        } else {
+            //mPortraitIcon.setFrame(2);
         }
         
     }
