@@ -132,7 +132,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             } else {
                 attackroll += getRandomInt(this.dieSize, this.explodes);
             }
-            rRollText.setTExt(attackroll);
+            rRollText.setText(attackroll);
             
             if (attackroll >= enemy.def) {
                 enemy.health -= attackroll;
