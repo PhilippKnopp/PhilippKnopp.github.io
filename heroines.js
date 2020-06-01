@@ -88,7 +88,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             if (rangedDamage[0] == 0) {
                 rangedDamage[0] = getRandomInt(this.dieSize, this.explodes);
                 mPortraitIcon.anims.play('mRollDie');
-                mRollText.setText(attackroll);
+                mRollText.setText(rangedDamage[0]);
             } else {
                 mPortraitIcon.setFrame(3);
                 mRollText.setText(rangedDamage[0]);
