@@ -357,16 +357,18 @@
         rMovementText.setText(rogue.movementCounter + "/" + rogue.movement);
         mMovementText.setText(mage.movementCounter + "/" + mage.movement);
         
+        bRollText.setVisible(false);
         rRollText.setVisible(false);
+        mRollText.setVisible(false);
         
         if (barb.health > 0) {
             if (activeChar == barb) {
-                //bPortraitIcon.setFrame(1);
+                bPortraitIcon.setFrame(1);
             } else {
-                //bPortraitIcon.setFrame(0);
+                bPortraitIcon.setFrame(0);
             }
         } else {
-            //bPortraitIcon.setFrame(2);
+            bPortraitIcon.setFrame(2);
         }
         if (rogue.health > 0) {
             if (activeChar == rogue) {
@@ -379,12 +381,12 @@
         }
         if (mage.health > 0) {
             if (activeChar == mage) {
-                //mPortraitIcon.setFrame(1);
+                mPortraitIcon.setFrame(1);
             } else {
-                //mPortraitIcon.setFrame(0);
+                mPortraitIcon.setFrame(0);
             }
         } else {
-            //mPortraitIcon.setFrame(2);
+            mPortraitIcon.setFrame(2);
         }
         
     }

@@ -91,11 +91,19 @@ function createFrameAnimations(_this) {
         {key: "rPortraitUISprite", frame: 6}, {key: "rPortraitUISprite", frame: 7}, {key: "rPortraitUISprite", frame: 6},
         {key: "rPortraitUISprite", frame: 5}, {key: "rPortraitUISprite", frame: 4}, {key: "rPortraitUISprite", frame: 3}];
     _this.anims.create({ key: 'rollDie', frames: frameArray1});
+    bPortraitIcon.on('animationcomplete', rPortraitIcon_animComplete, this);
     rPortraitIcon.on('animationcomplete', rPortraitIcon_animComplete, this);
+    mPortraitIcon.on('animationcomplete', rPortraitIcon_animComplete, this);
 }
 
+function bPortraitIcon_animComplete (animation, frame) {
+    bRollText.setVisible(true);
+}
 function rPortraitIcon_animComplete (animation, frame) {
     rRollText.setVisible(true);
+}
+function mPortraitIcon_animComplete (animation, frame) {
+    mRollText.setVisible(true);
 }
 
 function showAttackFX(attacker, victim) {

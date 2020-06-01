@@ -123,16 +123,27 @@ class Figure extends Phaser.GameObjects.Sprite {
             } else if (this.actionsCounter == 0 && this.movementCounter >= 6) {
                 this.movementCounter -= 6;
             }
+            
             updateGUI();
             
             let attackroll = 0;
-            rPortraitIcon.anims.play('rollDie');
             if (this.skills.stealth.active == true) {
                 attackroll += getRandomInt(this.dieSize, this.explodes, 2);
             } else {
                 attackroll += getRandomInt(this.dieSize, this.explodes);
             }
-            rRollText.setText(attackroll);
+            
+            // Startet Animatin im Porträt in der UI und zeigt dort auch das Würfelergebnis
+            if (this == barb) {
+                bPortraitIcon.anims.play('rollDie');
+                bRollText.setText(attackroll);
+            } else if (this == rogue) {
+                rPortraitIcon.anims.play('rollDie');
+                rRollText.setText(attackroll);
+            } else if (this == mage) {
+                mPortraitIcon.anims.play('rollDie');
+                mRollText.setText(attackroll);
+            }
             
             if (attackroll >= enemy.def) {
                 enemy.health -= attackroll;
@@ -258,7 +269,8 @@ class Figure extends Phaser.GameObjects.Sprite {
                 case mage:
                     faceButton.setFrame(0);
                     if (mage.health > 0) {
-                        //mPortraitIcon.setFrame(1);
+                        mRollText.setVisible(false);
+                        mPortraitIcon.setFrame(1);
                     }
                     break;
                 case rogue:
@@ -271,7 +283,8 @@ class Figure extends Phaser.GameObjects.Sprite {
                 case barb:
                     faceButton.setFrame(2);
                     if (barb.health > 0) {
-                        //bPortraitIcon.setFrame(1);
+                        bRollText.setVisible(false);
+                        bPortraitIcon.setFrame(1);
                     }
                     break;
                 default:

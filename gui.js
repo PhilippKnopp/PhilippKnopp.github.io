@@ -142,21 +142,29 @@ function guiBuilder(_this) {
 ////////////// UI Icons //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     gameModeIcon = _this.add.sprite(977, 485, 'gameModeSprite');
+    gameModeText = _this.add.text(1097, 476, "Exploration", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    
     xpIcon = _this.add.sprite(1258, 485, 'xpSprite');
+    xpText = _this.add.text(1428, 476, xp, { fontFamily: "Verdana" , color: '#FFFFFF'});
+    
     bActionIcon = _this.add.sprite(1322, 618, 'bAction');
     rActionIcon = _this.add.sprite(1322, 748, 'rAction');
     mActionIcon = _this.add.sprite(1322, 878, 'mAction');
     
-    gameModeText = _this.add.text(1097, 476, "Exploration", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    xpText = _this.add.text(1428, 476, xp, { fontFamily: "Verdana" , color: '#FFFFFF'});
     bHpText = _this.add.text(1108, 597, "12/12", { fontFamily: "Verdana" , color: '#FFFFFF'});
     rHpText = _this.add.text(1108, 727, "8/8", { fontFamily: "Verdana" , color: '#FFFFFF'});
     mHpText = _this.add.text(1108, 857, "4/4", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    
     bMovementText = _this.add.text(1142, 621, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
     rMovementText = _this.add.text(1142, 751, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
     mMovementText = _this.add.text(1142, 881, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
     
+    bPortraitIcon = _this.add.sprite(977, 618, 'bPortraitUISprite');
     rPortraitIcon = _this.add.sprite(977, 748, 'rPortraitUISprite');
+    mPortraitIcon = _this.add.sprite(977, 878, 'mPortraitUISprite');
+    
+    bRollText = _this.add.text(977, 618, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
     rRollText = _this.add.text(977, 748, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
+    mRollText = _this.add.text(977, 878, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
     
 }
