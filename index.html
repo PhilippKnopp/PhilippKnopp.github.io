@@ -188,6 +188,9 @@
             for (let i = 0; i < charsStillAlive; i++) {
                 figuresOnMap[i].hasActed = false;
             }
+            
+            updateGUI();
+            
             // in update function werden jetzt die Gegner gesteuert
             enemyTurnActive = true;
             enemyTurn();
@@ -384,7 +387,10 @@
             rPortraitIcon.setFrame(2);
         }
         if (mage.health > 0) {
-            if (activeChar == mage) {
+            if (rangedDamage[0] > 0) {
+                mPortraitIcon.setFrame(3);
+                mRollText.setText(rangedDamage[0]);
+            } else if (activeChar == mage) {
                 mPortraitIcon.setFrame(1);
             } else {
                 mPortraitIcon.setFrame(0);
