@@ -82,10 +82,18 @@ class Figure extends Phaser.GameObjects.Sprite {
             } else if (this.actionsCounter == 0 && this.movementCounter >= 6 && rangedDamage[0] == 0) {
                 this.movementCounter -= 6;
             }
+            
             updateGUI();
+            
             if (rangedDamage[0] == 0) {
                 rangedDamage[0] = getRandomInt(this.dieSize, this.explodes);
+                mPortraitIcon.anims.play('rollDie');
+                mRollText.setText(attackroll);
+            } else {
+                mPortraitIcon.setFrame(3);
+                mRollText.setText(rangedDamage[0]);
             }
+            
             let distantEnemies = [];
             for (var i = 2; i < figuresOnMap.length; i++) {
                 if (lineOfSight(this.onTile, figuresOnMap[i].onTile) == true && figuresOnMap[i] instanceof Enemy) {
@@ -110,6 +118,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 rangedDamage[0]--;
                 enemy.health--;
             }
+            mRollText.setText(rangedDamage[0]);
             
             // Aktion je nach Zustand des Gegners ist jetzt erst wenn Animation den Gegner schon getroffen hat.
         }
