@@ -87,7 +87,7 @@ class Figure extends Phaser.GameObjects.Sprite {
             
             if (rangedDamage[0] == 0) {
                 rangedDamage[0] = getRandomInt(this.dieSize, this.explodes);
-                mPortraitIcon.anims.play('rollDie');
+                mPortraitIcon.anims.play('mRollDie');
                 mRollText.setText(attackroll);
             } else {
                 mPortraitIcon.setFrame(3);
@@ -144,13 +144,13 @@ class Figure extends Phaser.GameObjects.Sprite {
             
             // Startet Animatin im Porträt in der UI und zeigt dort auch das Würfelergebnis
             if (this == barb) {
-                bPortraitIcon.anims.play('rollDie');
+                bPortraitIcon.anims.play('bRollDie');
                 bRollText.setText(attackroll);
             } else if (this == rogue) {
-                rPortraitIcon.anims.play('rollDie');
+                rPortraitIcon.anims.play('rRollDie');
                 rRollText.setText(attackroll);
             } else if (this == mage) {
-                mPortraitIcon.anims.play('rollDie');
+                mPortraitIcon.anims.play('mRollDie');
                 mRollText.setText(attackroll);
             }
             

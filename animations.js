@@ -86,14 +86,24 @@ function createFrameAnimations(_this) {
     _this.anims.create({key: 'spell1', frames: _this.anims.generateFrameNumbers('attackFX10', { start: 0, end: 7 }), repeat: -1});
     spellFX1.on('animationstart', spellFX1_animStart, this);
     
-    let frameArray1 = [
+    let bFrameArray1 = [
+        {key: "bPortraitUISprite", frame: 3}, {key: "bPortraitUISprite", frame: 4}, {key: "bPortraitUISprite", frame: 5},
+        {key: "bPortraitUISprite", frame: 6}, {key: "bPortraitUISprite", frame: 7}, {key: "bPortraitUISprite", frame: 6},
+        {key: "bPortraitUISprite", frame: 5}, {key: "bPortraitUISprite", frame: 4}, {key: "bPortraitUISprite", frame: 3}];
+    _this.anims.create({ key: 'bRollDie', frames: bFrameArray1});
+    let rFrameArray1 = [
         {key: "rPortraitUISprite", frame: 3}, {key: "rPortraitUISprite", frame: 4}, {key: "rPortraitUISprite", frame: 5},
         {key: "rPortraitUISprite", frame: 6}, {key: "rPortraitUISprite", frame: 7}, {key: "rPortraitUISprite", frame: 6},
         {key: "rPortraitUISprite", frame: 5}, {key: "rPortraitUISprite", frame: 4}, {key: "rPortraitUISprite", frame: 3}];
-    _this.anims.create({ key: 'rollDie', frames: frameArray1});
-    bPortraitIcon.on('animationcomplete', rPortraitIcon_animComplete, this);
+    _this.anims.create({ key: 'rRollDie', frames: rFrameArray1});
+    let mFrameArray1 = [
+        {key: "mPortraitUISprite", frame: 3}, {key: "mPortraitUISprite", frame: 4}, {key: "mPortraitUISprite", frame: 5},
+        {key: "mPortraitUISprite", frame: 6}, {key: "mPortraitUISprite", frame: 7}, {key: "mPortraitUISprite", frame: 6},
+        {key: "mPortraitUISprite", frame: 5}, {key: "mPortraitUISprite", frame: 4}, {key: "mPortraitUISprite", frame: 3}];
+    _this.anims.create({ key: 'mRollDie', frames: mFrameArray1});
+    bPortraitIcon.on('animationcomplete', bPortraitIcon_animComplete, this);
     rPortraitIcon.on('animationcomplete', rPortraitIcon_animComplete, this);
-    mPortraitIcon.on('animationcomplete', rPortraitIcon_animComplete, this);
+    mPortraitIcon.on('animationcomplete', mPortraitIcon_animComplete, this);
 }
 
 function bPortraitIcon_animComplete (animation, frame) {
