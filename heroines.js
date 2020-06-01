@@ -287,7 +287,11 @@ class Figure extends Phaser.GameObjects.Sprite {
                     faceButton.setFrame(1);
                     if (rogue.health > 0) {
                         rRollText.setVisible(false);
-                        rPortraitIcon.setFrame(1);
+                        if (rogue.skills.stealth.active) {
+                            rPortraitIcon.setFrame(9);
+                        } else {
+                            rPortraitIcon.setFrame(1);
+                        }
                     }
                     break;
                 case barb:
