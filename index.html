@@ -371,8 +371,12 @@
             bPortraitIcon.setFrame(2);
         }
         if (rogue.health > 0) {
-            if (activeChar == rogue) {
+            if (activeChar == rogue && rogue.skills.stealth.active == true) {
+                rPortraitIcon.setFrame(9);
+            } else if (activeChar == rogue && rogue.skills.stealth.active == false) {
                 rPortraitIcon.setFrame(1);
+            } else if (activeChar != rogue && rogue.skills.stealth.active == true) {
+                rPortraitIcon.setFrame(8);
             } else {
                 rPortraitIcon.setFrame(0);
             }
