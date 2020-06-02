@@ -175,62 +175,6 @@ function guiBuilder(_this) {
         });
     }
     
-    /*bSkillButton.setInteractive();
-    bSkillButton.on("pointerdown", function pointerUp () {
-        let levelup = Math.floor(xp/100)*3;
-        bSkillButton.setFrame(2+levelup);
-    });
-	bSkillButton.on("pointerup", function pointerUp () {
-        let levelup = Math.floor(xp/100)*3;
-        bSkillButton.setFrame(0+levelup);
-    });
-    bSkillButton.on("pointerover", function pointerOver () {
-        let levelup = Math.floor(xp/100)*3;
-        bSkillButton.setFrame(1+levelup);
-    });
-    bSkillButton.on("pointerout", function pointerOut () {
-        let levelup = Math.floor(xp/100)*3;
-        bSkillButton.setFrame(0+levelup);
-    });
-    
-    rSkillButton = _this.add.sprite(1420, 748, 'skillUISprite');
-    rSkillButton.setInteractive();
-    rSkillButton.on("pointerdown", function pointerUp () {
-        let levelup = Math.floor(xp/100)*3;
-        rSkillButton.setFrame(2+levelup);
-    });
-    rSkillButton.on("pointerup", function pointerUp () {
-        let levelup = Math.floor(xp/100)*3;
-        rSkillButton.setFrame(0+levelup);
-    });
-    rSkillButton.on("pointerover", function pointerOver () {
-        let levelup = Math.floor(xp/100)*3;
-        rSkillButton.setFrame(1+levelup);
-    });
-    rSkillButton.on("pointerout", function pointerOut () {
-        let levelup = Math.floor(xp/100)*3;
-        rSkillButton.setFrame(0+levelup);
-    });
-    
-    mSkillButton = _this.add.sprite(1420, 878, 'skillUISprite');
-    mSkillButton.setInteractive();
-    mSkillButton.on("pointerdown", function pointerUp () {
-        let levelup = Math.floor(xp/100)*3;
-        mSkillButton.setFrame(2+levelup);
-    });
-    mSkillButton.on("pointerup", function pointerUp () {
-        let levelup = Math.floor(xp/100)*3;
-        mSkillButton.setFrame(0+levelup);
-    });
-    mSkillButton.on("pointerover", function pointerOver () {
-        let levelup = Math.floor(xp/100)*3;
-        mSkillButton.setFrame(1+levelup);
-    });
-    mSkillButton.on("pointerout", function pointerOut () {
-        let levelup = Math.floor(xp/100)*3;
-        mSkillButton.setFrame(0+levelup);
-    });*/
-    
     bActionIcon = _this.add.sprite(1322, 618, 'bAction');
     rActionIcon = _this.add.sprite(1322, 748, 'rAction');
     mActionIcon = _this.add.sprite(1322, 878, 'mAction');
