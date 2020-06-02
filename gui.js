@@ -147,11 +147,42 @@ function guiBuilder(_this) {
     xpIcon = _this.add.sprite(1258, 485, 'xpSprite');
     xpText = _this.add.text(1428, 476, xp, { fontFamily: "Verdana" , color: '#FFFFFF'});
     
+    let skillButton = [];
     bSkillButton = _this.add.sprite(1420, 618, 'skillUISprite');
-    bSkillButton.setInteractive();
-	bSkillButton.on("pointerup", function pointerUp () {
+    skillButton.push(bSkillButton);
+    rSkillButton = _this.add.sprite(1420, 748, 'skillUISprite');
+    skillButton.push(rSkillButton);
+    mSkillButton = _this.add.sprite(1420, 878, 'skillUISprite');
+    skillButton.push(mSkillButton);
+    
+    for (let i = 0; i < 3; i++) {
+        skillButton[i].setInteractive();
+        skillButton[i].on("pointerdown", function pointerUp () {
+            let levelup = Math.floor(xp/100)*3;
+            skillButton[i].setFrame(2+levelup);
+        });
+	   skillButton[i].on("pointerup", function pointerUp () {
+            let levelup = Math.floor(xp/100)*3;
+            skillButton[i].setFrame(0+levelup);
+        });
+        skillButton[i].on("pointerover", function pointerOver () {
+            let levelup = Math.floor(xp/100)*3;
+            skillButton[i].setFrame(1+levelup);
+        });
+        skillButton[i].on("pointerout", function pointerOut () {
+            let levelup = Math.floor(xp/100)*3;
+            skillButton[i].setFrame(0+levelup);
+        });
+    }
+    
+    /*bSkillButton.setInteractive();
+    bSkillButton.on("pointerdown", function pointerUp () {
         let levelup = Math.floor(xp/100)*3;
         bSkillButton.setFrame(2+levelup);
+    });
+	bSkillButton.on("pointerup", function pointerUp () {
+        let levelup = Math.floor(xp/100)*3;
+        bSkillButton.setFrame(0+levelup);
     });
     bSkillButton.on("pointerover", function pointerOver () {
         let levelup = Math.floor(xp/100)*3;
@@ -161,11 +192,16 @@ function guiBuilder(_this) {
         let levelup = Math.floor(xp/100)*3;
         bSkillButton.setFrame(0+levelup);
     });
+    
     rSkillButton = _this.add.sprite(1420, 748, 'skillUISprite');
     rSkillButton.setInteractive();
-    rSkillButton.on("pointerup", function pointerUp () {
+    rSkillButton.on("pointerdown", function pointerUp () {
         let levelup = Math.floor(xp/100)*3;
         rSkillButton.setFrame(2+levelup);
+    });
+    rSkillButton.on("pointerup", function pointerUp () {
+        let levelup = Math.floor(xp/100)*3;
+        rSkillButton.setFrame(0+levelup);
     });
     rSkillButton.on("pointerover", function pointerOver () {
         let levelup = Math.floor(xp/100)*3;
@@ -175,11 +211,16 @@ function guiBuilder(_this) {
         let levelup = Math.floor(xp/100)*3;
         rSkillButton.setFrame(0+levelup);
     });
+    
     mSkillButton = _this.add.sprite(1420, 878, 'skillUISprite');
     mSkillButton.setInteractive();
-    mSkillButton.on("pointerup", function pointerUp () {
+    mSkillButton.on("pointerdown", function pointerUp () {
         let levelup = Math.floor(xp/100)*3;
         mSkillButton.setFrame(2+levelup);
+    });
+    mSkillButton.on("pointerup", function pointerUp () {
+        let levelup = Math.floor(xp/100)*3;
+        mSkillButton.setFrame(0+levelup);
     });
     mSkillButton.on("pointerover", function pointerOver () {
         let levelup = Math.floor(xp/100)*3;
@@ -188,7 +229,7 @@ function guiBuilder(_this) {
     mSkillButton.on("pointerout", function pointerOut () {
         let levelup = Math.floor(xp/100)*3;
         mSkillButton.setFrame(0+levelup);
-    });
+    });*/
     
     bActionIcon = _this.add.sprite(1322, 618, 'bAction');
     rActionIcon = _this.add.sprite(1322, 748, 'rAction');
