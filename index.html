@@ -45,7 +45,7 @@
     
 ////////////// Variablen, die in der App verwendet werden   //////////////////////////////////////////////////////////////////////////////////////////
     
-    var gameVersion = "Version 0.33 Test A";
+    var gameVersion = "Version 0.34 Test A";
     var game = new Phaser.Game(config);
     var level = 1;
     
@@ -83,7 +83,7 @@
     var textHistoryIndex = -1;
     var gameModeIcon;
     var gameModeText;
-    var xp = 99;
+    var xp = 0;
     var xpIcon;
     var xpText;
     var bActionIcon, rActionIcon, mActionIcon;
@@ -441,7 +441,7 @@
         enemyTurnActive = false;
         textHistory.length = 0;
         textHistoryIndex = -1;
-        xp = 99;
+        xp = 0;
         
         fightmode = false;
         
