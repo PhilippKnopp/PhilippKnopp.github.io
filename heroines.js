@@ -119,7 +119,9 @@ class Figure extends Phaser.GameObjects.Sprite {
                 enemy.health--;
             }
             
-            mRollText.setText(rangedDamage[0]);
+            if (rangedDamage[0] != 0) {
+                mRollText.setText(rangedDamage[0]);
+            }
             
             // Aktion je nach Zustand des Gegners ist jetzt erst wenn Animation den Gegner schon getroffen hat.
         }
