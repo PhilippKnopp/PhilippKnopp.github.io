@@ -98,9 +98,9 @@ class SceneTitle extends Phaser.Scene {
 
     create () {
         
-        var title = this.add.image(960, 540, 'title');
+        let title = this.add.image(960, 540, 'title');
         
-        var VersionText = this.add.text(960, 1020, gameVersion, { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' }).setOrigin( 0.5, 0.5).setX(960).setAlpha(0.5);
+        let VersionText = this.add.text(960, 1020, gameVersion, { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' }).setOrigin( 0.5).setX(960).setAlpha(0.5);
         
         this.input.manager.enabled = true;
         this.input.once('pointerdown', function () {
@@ -119,12 +119,36 @@ class SceneTravel_1 extends Phaser.Scene {
 
     create () {
         
-        var screen_travel_1 = this.add.image(960, 540, 'screen_travel_1');
+        let screen_travel_1 = this.add.image(960, 540, 'screen_travel_1');
         
-        var Info_Travel = this.add.text(960, 950, textTravelL1[0], { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, wordWrap: { width: 900, useAdvancedWrap: true }, align: 'center' }).setOrigin( 0.5, 0.5).setX(960);
+        let Info_Travel = this.add.text(960, 950, textTravelL1[0], { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, wordWrap: { width: 900, useAdvancedWrap: true }, align: 'center' }).setOrigin( 0.5).setX(960);
         
         this.input.manager.enabled = true;
         this.input.once('pointerdown', function () {
+            // geht sicher, dass alle Spielübergreifenden Variablen auch bei einem Neustart einen sinnvollen Wert haben
+            restartLevel();
+            this.scene.start('sceneGame');
+        }, this);
+        
+    }
+
+}
+
+class SceneTravel_2 extends Phaser.Scene {
+
+    constructor () {
+        super({ key: 'sceneTravel_2' });
+    }
+
+    create () {
+        
+        let screen_travel_2 = this.add.image(960, 540, 'screen_travel_1');
+        
+        let Info_Travel = this.add.text(960, 950, textTravelL2[0], { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, wordWrap: { width: 900, useAdvancedWrap: true }, align: 'center' }).setOrigin( 0.5).setX(960);
+        
+        this.input.manager.enabled = true;
+        this.input.once('pointerdown', function () {
+            level = 2;
             this.scene.start('sceneGame');
         }, this);
         
@@ -139,7 +163,7 @@ class SceneGameOver extends Phaser.Scene {
     }
 
     create () {
-        var gameOver = this.add.image(960, 540, 'gameOver');
+        let gameOver = this.add.image(960, 540, 'gameOver');
         
         this.input.manager.enabled = true;
         this.input.once('pointerdown', function () {
@@ -157,9 +181,6 @@ class SceneGame extends Phaser.Scene {
     
     // Funktion die alle Sachen erstellt
 	create() {
-        
-        // geht sicher, dass alle Spielübergreifenden Variablen auch bei einem Neustart einen sinnvollen Wert haben
-        restartLevel();
         
         // Greift auf gui.js zu und erstellt viele der User Interface Elemente
         guiBuilder(this);
@@ -180,6 +201,9 @@ class SceneGame extends Phaser.Scene {
         AKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         spaceKey.on('down', function (key, event) {
+            if (figuresOnMap.length == 3) {
+                this.scene.start('sceneTravel_2');
+            }
             if (enemyTurnActive == false) {
                 event.stopPropagation();
                 for (let i = 0; i < 3; i++) {

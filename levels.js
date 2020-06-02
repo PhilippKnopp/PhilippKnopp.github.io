@@ -357,6 +357,8 @@ function ritual(energy, priestDied = false) {
             let ordrak = figuresOnMap[figuresOnMap.findIndex((element) => element.name == "Ordrak")];
             ordrak.health = 0;
             tileArray[755].walkable = [1,1,1,1,1,1,1,1];
+            swirl1.setVisible(false);
+            swirl2.setVisible(false);
             figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
             addXP(ordrak.loot);
         }

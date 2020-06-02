@@ -40,7 +40,7 @@
         },
         backgroundColor: '#0C0E11',
         scale: { mode: Phaser.Scale.FIT },
-        scene: [SceneTitle, SceneTravel_1, SceneGame, SceneGameOver]
+        scene: [SceneTitle, SceneTravel_1, SceneGame, SceneTravel_2, SceneGameOver]
 	}
     
 ////////////// Variablen, die in der App verwendet werden   //////////////////////////////////////////////////////////////////////////////////////////
@@ -292,6 +292,7 @@
         } else if (eventKey == "e8") {
         // ende von Level 1
             showText (textL1[15]);
+            
         } else if (eventKey == "7e9") {
         // Kristall im See
             if (fightmode == true) {
@@ -430,7 +431,7 @@
     }
     
     function restartLevel() {
-
+        
         tileArray.length = 0;
         
         rangedDamage = [0];
