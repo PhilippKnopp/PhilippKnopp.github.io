@@ -79,6 +79,7 @@ class SceneTitle extends Phaser.Scene {
         this.load.spritesheet('textNewSprite', 'img/textNew.png', { frameWidth: 84, frameHeight: 46 });
         this.load.spritesheet('gameModeSprite', 'img/mode.png', { frameWidth: 86, frameHeight: 86 });
         this.load.spritesheet('xpSprite', 'img/xp.png', { frameWidth: 86, frameHeight: 86 });
+        this.load.spritesheet('skillUISprite', 'img/UI_skill.png', { frameWidth: 70, frameHeight: 70 });
         this.load.spritesheet('bPortraitUISprite', 'img/UI_B.png', { frameWidth: 87, frameHeight: 87 });
         this.load.spritesheet('rPortraitUISprite', 'img/UI_R.png', { frameWidth: 87, frameHeight: 87 });
         this.load.spritesheet('mPortraitUISprite', 'img/UI_M.png', { frameWidth: 87, frameHeight: 87 });
@@ -120,7 +121,7 @@ class SceneTravel_1 extends Phaser.Scene {
         
         var screen_travel_1 = this.add.image(960, 540, 'screen_travel_1');
         
-        var Info_Travel = this.add.text(960, 950, "In the oldest part of the woods, there is a deep cave. Two adventurers are sent there by a local guardsman, to find his missing daughter Arowia.", { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, wordWrap: { width: 900, useAdvancedWrap: true }, align: 'center' }).setOrigin( 0.5, 0.5).setX(960);
+        var Info_Travel = this.add.text(960, 950, textTravelL1[0], { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, wordWrap: { width: 900, useAdvancedWrap: true }, align: 'center' }).setOrigin( 0.5, 0.5).setX(960);
         
         this.input.manager.enabled = true;
         this.input.once('pointerdown', function () {

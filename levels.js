@@ -363,8 +363,12 @@ function ritual(energy, priestDied = false) {
     }
 }
 
+var textTravelL1 = [
+/*0*/   "In the oldest part of the woods, there is a deep cave. Two adventurers are sent there by a local guardsman, to find his missing daughter Arowia."
+]
+
 var textL1 = [
-/*0*/   "After climbing deeper and deeper, the cave widens to an underground chamber. Two pale humanoid beings with sharp teeth and black eyes are holding a woman captive. She is not the girl they wanted to rescue, but she seems to be in need for their help anyway.",
+/*0*/   "After climbing for some time, the cave widens to an underground chamber. Two pale humanoid beings with sharp teeth and black eyes are holding a woman captive. She is not the girl they wanted to rescue, but she seems to be in need for their help anyway.",
 /*1*/   "I can't see that.",
 /*2*/   "A cold and dark cave. The walls are rough and wet. There is an impressive temple, that was cut out of the stone next to a lake.",
 /*3*/   "Even though the water is crystal clear the surface of the lake only reflects the dark surroundings. That makes it impossible to tell how deep the lake truly is.",
@@ -386,13 +390,13 @@ var textL1 = [
 /*19*/  "She is not my enemy.",
 /*20*/  "I can not reach that enemy from here.",
 /*21*/  "The cast iron portal opens surprisingly smoothly. Silent chanting can be heard from deeper within the temple. Entering feels like an unwelcome intrusion.",
-/*22*/  "This corridor leads to some empty rooms. It s hard to guess what they were once used for.",
+/*22*/  "This corridor leads to some empty rooms. It's hard to guess what they were once used for.",
 /*23*/  "I found nothing of value.",
 /*24*/  "Caelith tries to retrieve the item from the bottom of the lake. But it is more likely for her to suffer from hypothermia than to reach it.",
 /*25*/  "Leng, remind me why I am doing this?",
 /*26*/  "Rhiva tries with an iron determination to retrieve the item from the bottom of the lake. After some time she resurfaces almost unconscious.",
 /*27*/  "I can try again.",
-/*28*/  "Leng dives deep and deeper to the bottom of the icy lake. Her eyes adjust quickly to the complete darkness of the lake. As she reaches for the glowing crystals she feels that something large starts to move in the water.",
+/*28*/  "Leng dives to the bottom of the icy lake. Her eyes adjusting quickly to the complete darkness. As she reaches for the glowing crystals she feels that something large starts to move in the water.",
 /*29*/  "I've got it. We should go...  Now!",
 /*30*/  "A calm and very deep lake.",
 /*31*/  "We should press on.",
