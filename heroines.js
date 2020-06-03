@@ -339,7 +339,7 @@ function showActions(_this) {
     }
     
     // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
-    if (fightmode == false || _this.actionsCounter > 0 || (_this.movementCounter >= 6 && _this.actionsCounter == 0) ) {
+    if ((fightmode == false && _this.health > 0) || _this.actionsCounter > 0 || (_this.movementCounter >= 6 && _this.actionsCounter == 0) ) {
         let adjacentEnemies = false;
         for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
             if (tileArray[_this.onTile].neighbors[i].occupiedBy == "enemy" || tileArray[_this.onTile].neighbors[i].occupiedBy == "idol") {
@@ -375,7 +375,7 @@ function showActions(_this) {
     buttonXpos += 85;
     
     // bietet den "Tür-Button" an, wenn eine Tür in Reichweite ist.
-    if (tileArray[_this.onTile].state == "0dc" || tileArray[_this.onTile].state == "0do") {
+    if ((tileArray[_this.onTile].state == "0dc" || tileArray[_this.onTile].state == "0do") && _this.health > 0) {
         doorButton.x = _this.x+buttonXpos;
         doorButton.y = _this.y;
         doorButton.setAlpha(1);
@@ -383,7 +383,7 @@ function showActions(_this) {
     }
     
     // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist
-    if (fightmode == false || _this.actionsCounter >= 0 || (_this.movementCounter) >= 6 ) {
+    if ((fightmode == false && _this.health > 0) || _this.actionsCounter >= 0 || (_this.movementCounter) >= 6 ) {
         let adjacentTrap = false;
         for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
             if (tileArray[_this.onTile].neighbors[i].state == "0t1" && trap1Sprt.alpha !=0 && trap1Sprt.frame != 1) {
@@ -435,7 +435,7 @@ function showActions(_this) {
             moveButton.setFrame(2);
             attackButton.setFrame(2);
             searchButton.setFrame(2);
-            //specialButton.setFrame(2);
+            specialButton.setFrame(2);
             cancelButton.setFrame(2);
             break;
         default:
