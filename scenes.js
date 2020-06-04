@@ -237,7 +237,9 @@ class SceneGame extends Phaser.Scene {
                 tile.distanceTravelled;
 				tile.wayPointUsefulness;
 				tile.entryPoint;
-                tile.occupiedBy = "";
+                tile.occupiedBy = [];
+                tile.neighbors = [];
+				tile.neighborsDistance = [];
                 
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
@@ -249,9 +251,6 @@ class SceneGame extends Phaser.Scene {
                             showText("", activeChar, textL1[18]);
                         }
                         activeChar.pathToTravel = path.first;
-                        /*if (fightmode == true) {
-                            activeChar.movementCounter -= path.second;
-                        }*/
                         returnCursorToNormal();
                         for (var i = 0; i < tileArray.length; i++) {
                             tileArray[i].setFrame(0);
@@ -375,8 +374,23 @@ class SceneGame extends Phaser.Scene {
                         }
                     }
                 });
-				tile.neighbors = [];
-				tile.neighborsDistance = [];
+                
+                // Passt die Daten an, wie schwer das Betreten der Tile ist, je nachdem was darauf liegt
+                tile.updateWalkability = function () {
+                    let currentWalkability = this.walkable;
+                    
+                    for (let i = 0; i < this.occupiedBy.length; j++) {
+                        
+                        // Macht Felder schwerer begehbar, wenn jemand darauf steht
+                        if (this.occupiedBy[i] instanceof Figure || this.occupiedBy[i] instanceof Enemy) {
+                            this.neighborsDistance[i] += 1;
+                        }
+                        
+                    }
+                    
+                    return currentWalkability;
+                }
+                
                 // Sammelt Informationen über alle Nachbarfelder
 				tile.checkForNeighbors = function () {
 					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != 0 && tileArray[this.name-1-matrixWidth].walkable[4] != 0) {
@@ -411,6 +425,9 @@ class SceneGame extends Phaser.Scene {
 						this.neighbors.push(tileArray[this.name-1]);
 						this.neighborsDistance.push(1*tileArray[this.name-1].walkable[3]);
 					}
+                    
+                    ///////////////////////////     ALT     ///////////////////////////////
+                    /*
                     // verändert Distanzen zu Nachbarfeldern je nach Spielsituation
                     for (let i = 0; i < this.neighbors.length; i++) {
                         // Felder mit tiefem Wasser werden leicht begehbar für gute Schwimmer
@@ -423,8 +440,31 @@ class SceneGame extends Phaser.Scene {
                         if (this.neighbors[i].occupiedBy != "") {
                             this.neighborsDistance[i] += 1;
                         }
+                    }*/
+                    ///////////////////////////     ALT     ///////////////////////////////
+                    
+                    for (let i = 0; i < this.neighbors.length; i++) {
+                        for (let j = 0; i < this.neighbors[i].occupiedBy.length; j++) {
+                            
+                            // Felder mit tiefem Wasser werden leicht begehbar für gute Schwimmer
+                            if (activeChar instanceof Figure) {
+                                if ((this.neighbors[i].state == 7 || this.neighbors[i].state == "7e9") && activeChar.skills.swim == true) {
+                                    this.neighborsDistance[i] = this.neighborsDistance[i]/3;
+                                }
+                            }
+                            
+                            // Macht Felder schwerer begehbar, wenn jemand darauf steht
+                            if (this.neighbors[i].occupiedBy[j] instanceof Figure || this.neighbors[i].occupiedBy[j] instanceof Enemy) {
+                                this.neighborsDistance[i] += 1;
+                            }
+                            
+                            
+                        }
                     }
+                    
 				}
+                
+                // Berechnet die Distanz-Luftlinie zum Ziel während des Pfadfindens
 				tile.estimatedWayToB = function (b) {
                     let a = this.name;
 					

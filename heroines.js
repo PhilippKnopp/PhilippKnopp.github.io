@@ -86,12 +86,14 @@ class Figure extends Phaser.GameObjects.Sprite {
             updateGUI();
             
             if (rangedDamage[0] == 0) {
+                rangedDamage.length = 0;
                 rangedDamage[0] = getRandomInt(this.dieSize, this.explodes);
+                rangedDamage.push(rangedDamage[0]);
                 mPortraitIcon.anims.play('mRollDie');
-                mRollText.setText(rangedDamage[0]);
+                mRollText.setText(rangedDamage[0]+"/"+rangedDamage[1]);
             } else {
                 mPortraitIcon.setFrame(3);
-                mRollText.setText(rangedDamage[0]);
+                mRollText.setText(rangedDamage[0]+"/"+rangedDamage[1]);
             }
             
             let distantEnemies = [];
@@ -119,9 +121,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 enemy.health--;
             }
             
-            if (rangedDamage[0] != 0) {
-                mRollText.setText(rangedDamage[0]);
-            }
+            mRollText.setText(rangedDamage[0]+"/"+rangedDamage[1]);
             
             // Aktion je nach Zustand des Gegners ist jetzt erst wenn Animation den Gegner schon getroffen hat.
         }
@@ -383,7 +383,7 @@ function showActions(_this) {
     }
     
     // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist
-    if ((fightmode == false && _this.health > 0) || _this.actionsCounter >= 0 || (_this.movementCounter) >= 6 ) {
+    if ((fightmode == false || _this.actionsCounter >= 0 || (_this.movementCounter) >= 6) && _this.health > 0 ) {
         let adjacentTrap = false;
         for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
             if (tileArray[_this.onTile].neighbors[i].state == "0t1" && trap1Sprt.alpha !=0 && trap1Sprt.frame != 1) {
