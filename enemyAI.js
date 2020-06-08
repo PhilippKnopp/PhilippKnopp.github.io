@@ -67,7 +67,7 @@ function enemyPlanMove (enemy) {
             clearNodes();
             
             // Schaut ob die Heldin überhaupt angegriffen werden kann.
-            let heroinIsViable = false;
+            let heroineIsViable = false;
             for (let j = 0; j < neighborsCopy.length; j++) {
                 if (neighborsCopy[j].occupiedBy != ""){
                     console.log(j + "ist schon besetzt");
@@ -76,17 +76,17 @@ function enemyPlanMove (enemy) {
                 let path = calculatePath (enemy.onTile, neighborsCopy[j].name, true);
                 if (neighborsCopy[j].name == enemy.onTile) {  // die Distanz ist 0 weil dieser Gegner schon auf dem richtigen Feld steht
                     console.log("Gegner steht schon daneben");
-                    heroinIsViable = true;
+                    heroineIsViable = true;
                     break;
                 } else if (path.second != 0) {  // eine Distanz wird zurückgegeben => Man kann auf das Feld laufen!
                     console.log("Gegner kann da hinlaufen");
-                    heroinIsViable = true;
+                    heroineIsViable = true;
                     break;
                 }
             }
             
             // Wenn die Heldin nicht angegriffen werden kann gehe zur nächsten
-            if (heroinIsViable == false) {
+            if (heroineIsViable == false) {
                 continue;
             }
             
@@ -107,7 +107,15 @@ function enemyPlanMove (enemy) {
             // Priorisiere Helden die günstig stehen (Faktor 2)
             let distancesToThisHeroine = [];
             for (let j = 0; j < neighborsCopy.length; j++) {
-                if (neighborsCopy[j].occupiedBy != "" && neighborsCopy[j].name != enemy.onTile){
+                
+                let validPlace = true;
+                for (let i = 0; i < neighborsCopy[j].occupiedBy.length; i++) {
+                    if (neighborsCopy[j].occupiedBy[i] instanceof Figure || neighborsCopy[j].occupiedBy[i] instanceof Enemy) {
+                        validPlace = false;
+                    }
+                }
+                
+                if (validPlace && neighborsCopy[j].name != enemy.onTile){
                     continue;
                 }
                 let path = calculatePath(enemy.onTile, neighborsCopy[j].name, true);
@@ -140,7 +148,7 @@ function enemyPlanMove (enemy) {
             
             // Priorisiert Helden die bereits mit einem Gegner kämpfen (Faktor 1)
             for (let j = 0; j < neighborsCopy.length; j++) {
-                if (neighborsCopy[j].occupiedBy == "enemy" && neighborsCopy[j] != enemy.onTile) {
+                if (neighborsCopy[j].occupiedBy.findIndex() == "enemy" && neighborsCopy[j] != enemy.onTile) {
                     console.log("Flankiert +1");
                     victimRanking[i] += 1;
                     break;  // Bonus wird nur einmal vergeben.

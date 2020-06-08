@@ -27,7 +27,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
         
         this.setOnMap = function () {
             if (this.name != "Ordrak" || eventReminder.ritualState == "succesful") {
-                tileArray[this.onTile].occupiedBy = "enemy";
+                tileArray[this.onTile].occupiedBy.push(this);
                 this.setAlpha(1);
                 this.x = tileArray[this.onTile].x;
                 this.y = tileArray[this.onTile].y;
@@ -35,17 +35,13 @@ class Enemy extends Phaser.GameObjects.Sprite {
         };
         
         this.enterTile = function () {
-            let changeTileOccupation = true;
-            for (var i = 0; i < figuresOnMap.length; i++) {
-                if (figuresOnMap[i].onTile == this.onTile && figuresOnMap[i] != this) {
-                    changeTileOccupation = false;
-                }
-            }
-            if (changeTileOccupation == true) {
-                tileArray[this.onTile].occupiedBy = "";
-            }
+            // findet die aktuelle Position dieser Figur auf dieser Tile (Z-Wert)...
+            let index = tileArray[this.onTile].occupiedBy.indexOf(this);
+            // ... und löscht sie aus dieser Ebene
+            tileArray[this.onTile].occupiedBy.splice(index, 1);
+            
             this.onTile = this.pathToTravel.shift(); // onTile wird zu em ersten Pfadschritt und dieser wird dann entfernt
-            tileArray[this.onTile].occupiedBy = "enemy";
+            tileArray[this.onTile].occupiedBy.push(this);
             enemyVisibility();
             checkFightmode();
             /*if (typeof tileArray[this.onTile].state === 'string') {
@@ -103,6 +99,21 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 }
                 checkFightmode();
             }
+        }
+        
+        this.modifyWalkability = function (baseWalkability) {
+            for (let i = 0; i < baseWalkability.length; i++) {
+                if (activeChar != null) {
+                    if (activeChar instanceof Figure) {
+                        baseWalkability[i] = 0;
+                    } else if (baseWalkability[i] != 0) {
+                        baseWalkability[i] += 1;
+                    }
+                } else {
+                    alert ("Line 117 in enemies: activeChar == null");
+                }
+            }
+            return baseWalkability;
         }
         
     }

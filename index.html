@@ -11,6 +11,7 @@
     <script src="//cdn.jsdelivr.net/npm/phaser@3.23.0/dist/phaser.min.js"></script>
     <script src="scenes.js"></script>
     <script src="levels.js"></script>
+    <script src="items.js"></script>
     <script src="heroines.js"></script>
     <script src="enemies.js"></script>
     <script src="animations.js"></script>
@@ -136,7 +137,7 @@
             figuresOnMap[i].setOnMap();
         }
         
-        tileArray[941].occupiedBy = "idol";
+        tileArray[941].occupiedBy.push(idol);
         eventDispatch("e1");
     }
 

@@ -375,92 +375,108 @@ class SceneGame extends Phaser.Scene {
                     }
                 });
                 
-                // Passt die Daten an, wie schwer das Betreten der Tile ist, je nachdem was darauf liegt
-                tile.updateWalkability = function () {
-                    let currentWalkability = this.walkable;
+                // Passt die Daten an, wie schwer das Betreten dieser Tile aktuell ist
+                tile.updateWalkable = function () {
+                    let currentWalkable = this.walkable;
                     
-                    for (let i = 0; i < this.occupiedBy.length; j++) {
-                        
-                        // Macht Felder schwerer begehbar, wenn jemand darauf steht
-                        if (this.occupiedBy[i] instanceof Figure || this.occupiedBy[i] instanceof Enemy) {
-                            this.neighborsDistance[i] += 1;
+                    // Felder mit tiefem Wasser werden leicht begehbar für gute Schwimmer
+                    if (activeChar instanceof Figure) {
+                        if ((this.state == 7 || this.state == "7e9") && activeChar.skills.swim == true) {
+                            currentWalkable = currentWalkable/3;
                         }
-                        
                     }
                     
-                    return currentWalkability;
+                    // Geht Objecte durch die auf der Tile liegen und modifiziert aktuelle Begehbarkeit
+                    for (let i = 0; i < this.occupiedBy.length; i++) {
+                        currentWalkable = occupiedBy[i].modifyWalkable(currentWalkable);
+                    }
+                    
+                    return currentWalkable;
                 }
                 
                 // Sammelt Informationen über alle Nachbarfelder
 				tile.checkForNeighbors = function () {
+                    
+                    //  B   -   -
+                    //  -   A   -
+                    //  -   -   -
 					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != 0 && tileArray[this.name-1-matrixWidth].walkable[4] != 0) {
-						this.neighbors.push(tileArray[this.name-1-matrixWidth]);
-						this.neighborsDistance.push(1.5*tileArray[this.name-1-matrixWidth].walkable[4]);
+						let currentWalkableOfThisNeighbor = tileArray[this.name-1-matrixWidth].updateWalkable();
+                        if (currentWalkableOfThisNeighbor != 0) {
+                            this.neighbors.push(tileArray[this.name-1-matrixWidth]);
+                            this.neighborsDistance.push(1.5*currentWalkableOfThisNeighbor[4]);
+                        }
 					}
+                    //  -   B   -
+                    //  -   A   -
+                    //  -   -   -
 					if (this.name-matrixWidth >= 0 && tileArray[this.name-matrixWidth].walkable[5] != 0) {
-						this.neighbors.push(tileArray[this.name-matrixWidth]);
-						this.neighborsDistance.push(1*tileArray[this.name-matrixWidth].walkable[5]);
+						let currentWalkableOfThisNeighbor = tileArray[this.name-matrixWidth].updateWalkable();
+                        if (currentWalkableOfThisNeighbor != 0) {
+                            this.neighbors.push(tileArray[this.name-matrixWidth]);
+                            this.neighborsDistance.push(1*tileArray[this.name-matrixWidth].walkable[5]);
+                        }
 					}
+                    //  -   -   B
+                    //  -   A   -
+                    //  -   -   -
 					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name-matrixWidth+1].walkable[6] != 0) {
-						this.neighbors.push(tileArray[this.name-matrixWidth+1]);
-						this.neighborsDistance.push(1.5*tileArray[this.name-matrixWidth+1].walkable[6]);
+                        let currentWalkableOfThisNeighbor = tileArray[this.name-matrixWidth+1].updateWalkable();
+                        if (currentWalkableOfThisNeighbor != 0) {
+                            this.neighbors.push(tileArray[this.name-matrixWidth+1]);
+                            this.neighborsDistance.push(1.5*tileArray[this.name-matrixWidth+1].walkable[6]);
+                        }
 					}
+                    //  -   -   -
+                    //  -   A   B
+                    //  -   -   -
 					if (this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name+1].walkable[7] != 0) {
-						this.neighbors.push(tileArray[this.name+1]);
-						this.neighborsDistance.push(1*tileArray[this.name+1].walkable[7]);
+                        let currentWalkableOfThisNeighbor = tileArray[this.name+1].updateWalkable();
+                        if (currentWalkableOfThisNeighbor != 0) {
+                            this.neighbors.push(tileArray[this.name+1]);
+                            this.neighborsDistance.push(1*tileArray[this.name+1].walkable[7]);
+                        }
 					}
+                    //  -   -   -
+                    //  -   A   -
+                    //  -   -   B
 					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name+1+matrixWidth].walkable[0] != 0) {
-						this.neighbors.push(tileArray[this.name+1+matrixWidth]);
-						this.neighborsDistance.push(1.5*tileArray[this.name+1+matrixWidth].walkable[0]);
+                        let currentWalkableOfThisNeighbor = tileArray[this.name+1+matrixWidth].updateWalkable();
+                        if (currentWalkableOfThisNeighbor != 0) {
+                            this.neighbors.push(tileArray[this.name+1+matrixWidth]);
+                            this.neighborsDistance.push(1.5*tileArray[this.name+1+matrixWidth].walkable[0]);
+                        }
 					}
+                    //  -   -   -
+                    //  -   A   -
+                    //  -   B   -
 					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && tileArray[this.name+matrixWidth].walkable[1] != 0) {
-						this.neighbors.push(tileArray[this.name+matrixWidth]);
-						this.neighborsDistance.push(1*tileArray[this.name+matrixWidth].walkable[1]);
+                        let currentWalkableOfThisNeighbor = tileArray[this.name+matrixWidth].updateWalkable();
+                        if (currentWalkableOfThisNeighbor != 0) {
+                            this.neighbors.push(tileArray[this.name+matrixWidth]);
+                            this.neighborsDistance.push(1*tileArray[this.name+matrixWidth].walkable[1]);
+                        }
 					}
+                    //  -   -   -
+                    //  -   A   -
+                    //  B   -   -
 					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && this.name%matrixWidth != 0 && tileArray[this.name-1+matrixWidth].walkable[2] != 0) {
-						this.neighbors.push(tileArray[this.name-1+matrixWidth]);
-						this.neighborsDistance.push(1.5*tileArray[this.name-1+matrixWidth].walkable[2]);
+                        let currentWalkableOfThisNeighbor = tileArray[this.name-1+matrixWidth].updateWalkable();
+                        if (currentWalkableOfThisNeighbor != 0) {
+                            this.neighbors.push(tileArray[this.name-1+matrixWidth]);
+                            this.neighborsDistance.push(1.5*tileArray[this.name-1+matrixWidth].walkable[2]);
+                        }
 					}
+                    //  -   -   -
+                    //  B   A   -
+                    //  -   -   -
 					if (this.name%matrixWidth != 0 && tileArray[this.name-1].walkable[3] != 0) {
-						this.neighbors.push(tileArray[this.name-1]);
-						this.neighborsDistance.push(1*tileArray[this.name-1].walkable[3]);
+                        let currentWalkableOfThisNeighbor = tileArray[this.name-1].updateWalkable();
+                        if (currentWalkableOfThisNeighbor != 0) {
+                            this.neighbors.push(tileArray[this.name-1]);
+                            this.neighborsDistance.push(1*tileArray[this.name-1].walkable[3]);
+                        }
 					}
-                    
-                    ///////////////////////////     ALT     ///////////////////////////////
-                    /*
-                    // verändert Distanzen zu Nachbarfeldern je nach Spielsituation
-                    for (let i = 0; i < this.neighbors.length; i++) {
-                        // Felder mit tiefem Wasser werden leicht begehbar für gute Schwimmer
-                        if (activeChar instanceof Figure) {
-                            if ((this.neighbors[i].state == 7 || this.neighbors[i].state == "7e9") && activeChar.skills.swim == true) {
-                                this.neighborsDistance[i] = this.neighborsDistance[i]/3;
-                            }
-                        }
-                        // Macht Felder schwerer begehbar, wenn jemand darauf steht
-                        if (this.neighbors[i].occupiedBy != "") {
-                            this.neighborsDistance[i] += 1;
-                        }
-                    }*/
-                    ///////////////////////////     ALT     ///////////////////////////////
-                    
-                    for (let i = 0; i < this.neighbors.length; i++) {
-                        for (let j = 0; i < this.neighbors[i].occupiedBy.length; j++) {
-                            
-                            // Felder mit tiefem Wasser werden leicht begehbar für gute Schwimmer
-                            if (activeChar instanceof Figure) {
-                                if ((this.neighbors[i].state == 7 || this.neighbors[i].state == "7e9") && activeChar.skills.swim == true) {
-                                    this.neighborsDistance[i] = this.neighborsDistance[i]/3;
-                                }
-                            }
-                            
-                            // Macht Felder schwerer begehbar, wenn jemand darauf steht
-                            if (this.neighbors[i].occupiedBy[j] instanceof Figure || this.neighbors[i].occupiedBy[j] instanceof Enemy) {
-                                this.neighborsDistance[i] += 1;
-                            }
-                            
-                            
-                        }
-                    }
                     
 				}
                 

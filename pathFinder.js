@@ -33,21 +33,23 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
     // gehe folgende Schleife solange durch bis es einen Weg gibt
     mapperLoop: while (pathFound == false) {
         
-        // gehe frontierList durch nach niedrigster wayPointUsefulness oder
-        frontierListValues.length = 0;
-        for (var i = 0; i < frontierList.length; i++) {
-            frontierListValues.push(frontierList[i].wayPointUsefulness);
-        }
+        // Wenn kein Weg möglich ist brich diese Schleife ab
         if (frontierList.length == 0) {
             pathToTravel = [];
             break mapperLoop;
+        }
+        
+        // gehe frontierList durch nach niedrigster wayPointUsefulness
+        frontierListValues.length = 0;
+        for (let i = 0; i < frontierList.length; i++) {
+            frontierListValues.push(frontierList[i].wayPointUsefulness);
         }
 
         activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
         
         // Wenn Knoten mit Niedrigster wayPointUsefulness schon das Ziel ist, ist A* fertig
         if (frontierList[activeNode].name == endIndex) {
-            pathFound = true; // unterbricht das Pfadsuchen
+            pathFound = true; // unterbricht diese Schleife und damit das Pfadsuchen
             let backtraceIndex = endIndex; // Sucht den Index des Zielfeldes
             pathToTravel.unshift(backtraceIndex); // Fügt das Zielfeld dem Pfad hinzu
             
@@ -63,7 +65,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
         frontierList[activeNode].checkForNeighbors();
         
         // Füge Neighbors des aktuellen Knotens der Frontierlist hinzu
-        for (var i = 0; i < frontierList[activeNode].neighbors.length; i++) {
+        for (let i = 0; i < frontierList[activeNode].neighbors.length; i++) {
             
             let distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
             if (containsObject(frontierList[activeNode].neighbors[i], frontierList)) {
@@ -73,10 +75,6 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
                     frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
                 }
             } else if (containsObject(frontierList[activeNode].neighbors[i], mappedList)) {
-                continue;
-            } else if ((frontierList[activeNode].neighbors[i].occupiedBy == "enemy" || frontierList[activeNode].neighbors[i].occupiedBy == "idol") && tileArray[startIndex].occupiedBy == "figure") {
-                continue;
-            } else if ((frontierList[activeNode].neighbors[i].occupiedBy == "figure" || frontierList[activeNode].neighbors[i].occupiedBy == "idol") && tileArray[startIndex].occupiedBy == "enemy") {
                 continue;
             } else {
                 frontierList[activeNode].neighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
@@ -93,7 +91,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
         
     // wenn gerade ein Kampf ist soll die Bewegung begrenzt sein auf die Maximale Bewegungsweite des aktiven Charakters
     if (fightmode == true && onlyMeasure == false) {
-        movementStopper: for (var l = 0; l < pathToTravel.length; l++) {
+        movementStopper: for (let l = 0; l < pathToTravel.length; l++) {
             if (tileArray[pathToTravel[l]].distanceTravelled > activeChar.movementCounter) {
                 pathToTravel.length = l;
                 break movementStopper;
@@ -103,7 +101,14 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
     
     // wenn das Ziefeld der Bewegung besetzt ist wird es gekürzt bis die Bewegung auf einem leeren Feld endet oder keine Bewegung zustande kommt
     endIsFree: while (pathToTravel.length > 0) {
-        if (tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy != "") {
+        let validEnd = true;
+        for (let i = 0; i < tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy.length; i++) {
+            if (tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy[i] instanceof Figure || tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy[i] instanceof Enemy) {
+                validEnd = false;
+            }
+        }
+        
+        if (validEnd == false) {
             pathToTravel.length = pathToTravel.length-1;
         } else {
             break endIsFree;
