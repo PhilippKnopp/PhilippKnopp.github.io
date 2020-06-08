@@ -268,7 +268,6 @@ class SceneGame extends Phaser.Scene {
                         if (lineOfSight (activeChar.onTile, this.name) == true) {
                             if (this.info == 3 && crystal1Img.alpha != 0) {
                                 crystal1Img.setAlpha(1);
-                                tileArray[120].state = "7e9";
                                 showText(textL1[this.info], activeChar, textL1[4]);
                             } else if (this.info == 3 && crystal1Img.alpha == 0) {
                                 showText(textL1[30], activeChar, textL1[31]);

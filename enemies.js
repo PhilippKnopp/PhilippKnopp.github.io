@@ -35,10 +35,8 @@ class Enemy extends Phaser.GameObjects.Sprite {
         };
         
         this.enterTile = function () {
-            // findet die aktuelle Position dieser Figur auf dieser Tile (Z-Wert)...
-            let index = tileArray[this.onTile].occupiedBy.indexOf(this);
-            // ... und löscht sie aus dieser Ebene
-            tileArray[this.onTile].occupiedBy.splice(index, 1);
+            // findet die aktuelle Position dieser Figur auf dieser Tile (Z-Wert) und löscht sie aus dieser Ebene
+            tileArray[this.onTile].occupiedBy.splice(tileArray[this.onTile].occupiedBy.indexOf(this), 1);
             
             this.onTile = this.pathToTravel.shift(); // onTile wird zu em ersten Pfadschritt und dieser wird dann entfernt
             tileArray[this.onTile].occupiedBy.push(this);
@@ -84,7 +82,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.checkHealth = function () {
             if (this.health <= 0) {
                 this.setAlpha(0);
-                tileArray[this.onTile].occupiedBy = "";
+                tileArray[this.onTile].occupiedBy.splice(tileArray[this.onTile].occupiedBy.indexOf(this), 1);
                 figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
                 addXP(this.loot);
                 if (this.name == "Ordrak") {
@@ -103,14 +101,12 @@ class Enemy extends Phaser.GameObjects.Sprite {
         
         this.modifyWalkability = function (baseWalkability) {
             for (let i = 0; i < baseWalkability.length; i++) {
-                if (activeChar != null) {
-                    if (activeChar instanceof Figure) {
-                        baseWalkability[i] = 0;
-                    } else if (baseWalkability[i] != 0) {
-                        baseWalkability[i] += 1;
-                    }
+                if (activeChar instanceof Figure) {
+                    baseWalkability[i] = 0;
+                } else if (baseWalkability[i] != 0) {
+                    baseWalkability[i] += 1;
                 } else {
-                    alert ("Line 117 in enemies: activeChar == null");
+                    alert ("Line 111 in enemies");
                 }
             }
             return baseWalkability;
@@ -131,13 +127,13 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 showActions(activeChar);
             }
         } else if (attackButton.state == 2) {
-            if (lineOfSight (activeChar.onTile, this.onTile) == true) { // Line of sight to enemy: Ranged Attack
+            if (lineOfSight (activeChar.onTile, this.onTile)) { // Line of sight to enemy: Ranged Attack
                 activeChar.rangedAttack(this);
             } else { // No Line of sight to enemy: I Can Not See That
                 showText("", activeChar, textL1[1]);
             }
         } else if (searchButton.state == 1) {
-            if (lineOfSight (activeChar.onTile, this.onTile) == true) {
+            if (lineOfSight (activeChar.onTile, this.onTile)) {
                 showText(textL1Chars[this.description]);
             } else {
                 showText("", activeChar, textL1[1]);

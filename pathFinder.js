@@ -76,7 +76,11 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
                 }
             } else if (containsObject(frontierList[activeNode].neighbors[i], mappedList)) {
                 continue;
-            } else {
+            }/* else if ((frontierList[activeNode].neighbors[i].occupiedBy == "enemy" || frontierList[activeNode].neighbors[i].occupiedBy == "idol") && tileArray[startIndex].occupiedBy == "figure") {
+                continue;
+            } else if ((frontierList[activeNode].neighbors[i].occupiedBy == "figure" || frontierList[activeNode].neighbors[i].occupiedBy == "idol") && tileArray[startIndex].occupiedBy == "enemy") {
+                continue;
+            } */else {
                 frontierList[activeNode].neighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
                 frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB(endIndex);
                 frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;

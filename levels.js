@@ -16,9 +16,9 @@ var level1Type = [
     5, 5, 6, 0, 5, 5, 5, 5, 5, 5, 5, 6, 0, "0dc", "0dc", 0, 0, 0, "0do", "0do", 0, 5, 5, 5, 5, // 374
     5, 5, 6, 0, 6, 5, 5, 5, 5, 5, 5, 5, 0, "0dc", "0dc", 0, 0, 0, "0do", "0do", 0, 0, 0, "0e3", 5, //399
     5, 5, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 0, "0dc", "0dc", 0, 0, 0, "0do", "0do", 0, 5, 5, 5, 5,
-    5, 0, 0, 6, 5, 5, 5, 5, 5, 6, 6, 6, "0t1", "0t1", 5, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5,
-    5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, "0t1", "0t1", 5, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5,
-    5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, "0t1", "0t1", 5, 0, 0, 0, "0dc", "0dc", "0dc", 5, 5, 5, 5, //499
+    5, 0, 0, 6, 5, 5, 5, 5, 5, 6, 6, 6, 0, 0, 5, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5,
+    5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 0, 0, 5, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5,
+    5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 0, 0, 5, 0, 0, 0, "0dc", "0dc", "0dc", 5, 5, 5, 5, //499
     5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, "0dc", "0dc", "0dc", 5, 5, 5, 5,
     5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, "0dc", "0dc", "0dc", 0, 0, 0, 5, 5, 5, 5,
     5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5,
@@ -298,7 +298,7 @@ function ritual(energy, priestDied = false) {
         eventReminder.ritualProgress = 0;
         circle1Img.setAlpha(1);
         eventReminder.ritualState = "succesful";
-        let ordrak = figuresOnMap[figuresOnMap.findIndex((element) => element.name == "Ordrak")];
+        //let ordrak = figuresOnMap[figuresOnMap.findIndex((element) => element.name == "Ordrak")];
         tileArray[755].walkable = [1,1,1,1,1,1,1,1];
         ordrak.setOnMap();
         showText(textL1[45]);
@@ -311,7 +311,7 @@ function ritual(energy, priestDied = false) {
         if (eventReminder.ritualMembers <= 0) {
             eventReminder.ritualState = "failed";
             circle1Img.setAlpha(0);
-            let ordrak = figuresOnMap[figuresOnMap.findIndex((element) => element.name == "Ordrak")];
+            //let ordrak = figuresOnMap[figuresOnMap.findIndex((element) => element.name == "Ordrak")];
             ordrak.health = 0;
             tileArray[755].walkable = [1,1,1,1,1,1,1,1];
             swirl1.setVisible(false);

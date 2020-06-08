@@ -169,15 +169,3 @@ function showSpellFX(attacker, victim) {
     spellFX1.setDepth(1);
     spellFX1.anims.play('spell1');
 }
-
-/*
-function animComplete (animation, frame)
-{
-    //  Animation is over, let's fade the sprite out
-    this.tweens.add({
-        targets: gem,
-        duration: 3000,
-        alpha: 0
-    });
-}
-*/

@@ -56,7 +56,6 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         this.enterTile = function () {
-            
             // findet die aktuelle Position dieser Figur auf dieser Tile (Z-Wert)...
             let index = tileArray[this.onTile].occupiedBy.indexOf(this);
             // ... und löscht sie aus dieser Ebene
@@ -67,8 +66,8 @@ class Figure extends Phaser.GameObjects.Sprite {
             enemyVisibility();
             checkFightmode();
             // tileVisibility();
-            if (typeof tileArray[this.onTile].state === 'string') {
-                eventDispatch(tileArray[this.onTile].state);
+            for (let i = 0; i < tileArray[this.onTile].occupiedBy.length-1; i++) {
+                tileArray[this.onTile].occupiedBy[i].enterTile();
             }
         }
         
@@ -185,14 +184,12 @@ class Figure extends Phaser.GameObjects.Sprite {
         
         this.modifyWalkability = function (baseWalkability) {
             for (let i = 0; i < baseWalkability.length; i++) {
-                if (activeChar != null) {
-                    if (activeChar instanceof Enemy) {
-                        baseWalkability[i] = 0;
-                    } else if (baseWalkability[i] != 0) {
-                        baseWalkability[i] += 1;
-                    }
+                if (baseWalkability[i] != 0 && activeChar instanceof Enemy) {
+                    baseWalkability[i] += 6;
+                } else if (baseWalkability[i] != 0 && activeChar instanceof Figure) {
+                    baseWalkability[i] += 1;
                 } else {
-                    alert ("Line 199 in heroines: activeChar == null");
+                    alert ("Line 192");
                 }
             }
             return baseWalkability;
@@ -243,16 +240,10 @@ class Figure extends Phaser.GameObjects.Sprite {
     checkStealth() {
         let enemyIndexes = [];
         let enemyDefs = [];
-        // Alle Feinde auflisten
-        for (var i = 0; i < figuresOnMap.length; i++) {
-            if (tileArray[figuresOnMap[i].onTile].occupiedBy == "enemy") {
-                enemyIndexes.push(figuresOnMap[i]);
-            }
-        }
         // Sucht alle Gegner Verteidigungen und sammelt sie in enemyDefs
-        for (var k = 0; k < enemyIndexes.length; k++) {
-            if (lineOfSight (this.onTile, enemyIndexes[k].onTile)) {
-                enemyDefs.push(enemyIndexes[k].def);
+        for (let i = 0; i < figuresOnMap.length; i++) {
+            if (figuresOnMap[i] instanceof Enemy && lineOfSight (this.onTile, figuresOnMap[i].onTile)) {
+                enemyDefs.push(figuresOnMap[i].def);
             }
         }
         let stealthRoll = getRandomInt(this.dieSize, false);
@@ -268,7 +259,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     checkIfHidden() {
         // Schaut ob ein Feind Sichtlinie zum Rogue hat
         for (var i = 0; i < figuresOnMap.length; i++) {
-            if (figuresOnMap[i] instanceof Enemy && lineOfSight(this.onTile, figuresOnMap[i].onTile) == true) {
+            if (figuresOnMap[i] instanceof Enemy && lineOfSight(this.onTile, figuresOnMap[i].onTile)) {
                 return false;
             }
         }
@@ -352,8 +343,8 @@ function showActions(_this) {
     // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
     if ((fightmode == false && _this.health > 0) || _this.actionsCounter > 0 || (_this.movementCounter >= 6 && _this.actionsCounter == 0) ) {
         let adjacentEnemies = false;
-        for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
-            if (tileArray[_this.onTile].neighbors[i].occupiedBy == "enemy" || tileArray[_this.onTile].neighbors[i].occupiedBy == "idol") {
+        for (let i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
+            if (checkFor (tileArray[_this.onTile].neighbors[i].occupiedBy, Enemy) || tileArray[_this.onTile].neighbors[i].occupiedBy.includes(idol)) {
                 adjacentEnemies = true;
             }
         }
@@ -364,8 +355,8 @@ function showActions(_this) {
             buttonXpos += 85;
         } else if (_this == mage) {
             let distantEnemies = false;
-            for (var i = 0; i < tileArray.length; i++) {
-                if (lineOfSight(_this.onTile, i) == true && (tileArray[i].occupiedBy == "enemy" || tileArray[i].occupiedBy == "idol")) {
+            for (let i = 0; i < tileArray.length; i++) {
+                if (lineOfSight(_this.onTile, i) && (checkFor (tileArray[i].occupiedBy, Enemy) || tileArray[i].occupiedBy.includes(idol))) {
                     distantEnemies = true;
                 }
             }
@@ -396,8 +387,8 @@ function showActions(_this) {
     // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist
     if ((fightmode == false || _this.actionsCounter >= 0 || (_this.movementCounter) >= 6) && _this.health > 0 ) {
         let adjacentTrap = false;
-        for (var i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
-            if (tileArray[_this.onTile].neighbors[i].state == "0t1" && trap1Sprt.alpha !=0 && trap1Sprt.frame != 1) {
+        for (let i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
+            if (tileArray[_this.onTile].neighbors[i].occupiedBy.includes(trap1) && trap1Sprt.alpha != 0 && trap1Sprt.frame != 1) {
                 adjacentTrap = true;
             }
         }
@@ -453,7 +444,7 @@ function showActions(_this) {
             break;
     }
     
-    tileArray[_this.onTile].neighbors.length = 0;
+    clearNodes();
     
     if (doorButton.alpha == 0 && moveButton.alpha == 0 && attackButton.alpha == 0 && (specialButton.alpha == 0 || _this != rogue) ) {
         returnCursorToNormal();
