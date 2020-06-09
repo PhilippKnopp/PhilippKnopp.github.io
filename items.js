@@ -7,6 +7,8 @@ const idol = {
         return baseWalkability;
     },
     destroy: function () {
+        eventReminder.e7 = true;
+        showText(textL1[46], mage, textL1[47], rogue, textL1[48]);
         addXP (20);
         idol1Img.setAlpha(1);
         for (let i = 0; i < figuresOnMap.length; i++) {
@@ -18,6 +20,7 @@ const idol = {
                 figuresOnMap[i].specialAttack.name.push("darkness");
             }
         }
+        tileArray[941].occupiedBy.splice(tileArray[941].occupiedBy.indexOf(this), 1);
     }
 };
 
@@ -98,3 +101,13 @@ const trap1 = {
         showActions(activeChar);
     }
 }
+
+/*
+
+Finde Index von Object:
+let index = tileArray[i].occupiedBy.indexOf(object);
+
+Lösche item mit Index:
+tileArray[i].occupiedBy.splice(index, 1);
+
+*/

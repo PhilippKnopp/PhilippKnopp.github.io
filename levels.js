@@ -394,4 +394,3 @@ var textL1Chars = [
 /*5*/   "A black robe and an unholy symbol show this pale-one‘s sinister power and status. He fanatically swings a vicious iron mace.",
 /*6*/   "A large demon made of smoke and coiling black oil. He is unmitigated brutality but something seems to hold him back."
 ];
-

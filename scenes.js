@@ -223,7 +223,6 @@ class SceneGame extends Phaser.Scene {
 				tile.state = 0;
                 /*  States:
                     state = 0      normaler Boden          [1,1,1,1,1,1,1,1]
-					state = "0t1"  Trap
 					state = "0dc"  Türe geschlossen
 					state = "0do"  Türe offen
 					state = 5      Wand                    [0,0,0,0,0,0,0,0]
@@ -234,17 +233,20 @@ class SceneGame extends Phaser.Scene {
                 tile.name = index++;
                 tile.info = 1;
 				tile.walkable = [1,1,1,1,1,1,1,1];
+                tile.cWalkable = [];
                 tile.distanceTravelled;
 				tile.wayPointUsefulness;
 				tile.entryPoint;
                 tile.occupiedBy = [];
-                tile.neighbors = [];
-				tile.neighborsDistance = [];
+                tile.neighbors = [];            // Alle Nachbarn, die trotz Gelände erreichbar sind
+				tile.neighborsDistance = [];    // Distanzen, in der Reihenfolge zu tile.neighbors
+                tile.cNeighbors = [];           // Alle Nachbarn, die noch übrig sind, wenn man Gegenstände und Figuren mit einbezieht
+                tile.cNeighborsDistance = [];   // Distanzen, in der Reihenfolge zu tile.cNeighbors
                 
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
                     
-					if (moveButton.state == 1 && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol") {
+					if (moveButton.state == 1 && (currentWalkable.indexOf(1) > -1 || currentWalkable.indexOf(2) > -1 || currentWalkable.indexOf(3) > -1)) {
                     // Bewegung soll starten, nichts ist auf der Tile und diese ist von einer Seite aus begehbar
                         let path = calculatePath(activeChar.onTile, this.name);
                         if (path.first.length == 0) {
@@ -265,7 +267,7 @@ class SceneGame extends Phaser.Scene {
                     }
                     
                     if (searchButton.state == 1) {
-                        if (lineOfSight (activeChar.onTile, this.name) == true) {
+                        if (lineOfSight (activeChar.onTile, this.name)) {
                             if (this.info == 3 && crystal1Img.alpha != 0) {
                                 crystal1Img.setAlpha(1);
                                 showText(textL1[this.info], activeChar, textL1[4]);
@@ -282,31 +284,30 @@ class SceneGame extends Phaser.Scene {
                         }
                         returnCursorToNormal();
                         showActions(activeChar);
-                    } else if (attackButton.state == 1 && this.occupiedBy == "idol") {
+                    } else if (attackButton.state == 1 && this.occupiedBy.indexOf(idol) != -1) {
                     // Das Relikt steht benachbart und man möchte es angreifen
                         this.checkForNeighbors();
                         for (let i = 0; i < this.neighbors.length; i++) {
                             if (this.neighbors[i].name == activeChar.onTile) {
-                                this.occupiedBy = "";
-                                eventDispatch ("e7");
+                                idol.destroy();
                             }
                         }
                         this.neighbors.length = 0;
                         returnCursorToNormal();
                         showActions(activeChar);
-                    } else if (attackButton.state == 2 && this.occupiedBy == "idol") {
+                    } else if (attackButton.state == 2 && this.occupiedBy.indexOf(idol) != -1) {
                     // Das Relikt soll im Fernkampf angegriffen werden
-                        if (lineOfSight (activeChar.onTile, this.name) == true) {
-                            this.occupiedBy = "";
-                            eventDispatch ("e7");
+                        if (lineOfSight (activeChar.onTile, this.name)) {
+                            idol.destroy();
                         }
                         returnCursorToNormal();
                         showActions(activeChar);
                     }
 				});
                 tile.on("pointerover", function pointerOver () {
+                    let currentWalkable = this.updateWalkable();
                     // Soll beim Hovern über einer Tile in der Bewegungs-Planung der Pfad dorthin gezeigt werden?
-                    if (moveButton.state == 1 && (this.walkable.indexOf(1) > -1 || this.walkable.indexOf(2) > -1 || this.walkable.indexOf(3) > -1) && this.occupiedBy != "idol") {
+                    if (moveButton.state == 1 && (this.currentWalkable.indexOf(1) > -1 || this.currentWalkable.indexOf(2) > -1 || this.currentWalkable.indexOf(3) > -1)) {
                         // Berechnet Pfad den die Heldin hier her laufen würde
                         let path = calculatePath(activeChar.onTile, this.name);
                         // Färbt Pfad entsprechend der Schwierigkeit des Terrains ein
@@ -351,7 +352,7 @@ class SceneGame extends Phaser.Scene {
                             }
                             
                             // Wer gut schwimmen kann, kann sich in tiefem Wasserr leicht bewegen
-                            if ((tileArray[path.first[i]].state == 7 || tileArray[path.first[i]].state == "7e9") && activeChar.skills.swim == true) {
+                            if (tileArray[path.first[i]].state == 7 && activeChar.skills.swim == true) {
                                 difficulty = 1;
                             }
                             
@@ -376,21 +377,19 @@ class SceneGame extends Phaser.Scene {
                 
                 // Passt die Daten an, wie schwer das Betreten dieser Tile aktuell ist
                 tile.updateWalkable = function () {
-                    let currentWalkable = this.walkable;
-                    
+                    this.cWalkable = [...this.walkable];
                     // Felder mit tiefem Wasser werden leicht begehbar für gute Schwimmer
                     if (activeChar instanceof Figure) {
-                        if ((this.state == 7 || this.state == "7e9") && activeChar.skills.swim == true) {
-                            currentWalkable = currentWalkable/3;
+                        if (this.state == 7 && activeChar.skills.swim == true) {
+                            for (let i = 0; i < this.cWalkable.length; i++) {
+                                this.cWalkable[i] = this.cWalkable[i]/3;
+                            }
                         }
                     }
-                    
                     // Geht Objecte durch die auf der Tile liegen und modifiziert aktuelle Begehbarkeit
                     for (let i = 0; i < this.occupiedBy.length; i++) {
-                        currentWalkable = occupiedBy[i].modifyWalkable(currentWalkable);
+                        this.cWalkable = this.occupiedBy[i].modifyWalkable(this.cWalkable);
                     }
-                    
-                    return currentWalkable;
                 }
                 
                 // Sammelt Informationen über alle Nachbarfelder
@@ -400,82 +399,116 @@ class SceneGame extends Phaser.Scene {
                     //  -   A   -
                     //  -   -   -
 					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != 0 && tileArray[this.name-1-matrixWidth].walkable[4] != 0) {
-						let currentWalkableOfThisNeighbor = tileArray[this.name-1-matrixWidth].updateWalkable();
-                        if (currentWalkableOfThisNeighbor != 0) {
-                            this.neighbors.push(tileArray[this.name-1-matrixWidth]);
-                            this.neighborsDistance.push(1.5*currentWalkableOfThisNeighbor[4]);
+                        this.neighbors.push(tileArray[this.name-1-matrixWidth]);
+                        this.neighborsDistance.push(1.5*tileArray[this.name-1-matrixWidth].walkable[4]);
+                        
+						tileArray[this.name-1-matrixWidth].updateWalkable();
+                        
+                        if (tileArray[this.name-1-matrixWidth].cWalkable[4] != 0) {
+                            this.cNeighbors.push(tileArray[this.name-1-matrixWidth]);
+                            this.cNeighborsDistance.push(1.5*tileArray[this.name-1-matrixWidth].cWalkable[4]);
                         }
 					}
                     //  -   B   -
                     //  -   A   -
                     //  -   -   -
 					if (this.name-matrixWidth >= 0 && tileArray[this.name-matrixWidth].walkable[5] != 0) {
-						let currentWalkableOfThisNeighbor = tileArray[this.name-matrixWidth].updateWalkable();
-                        if (currentWalkableOfThisNeighbor != 0) {
-                            this.neighbors.push(tileArray[this.name-matrixWidth]);
-                            this.neighborsDistance.push(1*tileArray[this.name-matrixWidth].walkable[5]);
+                        this.neighbors.push(tileArray[this.name-matrixWidth]);
+                        this.neighborsDistance.push(1*tileArray[this.name-matrixWidth].walkable[5]);
+                        
+						tileArray[this.name-matrixWidth].updateWalkable();
+                        
+                        if (tileArray[this.name-matrixWidth].cWalkable[5] != 0) {
+                            this.cNeighbors.push(tileArray[this.name-matrixWidth]);
+                            this.cNeighborsDistance.push(1*tileArray[this.name-matrixWidth].cWalkable[5]);
                         }
 					}
                     //  -   -   B
                     //  -   A   -
                     //  -   -   -
 					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name-matrixWidth+1].walkable[6] != 0) {
-                        let currentWalkableOfThisNeighbor = tileArray[this.name-matrixWidth+1].updateWalkable();
-                        if (currentWalkableOfThisNeighbor != 0) {
-                            this.neighbors.push(tileArray[this.name-matrixWidth+1]);
-                            this.neighborsDistance.push(1.5*tileArray[this.name-matrixWidth+1].walkable[6]);
+                        this.neighbors.push(tileArray[this.name-matrixWidth+1]);
+                        this.neighborsDistance.push(1.5*tileArray[this.name-matrixWidth+1].walkable[6]);
+                        
+                        tileArray[this.name-matrixWidth+1].updateWalkable();
+                        
+                        if (tileArray[this.name-matrixWidth+1].cWalkable[6] != 0) {
+                            this.cNeighbors.push(tileArray[this.name-matrixWidth+1]);
+                            this.cNeighborsDistance.push(1.5*tileArray[this.name-matrixWidth+1].cWalkable[6]);
                         }
 					}
                     //  -   -   -
                     //  -   A   B
                     //  -   -   -
 					if (this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name+1].walkable[7] != 0) {
-                        let currentWalkableOfThisNeighbor = tileArray[this.name+1].updateWalkable();
-                        if (currentWalkableOfThisNeighbor != 0) {
-                            this.neighbors.push(tileArray[this.name+1]);
-                            this.neighborsDistance.push(1*tileArray[this.name+1].walkable[7]);
+                        this.neighbors.push(tileArray[this.name+1]);
+                        this.neighborsDistance.push(1*tileArray[this.name+1].walkable[7]);
+                        
+                        tileArray[this.name+1].updateWalkable();
+                        
+                        if (tileArray[this.name+1].cWalkable[7] != 0) {
+                            this.cNeighbors.push(tileArray[this.name+1]);
+                            this.cNeighborsDistance.push(1*tileArray[this.name+1].cWalkable[7]);
                         }
 					}
                     //  -   -   -
                     //  -   A   -
                     //  -   -   B
 					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name+1+matrixWidth].walkable[0] != 0) {
-                        let currentWalkableOfThisNeighbor = tileArray[this.name+1+matrixWidth].updateWalkable();
-                        if (currentWalkableOfThisNeighbor != 0) {
-                            this.neighbors.push(tileArray[this.name+1+matrixWidth]);
-                            this.neighborsDistance.push(1.5*tileArray[this.name+1+matrixWidth].walkable[0]);
+                        this.neighbors.push(tileArray[this.name+1+matrixWidth]);
+                        this.neighborsDistance.push(1.5*tileArray[this.name+1+matrixWidth].walkable[0]);
+                        
+                        tileArray[this.name+1+matrixWidth].updateWalkable();
+                        
+                        if (tileArray[this.name+1+matrixWidth].cWalkable[0] != 0) {
+                            this.cNeighbors.push(tileArray[this.name+1+matrixWidth]);
+                            this.cNeighborsDistance.push(1.5*tileArray[this.name+1+matrixWidth].cWalkable[0]);
                         }
 					}
                     //  -   -   -
                     //  -   A   -
                     //  -   B   -
 					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && tileArray[this.name+matrixWidth].walkable[1] != 0) {
-                        let currentWalkableOfThisNeighbor = tileArray[this.name+matrixWidth].updateWalkable();
-                        if (currentWalkableOfThisNeighbor != 0) {
-                            this.neighbors.push(tileArray[this.name+matrixWidth]);
-                            this.neighborsDistance.push(1*tileArray[this.name+matrixWidth].walkable[1]);
+                        this.neighbors.push(tileArray[this.name+matrixWidth]);
+                        this.neighborsDistance.push(1*tileArray[this.name+matrixWidth].walkable[1]);
+                        
+                        tileArray[this.name+matrixWidth].updateWalkable();
+                        
+                        if (tileArray[this.name+matrixWidth].cWalkable[1] != 0) {
+                            this.cNeighbors.push(tileArray[this.name+matrixWidth]);
+                            this.cNeighborsDistance.push(1*tileArray[this.name+matrixWidth].cWalkable[1]);
                         }
 					}
                     //  -   -   -
                     //  -   A   -
                     //  B   -   -
 					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && this.name%matrixWidth != 0 && tileArray[this.name-1+matrixWidth].walkable[2] != 0) {
-                        let currentWalkableOfThisNeighbor = tileArray[this.name-1+matrixWidth].updateWalkable();
-                        if (currentWalkableOfThisNeighbor != 0) {
-                            this.neighbors.push(tileArray[this.name-1+matrixWidth]);
-                            this.neighborsDistance.push(1.5*tileArray[this.name-1+matrixWidth].walkable[2]);
+                        this.cNeighbors.push(tileArray[this.name-1+matrixWidth]);
+                        this.cNeighborsDistance.push(1.5*tileArray[this.name-1+matrixWidth].walkable[2]);
+                        
+                        tileArray[this.name-1+matrixWidth].updateWalkable();
+                        
+                        if (tileArray[this.name-1+matrixWidth].cWalkable[2] != 0) {
+                            this.cNeighbors.push(tileArray[this.name-1+matrixWidth]);
+                            this.cNeighborsDistance.push(1.5*tileArray[this.name-1+matrixWidth].cWalkable[2]);
                         }
 					}
                     //  -   -   -
                     //  B   A   -
                     //  -   -   -
 					if (this.name%matrixWidth != 0 && tileArray[this.name-1].walkable[3] != 0) {
-                        let currentWalkableOfThisNeighbor = tileArray[this.name-1].updateWalkable();
-                        if (currentWalkableOfThisNeighbor != 0) {
-                            this.neighbors.push(tileArray[this.name-1]);
-                            this.neighborsDistance.push(1*tileArray[this.name-1].walkable[3]);
+                        this.neighbors.push(tileArray[this.name-1]);
+                        this.neighborsDistance.push(1*tileArray[this.name-1].walkable[3]);
+                        
+                        tileArray[this.name-1].updateWalkable();
+                        
+                        if (tileArray[this.name-1].cWalkable[3] != 0) {
+                            this.cNeighbors.push(tileArray[this.name-1]);
+                            this.cNeighborsDistance.push(1*tileArray[this.name-1].cWalkable[3]);
                         }
 					}
+                    
+                    
                     
 				}
                 

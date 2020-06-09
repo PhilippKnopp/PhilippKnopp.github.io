@@ -113,13 +113,22 @@
         return false;
     }
     
-    function containsObject(obj, array) {
-        for (let i = 0; i < array.length; i++) {
-            if (array[i] === obj) {
+    function containsObject(obj, list) {
+        for (let i = 0; i < list.length; i++) {
+            if (list[i] === obj) {
                 return true;
             }
         }
         return false;
+    }
+    
+    function checkFor (array1, Type1) {
+        let index = array1.findIndex((element) => element instanceof Type1);
+        if (index == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     function buildLevel() {
@@ -192,7 +201,6 @@
     }*/
     
     function completeTurn() {
-        
         let turnOver = 0;
         for (let i = 0; i < charsStillAlive; i++) {
             if (figuresOnMap[i].health <= 0) {
@@ -206,20 +214,21 @@
             for (let i = 0; i < charsStillAlive; i++) {
                 figuresOnMap[i].hasActed = false;
             }
-            
             updateGUI();
             
             // in update function werden jetzt die Gegner gesteuert
             enemyTurnActive = true;
             enemyTurn();
         }
-        
     }
     
     function clearNodes() {
         tileArray.forEach(function(element) {
             element.neighbors.length = 0;
             element.neighborsDistance.length = 0;
+            element.cNeighbors.length = 0;
+            element.cNeighborsDistance.length = 0;
+            element.cWalkable.length = 0;
             element.distanceTravelled = "";
             element.wayPointUsefulness = "";
             element.entryPoint = "";
@@ -280,12 +289,6 @@
         // vor dem Bosskampf
             eventReminder.e6 = true;
             showText(textL1[43], mage, textL1[44]);
-        } else if (eventKey == "e7") {
-        // Statuette wird zerstört
-            addXP (20);
-            eventReminder.e7 = true;
-            showText(textL1[46], mage, textL1[47], rogue, textL1[48]);
-            idol.destroy();
         } else if (eventKey == "e8") {
         // ende von Level 1
             showText (textL1[15]);
@@ -379,15 +382,6 @@
             mPortraitIcon.setFrame(2);
         }
         
-    }
-    
-    function checkFor (array1, Type1) {
-        let index = array1.findIndex((element) => element instanceof Type1);
-        if (index == -1) {
-            return false;
-        } else {
-            return true;
-        }
     }
     
     function checkFightmode() { 
