@@ -354,9 +354,11 @@ class SceneGame extends Phaser.Scene {
                 tile.updateWalkable = function () {
                     this.cWalkable = [...this.walkable];
                     // Felder mit tiefem Wasser werden leicht begehbar für gute Schwimmer
-                    if (this.state == 7 && activeChar.skills.swim == true) {
-                        for (let i = 0; i < this.cWalkable.length; i++) {
-                            this.cWalkable[i] = this.cWalkable[i]/3;
+                    if (activeChar != null) {
+                        if (this.state == 7 && activeChar.skills.swim == true) {
+                            for (let i = 0; i < this.cWalkable.length; i++) {
+                                this.cWalkable[i] = this.cWalkable[i]/3;
+                            }
                         }
                     }
                     // Geht Objecte durch die auf der Tile liegen und modifiziert aktuelle Begehbarkeit
