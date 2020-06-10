@@ -376,7 +376,7 @@ class SceneGame extends Phaser.Scene {
                     }
                     // Geht Objecte durch die auf der Tile liegen und modifiziert aktuelle Begehbarkeit
                     for (let i = 0; i < this.occupiedBy.length; i++) {
-                        this.occupiedBy[i].modifyWalkable(this.cWalkable);
+                        this.occupiedBy[i].modifyWalkability(this.cWalkable);
                     }
                 }
                 
