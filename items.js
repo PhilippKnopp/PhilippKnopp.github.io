@@ -29,7 +29,7 @@ const crystal = {
     modifyWalkability: function (baseWalkability) {
         return baseWalkability;
     },
-    enterTile: function () {
+    stepOnThisObject: function () {
         if (fightmode == true && crystal1Img.alpha == 1) {
             showText ("", activeChar, textL1[42]);
         } else if (crystal1Img.alpha == 1) {
@@ -45,8 +45,7 @@ const crystal = {
                 }
             } else if (activeChar == rogue) {
                 showText (textL1[28], activeChar, textL1[29]);
-                let indexOfCrystal = tileArray[120].occupiedBy.indexOf(this);
-                tileArray[120].occupiedBy.splice(indexOfCrystal, 1);
+                tileArray[120].occupiedBy.splice(tileArray[120].occupiedBy.indexOf(this), 1);
                 crystal1Img.setAlpha(0);
                 addXP(12);
             }
@@ -59,7 +58,7 @@ const trap1 = {
     modifyWalkability: function (baseWalkability) {
         return baseWalkability;
     },
-    enterTile: function () {
+    stepOnThisObject: function () {
         activeChar.pathToTravel.length = 0;
         trap1Sprt.setAlpha(1);
         trap1Sprt.setFrame(1);

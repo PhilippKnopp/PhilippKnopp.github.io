@@ -2,17 +2,17 @@
 
 ////////// Bewegt die Gegner in Kampfsituationen //////////////////////////////////////////////////////////
 
-// Steuert nacheinander jeden alarmierten Gegner und beendet den Gegnerischen Zug
+// Steuert nacheinander jeden alarmierten Gegner und beendet dann den gegnerischen Zug
 function enemyTurn () {
     
     for (let i = 3; i < figuresOnMap.length; i++) {
         
         if (figuresOnMap[i] instanceof Enemy && figuresOnMap[i].alarmed == true && figuresOnMap[i].actionStack.length == 0 && figuresOnMap[i].state == 0) {
+            activeChar = figuresOnMap[i];
             figuresOnMap[i].active = true;
             figuresOnMap[i].setFrame(1);
             figuresOnMap[i].state = 1;
-            activeChar = figuresOnMap[i];
-            figuresOnMap[i].actionStack = enemyPlanMove(figuresOnMap[i]);
+            figuresOnMap[i].actionStack = enemyPlanMove();
             moveButton.state = 2;
             return;
         }
@@ -29,19 +29,19 @@ function enemyTurn () {
         figuresOnMap[i].state = 0;
     }
     
-    // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
-    replenishActions();
-    enemyTurnActive = false;
-    
     // Wenn keine der Heldinnen mehr am Leben ist springt das Spiel zur Game-Over-Scene
     if (barb.health <= 0 && rogue.health <= 0 && mage.health <= 0) {
         game.scene.keys.sceneGame.scene.start('sceneGameOver');
     }
     
+    // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
+    replenishActions();
+    enemyTurnActive = false;
+    
 }
 
 // Plant Zug für einen Gegner
-function enemyPlanMove (enemy) {
+function enemyPlanMove () {
     let victimOfChoice;
     let victimRanking = [];
     let placeOfChoice;
@@ -50,38 +50,52 @@ function enemyPlanMove (enemy) {
     
     // Spezielle Aktionen für bestimmte Level
     if (level == 1) {
-        if ( enemy.name == "Pale Priest" && (enemy.onTile == 703 || enemy.onTile == 707 || enemy.onTile == 778 || enemy.onTile == 782 || enemy.onTile == 830) && eventReminder.ritualProgress > 0) {
+        if ( activeChar.name == "Pale Priest" && (activeChar.onTile == 703 || activeChar.onTile == 707 || activeChar.onTile == 778 || activeChar.onTile == 782 || activeChar.onTile == 830) && eventReminder.ritualProgress > 0) {
             actionStack.push("ritual", null);
             return actionStack;
-        } else if (enemy.name == "Ordrak" && eventReminder.e7 == true && enemy.health < enemy.fullHealth) {
-            enemy.health += 1;
+        } else if (activeChar.name == "Ordrak" && eventReminder.e7 == true && activeChar.health < activeChar.fullHealth) {
+            activeChar.health += 1;
         }
     }
     
     // das Opfer der Wahl wird definiert
-    for (var i = 0; i < figuresOnMap.length; i++) {
+    for (let i = 0; i < figuresOnMap.length; i++) {
         if (figuresOnMap[i] instanceof Figure && figuresOnMap[i].health > 0 && figuresOnMap[i].skills.stealth.active == false) {
             
             tileArray[figuresOnMap[i].onTile].checkForNeighbors();
-            let neighborsCopy = [...tileArray[figuresOnMap[i].onTile].neighbors];
+            let cNeighborsCopy = [...tileArray[figuresOnMap[i].onTile].cNeighbors];
             clearNodes();
             
-            // Schaut ob die Heldin überhaupt angegriffen werden kann.
+            let isAlreadyThere = false;
+            let isAlreadyFlanked = false;
             let heroineIsViable = false;
-            for (let j = 0; j < neighborsCopy.length; j++) {
-                if (neighborsCopy[j].occupiedBy != ""){
-                    console.log(j + "ist schon besetzt");
-                    continue; // Platz ist schon besetzt => nächsten freien Patz anschauen
-                }
-                let path = calculatePath (enemy.onTile, neighborsCopy[j].name, true);
-                if (neighborsCopy[j].name == enemy.onTile) {  // die Distanz ist 0 weil dieser Gegner schon auf dem richtigen Feld steht
+            let distancesToThisHeroine = [];
+            
+            // Schaut ob die Heldin überhaupt angegriffen werden kann und sortiert unbrauchbare Felder aus.
+            for (let j = 0; j < cNeighborsCopy.length; j++) {
+                if (activeChar.onTile == cNeighborsCopy[j].name) {
+                    // die Distanz ist 0 weil dieser Gegner schon auf dem richtigen Feld steht
                     console.log("Gegner steht schon daneben");
+                    isAlreadyThere = true;
                     heroineIsViable = true;
-                    break;
-                } else if (path.second != 0) {  // eine Distanz wird zurückgegeben => Man kann auf das Feld laufen!
+                    cNeighborsCopy.splice(j, 1);
+                    j--;
+                    continue;
+                } else if ( checkFor(cNeighborsCopy[j].occupiedBy, Enemy) ){
+                    // Platz ist schon besetzt => nächsten freien Patz anschauen
+                    console.log(j + "ist schon besetzt");
+                    isAlreadyFlanked = true;
+                    cNeighborsCopy.splice(j, 1);
+                    j--;
+                    continue;
+                }
+                
+                let path = calculatePath(activeChar.onTile, cNeighborsCopy[j].name, true);
+                if (path.second != 0) {
+                    // eine Distanz wird zurückgegeben => Man kann auf das Feld laufen!
                     console.log("Gegner kann da hinlaufen");
                     heroineIsViable = true;
-                    break;
+                    distancesToThisHeroine.push(path.second);
                 }
             }
             
@@ -93,8 +107,8 @@ function enemyPlanMove (enemy) {
             // Heldin wird mit 0 Punkten in das Ranking aufgenommen ob dieser Gegner sie angreifen möchte
             victimRanking.push(0);
             
-            // Priorisiere Helden mit wenig Health wenn der gegner Verlett ist (Faktor 1)
-            if (enemy.fullHealth > enemy.health) {
+            // Priorisiere Helden mit wenig Health wenn der gegner Verletzt ist (Faktor 1)
+            if (activeChar.fullHealth > activeChar.health) {
                 if (figuresOnMap[i].health <= 4) {
                     console.log("Verletzt +2");
                     victimRanking[i] += 2;
@@ -105,28 +119,8 @@ function enemyPlanMove (enemy) {
             }
             
             // Priorisiere Helden die günstig stehen (Faktor 2)
-            let distancesToThisHeroine = [];
-            for (let j = 0; j < neighborsCopy.length; j++) {
-                
-                let validPlace = true;
-                for (let i = 0; i < neighborsCopy[j].occupiedBy.length; i++) {
-                    if (neighborsCopy[j].occupiedBy[i] instanceof Figure || neighborsCopy[j].occupiedBy[i] instanceof Enemy) {
-                        validPlace = false;
-                    }
-                }
-                
-                if (validPlace && neighborsCopy[j].name != enemy.onTile){
-                    continue;
-                }
-                let path = calculatePath(enemy.onTile, neighborsCopy[j].name, true);
-                if (neighborsCopy[j].name == enemy.onTile) {  // die Distanz ist 0 weil dieser Gegner schon auf dem richtigen Feld steht
-                    distancesToThisHeroine.push(path.second);
-                } else if (path.second != 0) {  // eine Distanz wird zurückgegeben => Man kann auf das Feld laufen!
-                    distancesToThisHeroine.push(path.second);
-                }
-            }
             let distanceToThisHeroine = Math.min(...distancesToThisHeroine);
-            if (distanceToThisHeroine == 0) {
+            if (isAlreadyThere) {
                 console.log("Distanz +4");
                 victimRanking[i] += 4;
             } else if (distanceToThisHeroine <= 2) {
@@ -141,18 +135,15 @@ function enemyPlanMove (enemy) {
             }
             
             // Priorisiere Helden zu denen Line Of Sight besteht (Faktor 4)
-            if (lineOfSight (enemy.onTile, figuresOnMap[i].onTile)) {
+            if (lineOfSight (activeChar.onTile, figuresOnMap[i].onTile)) {
                 console.log("Sichtbar +4");
                 victimRanking[i] += 4;
             }
             
             // Priorisiert Helden die bereits mit einem Gegner kämpfen (Faktor 1)
-            for (let j = 0; j < neighborsCopy.length; j++) {
-                if (neighborsCopy[j].occupiedBy.findIndex() == "enemy" && neighborsCopy[j] != enemy.onTile) {
-                    console.log("Flankiert +1");
-                    victimRanking[i] += 1;
-                    break;  // Bonus wird nur einmal vergeben.
-                }
+            if (isAlreadyFlanked) {
+                console.log("Flankiert +1");
+                victimRanking[i] += 1;
             }
             
             // Zufall wird in das Verhalten einbezogen (Faktor 1)
@@ -168,21 +159,22 @@ function enemyPlanMove (enemy) {
     // Das Bewegungsziel der Wahl wird definiert
     if (victimOfChoice != undefined) {
         tileArray[victimOfChoice.onTile].checkForNeighbors();
-        let neighborsCopy = [...tileArray[victimOfChoice.onTile].neighbors];
+        let cNeighborsCopy = [...tileArray[victimOfChoice.onTile].cNeighbors];
         clearNodes();
         
-        // Geht alle 8 Plätze neben dem Opfer der Wahl durch
-        for (let i = 0; i < neighborsCopy.length; i++) {
+        
+        // Geht alle Plätze neben dem Opfer der Wahl durch
+        for (let i = 0; i < cNeighborsCopy.length; i++) {
             
             // Sortiere Platz aus wenn er von jemand anderem besetzt ist
-            if (neighborsCopy[i].occupiedBy != "" && neighborsCopy[i].name != enemy.onTile) {
+            if (checkFor(cNeighborsCopy[i].occupiedBy, Enemy) && activeChar.onTile != cNeighborsCopy[i].name) {
                 continue;
             }
             
-            let path = calculatePath(enemy.onTile, neighborsCopy[i].name);
+            let path = calculatePath(activeChar.onTile, cNeighborsCopy[i].name);
             
             // Sortiere Platz aus wenn es für diesen Gegner keinen Weg dorthin gibt
-            if (path.first.length == 0 && neighborsCopy[i].name != enemy.onTile) {
+            if (path.first.length == 0 && cNeighborsCopy[i].name != activeChar.onTile) {
                 continue;
             }
             
@@ -191,32 +183,38 @@ function enemyPlanMove (enemy) {
             
             // ersetzt den aktuellen Wunschort durch einen potenziell besseren
             if (placeOfChoice == undefined || Math.min(...placeRanking) == placeRanking[placeRanking.length-1]) {
-                placeOfChoice = neighborsCopy[i].name;
+                placeOfChoice = cNeighborsCopy[i].name;
             }
         }
         
         // Bewegung wird festgelegt
-        let finalPath = calculatePath(enemy.onTile, placeOfChoice);
-        enemy.pathToTravel = [...finalPath.first];
+        let finalPath = calculatePath(activeChar.onTile, placeOfChoice);
+        activeChar.pathToTravel = [...finalPath.first];
         console.log(finalPath.first);
         
     } else {
         console.log("implementiere Route wenn kein Held erreichbar ist");
     }
     
-    // Der Entschluss was getan wird, wird erneut gefasst, nachdem die Bewegung vorbei ist
+    // Entschluss, was getan wird, wird erneut gefasst, nachdem die Bewegung vorbei ist
     let neighborIndexes = [];
-    if (enemy.pathToTravel.length > 0) {    // Gegner hat sich bewegt, was kann er auf dem letzten Feld seiner Bewegung tun?
-        tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].checkForNeighbors();
-        for (let i = 0; i < tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors.length; i++) {
-            neighborIndexes.push(tileArray[enemy.pathToTravel[enemy.pathToTravel.length-1]].neighbors[i].name);
+    let placeholder = activeChar;
+    activeChar = null;
+    if (placeholder.pathToTravel.length > 0) {
+        // Gegner hat sich bald bewegt, was kann er auf dem letzten Feld seiner Bewegung tun?
+        tileArray[placeholder.pathToTravel[placeholder.pathToTravel.length-1]].checkForNeighbors();
+        for (let i = 0; i < tileArray[placeholder.pathToTravel[placeholder.pathToTravel.length-1]].cNeighbors.length; i++) {
+            neighborIndexes.push(tileArray[placeholder.pathToTravel[placeholder.pathToTravel.length-1]].cNeighbors[i].name);
         }
-    } else {    // Gegner hat sich nicht bewegt, was kann er auf seinem Feld tun?
-        tileArray[enemy.onTile].checkForNeighbors();
-        for (let i = 0; i < tileArray[enemy.onTile].neighbors.length; i++) {
-            neighborIndexes.push(tileArray[enemy.onTile].neighbors[i].name);
+    } else {
+        // Gegner wird sich nicht bewegen, was kann er auf seinem Feld tun?
+        tileArray[placeholder.onTile].checkForNeighbors();
+        for (let i = 0; i < tileArray[placeholder.onTile].cNeighbors.length; i++) {
+            neighborIndexes.push(tileArray[placeholder.onTile].cNeighbors[i].name);
         }
     }
+    activeChar = placeholder;
+    
     clearNodes();
     if (victimOfChoice != undefined && neighborIndexes.includes(victimOfChoice.onTile)) {
         actionStack.push("attack", victimOfChoice);
@@ -240,23 +238,23 @@ function enemyPlanMove (enemy) {
     return actionStack;
 }
 
-function enemyDo (enemy, action, target) {
+function enemyDo (activeChar, action, target) {
     switch(action) {
         case "attack":
-            enemy.actionStack.length = 0;
-            enemy.attack(target);
+            activeChar.actionStack.length = 0;
+            activeChar.attack(target);
             console.log("attack");
             break;
         case "wait":
-            enemy.actionStack.length = 0;
+            activeChar.actionStack.length = 0;
             console.log("wait");
             break;
         case "ritual":
-            enemy.actionStack.length = 0;
+            activeChar.actionStack.length = 0;
             console.log("ritual");
-            let attackroll = getRandomInt(enemy.dieSize, enemy.explodes);
-            if (enemy.specialAttack.roll.includes(attackroll)) {
-                specialAttack(enemy, enemy.specialAttack.name[enemy.specialAttack.roll.findIndex((element) => element == attackroll)]);
+            let attackroll = getRandomInt(activeChar.dieSize, activeChar.explodes);
+            if (activeChar.specialAttack.roll.includes(attackroll)) {
+                specialAttack(activeChar, activeChar.specialAttack.name[activeChar.specialAttack.roll.findIndex((element) => element == attackroll)]);
                 ritual(2);
             } else {
                 ritual(1);

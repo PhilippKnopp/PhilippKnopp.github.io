@@ -245,8 +245,9 @@ class SceneGame extends Phaser.Scene {
                 
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
+                    this.updateWalkable();
                     
-					if (moveButton.state == 1 && (currentWalkable.indexOf(1) > -1 || currentWalkable.indexOf(2) > -1 || currentWalkable.indexOf(3) > -1)) {
+					if (moveButton.state == 1 && (this.cWalkable.indexOf(1) > -1 || this.cWalkable.indexOf(2) > -1 || this.cWalkable.indexOf(3) > -1)) {
                     // Bewegung soll starten, nichts ist auf der Tile und diese ist von einer Seite aus begehbar
                         let path = calculatePath(activeChar.onTile, this.name);
                         if (path.first.length == 0) {
@@ -284,7 +285,9 @@ class SceneGame extends Phaser.Scene {
                         }
                         returnCursorToNormal();
                         showActions(activeChar);
-                    } else if (attackButton.state == 1 && this.occupiedBy.indexOf(idol) != -1) {
+                    }
+                    
+                    if (attackButton.state == 1 && this.occupiedBy.indexOf(idol) != -1) {
                     // Das Relikt steht benachbart und man möchte es angreifen
                         this.checkForNeighbors();
                         for (let i = 0; i < this.neighbors.length; i++) {
@@ -303,73 +306,58 @@ class SceneGame extends Phaser.Scene {
                         returnCursorToNormal();
                         showActions(activeChar);
                     }
+                    clearNodes();
 				});
                 tile.on("pointerover", function pointerOver () {
-                    let currentWalkable = this.updateWalkable();
+                    this.updateWalkable();
                     // Soll beim Hovern über einer Tile in der Bewegungs-Planung der Pfad dorthin gezeigt werden?
-                    if (moveButton.state == 1 && (this.currentWalkable.indexOf(1) > -1 || this.currentWalkable.indexOf(2) > -1 || this.currentWalkable.indexOf(3) > -1)) {
+                    if (moveButton.state == 1 && (this.cWalkable.indexOf(1) > -1 || this.cWalkable.indexOf(2) > -1 || this.cWalkable.indexOf(3) > -1)) {
                         // Berechnet Pfad den die Heldin hier her laufen würde
                         let path = calculatePath(activeChar.onTile, this.name);
                         // Färbt Pfad entsprechend der Schwierigkeit des Terrains ein
-                        for (var i = 0; i < path.first.length; i++) {
+                        for (let i = 0; i < path.first.length; i++) {
                             let difficulty;
+                            let startOfStep;
+                            
                             if (i == 0) {
-                                if (activeChar.onTile == path.first[i]-matrixWidth-1) {
-                                    difficulty = tileArray[path.first[i]].walkable[0];
-                                } else if (activeChar.onTile == path.first[i]-matrixWidth) {
-                                    difficulty = tileArray[path.first[i]].walkable[1];
-                                } else if (activeChar.onTile == path.first[i]-matrixWidth+1) {
-                                    difficulty = tileArray[path.first[i]].walkable[2];
-                                } else if (activeChar.onTile == path.first[i]+1) {
-                                    difficulty = tileArray[path.first[i]].walkable[3];
-                                } else if (activeChar.onTile == path.first[i]+matrixWidth+1) {
-                                    difficulty = tileArray[path.first[i]].walkable[4];
-                                } else if (activeChar.onTile == path.first[i]+matrixWidth) {
-                                    difficulty = tileArray[path.first[i]].walkable[5];
-                                } else if (activeChar.onTile == path.first[i]+matrixWidth-1) {
-                                    difficulty = tileArray[path.first[i]].walkable[6];
-                                } else if (activeChar.onTile == path.first[i]-1) {
-                                    difficulty = tileArray[path.first[i]].walkable[7];
-                                }
+                                startOfStep = activeChar.onTile;
                             } else {
-                                if (path.first[i-1] == path.first[i]-matrixWidth-1) {
-                                    difficulty = tileArray[path.first[i]].walkable[0];
-                                } else if (path.first[i-1] == path.first[i]-matrixWidth) {
-                                    difficulty = tileArray[path.first[i]].walkable[1];
-                                } else if (path.first[i-1] == path.first[i]-matrixWidth+1) {
-                                    difficulty = tileArray[path.first[i]].walkable[2];
-                                } else if (path.first[i-1] == path.first[i]+1) {
-                                    difficulty = tileArray[path.first[i]].walkable[3];
-                                } else if (path.first[i-1] == path.first[i]+matrixWidth+1) {
-                                    difficulty = tileArray[path.first[i]].walkable[4];
-                                } else if (path.first[i-1] == path.first[i]+matrixWidth) {
-                                    difficulty = tileArray[path.first[i]].walkable[5];
-                                } else if (path.first[i-1] == path.first[i]+matrixWidth-1) {
-                                    difficulty = tileArray[path.first[i]].walkable[6];
-                                } else if (path.first[i-1] == path.first[i]-1) {
-                                    difficulty = tileArray[path.first[i]].walkable[7];
-                                }
+                                startOfStep = path.first[i-1];
                             }
                             
-                            // Wer gut schwimmen kann, kann sich in tiefem Wasserr leicht bewegen
-                            if (tileArray[path.first[i]].state == 7 && activeChar.skills.swim == true) {
-                                difficulty = 1;
+                            if (startOfStep == path.first[i]-matrixWidth-1) {
+                                difficulty = tileArray[path.first[i]].cWalkable[0];
+                            } else if (startOfStep == path.first[i]-matrixWidth) {
+                                difficulty = tileArray[path.first[i]].cWalkable[1];
+                            } else if (startOfStep == path.first[i]-matrixWidth+1) {
+                                difficulty = tileArray[path.first[i]].cWalkable[2];
+                            } else if (startOfStep == path.first[i]+1) {
+                                difficulty = tileArray[path.first[i]].cWalkable[3];
+                            } else if (startOfStep == path.first[i]+matrixWidth+1) {
+                                difficulty = tileArray[path.first[i]].cWalkable[4];
+                            } else if (startOfStep == path.first[i]+matrixWidth) {
+                                difficulty = tileArray[path.first[i]].cWalkable[5];
+                            } else if (startOfStep == path.first[i]+matrixWidth-1) {
+                                difficulty = tileArray[path.first[i]].cWalkable[6];
+                            } else if (startOfStep == path.first[i]-1) {
+                                difficulty = tileArray[path.first[i]].cWalkable[7];
                             }
                             
                             // Tile-Frame wird entsprechend der Schwierigkeit des Geländes eingestellt
-                            if (difficulty == 1) {
+                            if (difficulty <= 1) {
                                 tileArray[path.first[i]].setFrame(1);
-                            } else if (difficulty == 2) {
+                            } else if (difficulty <= 2) {
                                 tileArray[path.first[i]].setFrame(2);
-                            } else if (difficulty == 3) {
+                            } else {
                                 tileArray[path.first[i]].setFrame(3);
                             }
                         }
                     }
+                    clearNodes();
                 });
                 tile.on("pointerout", function pointerOut () {
                     if (moveButton.state == 1) {
-                        for (var i = 0; i < tileArray.length; i++) {
+                        for (let i = 0; i < tileArray.length; i++) {
                             tileArray[i].setFrame(0);
                         }
                     }
@@ -388,7 +376,7 @@ class SceneGame extends Phaser.Scene {
                     }
                     // Geht Objecte durch die auf der Tile liegen und modifiziert aktuelle Begehbarkeit
                     for (let i = 0; i < this.occupiedBy.length; i++) {
-                        this.cWalkable = this.occupiedBy[i].modifyWalkable(this.cWalkable);
+                        this.occupiedBy[i].modifyWalkable(this.cWalkable);
                     }
                 }
                 
@@ -507,9 +495,6 @@ class SceneGame extends Phaser.Scene {
                             this.cNeighborsDistance.push(1*tileArray[this.name-1].cWalkable[3]);
                         }
 					}
-                    
-                    
-                    
 				}
                 
                 // Berechnet die Distanz-Luftlinie zum Ziel während des Pfadfindens
@@ -521,7 +506,6 @@ class SceneGame extends Phaser.Scene {
 					let diagonals = Math.min(xDistance, yDistance);
 					return xDistance + yDistance - diagonals/2;
 				}
-				
 			}
 		}
         
@@ -581,8 +565,8 @@ class SceneGame extends Phaser.Scene {
         // state: 1 disableTrap
 		specialButton.on("pointerup", function pointerUp() {
             if (specialButton.state == 1 && level == 1) {
-                disableTrap1();
                 specialButton.state = 0;
+                trap1.disableTrap();
             }
 		});
         specialButton.setDepth(1);

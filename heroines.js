@@ -56,18 +56,15 @@ class Figure extends Phaser.GameObjects.Sprite {
         }
         
         this.enterTile = function () {
-            // findet die aktuelle Position dieser Figur auf dieser Tile (Z-Wert)...
-            let index = tileArray[this.onTile].occupiedBy.indexOf(this);
-            // ... und löscht sie aus dieser Ebene
-            tileArray[this.onTile].occupiedBy.splice(index, 1);
-            this.onTile = this.pathToTravel[0];
-            this.pathToTravel.shift();
+            // findet die aktuelle Position dieser Figur auf dieser Tile (Z-Wert) und löscht sie
+            tileArray[this.onTile].occupiedBy.splice(tileArray[this.onTile].occupiedBy.indexOf(this), 1);
+            this.onTile = this.pathToTravel.shift(); // onTile wird zu em ersten Pfadschritt und dieser wird dann entfernt
             tileArray[this.onTile].occupiedBy.push(this);
             enemyVisibility();
             checkFightmode();
             // tileVisibility();
             for (let i = 0; i < tileArray[this.onTile].occupiedBy.length-1; i++) {
-                tileArray[this.onTile].occupiedBy[i].enterTile();
+                tileArray[this.onTile].occupiedBy[i].stepOnThisObject();
             }
         }
         
@@ -185,11 +182,9 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.modifyWalkability = function (baseWalkability) {
             for (let i = 0; i < baseWalkability.length; i++) {
                 if (baseWalkability[i] != 0 && activeChar instanceof Enemy) {
-                    baseWalkability[i] += 6;
-                } else if (baseWalkability[i] != 0 && activeChar instanceof Figure) {
+                    baseWalkability[i] = 0;
+                } else if (baseWalkability[i] != 0) {
                     baseWalkability[i] += 1;
-                } else {
-                    alert ("Line 192");
                 }
             }
             return baseWalkability;
@@ -333,7 +328,7 @@ function showActions(_this) {
     faceButton.setAlpha(1);
     
     // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
-    if (tileArray[_this.onTile].neighbors.length != 0 && (fightmode == false || _this.movementCounter >= 1)) {
+    if (tileArray[_this.onTile].cNeighbors.length != 0 && (fightmode == false || _this.movementCounter >= 1)) {
         moveButton.x = _this.x+buttonXpos;
         moveButton.y = _this.y;
         moveButton.setAlpha(1);
@@ -387,8 +382,8 @@ function showActions(_this) {
     // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist
     if ((fightmode == false || _this.actionsCounter >= 0 || (_this.movementCounter) >= 6) && _this.health > 0 ) {
         let adjacentTrap = false;
-        for (let i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
-            if (tileArray[_this.onTile].neighbors[i].occupiedBy.includes(trap1) && trap1Sprt.alpha != 0 && trap1Sprt.frame != 1) {
+        for (let i = 0; i < tileArray[_this.onTile].cNeighbors.length; i++) {
+            if (tileArray[_this.onTile].cNeighbors[i].occupiedBy.includes(trap1) && trap1Sprt.alpha != 0 && trap1Sprt.frame != 1) {
                 adjacentTrap = true;
             }
         }
@@ -469,7 +464,7 @@ function hideActions() {
 }
 
 function deactivateFigures() {
-    for (var i = 0; i < figuresOnMap.length; i++) {
+    for (let i = 0; i < figuresOnMap.length; i++) {
         figuresOnMap[i].active = false;
         figuresOnMap[i].setFrame(0);
         activeChar = null;

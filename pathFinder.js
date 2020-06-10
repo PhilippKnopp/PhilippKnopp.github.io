@@ -65,26 +65,22 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
         frontierList[activeNode].checkForNeighbors();
         
         // Füge Neighbors des aktuellen Knotens der Frontierlist hinzu
-        for (let i = 0; i < frontierList[activeNode].neighbors.length; i++) {
+        for (let i = 0; i < frontierList[activeNode].cNeighbors.length; i++) {
             
-            let distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
-            if (containsObject(frontierList[activeNode].neighbors[i], frontierList)) {
-                if (distanceTravelled < frontierList[activeNode].neighbors[i].distanceTravelled) {
-                    frontierList[activeNode].neighbors[i].distanceTravelled = distanceTravelled;
-                    frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB(endIndex);
-                    frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
+            let distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].cNeighborsDistance[i];
+            if (containsObject(frontierList[activeNode].cNeighbors[i], frontierList)) {
+                if (distanceTravelled < frontierList[activeNode].cNeighbors[i].distanceTravelled) {
+                    frontierList[activeNode].cNeighbors[i].distanceTravelled = distanceTravelled;
+                    frontierList[activeNode].cNeighbors[i].wayPointUsefulness = frontierList[activeNode].cNeighbors[i].distanceTravelled + frontierList[activeNode].cNeighbors[i].estimatedWayToB(endIndex);
+                    frontierList[activeNode].cNeighbors[i].entryPoint = frontierList[activeNode].name;
                 }
-            } else if (containsObject(frontierList[activeNode].neighbors[i], mappedList)) {
+            } else if (containsObject(frontierList[activeNode].cNeighbors[i], mappedList)) {
                 continue;
-            }/* else if ((frontierList[activeNode].neighbors[i].occupiedBy == "enemy" || frontierList[activeNode].neighbors[i].occupiedBy == "idol") && tileArray[startIndex].occupiedBy == "figure") {
-                continue;
-            } else if ((frontierList[activeNode].neighbors[i].occupiedBy == "figure" || frontierList[activeNode].neighbors[i].occupiedBy == "idol") && tileArray[startIndex].occupiedBy == "enemy") {
-                continue;
-            } */else {
-                frontierList[activeNode].neighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
-                frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB(endIndex);
-                frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
-                frontierList.push(frontierList[activeNode].neighbors[i]);
+            } else {
+                frontierList[activeNode].cNeighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].cNeighborsDistance[i];
+                frontierList[activeNode].cNeighbors[i].wayPointUsefulness = frontierList[activeNode].cNeighbors[i].distanceTravelled + frontierList[activeNode].cNeighbors[i].estimatedWayToB(endIndex);
+                frontierList[activeNode].cNeighbors[i].entryPoint = frontierList[activeNode].name;
+                frontierList.push(frontierList[activeNode].cNeighbors[i]);
             }
         }
         
@@ -103,20 +99,9 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
         }
     }
     
-    // wenn das Ziefeld der Bewegung besetzt ist wird es gekürzt bis die Bewegung auf einem leeren Feld endet oder keine Bewegung zustande kommt
-    endIsFree: while (pathToTravel.length > 0) {
-        let validEnd = true;
-        for (let i = 0; i < tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy.length; i++) {
-            if (tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy[i] instanceof Figure || tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy[i] instanceof Enemy) {
-                validEnd = false;
-            }
-        }
-        
-        if (validEnd == false) {
-            pathToTravel.length = pathToTravel.length-1;
-        } else {
-            break endIsFree;
-        }
+    // wenn das Ziefeld der Bewegung besetzt ist, wird die Bewegung gekürzt
+    while ((checkFor (tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy, Figure) || checkFor (tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy, Enemy)) && pathToTravel.length > 0) {
+        pathToTravel.length = pathToTravel.length-1;
     }
     
     // speichert die Entfernung bis zum Ende des Pfades
@@ -160,17 +145,20 @@ function lineOfSight (startIndex, endIndex) {
                 if (pointer >= stepDiagonals && difY > 0) { // N-W
                     stepDiagonals += 1/(diagonals+1);
                     index = index - matrixWidth - 1;
-                    losPathDifficulty.push(tileArray[index].walkable[4]);
+                    tileArray[index].updateWalkable();
+                    losPathDifficulty.push(tileArray[index].cWalkable[4]);
                     aX--;
                 } else if (pointer >= stepDiagonals && difY < 0) { // S-W
                     stepDiagonals += 1/(diagonals+1);
                     index = index + matrixWidth - 1;
-                    losPathDifficulty.push(tileArray[index].walkable[2]);
+                    tileArray[index].updateWalkable();
+                    losPathDifficulty.push(tileArray[index].cWalkable[2]);
                     aX--;
                 } else if (pointer >= stepStraights || difY == 0) { // W
                     stepStraights += 1/(straights+1);
                     index = index - 1;
-                    losPathDifficulty.push(tileArray[index].walkable[3]);
+                    tileArray[index].updateWalkable();
+                    losPathDifficulty.push(tileArray[index].cWalkable[3]);
                     aX--;
                 }
             }
@@ -180,17 +168,20 @@ function lineOfSight (startIndex, endIndex) {
                 if (pointer >= stepDiagonals && difY > 0) { // N-O
                     stepDiagonals += 1/(diagonals+1);
                     index = index - matrixWidth + 1;
-                    losPathDifficulty.push(tileArray[index].walkable[6]);
+                    tileArray[index].updateWalkable();
+                    losPathDifficulty.push(tileArray[index].cWalkable[6]);
                     aX++;
                 } else if (pointer >= stepDiagonals && difY < 0) { // S-O
                     stepDiagonals += 1/(diagonals+1);
                     index = index + matrixWidth + 1;
-                    losPathDifficulty.push(tileArray[index].walkable[0]);
+                    tileArray[index].updateWalkable();
+                    losPathDifficulty.push(tileArray[index].cWalkable[0]);
                     aX++;
                 } else if (pointer >= stepStraights || difY == 0) { // O
                     stepStraights += 1/(straights+1);
                     index = index + 1;
-                    losPathDifficulty.push(tileArray[index].walkable[7]);
+                    tileArray[index].updateWalkable();
+                    losPathDifficulty.push(tileArray[index].cWalkable[7]);
                     aX++;
                 }
             }
@@ -202,17 +193,20 @@ function lineOfSight (startIndex, endIndex) {
                 if (pointer >= stepDiagonals && difX > 0) { // N-W
                     stepDiagonals += 1/(diagonals+1);
                     index = index - matrixWidth - 1;
-                    losPathDifficulty.push(tileArray[index].walkable[4]);
+                    tileArray[index].updateWalkable();
+                    losPathDifficulty.push(tileArray[index].cWalkable[4]);
                     aY--;
                 } else if (pointer >= stepDiagonals && difX < 0) { // N-O
                     stepDiagonals += 1/(diagonals+1);
                     index = index - matrixWidth + 1;
-                    losPathDifficulty.push(tileArray[index].walkable[6]);
+                    tileArray[index].updateWalkable();
+                    losPathDifficulty.push(tileArray[index].cWalkable[6]);
                     aY--;
                 } else if (pointer >= stepStraights || difX == 0) { // N
                     stepStraights += 1/(straights+1);
                     index = index - matrixWidth;
-                    losPathDifficulty.push(tileArray[index].walkable[5]);
+                    tileArray[index].updateWalkable();
+                    losPathDifficulty.push(tileArray[index].cWalkable[5]);
                     aY--;
                 }
             }
@@ -222,23 +216,27 @@ function lineOfSight (startIndex, endIndex) {
                 if (pointer >= stepDiagonals && difX > 0) { // S-W
                     stepDiagonals += 1/(diagonals+1);
                     index = index + matrixWidth - 1;
-                    losPathDifficulty.push(tileArray[index].walkable[2]);
+                    tileArray[index].updateWalkable();
+                    losPathDifficulty.push(tileArray[index].cWalkable[2]);
                     aY++;
                 } else if (pointer >= stepDiagonals && difX < 0) { // S-O
                     stepDiagonals += 1/(diagonals+1);
                     index = index + matrixWidth + 1;
-                    losPathDifficulty.push(tileArray[index].walkable[0]);
+                    tileArray[index].updateWalkable();
+                    losPathDifficulty.push(tileArray[index].cWalkable[0]);
                     aY++;
                 } else if (pointer >= stepStraights || difX == 0) { // S
                     stepStraights += 1/(straights+1);
                     index = index + matrixWidth;
-                    losPathDifficulty.push(tileArray[index].walkable[1]);
+                    tileArray[index].updateWalkable();
+                    losPathDifficulty.push(tileArray[index].cWalkable[1]);
                     aY++;
                 }
             }
         }
     }
     
+    clearNodes();
     searchButton.state = 0;
     
     let los_blocked = losPathDifficulty.includes(0); // testet ob in dem Array "losPathDifficulty" eine 0 vorkommt (dort kann man nicht hinlaufen)

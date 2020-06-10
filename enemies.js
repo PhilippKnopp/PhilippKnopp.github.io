@@ -101,12 +101,10 @@ class Enemy extends Phaser.GameObjects.Sprite {
         
         this.modifyWalkability = function (baseWalkability) {
             for (let i = 0; i < baseWalkability.length; i++) {
-                if (activeChar instanceof Figure) {
+                if (baseWalkability[i] != 0 && activeChar instanceof Figure) {
                     baseWalkability[i] = 0;
                 } else if (baseWalkability[i] != 0) {
                     baseWalkability[i] += 1;
-                } else {
-                    alert ("Line 111 in enemies");
                 }
             }
             return baseWalkability;
@@ -118,10 +116,10 @@ class Enemy extends Phaser.GameObjects.Sprite {
         if (attackButton.state == 1) {
             tileArray[activeChar.onTile].checkForNeighbors();
             if (tileArray[activeChar.onTile].neighbors.includes(tileArray[this.onTile])) {
-                tileArray[activeChar.onTile].neighbors.length = 0;
+                clearNodes();
                 activeChar.attack(this);
             } else {
-                tileArray[activeChar.onTile].neighbors.length = 0;
+                clearNodes();
                 showText ("", activeChar, textL1[20]);
                 returnCursorToNormal();
                 showActions(activeChar);
@@ -274,10 +272,10 @@ function specialAttack(enemy, attackName) {
             break;
         case "unholy energy":
             for (let i = 0; i < figuresOnMap.length; i++) {
-                if (figuresOnMap[i] instanceof Figure && lineOfSight (enemy.onTile, figuresOnMap[i].onTile)) {
+                if (figuresOnMap[i] instanceof Figure && lineOfSight(enemy.onTile, figuresOnMap[i].onTile)) {
                     figuresOnMap[i].health -= 1;
                     figuresOnMap[i].checkHealth();
-                } else if (figuresOnMap[i] instanceof Enemy && lineOfSight (enemy.onTile, figuresOnMap[i].onTile) && figuresOnMap[i].health < figuresOnMap[i].fullHealth) {
+                } else if (figuresOnMap[i] instanceof Enemy && lineOfSight(enemy.onTile, figuresOnMap[i].onTile) && figuresOnMap[i].health < figuresOnMap[i].fullHealth) {
                     figuresOnMap[i].health += 1;
                 }
             }
