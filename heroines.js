@@ -21,6 +21,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.skills = {stealth: { trained: false, active: false },
                        swim:    false
                       };
+        this.stepOnThisObject = function () {};
         
         this.setInteractive();
         this.on("pointerup", this.activateFigure, this);
