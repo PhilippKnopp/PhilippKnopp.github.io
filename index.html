@@ -169,25 +169,28 @@
     function enemyVisibility () {
         let enemyIndexes = [];
         // Alle Feinde werden unsichtbar
-        for (var i = 0; i < figuresOnMap.length; i++) {
+        for (let i = 0; i < figuresOnMap.length; i++) {
             if (figuresOnMap[i] instanceof Enemy) {
                 figuresOnMap[i].setAlpha(0);
                 enemyIndexes.push(figuresOnMap[i]);
             }
         }
+        
+        let placeholder = activeChar;
         // Alle Feinde, zu denen LoS besteht, werden wieder sichtbar
-        for (var j = 0; j < charsStillAlive; j++) {
+        for (let i = 0; i < charsStillAlive; i++) {
             for (var k = 0; k < enemyIndexes.length; k++) {
-                if (lineOfSight (figuresOnMap[j].onTile, enemyIndexes[k].onTile) && figuresOnMap[j].health > 0) {
+                if (lineOfSight (figuresOnMap[i].onTile, enemyIndexes[k].onTile) && figuresOnMap[i].health > 0) {
                     if (enemyIndexes[k].name != "Ordrak" || eventReminder.ritualState == "succesful") {
                         enemyIndexes[k].setAlpha(1);
-                        if (figuresOnMap[j].skills.stealth.active == false) {
+                        if (figuresOnMap[i].skills.stealth.active == false) {
                             enemyIndexes[k].alarmed = true;
                         }
                     }
                 }
             }
         }
+        activeChar = placeholder;
     }
     
     /*function tileVisibility () { 
