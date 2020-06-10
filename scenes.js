@@ -316,37 +316,24 @@ class SceneGame extends Phaser.Scene {
                         let path = calculatePath(activeChar.onTile, this.name);
                         // Färbt Pfad entsprechend der Schwierigkeit des Terrains ein
                         for (let i = 0; i < path.first.length; i++) {
-                            let difficulty;
-                            let startOfStep;
                             
+                            let startOfStep;
                             if (i == 0) {
                                 startOfStep = activeChar.onTile;
                             } else {
                                 startOfStep = path.first[i-1];
                             }
                             
-                            if (startOfStep == path.first[i]-matrixWidth-1) {
-                                difficulty = tileArray[path.first[i]].cWalkable[0];
-                            } else if (startOfStep == path.first[i]-matrixWidth) {
-                                difficulty = tileArray[path.first[i]].cWalkable[1];
-                            } else if (startOfStep == path.first[i]-matrixWidth+1) {
-                                difficulty = tileArray[path.first[i]].cWalkable[2];
-                            } else if (startOfStep == path.first[i]+1) {
-                                difficulty = tileArray[path.first[i]].cWalkable[3];
-                            } else if (startOfStep == path.first[i]+matrixWidth+1) {
-                                difficulty = tileArray[path.first[i]].cWalkable[4];
-                            } else if (startOfStep == path.first[i]+matrixWidth) {
-                                difficulty = tileArray[path.first[i]].cWalkable[5];
-                            } else if (startOfStep == path.first[i]+matrixWidth-1) {
-                                difficulty = tileArray[path.first[i]].cWalkable[6];
-                            } else if (startOfStep == path.first[i]-1) {
-                                difficulty = tileArray[path.first[i]].cWalkable[7];
+                            let step = calculatePath(startOfStep, path.first[i], true);
+                            if (startOfStep == path.first[i]-matrixWidth-1 || startOfStep == path.first[i]-matrixWidth+1 ||
+                               startOfStep == path.first[i]+matrixWidth+1 || startOfStep == path.first[i]+matrixWidth-1) {
+                                step.second = step.second/1.5;
                             }
                             
                             // Tile-Frame wird entsprechend der Schwierigkeit des Geländes eingestellt
-                            if (difficulty <= 1) {
+                            if (step.second <= 1) {
                                 tileArray[path.first[i]].setFrame(1);
-                            } else if (difficulty <= 2) {
+                            } else if (step.second <= 2) {
                                 tileArray[path.first[i]].setFrame(2);
                             } else {
                                 tileArray[path.first[i]].setFrame(3);
@@ -367,11 +354,9 @@ class SceneGame extends Phaser.Scene {
                 tile.updateWalkable = function () {
                     this.cWalkable = [...this.walkable];
                     // Felder mit tiefem Wasser werden leicht begehbar für gute Schwimmer
-                    if (activeChar instanceof Figure) {
-                        if (this.state == 7 && activeChar.skills.swim == true) {
-                            for (let i = 0; i < this.cWalkable.length; i++) {
-                                this.cWalkable[i] = this.cWalkable[i]/3;
-                            }
+                    if (this.state == 7 && activeChar.skills.swim == true) {
+                        for (let i = 0; i < this.cWalkable.length; i++) {
+                            this.cWalkable[i] = this.cWalkable[i]/3;
                         }
                     }
                     // Geht Objecte durch die auf der Tile liegen und modifiziert aktuelle Begehbarkeit

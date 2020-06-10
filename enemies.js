@@ -19,6 +19,9 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.description = 0;
         this.color = "#878787";
         this.loot;
+        this.skills = {stealth: { trained: false, active: false },
+                       swim:    false
+                      };
         
         this.setInteractive();
         this.on("pointerup", this.activateFigure, this);
