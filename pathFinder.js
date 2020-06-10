@@ -100,8 +100,12 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
     }
     
     // wenn das Ziefeld der Bewegung besetzt ist, wird die Bewegung gekürzt
-    while ((checkFor (tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy, Figure) || checkFor (tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy, Enemy)) && pathToTravel.length > 0) {
-        pathToTravel.length = pathToTravel.length-1;
+    checkEnd: while (pathToTravel.length > 0) {
+        if (checkFor (tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy, Figure) || checkFor (tileArray[pathToTravel[pathToTravel.length-1]].occupiedBy, Enemy)) {
+            pathToTravel.length = pathToTravel.length-1;
+        } else {
+            break checkEnd;
+        }
     }
     
     // speichert die Entfernung bis zum Ende des Pfades
