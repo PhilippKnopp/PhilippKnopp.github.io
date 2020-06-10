@@ -176,8 +176,6 @@
             }
         }
         
-        let placeholder = activeChar;
-        activeChar = null;
         // Alle Feinde, zu denen LoS besteht, werden wieder sichtbar
         for (let i = 0; i < charsStillAlive; i++) {
             for (var k = 0; k < enemyIndexes.length; k++) {
@@ -191,7 +189,6 @@
                 }
             }
         }
-        activeChar = placeholder;
     }
     
     /*function tileVisibility () { 

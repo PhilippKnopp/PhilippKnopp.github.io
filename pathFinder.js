@@ -122,6 +122,9 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
 }
 
 function lineOfSight (startIndex, endIndex) {
+    let placeholder = activeChar;
+    activeChar = null;
+    
     let aX = startIndex % matrixWidth;
     let aY = Math.floor(startIndex / matrixWidth);
     
@@ -242,6 +245,7 @@ function lineOfSight (startIndex, endIndex) {
     
     clearNodes();
     searchButton.state = 0;
+    activeChar = placeholder;
     
     let los_blocked = losPathDifficulty.includes(0); // testet ob in dem Array "losPathDifficulty" eine 0 vorkommt (dort kann man nicht hinlaufen)
     return !los_blocked; // gibt "true" zurück, wenn man in direkter Linie zum angesehenen Punkt laufen/schwimmen/... könnte.
