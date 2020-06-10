@@ -1,5 +1,4 @@
-const idol = {
-    denyLoS: false,
+var idol = {
     modifyWalkability: function (baseWalkability) {
         for (let i = 0; i < baseWalkability.length; i++) {
             baseWalkability[i] = 0;
@@ -24,8 +23,7 @@ const idol = {
     }
 };
 
-const crystal = {
-    denyLoS: false,
+var crystal = {
     modifyWalkability: function (baseWalkability) {
         return baseWalkability;
     },
@@ -53,8 +51,7 @@ const crystal = {
     }
 };
 
-const trap1 = {
-    denyLoS: false,
+var trap1 = {
     modifyWalkability: function (baseWalkability) {
         return baseWalkability;
     },
