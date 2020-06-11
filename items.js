@@ -1,9 +1,14 @@
 const idol = {
-    modifyWalkability: function (baseWalkability) {
-        for (let i = 0; i < baseWalkability.length; i++) {
-            baseWalkability[i] = 0;
+    modifyWalkability: function (baseWalkability, lookForTargets) {
+        if (lookForTargets == false) {
+            for (let i = 0; i < baseWalkability.length; i++) {
+                baseWalkability[i] = 0;
+            }
         }
         return baseWalkability;
+    },
+    lookAtThis: function () {
+        showText(textL1[14]);
     },
     destroy: function () {
         eventReminder.e7 = true;
@@ -24,7 +29,7 @@ const idol = {
 };
 
 const crystal = {
-    modifyWalkability: function (baseWalkability) {
+    modifyWalkability: function (baseWalkability, lookForTargets) {
         return baseWalkability;
     },
     stepOnThisObject: function () {
@@ -52,7 +57,7 @@ const crystal = {
 };
 
 const trap1 = {
-    modifyWalkability: function (baseWalkability) {
+    modifyWalkability: function (baseWalkability, lookForTargets) {
         return baseWalkability;
     },
     lookAtThis: function () {
@@ -107,7 +112,7 @@ const event1 = {
 }
 
 const event3 = {
-    modifyWalkability: function (baseWalkability) {
+    modifyWalkability: function (baseWalkability, lookForTargets) {
         return baseWalkability;
     },
     stepOnThisObject: function () {
@@ -120,7 +125,7 @@ const event3 = {
 }
 
 const event5 = {
-    modifyWalkability: function (baseWalkability) {
+    modifyWalkability: function (baseWalkability, lookForTargets) {
         return baseWalkability;
     },
     stepOnThisObject: function () {
@@ -133,7 +138,7 @@ const event5 = {
 }
 
 const event6 = {
-    modifyWalkability: function (baseWalkability) {
+    modifyWalkability: function (baseWalkability, lookForTargets) {
         return baseWalkability;
     },
     stepOnThisObject: function () {

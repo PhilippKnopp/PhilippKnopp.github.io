@@ -103,9 +103,9 @@ class Enemy extends Phaser.GameObjects.Sprite {
             }
         }
         
-        this.modifyWalkability = function (baseWalkability) {
+        this.modifyWalkability = function (baseWalkability, lookForTargets) {
             for (let i = 0; i < baseWalkability.length; i++) {
-                if (baseWalkability[i] != 0 && activeChar instanceof Figure) {
+                if (baseWalkability[i] != 0 && activeChar instanceof Figure && lookForTargets == false) {
                     baseWalkability[i] = 0;
                 } else if (baseWalkability[i] != 0) {
                     baseWalkability[i] += 1;
@@ -118,8 +118,8 @@ class Enemy extends Phaser.GameObjects.Sprite {
     
     activateFigure () {
         if (attackButton.state == 1) {
-            tileArray[activeChar.onTile].checkForNeighbors();
-            if (tileArray[activeChar.onTile].neighbors.includes(tileArray[this.onTile])) {
+            tileArray[activeChar.onTile].checkForNeighbors(true);
+            if (tileArray[activeChar.onTile].cNeighbors.includes(tileArray[this.onTile])) {
                 clearNodes();
                 activeChar.attack(this);
             } else {

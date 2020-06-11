@@ -198,22 +198,20 @@ function enemyPlanMove () {
     
     // Entschluss, was getan wird, wird erneut gefasst, nachdem die Bewegung vorbei ist
     let neighborIndexes = [];
-    let placeholder = activeChar;
-    activeChar = null;
-    if (placeholder.pathToTravel.length > 0) {
+    
+    if (activeChar.pathToTravel.length > 0) {
         // Gegner hat sich bald bewegt, was kann er auf dem letzten Feld seiner Bewegung tun?
-        tileArray[placeholder.pathToTravel[placeholder.pathToTravel.length-1]].checkForNeighbors();
-        for (let i = 0; i < tileArray[placeholder.pathToTravel[placeholder.pathToTravel.length-1]].cNeighbors.length; i++) {
-            neighborIndexes.push(tileArray[placeholder.pathToTravel[placeholder.pathToTravel.length-1]].cNeighbors[i].name);
+        tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].checkForNeighbors(true);
+        for (let i = 0; i < tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].cNeighbors.length; i++) {
+            neighborIndexes.push(tileArray[activeChar.pathToTravel[activeChar.pathToTravel.length-1]].cNeighbors[i].name);
         }
     } else {
         // Gegner wird sich nicht bewegen, was kann er auf seinem Feld tun?
-        tileArray[placeholder.onTile].checkForNeighbors();
+        tileArray[activeChar.onTile].checkForNeighbors(true);
         for (let i = 0; i < tileArray[placeholder.onTile].cNeighbors.length; i++) {
             neighborIndexes.push(tileArray[placeholder.onTile].cNeighbors[i].name);
         }
     }
-    activeChar = placeholder;
     
     clearNodes();
     if (victimOfChoice != undefined && neighborIndexes.includes(victimOfChoice.onTile)) {

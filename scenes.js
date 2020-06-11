@@ -270,7 +270,7 @@ class SceneGame extends Phaser.Scene {
                     if (searchButton.state == 1) {
                         if (lineOfSight (activeChar.onTile, this.name)) {
                             let searchWasSuccesful = false;
-                            for (let i = 0; i < this.occupiedBy.length; i++) {
+                            for (let i = this.occupiedBy.length; i > 0; i--) {
                                 if (this.occupiedBy[i].lookAtThis() != undefined) {
                                     searchWasSuccesful = true;
                                     this.occupiedBy[i].lookAtThis();
@@ -296,13 +296,12 @@ class SceneGame extends Phaser.Scene {
                     
                     if (attackButton.state == 1 && this.occupiedBy.indexOf(idol) != -1) {
                     // Das Relikt steht benachbart und man möchte es angreifen
-                        this.checkForNeighbors();
-                        for (let i = 0; i < this.neighbors.length; i++) {
-                            if (this.neighbors[i].name == activeChar.onTile) {
+                        this.checkForNeighbors(true);
+                        for (let i = 0; i < this.cNeighbors.length; i++) {
+                            if (this.cNeighbors[i].name == activeChar.onTile) {
                                 idol.destroy();
                             }
                         }
-                        this.neighbors.length = 0;
                         returnCursorToNormal();
                         showActions(activeChar);
                     } else if (attackButton.state == 2 && this.occupiedBy.indexOf(idol) != -1) {
@@ -358,7 +357,7 @@ class SceneGame extends Phaser.Scene {
                 });
                 
                 // Passt die Daten an, wie schwer das Betreten dieser Tile aktuell ist
-                tile.updateWalkable = function () {
+                tile.updateWalkable = function (lookForTargets = false) {
                     this.cWalkable = [...this.walkable];
                     // Felder mit tiefem Wasser werden leicht begehbar für gute Schwimmer
                     if (activeChar != null) {
@@ -370,12 +369,12 @@ class SceneGame extends Phaser.Scene {
                     }
                     // Geht Objecte durch die auf der Tile liegen und modifiziert aktuelle Begehbarkeit
                     for (let i = 0; i < this.occupiedBy.length; i++) {
-                        this.occupiedBy[i].modifyWalkability(this.cWalkable);
+                        this.occupiedBy[i].modifyWalkability(this.cWalkable, lookForTargets);
                     }
                 }
                 
                 // Sammelt Informationen über alle Nachbarfelder
-				tile.checkForNeighbors = function () {
+				tile.checkForNeighbors = function (lookForTargets) {
                     
                     //  B   -   -
                     //  -   A   -
@@ -384,7 +383,7 @@ class SceneGame extends Phaser.Scene {
                         this.neighbors.push(tileArray[this.name-1-matrixWidth]);
                         this.neighborsDistance.push(1.5*tileArray[this.name-1-matrixWidth].walkable[4]);
                         
-						tileArray[this.name-1-matrixWidth].updateWalkable();
+						tileArray[this.name-1-matrixWidth].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name-1-matrixWidth].cWalkable[4] != 0) {
                             this.cNeighbors.push(tileArray[this.name-1-matrixWidth]);
@@ -398,7 +397,7 @@ class SceneGame extends Phaser.Scene {
                         this.neighbors.push(tileArray[this.name-matrixWidth]);
                         this.neighborsDistance.push(1*tileArray[this.name-matrixWidth].walkable[5]);
                         
-						tileArray[this.name-matrixWidth].updateWalkable();
+						tileArray[this.name-matrixWidth].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name-matrixWidth].cWalkable[5] != 0) {
                             this.cNeighbors.push(tileArray[this.name-matrixWidth]);
@@ -412,7 +411,7 @@ class SceneGame extends Phaser.Scene {
                         this.neighbors.push(tileArray[this.name-matrixWidth+1]);
                         this.neighborsDistance.push(1.5*tileArray[this.name-matrixWidth+1].walkable[6]);
                         
-                        tileArray[this.name-matrixWidth+1].updateWalkable();
+                        tileArray[this.name-matrixWidth+1].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name-matrixWidth+1].cWalkable[6] != 0) {
                             this.cNeighbors.push(tileArray[this.name-matrixWidth+1]);
@@ -426,7 +425,7 @@ class SceneGame extends Phaser.Scene {
                         this.neighbors.push(tileArray[this.name+1]);
                         this.neighborsDistance.push(1*tileArray[this.name+1].walkable[7]);
                         
-                        tileArray[this.name+1].updateWalkable();
+                        tileArray[this.name+1].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name+1].cWalkable[7] != 0) {
                             this.cNeighbors.push(tileArray[this.name+1]);
@@ -440,7 +439,7 @@ class SceneGame extends Phaser.Scene {
                         this.neighbors.push(tileArray[this.name+1+matrixWidth]);
                         this.neighborsDistance.push(1.5*tileArray[this.name+1+matrixWidth].walkable[0]);
                         
-                        tileArray[this.name+1+matrixWidth].updateWalkable();
+                        tileArray[this.name+1+matrixWidth].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name+1+matrixWidth].cWalkable[0] != 0) {
                             this.cNeighbors.push(tileArray[this.name+1+matrixWidth]);
@@ -454,7 +453,7 @@ class SceneGame extends Phaser.Scene {
                         this.neighbors.push(tileArray[this.name+matrixWidth]);
                         this.neighborsDistance.push(1*tileArray[this.name+matrixWidth].walkable[1]);
                         
-                        tileArray[this.name+matrixWidth].updateWalkable();
+                        tileArray[this.name+matrixWidth].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name+matrixWidth].cWalkable[1] != 0) {
                             this.cNeighbors.push(tileArray[this.name+matrixWidth]);
@@ -468,7 +467,7 @@ class SceneGame extends Phaser.Scene {
                         this.cNeighbors.push(tileArray[this.name-1+matrixWidth]);
                         this.cNeighborsDistance.push(1.5*tileArray[this.name-1+matrixWidth].walkable[2]);
                         
-                        tileArray[this.name-1+matrixWidth].updateWalkable();
+                        tileArray[this.name-1+matrixWidth].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name-1+matrixWidth].cWalkable[2] != 0) {
                             this.cNeighbors.push(tileArray[this.name-1+matrixWidth]);
@@ -482,7 +481,7 @@ class SceneGame extends Phaser.Scene {
                         this.neighbors.push(tileArray[this.name-1]);
                         this.neighborsDistance.push(1*tileArray[this.name-1].walkable[3]);
                         
-                        tileArray[this.name-1].updateWalkable();
+                        tileArray[this.name-1].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name-1].cWalkable[3] != 0) {
                             this.cNeighbors.push(tileArray[this.name-1]);

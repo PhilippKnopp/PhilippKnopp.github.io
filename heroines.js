@@ -180,9 +180,9 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
         }
         
-        this.modifyWalkability = function (baseWalkability) {
+        this.modifyWalkability = function (baseWalkability, lookForTargets) {
             for (let i = 0; i < baseWalkability.length; i++) {
-                if (baseWalkability[i] != 0 && activeChar instanceof Enemy) {
+                if (baseWalkability[i] != 0 && activeChar instanceof Enemy && lookForTargets == false) {
                     baseWalkability[i] = 0;
                 } else if (baseWalkability[i] != 0) {
                     baseWalkability[i] += 1;
@@ -323,29 +323,27 @@ function showActions(_this) {
     hideActions();
     let buttonXpos = 60;
     
-    let placeholder = activeChar;
-    activeChar = null;
-    tileArray[_this.onTile].checkForNeighbors();
-    activeChar = placeholder;
-    
     faceButton.x = _this.x-buttonXpos;
     faceButton.y = _this.y;
     faceButton.setAlpha(1);
     
     // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
+    tileArray[_this.onTile].checkForNeighbors();
     if (tileArray[_this.onTile].cNeighbors.length != 0 && (fightmode == false || _this.movementCounter >= 1)) {
         moveButton.x = _this.x+buttonXpos;
         moveButton.y = _this.y;
         moveButton.setAlpha(1);
         buttonXpos += 85;
     }
+    clearNodes();
     
     // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
+    tileArray[_this.onTile].checkForNeighbors(true);
     if ((fightmode == false && _this.health > 0) || _this.actionsCounter > 0 || (_this.movementCounter >= 6 && _this.actionsCounter == 0) ) {
         let adjacentEnemies = false;
         
         for (let i = 0; i < tileArray[_this.onTile].cNeighbors.length; i++) {
-            if (checkFor (tileArray[_this.onTile].cNeighbors[i].occupiedBy, Enemy) || tileArray[_this.onTile].neighbors[i].occupiedBy.includes(idol)) {
+            if (checkFor (tileArray[_this.onTile].cNeighbors[i].occupiedBy, Enemy) || tileArray[_this.onTile].cNeighbors[i].occupiedBy.includes(idol)) {
                 adjacentEnemies = true;
             }
         }

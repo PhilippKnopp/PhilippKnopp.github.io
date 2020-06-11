@@ -122,8 +122,6 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
 }
 
 function lineOfSight (startIndex, endIndex) {
-    let placeholder = activeChar;
-    activeChar = null;
     
     let aX = startIndex % matrixWidth;
     let aY = Math.floor(startIndex / matrixWidth);
@@ -152,19 +150,19 @@ function lineOfSight (startIndex, endIndex) {
                 if (pointer >= stepDiagonals && difY > 0) { // N-W
                     stepDiagonals += 1/(diagonals+1);
                     index = index - matrixWidth - 1;
-                    tileArray[index].updateWalkable();
+                    tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[4]);
                     aX--;
                 } else if (pointer >= stepDiagonals && difY < 0) { // S-W
                     stepDiagonals += 1/(diagonals+1);
                     index = index + matrixWidth - 1;
-                    tileArray[index].updateWalkable();
+                    tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[2]);
                     aX--;
                 } else if (pointer >= stepStraights || difY == 0) { // W
                     stepStraights += 1/(straights+1);
                     index = index - 1;
-                    tileArray[index].updateWalkable();
+                    tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[3]);
                     aX--;
                 }
@@ -175,19 +173,19 @@ function lineOfSight (startIndex, endIndex) {
                 if (pointer >= stepDiagonals && difY > 0) { // N-O
                     stepDiagonals += 1/(diagonals+1);
                     index = index - matrixWidth + 1;
-                    tileArray[index].updateWalkable();
+                    tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[6]);
                     aX++;
                 } else if (pointer >= stepDiagonals && difY < 0) { // S-O
                     stepDiagonals += 1/(diagonals+1);
                     index = index + matrixWidth + 1;
-                    tileArray[index].updateWalkable();
+                    tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[0]);
                     aX++;
                 } else if (pointer >= stepStraights || difY == 0) { // O
                     stepStraights += 1/(straights+1);
                     index = index + 1;
-                    tileArray[index].updateWalkable();
+                    tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[7]);
                     aX++;
                 }
@@ -200,19 +198,19 @@ function lineOfSight (startIndex, endIndex) {
                 if (pointer >= stepDiagonals && difX > 0) { // N-W
                     stepDiagonals += 1/(diagonals+1);
                     index = index - matrixWidth - 1;
-                    tileArray[index].updateWalkable();
+                    tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[4]);
                     aY--;
                 } else if (pointer >= stepDiagonals && difX < 0) { // N-O
                     stepDiagonals += 1/(diagonals+1);
                     index = index - matrixWidth + 1;
-                    tileArray[index].updateWalkable();
+                    tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[6]);
                     aY--;
                 } else if (pointer >= stepStraights || difX == 0) { // N
                     stepStraights += 1/(straights+1);
                     index = index - matrixWidth;
-                    tileArray[index].updateWalkable();
+                    tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[5]);
                     aY--;
                 }
@@ -223,19 +221,19 @@ function lineOfSight (startIndex, endIndex) {
                 if (pointer >= stepDiagonals && difX > 0) { // S-W
                     stepDiagonals += 1/(diagonals+1);
                     index = index + matrixWidth - 1;
-                    tileArray[index].updateWalkable();
+                    tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[2]);
                     aY++;
                 } else if (pointer >= stepDiagonals && difX < 0) { // S-O
                     stepDiagonals += 1/(diagonals+1);
                     index = index + matrixWidth + 1;
-                    tileArray[index].updateWalkable();
+                    tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[0]);
                     aY++;
                 } else if (pointer >= stepStraights || difX == 0) { // S
                     stepStraights += 1/(straights+1);
                     index = index + matrixWidth;
-                    tileArray[index].updateWalkable();
+                    tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[1]);
                     aY++;
                 }
@@ -245,7 +243,6 @@ function lineOfSight (startIndex, endIndex) {
     
     clearNodes();
     searchButton.state = 0;
-    activeChar = placeholder;
     
     let los_blocked = losPathDifficulty.includes(0); // testet ob in dem Array "losPathDifficulty" eine 0 vorkommt (dort kann man nicht hinlaufen)
     return !los_blocked; // gibt "true" zurück, wenn man in direkter Linie zum angesehenen Punkt laufen/schwimmen/... könnte.
