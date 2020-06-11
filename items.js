@@ -148,6 +148,12 @@ const event6 = {
     }
 }
 
+const event8 = {
+    endLevel: function () {
+        showText (textL1[15]);
+    }
+}
+
 /*
 
 Finde Index von Object:

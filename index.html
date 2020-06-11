@@ -73,7 +73,7 @@
     
     var mage, rogue, barb;
     var rangedDamage = [0]; // Überschüssiger Schaden der Magierin kann auf zusätzliche Ziele verteilt werden
-    var eventReminder = {e2:false, e4:false, e6:false, e7:false, ritualProgress: 13, ritualMembers: 5, ritualState: ""}; // Dinge die nur einmal passieren sollen
+    var eventReminder = {e2:false, e4:false, e7:false, ritualProgress: 13, ritualMembers: 5, ritualState: ""}; // Dinge die nur einmal passieren sollen
     
     var figuresOnMap = [];
     var activeChar = null;  // Variable in der die Spielfigut gespeichert wird, die gerade aktiv ist um schnell darauf zugreifen zu können.
@@ -278,9 +278,6 @@
         // nach dem öffnen der zweiten Türe in den Hauptraum
             eventReminder.e4 = true;
             showText (textL1[38], figuresOnMap[figuresOnMap.length - 2], textL1Enemy[1]);
-        } else if (eventKey == "e8") {
-        // ende von Level 1
-            showText (textL1[15]);
         }
     }
     

@@ -97,7 +97,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
                     ritual(0, true);
                 }
                 if (figuresOnMap.length == 3) {
-                    eventDispatch ("e8");
+                    event8.endLevel();
                 }
                 checkFightmode();
             }
