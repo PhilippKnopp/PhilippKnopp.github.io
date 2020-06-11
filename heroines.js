@@ -329,7 +329,7 @@ function showActions(_this) {
     
     // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
     tileArray[_this.onTile].checkForNeighbors();
-    if (tileArray[_this.onTile].cNeighbors.length != 0 && (fightmode == false || _this.movementCounter >= 1)) {
+    if (tileArray[_this.onTile].neighbors.length != 0 && (fightmode == false || _this.movementCounter >= 1)) {
         moveButton.x = _this.x+buttonXpos;
         moveButton.y = _this.y;
         moveButton.setAlpha(1);
@@ -342,8 +342,8 @@ function showActions(_this) {
     if ((fightmode == false && _this.health > 0) || _this.actionsCounter > 0 || (_this.movementCounter >= 6 && _this.actionsCounter == 0) ) {
         let adjacentEnemies = false;
         
-        for (let i = 0; i < tileArray[_this.onTile].cNeighbors.length; i++) {
-            if (checkFor (tileArray[_this.onTile].cNeighbors[i].occupiedBy, Enemy) || tileArray[_this.onTile].cNeighbors[i].occupiedBy.includes(idol)) {
+        for (let i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
+            if (checkFor (tileArray[_this.onTile].neighbors[i].occupiedBy, Enemy) || tileArray[_this.onTile].neighbors[i].occupiedBy.includes(idol)) {
                 adjacentEnemies = true;
             }
         }
@@ -387,8 +387,8 @@ function showActions(_this) {
     // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist
     if ((fightmode == false || _this.actionsCounter >= 0 || (_this.movementCounter) >= 6) && _this.health > 0 ) {
         let adjacentTrap = false;
-        for (let i = 0; i < tileArray[_this.onTile].cNeighbors.length; i++) {
-            if (tileArray[_this.onTile].cNeighbors[i].occupiedBy.includes(trap1) && trap1Sprt.alpha != 0) {
+        for (let i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
+            if (tileArray[_this.onTile].neighbors[i].occupiedBy.includes(trap1) && trap1Sprt.alpha != 0) {
                 adjacentTrap = true;
             }
         }

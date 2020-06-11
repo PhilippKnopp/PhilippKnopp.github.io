@@ -65,22 +65,22 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
         frontierList[activeNode].checkForNeighbors();
         
         // Füge Neighbors des aktuellen Knotens der Frontierlist hinzu
-        for (let i = 0; i < frontierList[activeNode].cNeighbors.length; i++) {
+        for (let i = 0; i < frontierList[activeNode].neighbors.length; i++) {
             
-            let distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].cNeighborsDistance[i];
-            if (containsObject(frontierList[activeNode].cNeighbors[i], frontierList)) {
-                if (distanceTravelled < frontierList[activeNode].cNeighbors[i].distanceTravelled) {
-                    frontierList[activeNode].cNeighbors[i].distanceTravelled = distanceTravelled;
-                    frontierList[activeNode].cNeighbors[i].wayPointUsefulness = frontierList[activeNode].cNeighbors[i].distanceTravelled + frontierList[activeNode].cNeighbors[i].estimatedWayToB(endIndex);
-                    frontierList[activeNode].cNeighbors[i].entryPoint = frontierList[activeNode].name;
+            let distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
+            if (containsObject(frontierList[activeNode].neighbors[i], frontierList)) {
+                if (distanceTravelled < frontierList[activeNode].neighbors[i].distanceTravelled) {
+                    frontierList[activeNode].neighbors[i].distanceTravelled = distanceTravelled;
+                    frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB(endIndex);
+                    frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
                 }
-            } else if (containsObject(frontierList[activeNode].cNeighbors[i], mappedList)) {
+            } else if (containsObject(frontierList[activeNode].neighbors[i], mappedList)) {
                 continue;
             } else {
-                frontierList[activeNode].cNeighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].cNeighborsDistance[i];
-                frontierList[activeNode].cNeighbors[i].wayPointUsefulness = frontierList[activeNode].cNeighbors[i].distanceTravelled + frontierList[activeNode].cNeighbors[i].estimatedWayToB(endIndex);
-                frontierList[activeNode].cNeighbors[i].entryPoint = frontierList[activeNode].name;
-                frontierList.push(frontierList[activeNode].cNeighbors[i]);
+                frontierList[activeNode].neighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
+                frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB(endIndex);
+                frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
+                frontierList.push(frontierList[activeNode].neighbors[i]);
             }
         }
         

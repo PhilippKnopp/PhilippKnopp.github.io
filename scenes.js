@@ -240,8 +240,6 @@ class SceneGame extends Phaser.Scene {
                 tile.occupiedBy = [];
                 tile.neighbors = [];            // Alle Nachbarn, die trotz Gelände erreichbar sind
 				tile.neighborsDistance = [];    // Distanzen, in der Reihenfolge zu tile.neighbors
-                tile.cNeighbors = [];           // Alle Nachbarn, die noch übrig sind, wenn man Gegenstände und Figuren mit einbezieht
-                tile.cNeighborsDistance = [];   // Distanzen, in der Reihenfolge zu tile.cNeighbors
                 
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
@@ -297,8 +295,8 @@ class SceneGame extends Phaser.Scene {
                     if (attackButton.state == 1 && this.occupiedBy.indexOf(idol) != -1) {
                     // Das Relikt steht benachbart und man möchte es angreifen
                         this.checkForNeighbors(true);
-                        for (let i = 0; i < this.cNeighbors.length; i++) {
-                            if (this.cNeighbors[i].name == activeChar.onTile) {
+                        for (let i = 0; i < this.neighbors.length; i++) {
+                            if (this.neighbors[i].name == activeChar.onTile) {
                                 idol.destroy();
                             }
                         }
@@ -380,112 +378,88 @@ class SceneGame extends Phaser.Scene {
                     //  -   A   -
                     //  -   -   -
 					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != 0 && tileArray[this.name-1-matrixWidth].walkable[4] != 0) {
-                        this.neighbors.push(tileArray[this.name-1-matrixWidth]);
-                        this.neighborsDistance.push(1.5*tileArray[this.name-1-matrixWidth].walkable[4]);
-                        
-						tileArray[this.name-1-matrixWidth].updateWalkable(lookForTargets);
+                        tileArray[this.name-1-matrixWidth].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name-1-matrixWidth].cWalkable[4] != 0) {
-                            this.cNeighbors.push(tileArray[this.name-1-matrixWidth]);
-                            this.cNeighborsDistance.push(1.5*tileArray[this.name-1-matrixWidth].cWalkable[4]);
+                            this.neighbors.push(tileArray[this.name-1-matrixWidth]);
+                            this.neighborsDistance.push(1.5*tileArray[this.name-1-matrixWidth].cWalkable[4]);
                         }
 					}
                     //  -   B   -
                     //  -   A   -
                     //  -   -   -
 					if (this.name-matrixWidth >= 0 && tileArray[this.name-matrixWidth].walkable[5] != 0) {
-                        this.neighbors.push(tileArray[this.name-matrixWidth]);
-                        this.neighborsDistance.push(1*tileArray[this.name-matrixWidth].walkable[5]);
-                        
-						tileArray[this.name-matrixWidth].updateWalkable(lookForTargets);
+                        tileArray[this.name-matrixWidth].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name-matrixWidth].cWalkable[5] != 0) {
-                            this.cNeighbors.push(tileArray[this.name-matrixWidth]);
-                            this.cNeighborsDistance.push(1*tileArray[this.name-matrixWidth].cWalkable[5]);
+                            this.neighbors.push(tileArray[this.name-matrixWidth]);
+                            this.neighborsDistance.push(1*tileArray[this.name-matrixWidth].cWalkable[5]);
                         }
 					}
                     //  -   -   B
                     //  -   A   -
                     //  -   -   -
 					if (this.name-matrixWidth >= 0 && this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name-matrixWidth+1].walkable[6] != 0) {
-                        this.neighbors.push(tileArray[this.name-matrixWidth+1]);
-                        this.neighborsDistance.push(1.5*tileArray[this.name-matrixWidth+1].walkable[6]);
-                        
                         tileArray[this.name-matrixWidth+1].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name-matrixWidth+1].cWalkable[6] != 0) {
-                            this.cNeighbors.push(tileArray[this.name-matrixWidth+1]);
-                            this.cNeighborsDistance.push(1.5*tileArray[this.name-matrixWidth+1].cWalkable[6]);
+                            this.neighbors.push(tileArray[this.name-matrixWidth+1]);
+                            this.neighborsDistance.push(1.5*tileArray[this.name-matrixWidth+1].cWalkable[6]);
                         }
 					}
                     //  -   -   -
                     //  -   A   B
                     //  -   -   -
 					if (this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name+1].walkable[7] != 0) {
-                        this.neighbors.push(tileArray[this.name+1]);
-                        this.neighborsDistance.push(1*tileArray[this.name+1].walkable[7]);
-                        
                         tileArray[this.name+1].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name+1].cWalkable[7] != 0) {
-                            this.cNeighbors.push(tileArray[this.name+1]);
-                            this.cNeighborsDistance.push(1*tileArray[this.name+1].cWalkable[7]);
+                            this.neighbors.push(tileArray[this.name+1]);
+                            this.neighborsDistance.push(1*tileArray[this.name+1].cWalkable[7]);
                         }
 					}
                     //  -   -   -
                     //  -   A   -
                     //  -   -   B
 					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && this.name%matrixWidth != (matrixWidth-1) && tileArray[this.name+1+matrixWidth].walkable[0] != 0) {
-                        this.neighbors.push(tileArray[this.name+1+matrixWidth]);
-                        this.neighborsDistance.push(1.5*tileArray[this.name+1+matrixWidth].walkable[0]);
-                        
                         tileArray[this.name+1+matrixWidth].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name+1+matrixWidth].cWalkable[0] != 0) {
-                            this.cNeighbors.push(tileArray[this.name+1+matrixWidth]);
-                            this.cNeighborsDistance.push(1.5*tileArray[this.name+1+matrixWidth].cWalkable[0]);
+                            this.neighbors.push(tileArray[this.name+1+matrixWidth]);
+                            this.neighborsDistance.push(1.5*tileArray[this.name+1+matrixWidth].cWalkable[0]);
                         }
 					}
                     //  -   -   -
                     //  -   A   -
                     //  -   B   -
 					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && tileArray[this.name+matrixWidth].walkable[1] != 0) {
-                        this.neighbors.push(tileArray[this.name+matrixWidth]);
-                        this.neighborsDistance.push(1*tileArray[this.name+matrixWidth].walkable[1]);
-                        
                         tileArray[this.name+matrixWidth].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name+matrixWidth].cWalkable[1] != 0) {
-                            this.cNeighbors.push(tileArray[this.name+matrixWidth]);
-                            this.cNeighborsDistance.push(1*tileArray[this.name+matrixWidth].cWalkable[1]);
+                            this.neighbors.push(tileArray[this.name+matrixWidth]);
+                            this.neighborsDistance.push(1*tileArray[this.name+matrixWidth].cWalkable[1]);
                         }
 					}
                     //  -   -   -
                     //  -   A   -
                     //  B   -   -
 					if (this.name+matrixWidth < (matrixWidth*matrixHeight) && this.name%matrixWidth != 0 && tileArray[this.name-1+matrixWidth].walkable[2] != 0) {
-                        this.cNeighbors.push(tileArray[this.name-1+matrixWidth]);
-                        this.cNeighborsDistance.push(1.5*tileArray[this.name-1+matrixWidth].walkable[2]);
-                        
                         tileArray[this.name-1+matrixWidth].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name-1+matrixWidth].cWalkable[2] != 0) {
-                            this.cNeighbors.push(tileArray[this.name-1+matrixWidth]);
-                            this.cNeighborsDistance.push(1.5*tileArray[this.name-1+matrixWidth].cWalkable[2]);
+                            this.neighbors.push(tileArray[this.name-1+matrixWidth]);
+                            this.neighborsDistance.push(1.5*tileArray[this.name-1+matrixWidth].cWalkable[2]);
                         }
 					}
                     //  -   -   -
                     //  B   A   -
                     //  -   -   -
 					if (this.name%matrixWidth != 0 && tileArray[this.name-1].walkable[3] != 0) {
-                        this.neighbors.push(tileArray[this.name-1]);
-                        this.neighborsDistance.push(1*tileArray[this.name-1].walkable[3]);
-                        
                         tileArray[this.name-1].updateWalkable(lookForTargets);
                         
                         if (tileArray[this.name-1].cWalkable[3] != 0) {
-                            this.cNeighbors.push(tileArray[this.name-1]);
-                            this.cNeighborsDistance.push(1*tileArray[this.name-1].cWalkable[3]);
+                            this.neighbors.push(tileArray[this.name-1]);
+                            this.neighborsDistance.push(1*tileArray[this.name-1].cWalkable[3]);
                         }
 					}
 				}

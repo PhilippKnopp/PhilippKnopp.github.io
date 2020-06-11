@@ -119,7 +119,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
     activateFigure () {
         if (attackButton.state == 1) {
             tileArray[activeChar.onTile].checkForNeighbors(true);
-            if (tileArray[activeChar.onTile].cNeighbors.includes(tileArray[this.onTile])) {
+            if (tileArray[activeChar.onTile].neighbors.includes(tileArray[this.onTile])) {
                 clearNodes();
                 activeChar.attack(this);
             } else {
