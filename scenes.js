@@ -269,16 +269,23 @@ class SceneGame extends Phaser.Scene {
                     
                     if (searchButton.state == 1) {
                         if (lineOfSight (activeChar.onTile, this.name)) {
-                            if (this.info == 3 && crystal1Img.alpha != 0) {
-                                crystal1Img.setAlpha(1);
-                                showText(textL1[this.info], activeChar, textL1[4]);
-                            } else if (this.info == 3 && crystal1Img.alpha == 0) {
-                                showText(textL1[30], activeChar, textL1[31]);
-                            } else if (this.info == 7) {
-                                showText(textL1[this.info]);
-                                trap1Sprt.setAlpha(1);
-                            } else {
-                                showText(textL1[this.info]);
+                            let searchWasSuccesful = false;
+                            for (let i = 0; i < this.occupiedBy.length; i++) {
+                                if (this.occupiedBy[i].lookAtThis() != undefined) {
+                                    searchWasSuccesful = true;
+                                    this.occupiedBy[i].lookAtThis();
+                                    break;
+                                }
+                            }
+                            if (searchWasSuccesful == false) {
+                                if (this.info == 3 && crystal1Img.alpha != 0) {
+                                    crystal1Img.setAlpha(1);
+                                    showText(textL1[this.info], activeChar, textL1[4]);
+                                } else if (this.info == 3 && crystal1Img.alpha == 0) {
+                                    showText(textL1[30], activeChar, textL1[31]);
+                                } else {
+                                    showText(textL1[this.info]);
+                                }
                             }
                         } else {
                             showText("", activeChar, textL1[1]);

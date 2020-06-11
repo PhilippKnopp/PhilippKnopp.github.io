@@ -345,10 +345,11 @@ function showActions(_this) {
         let adjacentEnemies = false;
         
         for (let i = 0; i < tileArray[_this.onTile].cNeighbors.length; i++) {
-            if (checkFor (tileArray[_this.onTile].cNeighbors[i].occupiedBy, Enemy) || tileArray[_this.onTile].cNeighbors[i].occupiedBy.includes(idol)) {
+            if (checkFor (tileArray[_this.onTile].cNeighbors[i].occupiedBy, Enemy) || tileArray[_this.onTile].neighbors[i].occupiedBy.includes(idol)) {
                 adjacentEnemies = true;
             }
         }
+        
         if (adjacentEnemies == true) {
             attackButton.x = _this.x+buttonXpos;
             attackButton.y = _this.y;
@@ -389,7 +390,7 @@ function showActions(_this) {
     if ((fightmode == false || _this.actionsCounter >= 0 || (_this.movementCounter) >= 6) && _this.health > 0 ) {
         let adjacentTrap = false;
         for (let i = 0; i < tileArray[_this.onTile].cNeighbors.length; i++) {
-            if (tileArray[_this.onTile].cNeighbors[i].occupiedBy.includes(trap1) && trap1Sprt.alpha != 0 && trap1Sprt.frame != 1) {
+            if (tileArray[_this.onTile].cNeighbors[i].occupiedBy.includes(trap1) && trap1Sprt.alpha != 0) {
                 adjacentTrap = true;
             }
         }

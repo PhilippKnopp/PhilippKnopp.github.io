@@ -55,6 +55,10 @@ const trap1 = {
     modifyWalkability: function (baseWalkability) {
         return baseWalkability;
     },
+    lookAtThis: function () {
+        showText(textL1[7]);
+        trap1Sprt.setAlpha(1);
+    },
     stepOnThisObject: function () {
         activeChar.pathToTravel.length = 0;
         trap1Sprt.setAlpha(1);
