@@ -1,4 +1,4 @@
-var idol = {
+const idol = {
     modifyWalkability: function (baseWalkability) {
         for (let i = 0; i < baseWalkability.length; i++) {
             baseWalkability[i] = 0;
@@ -23,7 +23,7 @@ var idol = {
     }
 };
 
-var crystal = {
+const crystal = {
     modifyWalkability: function (baseWalkability) {
         return baseWalkability;
     },
@@ -51,7 +51,7 @@ var crystal = {
     }
 };
 
-var trap1 = {
+const trap1 = {
     modifyWalkability: function (baseWalkability) {
         return baseWalkability;
     },
@@ -59,12 +59,7 @@ var trap1 = {
         activeChar.pathToTravel.length = 0;
         trap1Sprt.setAlpha(1);
         trap1Sprt.setFrame(1);
-        tileArray[437].occupiedBy.splice(tileArray[437].occupiedBy.indexOf(this), 1);
-        tileArray[438].occupiedBy.splice(tileArray[438].occupiedBy.indexOf(this), 1);
-        tileArray[462].occupiedBy.splice(tileArray[462].occupiedBy.indexOf(this), 1);
-        tileArray[463].occupiedBy.splice(tileArray[463].occupiedBy.indexOf(this), 1);
-        tileArray[487].occupiedBy.splice(tileArray[487].occupiedBy.indexOf(this), 1);
-        tileArray[488].occupiedBy.splice(tileArray[488].occupiedBy.indexOf(this), 1);
+        this.deleteFromTile();
         activeChar.pathToTravel.push(activeChar.onTile-2);
         activeChar.health -= getRandomInt(6);
         activeChar.checkHealth();
@@ -88,13 +83,59 @@ var trap1 = {
         addXP(8);
         trap1Sprt.setAlpha(1);
         trap1Sprt.setFrame(1);
+        this.deleteFromTile();
+        showActions(activeChar);
+    },
+    deleteFromTile: function () {
         tileArray[437].occupiedBy.splice(tileArray[437].occupiedBy.indexOf(this), 1);
         tileArray[438].occupiedBy.splice(tileArray[438].occupiedBy.indexOf(this), 1);
         tileArray[462].occupiedBy.splice(tileArray[462].occupiedBy.indexOf(this), 1);
         tileArray[463].occupiedBy.splice(tileArray[463].occupiedBy.indexOf(this), 1);
         tileArray[487].occupiedBy.splice(tileArray[487].occupiedBy.indexOf(this), 1);
         tileArray[488].occupiedBy.splice(tileArray[488].occupiedBy.indexOf(this), 1);
-        showActions(activeChar);
+    }
+}
+
+const event1 = {
+    startLevel: function () {
+        showText (textL1[0], figuresOnMap[7], textL1Enemy[0], "", "", textL1[9]);
+    }
+}
+
+const event3 = {
+    modifyWalkability: function (baseWalkability) {
+        return baseWalkability;
+    },
+    stepOnThisObject: function () {
+        game.scene.keys.sceneGame.cameras.main.fadeOut(500);
+        game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
+            camera.fadeIn(700);
+        }, game.scene.keys.sceneGame);
+        showText (textL1[22], activeChar, textL1[23]);
+    }
+}
+
+const event5 = {
+    modifyWalkability: function (baseWalkability) {
+        return baseWalkability;
+    },
+    stepOnThisObject: function () {
+        game.scene.keys.sceneGame.cameras.main.fadeOut(500);
+        game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
+            camera.fadeIn(700);
+        }, game.scene.keys.sceneGame);
+        showText (textL1[22], activeChar, textL1[23]);
+    }
+}
+
+const event6 = {
+    modifyWalkability: function (baseWalkability) {
+        return baseWalkability;
+    },
+    stepOnThisObject: function () {
+        activeChar.pathToTravel.length = 0;
+        showText(textL1[43], mage, textL1[44]);
+        tileArray[606].occupiedBy.splice(tileArray[606].occupiedBy.indexOf(this), 1);
     }
 }
 
