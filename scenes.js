@@ -269,7 +269,7 @@ class SceneGame extends Phaser.Scene {
                         if (lineOfSight (activeChar.onTile, this.name)) {
                             let searchWasSuccesful = false;
                             for (let i = this.occupiedBy.length-1; i >= 0; i--) {
-                                if (this.occupiedBy[i].lookAtThis() != undefined) {
+                                if (typeof this.occupiedBy[i].lookAtThis !== "undefined") {
                                     searchWasSuccesful = true;
                                     this.occupiedBy[i].lookAtThis();
                                     break;
