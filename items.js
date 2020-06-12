@@ -29,9 +29,6 @@ const idol = {
 };
 
 const crystal = {
-    modifyWalkability: function (baseWalkability, lookForTargets) {
-        return baseWalkability;
-    },
     stepOnThisObject: function () {
         if (fightmode == true && crystal1Img.alpha == 1) {
             showText ("", activeChar, textL1[42]);
@@ -57,9 +54,6 @@ const crystal = {
 };
 
 const trap1 = {
-    modifyWalkability: function (baseWalkability, lookForTargets) {
-        return baseWalkability;
-    },
     lookAtThis: function () {
         showText(textL1[7]);
         trap1Sprt.setAlpha(1);
@@ -112,9 +106,6 @@ const event1 = {
 }
 
 const event3 = {
-    modifyWalkability: function (baseWalkability, lookForTargets) {
-        return baseWalkability;
-    },
     stepOnThisObject: function () {
         game.scene.keys.sceneGame.cameras.main.fadeOut(500);
         game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
@@ -125,9 +116,6 @@ const event3 = {
 }
 
 const event5 = {
-    modifyWalkability: function (baseWalkability, lookForTargets) {
-        return baseWalkability;
-    },
     stepOnThisObject: function () {
         game.scene.keys.sceneGame.cameras.main.fadeOut(500);
         game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
@@ -138,9 +126,6 @@ const event5 = {
 }
 
 const event6 = {
-    modifyWalkability: function (baseWalkability, lookForTargets) {
-        return baseWalkability;
-    },
     stepOnThisObject: function () {
         activeChar.pathToTravel.length = 0;
         showText(textL1[43], mage, textL1[44]);
@@ -164,15 +149,10 @@ const door1 = {
         } else {
             return baseWalkability;
         }
-    },
-    stepOnThisObject: function () {
     }
 }
 
 const door1trigger = {
-    modifyWalkability: function (baseWalkability, lookForTargets) {
-        return baseWalkability;
-    },
     useDoor: function () {
         if (door1.state == "close") {
             door1Img.setAlpha(1);
@@ -185,8 +165,6 @@ const door1trigger = {
             door1Img.setAlpha(0);
             door1.state = "close";
         }
-    },
-    stepOnThisObject: function () {
     }
 }
 
@@ -200,15 +178,10 @@ const door2 = {
         } else {
             return baseWalkability;
         }
-    },
-    stepOnThisObject: function () {
     }
 }
 
 const door2trigger = {
-    modifyWalkability: function (baseWalkability, lookForTargets) {
-        return baseWalkability;
-    },
     useDoor: function () {
         if (door2.state == "close") {
             door2Img.setAlpha(1);
@@ -221,8 +194,6 @@ const door2trigger = {
             door2Img.setAlpha(0);
             door2.state = "close";
         }
-    },
-    stepOnThisObject: function () {
     }
 }
 
@@ -247,19 +218,12 @@ const door4 = {
             door4Img.setAlpha(0);
             this.state = "close";
         }
-    },
-    stepOnThisObject: function () {
     }
 }
 
 const door4trigger = {
-    modifyWalkability: function (baseWalkability, lookForTargets) {
-        return baseWalkability;
-    },
     useDoor: function () {
         door4.useDoor();
-    },
-    stepOnThisObject: function () {
     }
 }
 
@@ -284,19 +248,12 @@ const door5 = {
             door5Img.setAlpha(0);
             this.state = "close";
         }
-    },
-    stepOnThisObject: function () {
     }
 }
 
 const door5trigger = {
-    modifyWalkability: function (baseWalkability, lookForTargets) {
-        return baseWalkability;
-    },
     useDoor: function () {
         door5.useDoor();
-    },
-    stepOnThisObject: function () {
     }
 }
 
@@ -321,27 +278,11 @@ const door6 = {
             door6Img.setAlpha(0);
             this.state = "close";
         }
-    },
-    stepOnThisObject: function () {
     }
 }
 
 const door6trigger = {
-    modifyWalkability: function (baseWalkability, lookForTargets) {
-        return baseWalkability;
-    },
     useDoor: function () {
         door6.useDoor();
-    },
-    stepOnThisObject: function () {
     }
 }
-/*
-
-Finde Index von Object:
-let index = tileArray[i].occupiedBy.indexOf(object);
-
-Lösche item mit Index:
-tileArray[i].occupiedBy.splice(index, 1);
-
-*/

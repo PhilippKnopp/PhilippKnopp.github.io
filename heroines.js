@@ -21,7 +21,6 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.skills = {stealth: { trained: false, active: false },
                        swim:    false
                       };
-        this.stepOnThisObject = function () {};
         
         this.setInteractive();
         this.on("pointerup", this.activateFigure, this);
@@ -65,7 +64,9 @@ class Figure extends Phaser.GameObjects.Sprite {
             checkFightmode();
             // tileVisibility();
             for (let i = 0; i < tileArray[this.onTile].occupiedBy.length-1; i++) {
-                tileArray[this.onTile].occupiedBy[i].stepOnThisObject();
+                if (typeof tileArray[this.onTile].occupiedBy[i].stepOnThisObject !== "undefined") {
+                    tileArray[this.onTile].occupiedBy[i].stepOnThisObject();
+                }
             }
         }
         
