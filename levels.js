@@ -165,32 +165,7 @@ function doors(char, tile) {
         updateGUI();
     }
     
-    if (tile == 540 || tile == 541 || tile == 542 || tile == 590 || tile == 591 || tile == 592) {
-        if (tileArray[tile].state == "0dc") {
-            tileArray[540].state = "0do";
-            tileArray[541].state = "0do";
-            tileArray[542].state = "0do";
-            tileArray[590].state = "0do";
-            tileArray[591].state = "0do";
-            tileArray[592].state = "0do";
-            door2Img.setAlpha(1);
-            eventDispatch("e4");
-            tileArray[565].walkable = [0,1,1,1,1,1,0,0];
-            tileArray[566].walkable = [1,1,1,1,1,1,1,1];
-            tileArray[567].walkable = [1,1,0,0,0,1,1,1];
-        } else if (tileArray[tile].state == "0do") {
-            tileArray[540].state = "0dc";
-            tileArray[541].state = "0dc";
-            tileArray[542].state = "0dc";
-            tileArray[590].state = "0dc";
-            tileArray[591].state = "0dc";
-            tileArray[592].state = "0dc";
-            door2Img.setAlpha(0);
-            tileArray[565].walkable = [0,0,0,0,0,0,0,0];
-            tileArray[566].walkable = [0,0,0,0,0,0,0,0];
-            tileArray[567].walkable = [0,0,0,0,0,0,0,0];
-        }
-    } else if (tile == 493 || tile == 494 || tile == 495 || tile == 518 || tile == 519 || tile == 520) {
+    if (tile == 493 || tile == 494 || tile == 495 || tile == 518 || tile == 519 || tile == 520) {
         if (tileArray[tile].state == "0dc") {
             tileArray[493].state = "0do";
             tileArray[494].state = "0do";

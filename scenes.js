@@ -480,10 +480,10 @@ class SceneGame extends Phaser.Scene {
         doorButton.setInteractive();
 		doorButton.on("pointerup", function pointerUp() {
             if (fightmode == true) {
-                if (char.movementCounter >= 1) {
-                    char.movementCounter--;
+                if (activeChar.movementCounter >= 1) {
+                    activeChar.movementCounter--;
                 } else {
-                    char.actionsCounter--;
+                    activeChar.actionsCounter--;
                 }
                 updateGUI();
             }
@@ -498,7 +498,7 @@ class SceneGame extends Phaser.Scene {
             enemyVisibility();
             // Sind jetzt Feinde in Alarmbereitschaft, die es vorher nicht waren wird in den Kampfmodus gewechselt
             checkFightmode();
-            showActions(char);
+            showActions(activeChar);
             //doors(activeChar, activeChar.onTile);
 		});
         doorButton.setDepth(1);
