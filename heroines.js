@@ -376,12 +376,16 @@ function showActions(_this) {
     searchButton.setAlpha(1);
     buttonXpos += 85;
     
-    // bietet den "Tür-Button" an, wenn eine Tür in Reichweite ist.
-    if ((tileArray[_this.onTile].state == "0dc" || tileArray[_this.onTile].state == "0do") && _this.health > 0) {
-        doorButton.x = _this.x+buttonXpos;
-        doorButton.y = _this.y;
-        doorButton.setAlpha(1);
-        buttonXpos += 85;
+    // bietet den "Tür-Button" an, wenn Charakter auf einer Türe (trigger) steht.
+    if (_this.health > 0) {
+        for (let i = 0; i < tileArray[_this.onTile].occupiedBy.length-1; i++) {
+            if (typeof tileArray[_this.onTile].occupiedBy[i].useDoor !== "undefined") {
+                doorButton.x = _this.x+buttonXpos;
+                doorButton.y = _this.y;
+                doorButton.setAlpha(1);
+                buttonXpos += 85;
+            }
+        }
     }
     
     // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist

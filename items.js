@@ -154,6 +154,42 @@ const event8 = {
     }
 }
 
+const door1 = {
+    state: "close",
+    modifyWalkability: function (baseWalkability, lookForTargets) {
+        if (this.state == "close" ) {
+            for (let i = 0; i < baseWalkability.length; i++) {
+                baseWalkability[i] = 0;
+            }
+        } else {
+            return baseWalkability;
+        }
+    }
+}
+
+const door1trigger = {
+    state: "close",
+    modifyWalkability: function (baseWalkability, lookForTargets) {
+        return baseWalkability;
+    },
+    useDoor: function () {
+        if (this.state == "close") {
+            door1Img.setAlpha(1);
+            this.state = "open";
+            door1.state = "open";
+            if (eventReminder.e2 != true) {
+                eventReminder.e2 = true;
+                showText (textL1[21]);
+            }
+        } else if (this.state == "open") {
+            door1Img.setAlpha(0);
+            this.state = "close";
+            door1.state = "close";
+        }
+    },
+}
+
+
 /*
 
 Finde Index von Object:

@@ -166,6 +166,16 @@
         tileArray[398].occupiedBy.push(event3);
         tileArray[623].occupiedBy.push(event5);
         tileArray[606].occupiedBy.push(event6);
+        
+        tileArray[290].occupiedBy.push(door1trigger);
+        tileArray[291].occupiedBy.push(door1trigger);
+        tileArray[292].occupiedBy.push(door1trigger);
+        tileArray[315].occupiedBy.push(door1);
+        tileArray[316].occupiedBy.push(door1);
+        tileArray[317].occupiedBy.push(door1);
+        tileArray[340].occupiedBy.push(door1trigger);
+        tileArray[341].occupiedBy.push(door1trigger);
+        tileArray[342].occupiedBy.push(door1trigger);
         event1.startLevel();
     }
 
@@ -270,11 +280,7 @@
     }
     
     function eventDispatch (eventKey) { 
-        if (eventKey == "e2" && eventReminder.e2 != true) {
-        // nach dem öffnen der ersten Türe in den tempel
-            eventReminder.e2 = true;
-            showText (textL1[21]);
-        } else if (eventKey == "e4" && eventReminder.e4 != true) {
+        if (eventKey == "e4" && eventReminder.e4 != true) {
         // nach dem öffnen der zweiten Türe in den Hauptraum
             eventReminder.e4 = true;
             showText (textL1[38], figuresOnMap[figuresOnMap.length - 2], textL1Enemy[1]);

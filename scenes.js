@@ -479,7 +479,27 @@ class SceneGame extends Phaser.Scene {
         doorButton = this.add.sprite(400, 400, 'doorSprite').setAlpha(0);
         doorButton.setInteractive();
 		doorButton.on("pointerup", function pointerUp() {
-            doors(activeChar, activeChar.onTile);
+            if (fightmode == true) {
+                if (char.movementCounter >= 1) {
+                    char.movementCounter--;
+                } else {
+                    char.actionsCounter--;
+                }
+                updateGUI();
+            }
+            for (let i = 0; i < tileArray[activeChar.onTile].occupiedBy.length; i++) {
+                if (typeof tileArray[activeChar.onTile].occupiedBy[i].useDoor !== "undefined") {
+                    tileArray[activeChar.onTile].occupiedBy[i].useDoor();
+                }
+            }
+            clearNodes();
+            
+            // Ist durch das öffnen der Tür ein Feind in Alarmbereitschaft versetzt worden?
+            enemyVisibility();
+            // Sind jetzt Feinde in Alarmbereitschaft, die es vorher nicht waren wird in den Kampfmodus gewechselt
+            checkFightmode();
+            showActions(char);
+            //doors(activeChar, activeChar.onTile);
 		});
         doorButton.setDepth(1);
         
