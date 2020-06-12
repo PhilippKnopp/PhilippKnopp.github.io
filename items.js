@@ -164,6 +164,8 @@ const door1 = {
         } else {
             return baseWalkability;
         }
+    },
+    stepOnThisObject: function () {
     }
 }
 
@@ -187,8 +189,48 @@ const door1trigger = {
             door1.state = "close";
         }
     },
+    stepOnThisObject: function () {
+    }
 }
 
+const door2 = {
+    state: "close",
+    modifyWalkability: function (baseWalkability, lookForTargets) {
+        if (this.state == "close" ) {
+            for (let i = 0; i < baseWalkability.length; i++) {
+                baseWalkability[i] = 0;
+            }
+        } else {
+            return baseWalkability;
+        }
+    },
+    stepOnThisObject: function () {
+    }
+}
+
+const door2trigger = {
+    state: "close",
+    modifyWalkability: function (baseWalkability, lookForTargets) {
+        return baseWalkability;
+    },
+    useDoor: function () {
+        if (this.state == "close") {
+            door2Img.setAlpha(1);
+            this.state = "open";
+            door2.state = "open";
+            if (eventReminder.e4 != true) {
+                eventReminder.e4 = true;
+                showText (textL1[21]);
+            }
+        } else if (this.state == "open") {
+            door2Img.setAlpha(0);
+            this.state = "close";
+            door2.state = "close";
+        }
+    },
+    stepOnThisObject: function () {
+    }
+}
 
 /*
 
