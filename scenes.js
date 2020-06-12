@@ -499,7 +499,6 @@ class SceneGame extends Phaser.Scene {
             // Sind jetzt Feinde in Alarmbereitschaft, die es vorher nicht waren wird in den Kampfmodus gewechselt
             checkFightmode();
             showActions(activeChar);
-            //doors(activeChar, activeChar.onTile);
 		});
         doorButton.setDepth(1);
         

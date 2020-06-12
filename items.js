@@ -170,22 +170,19 @@ const door1 = {
 }
 
 const door1trigger = {
-    state: "close",
     modifyWalkability: function (baseWalkability, lookForTargets) {
         return baseWalkability;
     },
     useDoor: function () {
-        if (this.state == "close") {
+        if (door1.state == "close") {
             door1Img.setAlpha(1);
-            this.state = "open";
             door1.state = "open";
             if (eventReminder.e2 != true) {
                 eventReminder.e2 = true;
                 showText (textL1[21]);
             }
-        } else if (this.state == "open") {
+        } else if (door1.state == "open") {
             door1Img.setAlpha(0);
-            this.state = "close";
             door1.state = "close";
         }
     },
@@ -209,22 +206,19 @@ const door2 = {
 }
 
 const door2trigger = {
-    state: "close",
     modifyWalkability: function (baseWalkability, lookForTargets) {
         return baseWalkability;
     },
     useDoor: function () {
-        if (this.state == "close") {
+        if (door2.state == "close") {
             door2Img.setAlpha(1);
-            this.state = "open";
             door2.state = "open";
             if (eventReminder.e4 != true) {
                 eventReminder.e4 = true;
                 showText (textL1[21]);
             }
-        } else if (this.state == "open") {
+        } else if (door2.state == "open") {
             door2Img.setAlpha(0);
-            this.state = "close";
             door2.state = "close";
         }
     },
@@ -232,6 +226,116 @@ const door2trigger = {
     }
 }
 
+const door4 = {
+    state: "close",
+    modifyWalkability: function (baseWalkability, lookForTargets) {
+        if (this.state == "close" ) {
+            if (baseWalkability[4] == 0 ) {
+                baseWalkability[5] = 0;
+            } else {
+                baseWalkability[1] = 0;
+            }
+        } else {
+            return baseWalkability;
+        }
+    },
+    useDoor: function () {
+        if (this.state == "close") {
+            door4Img.setAlpha(1);
+            this.state = "open";
+        } else if (this.state == "open") {
+            door4Img.setAlpha(0);
+            this.state = "close";
+        }
+    },
+    stepOnThisObject: function () {
+    }
+}
+
+const door4trigger = {
+    modifyWalkability: function (baseWalkability, lookForTargets) {
+        return baseWalkability;
+    },
+    useDoor: function () {
+        door4.useDoor();
+    },
+    stepOnThisObject: function () {
+    }
+}
+
+const door5 = {
+    state: "close",
+    modifyWalkability: function (baseWalkability, lookForTargets) {
+        if (this.state == "close" ) {
+            if (baseWalkability[2] == 0 ) {
+                baseWalkability[3] = 0;
+            } else {
+                baseWalkability[7] = 0;
+            }
+        } else {
+            return baseWalkability;
+        }
+    },
+    useDoor: function () {
+        if (this.state == "close") {
+            door5Img.setAlpha(1);
+            this.state = "open";
+        } else if (this.state == "open") {
+            door5Img.setAlpha(0);
+            this.state = "close";
+        }
+    },
+    stepOnThisObject: function () {
+    }
+}
+
+const door5trigger = {
+    modifyWalkability: function (baseWalkability, lookForTargets) {
+        return baseWalkability;
+    },
+    useDoor: function () {
+        door5.useDoor();
+    },
+    stepOnThisObject: function () {
+    }
+}
+
+const door6 = {
+    state: "open",
+    modifyWalkability: function (baseWalkability, lookForTargets) {
+        if (this.state == "close" ) {
+            if (baseWalkability[2] == 0 ) {
+                baseWalkability[3] = 0;
+            } else {
+                baseWalkability[7] = 0;
+            }
+        } else {
+            return baseWalkability;
+        }
+    },
+    useDoor: function () {
+        if (this.state == "close") {
+            door6Img.setAlpha(1);
+            this.state = "open";
+        } else if (this.state == "open") {
+            door6Img.setAlpha(0);
+            this.state = "close";
+        }
+    },
+    stepOnThisObject: function () {
+    }
+}
+
+const door6trigger = {
+    modifyWalkability: function (baseWalkability, lookForTargets) {
+        return baseWalkability;
+    },
+    useDoor: function () {
+        door6.useDoor();
+    },
+    stepOnThisObject: function () {
+    }
+}
 /*
 
 Finde Index von Object:
