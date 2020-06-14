@@ -378,7 +378,7 @@ function showActions(_this) {
     buttonXpos += 85;
     
     // bietet den "Tür-Button" an, wenn Charakter auf einer Türe (trigger) steht.
-    if (_this.health > 0) {
+    if ((fightmode == false || (_this.actionsCounter > 0 || _this.movementCounter >= 1)) && _this.health > 0) {
         for (let i = 0; i < tileArray[_this.onTile].occupiedBy.length-1; i++) {
             if (typeof tileArray[_this.onTile].occupiedBy[i].useDoor !== "undefined") {
                 doorButton.x = _this.x+buttonXpos;
@@ -390,10 +390,10 @@ function showActions(_this) {
     }
     
     // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist
-    if ((fightmode == false || _this.actionsCounter >= 0 || (_this.movementCounter) >= 6) && _this.health > 0 ) {
+    if ((fightmode == false || (_this.actionsCounter > 0 || _this.movementCounter >= 6)) && _this.health > 0 ) {
         let adjacentTrap = false;
         for (let i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
-            if (tileArray[_this.onTile].neighbors[i].occupiedBy.includes(trap1) && trap1Sprt.alpha != 0) {
+            if (tileArray[_this.onTile].neighbors[i].occupiedBy.includes(trap1) && trap1.detected) {
                 adjacentTrap = true;
             }
         }

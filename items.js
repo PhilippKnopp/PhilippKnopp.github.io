@@ -13,7 +13,7 @@ const idol = {
     destroy: function () {
         eventReminder.e7 = true;
         showText(textL1[46], mage, textL1[47], rogue, textL1[48]);
-        addXP (20);
+        xpIcon.addXP (20);
         idol1Img.setAlpha(1);
         for (let i = 0; i < figuresOnMap.length; i++) {
             if (figuresOnMap[i].name == "Pale Priest") {
@@ -47,16 +47,18 @@ const crystal = {
                 showText (textL1[28], activeChar, textL1[29]);
                 tileArray[120].occupiedBy.splice(tileArray[120].occupiedBy.indexOf(this), 1);
                 crystal1Img.setAlpha(0);
-                addXP(12);
+                xpIcon.addXP(12);
             }
         }
     }
 };
 
 const trap1 = {
+    detected: = false,
     lookAtThis: function () {
         showText(textL1[7]);
         trap1Sprt.setAlpha(1);
+        detected = true;
     },
     stepOnThisObject: function () {
         activeChar.pathToTravel.length = 0;
@@ -83,7 +85,7 @@ const trap1 = {
                 showText(textL1[37]);
             } 
         }
-        addXP(8);
+        xpIcon.addXP(8);
         trap1Sprt.setAlpha(1);
         trap1Sprt.setFrame(1);
         this.deleteFromTile();
@@ -140,9 +142,9 @@ const event8 = {
 }
 
 const door1 = {
-    state: "close",
+    open: false,
     modifyWalkability: function (baseWalkability, lookForTargets) {
-        if (this.state == "close" ) {
+        if (this.open == false ) {
             for (let i = 0; i < baseWalkability.length; i++) {
                 baseWalkability[i] = 0;
             }
@@ -154,24 +156,24 @@ const door1 = {
 
 const door1trigger = {
     useDoor: function () {
-        if (door1.state == "close") {
+        if (door1.open == false) {
             door1Img.setAlpha(1);
-            door1.state = "open";
+            door1.open = true;
             if (eventReminder.e2 != true) {
                 eventReminder.e2 = true;
                 showText (textL1[21]);
             }
-        } else if (door1.state == "open") {
+        } else if (door1.open) {
             door1Img.setAlpha(0);
-            door1.state = "close";
+            door1.open = false;
         }
     }
 }
 
 const door2 = {
-    state: "close",
+    open: false,
     modifyWalkability: function (baseWalkability, lookForTargets) {
-        if (this.state == "close" ) {
+        if (this.open == false ) {
             for (let i = 0; i < baseWalkability.length; i++) {
                 baseWalkability[i] = 0;
             }
@@ -183,24 +185,24 @@ const door2 = {
 
 const door2trigger = {
     useDoor: function () {
-        if (door2.state == "close") {
+        if (door2.open == false) {
             door2Img.setAlpha(1);
-            door2.state = "open";
+            door2.open = true;
             if (eventReminder.e4 != true) {
                 eventReminder.e4 = true;
-                showText (textL1[21]);
+                showText (textL1[38], figuresOnMap[figuresOnMap.length - 2], textL1Enemy[1]);
             }
-        } else if (door2.state == "open") {
+        } else if (door2.open) {
             door2Img.setAlpha(0);
-            door2.state = "close";
+            door2.open = false;
         }
     }
 }
 
 const door4 = {
-    state: "close",
+    open: false,
     modifyWalkability: function (baseWalkability, lookForTargets) {
-        if (this.state == "close" ) {
+        if (this.open == false) {
             if (baseWalkability[4] == 0 ) {
                 baseWalkability[5] = 0;
             } else {
@@ -211,12 +213,12 @@ const door4 = {
         }
     },
     useDoor: function () {
-        if (this.state == "close") {
+        if (this.open == false) {
             door4Img.setAlpha(1);
-            this.state = "open";
-        } else if (this.state == "open") {
+            this.open = true;
+        } else if (this.open) {
             door4Img.setAlpha(0);
-            this.state = "close";
+            this.open = false;
         }
     }
 }
@@ -228,9 +230,9 @@ const door4trigger = {
 }
 
 const door5 = {
-    state: "close",
+    open: false,
     modifyWalkability: function (baseWalkability, lookForTargets) {
-        if (this.state == "close" ) {
+        if (this.open == false) {
             if (baseWalkability[2] == 0 ) {
                 baseWalkability[3] = 0;
             } else {
@@ -241,12 +243,12 @@ const door5 = {
         }
     },
     useDoor: function () {
-        if (this.state == "close") {
+        if (this.open == false) {
             door5Img.setAlpha(1);
-            this.state = "open";
-        } else if (this.state == "open") {
+            this.open = true;
+        } else if (this.open) {
             door5Img.setAlpha(0);
-            this.state = "close";
+            this.open = false;
         }
     }
 }
@@ -258,9 +260,9 @@ const door5trigger = {
 }
 
 const door6 = {
-    state: "open",
+    open: true,
     modifyWalkability: function (baseWalkability, lookForTargets) {
-        if (this.state == "close" ) {
+        if (this.open == false) {
             if (baseWalkability[2] == 0 ) {
                 baseWalkability[3] = 0;
             } else {
@@ -271,12 +273,12 @@ const door6 = {
         }
     },
     useDoor: function () {
-        if (this.state == "close") {
+        if (this.open == false) {
             door6Img.setAlpha(1);
-            this.state = "open";
-        } else if (this.state == "open") {
+            this.open = true;
+        } else if (this.open) {
             door6Img.setAlpha(0);
-            this.state = "close";
+            this.open = false;
         }
     }
 }

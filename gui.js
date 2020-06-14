@@ -145,6 +145,24 @@ function guiBuilder(_this) {
     gameModeText = _this.add.text(1097, 476, "Exploration", { fontFamily: "Verdana" , color: '#FFFFFF'});
     
     xpIcon = _this.add.sprite(1258, 485, 'xpSprite');
+    xpIcon.addXP = function (number) {
+        xp += number;
+        xpText.setText(xp);
+        if (0 <= xp && xp < 25) {
+            this.setFrame(0);
+        } else if (25 <= xp && xp < 50) {
+            this.setFrame(1);
+        } else if (50 <= xp && xp < 75) {
+            this.setFrame(2);
+        } else if (75 <= xp && xp < 100) {
+            this.setFrame(3);
+        } else {
+            this.setFrame(4);
+            bSkillButton.setFrame(3);
+            rSkillButton.setFrame(3);
+            mSkillButton.setFrame(3);
+        }
+    }
     xpText = _this.add.text(1428, 476, xp, { fontFamily: "Verdana" , color: '#FFFFFF'});
     
     let skillButton = [];

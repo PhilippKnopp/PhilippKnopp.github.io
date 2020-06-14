@@ -222,13 +222,14 @@ class SceneGame extends Phaser.Scene {
                 tileArray.push(tile);
 				tile.state = 0;
                 /*  States:
-                    state = 0      normaler Boden          [1,1,1,1,1,1,1,1]
-					state = "0dc"  Türe geschlossen
-					state = "0do"  Türe offen
-					state = 5      Wand                    [0,0,0,0,0,0,0,0]
-					state = 6      Schwieriges Terrain     [2,2,2,2,2,2,2,2]
-					state = 8      Wasser (niedrig)        [2,2,2,2,2,2,2,2]
-					state = 7      Wasser (tief)           [3,3,3,3,3,3,3,3]
+                    state = 0      Wand                    [0,0,0,0,0,0,0,0]
+                    
+                    state = 1      Boden (flach)           [1,1,1,1,1,1,1,1]
+					state = 2      Boden (schwierig)       [2,2,2,2,2,2,2,2]
+                    state = 3      Boden (extrem)          [3,3,3,3,3,3,3,3]
+                    
+					state = 5      Wasser (niedrig)        [2,2,2,2,2,2,2,2]
+					state = 6      Wasser (tief)           [3,3,3,3,3,3,3,3]
                 */
                 tile.name = index++;
                 tile.info = 1;
@@ -238,8 +239,8 @@ class SceneGame extends Phaser.Scene {
 				tile.wayPointUsefulness;
 				tile.entryPoint;
                 tile.occupiedBy = [];
-                tile.neighbors = [];            // Alle Nachbarn, die trotz Gelände erreichbar sind
-				tile.neighborsDistance = [];    // Distanzen, in der Reihenfolge zu tile.neighbors
+                tile.neighbors = [];            // Alle Nachbarn, die erreichbar sind
+				tile.neighborsDistance = [];    // Distanzen, in der Reihenfolge von tile.neighbors
                 
 				tile.setInteractive();
 				tile.on("pointerup", function pointerUp () {
@@ -359,7 +360,7 @@ class SceneGame extends Phaser.Scene {
                     this.cWalkable = [...this.walkable];
                     // Felder mit tiefem Wasser werden leicht begehbar für gute Schwimmer
                     if (activeChar != null) {
-                        if (this.state == 7 && activeChar.skills.swim == true) {
+                        if (this.state == 6 && activeChar.skills.swim == true) {
                             for (let i = 0; i < this.cWalkable.length; i++) {
                                 this.cWalkable[i] = this.cWalkable[i]/3;
                             }

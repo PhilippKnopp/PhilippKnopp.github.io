@@ -84,7 +84,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 this.setAlpha(0);
                 tileArray[this.onTile].occupiedBy.splice(tileArray[this.onTile].occupiedBy.indexOf(this), 1);
                 figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
-                addXP(this.loot);
+                xpIcon.addXP(this.loot);
                 if (this.name == "Ordrak") {
                     circle1Img.setAlpha(0);
                     swirl1.setAlpha(0);
