@@ -58,7 +58,7 @@ const trap1 = {
     lookAtThis: function () {
         showText(textL1[7]);
         trap1Sprt.setAlpha(1);
-        detected = true;
+        this.detected = true;
     },
     stepOnThisObject: function () {
         activeChar.pathToTravel.length = 0;
