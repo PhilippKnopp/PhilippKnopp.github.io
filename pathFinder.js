@@ -45,7 +45,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
             frontierListValues.push(frontierList[i].wayPointUsefulness);
         }
         
-        if (Math.min(...frontierListValues) != infinity) {
+        if (Math.min(...frontierListValues) !== Infinity) {
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
         } else {
             pathToTravel = [];
