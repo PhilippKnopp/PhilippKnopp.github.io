@@ -43,7 +43,6 @@ console.log(frontierList);
         frontierListValues.length = 0;
         for (let i = 0; i < frontierList.length; i++) {
             frontierListValues.push(frontierList[i].wayPointUsefulness);
-console.log(frontierListValues);
         }
 console.log(frontierListValues.indexOf(Math.min(...frontierListValues)));
         activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
