@@ -31,12 +31,12 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
     frontierList.push(tileArray[startIndex]);
     
     // gehe folgende Schleife solange durch bis es einen Weg gibt
-    mapperLoop: while (pathFound == false) {
+    while (pathFound == false) {
         
         // Wenn kein Weg möglich ist brich diese Schleife ab
         if (frontierList.length == 0) {
             pathToTravel = [];
-            break mapperLoop;
+            break;
         }
         
         // gehe frontierList durch nach niedrigster wayPointUsefulness
@@ -45,11 +45,12 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
             frontierListValues.push(frontierList[i].wayPointUsefulness);
         }
         
+        // Aus irgendeinem Grund muss hier ein Fehler abgefangen werden.
         if (Math.min(...frontierListValues) !== Infinity) {
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
         } else {
             pathToTravel = [];
-            break mapperLoop;
+            break;
         }
         
         // Wenn Knoten mit Niedrigster wayPointUsefulness schon das Ziel ist, ist A* fertig
@@ -63,7 +64,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
                 backtraceIndex = tileArray[backtraceIndex].entryPoint;
             }
             
-            break mapperLoop;
+            break;
         }
         
         // berechne für diesen alle neighbors
