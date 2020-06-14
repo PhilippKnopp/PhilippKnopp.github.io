@@ -54,7 +54,7 @@ const crystal = {
 };
 
 const trap1 = {
-    detected: = false,
+    detected: false,
     lookAtThis: function () {
         showText(textL1[7]);
         trap1Sprt.setAlpha(1);
