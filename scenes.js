@@ -105,9 +105,12 @@ class SceneTitle extends Phaser.Scene {
         
         let VersionText = this.add.text(960, 1020, gameVersion, { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, align: 'center' }).setOrigin( 0.5).setX(960).setAlpha(0.5);
         
-        this.input.manager.enabled = true;
-        this.input.once('pointerdown', function () {
-            this.scene.start('sceneTravel_1');
+        this.cameras.main.fadeIn(500, 12, 14, 17);
+        this.cameras.main.once('camerafadeincomplete', function (camera) {
+            this.input.manager.enabled = true;
+            this.input.once('pointerdown', function () {
+                this.scene.start('sceneTravel_1');
+            }, this);
         }, this);
         
     }
