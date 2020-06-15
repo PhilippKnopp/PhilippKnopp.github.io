@@ -142,7 +142,7 @@ function guiBuilder(_this) {
 ////////////// UI Icons //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     gameModeIcon = _this.add.sprite(977, 485, 'gameModeSprite');
-    gameModeText = _this.add.text(1097, 476, "Exploration", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    gameModeText = _this.add.text(1097, 475, "Exploration", { fontFamily: "Verdana" , color: '#FFFFFF'});
     
     xpIcon = _this.add.sprite(1258, 485, 'xpSprite');
     xpIcon.addXP = function (number) {
