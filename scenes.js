@@ -151,13 +151,13 @@ class SceneTravel_2 extends Phaser.Scene {
         let screen_travel_2 = this.add.image(960, 540, 'screen_travel_2');
         
         let Info_Travel = this.add.text(960, 950, textTravelL2[0], { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, wordWrap: { width: 900, useAdvancedWrap: true }, align: 'center' }).setOrigin( 0.5).setX(960);
-        
+        /*
         this.input.manager.enabled = true;
         this.input.once('pointerdown', function () {
             level = 2;
             this.scene.start('sceneGame');
         }, this);
-        
+        */
     }
 
 }
@@ -212,8 +212,7 @@ class SceneGame extends Phaser.Scene {
         spaceKey.on('down', function (key, event) {
             if (figuresOnMap.length == 3) {
                 this.scene.start('sceneTravel_2');
-            }
-            if (enemyTurnActive == false) {
+            } else if (enemyTurnActive == false) {
                 event.stopPropagation();
                 for (let i = 0; i < 3; i++) {
                     figuresOnMap[i].hasActed = true;

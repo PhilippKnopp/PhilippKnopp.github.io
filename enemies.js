@@ -85,11 +85,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 tileArray[this.onTile].occupiedBy.splice(tileArray[this.onTile].occupiedBy.indexOf(this), 1);
                 figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
                 xpIcon.addXP(this.loot);
-                if (this.name == "Ordrak") {
-                    circle1Img.setAlpha(0);
-                    swirl1.setAlpha(0);
-                    swirl2.setAlpha(0);
-                } else if (this.onTile == 703 || this.onTile == 707 || this.onTile == 778 || this.onTile == 782 || this.onTile == 830) {
+                if ((this.onTile == 703 || this.onTile == 707 || this.onTile == 778 || this.onTile == 782 || this.onTile == 830) && this.name == "Pale Priest") {
                     ritual(0, true);
                 }
                 if (figuresOnMap.length == 3) {

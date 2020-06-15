@@ -173,13 +173,12 @@ function ritual(energy, priestDied = false) {
         if (eventReminder.ritualMembers <= 0) {
             eventReminder.ritualState = "failed";
             circle1Img.setAlpha(0);
+            tileArray[755].walkable = [1,1,1,1,1,1,1,1];
             let ordrak = figuresOnMap[figuresOnMap.findIndex((element) => element.name == "Ordrak")];
             ordrak.health = 0;
-            tileArray[755].walkable = [1,1,1,1,1,1,1,1];
             swirl1.setVisible(false);
             swirl2.setVisible(false);
-            figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
-            xpIcon.addXP(ordrak.loot);
+            ordrak.checkHealth();
         }
     }
 }
