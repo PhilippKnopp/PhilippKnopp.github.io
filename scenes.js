@@ -167,10 +167,18 @@ class SceneGameOver extends Phaser.Scene {
 
     create () {
         let gameOver = this.add.image(960, 540, 'gameOver');
-        
+        /*
         this.input.manager.enabled = true;
         this.input.once('pointerdown', function () {
             this.scene.start('sceneTitle');
+        }, this);
+        */
+        this.cameras.main.fadeIn(500, 12, 14, 17);
+        this.cameras.main.once('camerafadeincomplete', function (camera) {
+            this.input.manager.enabled = true;
+            this.input.once('pointerdown', function () {
+                this.scene.start('sceneTitle');
+            }, this);
         }, this);
     }
 

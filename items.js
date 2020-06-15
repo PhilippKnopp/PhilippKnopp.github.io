@@ -109,7 +109,7 @@ const event1 = {
 
 const event3 = {
     stepOnThisObject: function () {
-        game.scene.keys.sceneGame.cameras.main.fadeOut(500);
+        game.scene.keys.sceneGame.cameras.main.fadeOut(500, 12, 14, 17);
         game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
             camera.fadeIn(700);
         }, game.scene.keys.sceneGame);
@@ -119,7 +119,7 @@ const event3 = {
 
 const event5 = {
     stepOnThisObject: function () {
-        game.scene.keys.sceneGame.cameras.main.fadeOut(500);
+        game.scene.keys.sceneGame.cameras.main.fadeOut(500, 12, 14, 17);
         game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
             camera.fadeIn(700);
         }, game.scene.keys.sceneGame);
