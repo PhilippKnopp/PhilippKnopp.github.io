@@ -32,6 +32,9 @@ class SceneTitle extends Phaser.Scene {
         // sceneTravel_1
         this.load.image('screen_travel_1', 'img/Screen_Travel_1.png');
         
+        // sceneTravel_2
+        this.load.image('screen_travel_1', 'img/Screen_Travel_2.png');
+        
         // sceneGameOver
         this.load.image('gameOver', 'img/Screen_GameOver.png');
         
@@ -142,7 +145,7 @@ class SceneTravel_2 extends Phaser.Scene {
 
     create () {
         
-        let screen_travel_2 = this.add.image(960, 540, 'screen_travel_1');
+        let screen_travel_2 = this.add.image(960, 540, 'screen_travel_2');
         
         let Info_Travel = this.add.text(960, 950, textTravelL2[0], { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, wordWrap: { width: 900, useAdvancedWrap: true }, align: 'center' }).setOrigin( 0.5).setX(960);
         
