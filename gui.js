@@ -163,7 +163,7 @@ function guiBuilder(_this) {
             mSkillButton.setFrame(3);
         }
     }
-    xpText = _this.add.text(1428, 476, xp, { fontFamily: "Verdana" , color: '#FFFFFF'});
+    xpText = _this.add.text(1428, 475, xp, { fontFamily: "Verdana" , color: '#FFFFFF'});
     
     let skillButton = [];
     bSkillButton = _this.add.sprite(1420, 618, 'skillUISprite');
@@ -197,17 +197,17 @@ function guiBuilder(_this) {
     rActionIcon = _this.add.sprite(1322, 748, 'rAction');
     mActionIcon = _this.add.sprite(1322, 878, 'mAction');
     
-    bHpText = _this.add.text(1108, 597, "12/12", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    rHpText = _this.add.text(1108, 727, "8/8", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    mHpText = _this.add.text(1108, 857, "4/4", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    bHpText = _this.add.text(1108, 596, "12/12", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    rHpText = _this.add.text(1108, 726, "8/8", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    mHpText = _this.add.text(1108, 856, "4/4", { fontFamily: "Verdana" , color: '#FFFFFF'});
     
-    bMovementText = _this.add.text(1142, 621, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    rMovementText = _this.add.text(1142, 751, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    mMovementText = _this.add.text(1142, 881, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    bMovementText = _this.add.text(1142, 620, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    rMovementText = _this.add.text(1142, 750, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    mMovementText = _this.add.text(1142, 880, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
     
-    bPortraitIcon = _this.add.sprite(977, 618, 'bPortraitUISprite');
-    rPortraitIcon = _this.add.sprite(977, 748, 'rPortraitUISprite');
-    mPortraitIcon = _this.add.sprite(977, 878, 'mPortraitUISprite');
+    bPortraitIcon = _this.add.sprite(977, 617, 'bPortraitUISprite');
+    rPortraitIcon = _this.add.sprite(977, 747, 'rPortraitUISprite');
+    mPortraitIcon = _this.add.sprite(977, 877, 'mPortraitUISprite');
     
     bRollText = _this.add.text(977, 618, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
     rRollText = _this.add.text(977, 748, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
