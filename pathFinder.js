@@ -46,7 +46,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
         }
         
         // Aus irgendeinem Grund muss hier ein Fehler abgefangen werden.
-        if (Math.min(...frontierListValues) !== Infinity) {
+        if (frontierListValues.indexOf(Math.min(...frontierListValues)) != -1) {
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
         } else {
             pathToTravel = [];
