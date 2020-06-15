@@ -166,11 +166,11 @@ function guiBuilder(_this) {
     xpText = _this.add.text(1428, 475, xp, { fontFamily: "Verdana" , color: '#FFFFFF'});
     
     let skillButton = [];
-    bSkillButton = _this.add.sprite(1420, 618, 'skillUISprite');
+    bSkillButton = _this.add.sprite(1420, 617, 'skillUISprite');
     skillButton.push(bSkillButton);
-    rSkillButton = _this.add.sprite(1420, 748, 'skillUISprite');
+    rSkillButton = _this.add.sprite(1420, 747, 'skillUISprite');
     skillButton.push(rSkillButton);
-    mSkillButton = _this.add.sprite(1420, 878, 'skillUISprite');
+    mSkillButton = _this.add.sprite(1420, 877, 'skillUISprite');
     skillButton.push(mSkillButton);
     
     for (let i = 0; i < 3; i++) {

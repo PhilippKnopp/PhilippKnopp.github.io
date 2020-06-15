@@ -31,7 +31,7 @@ function enemyTurn () {
     
     // Wenn keine der Heldinnen mehr am Leben ist springt das Spiel zur Game-Over-Scene
     if (barb.health <= 0 && rogue.health <= 0 && mage.health <= 0) {
-        game.scene.keys.sceneGame.cameras.main.fadeOut(15000, 12, 14, 17);
+        game.scene.keys.sceneGame.cameras.main.fadeOut(1500, 12, 14, 17);
         game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
             game.scene.keys.sceneGame.scene.start('sceneGameOver');
         }, game.scene.keys.sceneGame);
