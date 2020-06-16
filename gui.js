@@ -163,11 +163,11 @@ function guiBuilder(_this) {
     xpText = _this.add.text(1428, 475, xp, { fontFamily: "Verdana" , color: '#FFFFFF'});
     
     let skillButton = [];
-    bSkillButton = _this.add.sprite(1420, 617, 'skillUISprite');
+    bSkillButton = _this.add.sprite(1420, 634, 'skillUISprite');
     skillButton.push(bSkillButton);
-    rSkillButton = _this.add.sprite(1420, 747, 'skillUISprite');
+    rSkillButton = _this.add.sprite(1420, 744, 'skillUISprite');
     skillButton.push(rSkillButton);
-    mSkillButton = _this.add.sprite(1420, 877, 'skillUISprite');
+    mSkillButton = _this.add.sprite(1420, 854, 'skillUISprite');
     skillButton.push(mSkillButton);
     
     for (let i = 0; i < 3; i++) {
@@ -194,13 +194,13 @@ function guiBuilder(_this) {
     rActionIcon = _this.add.sprite(1322, 745, 'rAction');
     mActionIcon = _this.add.sprite(1322, 855, 'mAction');
     
-    bHpText = _this.add.text(1108, 596, "12/12", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    rHpText = _this.add.text(1108, 726, "8/8", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    mHpText = _this.add.text(1108, 856, "4/4", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    bHpText = _this.add.text(1110, 613, "12/12", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    rHpText = _this.add.text(1110, 723, "8/8", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    mHpText = _this.add.text(1110, 833, "4/4", { fontFamily: "Verdana" , color: '#FFFFFF'});
     
-    bMovementText = _this.add.text(1142, 620, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    rMovementText = _this.add.text(1142, 750, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
-    mMovementText = _this.add.text(1142, 880, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    bMovementText = _this.add.text(1144, 637, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    rMovementText = _this.add.text(1144, 747, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    mMovementText = _this.add.text(1144, 857, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
     
     bPortraitIcon = _this.add.sprite(977, 635, 'bPortraitUISprite');
     rPortraitIcon = _this.add.sprite(977, 745, 'rPortraitUISprite');
