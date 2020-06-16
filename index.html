@@ -46,7 +46,7 @@
     
 ////////////// Variablen, die in der App verwendet werden   //////////////////////////////////////////////////////////////////////////////////////////
     
-    var gameVersion = "Version 0.35 Test A";
+    var gameVersion = "Version 0.35 Test B";
     var game = new Phaser.Game(config);
     var level = 1;
     
@@ -76,7 +76,6 @@
     var eventReminder = {e2:false, e4:false, e7:false}; // Dinge die nur einmal passieren sollen
     
     var figuresOnMap = [];
-    var objectsOnMap = [];
     var activeChar = null;  // Variable in der die Spielfigut gespeichert wird, die gerade aktiv ist um schnell darauf zugreifen zu können.
     var enemyTurnActive = false;
     var charsStillAlive = 3;
@@ -152,70 +151,67 @@
             tileArray[i].info = levelMapInfo[i];
         }
         
-        // Erstellte Objekte werden auf der Karte Platziert und Registriert
-        for (let i = 0; i < objectsOnMap.length; i++) {
-            objectsOnMap[i].setOnMap();
-        }
-        
         // Erstellte Figuren werden auf der Karte Platziert und Registriert
         for (let i = 0; i < figuresOnMap.length; i++) {
             figuresOnMap[i].setOnMap();
         }
         
-        tileArray[941].occupiedBy.push(idol);
-        tileArray[120].occupiedBy.push(crystal);
-        tileArray[437].occupiedBy.push(trap1);
-        tileArray[438].occupiedBy.push(trap1);
-        tileArray[462].occupiedBy.push(trap1);
-        tileArray[463].occupiedBy.push(trap1);
-        tileArray[487].occupiedBy.push(trap1);
-        tileArray[488].occupiedBy.push(trap1);
-        tileArray[398].occupiedBy.push(event3);
-        tileArray[623].occupiedBy.push(event5);
-        tileArray[606].occupiedBy.push(event6);
-        
-        tileArray[290].occupiedBy.push(door1trigger);
-        tileArray[291].occupiedBy.push(door1trigger);
-        tileArray[292].occupiedBy.push(door1trigger);
-        tileArray[315].occupiedBy.push(door1);
-        tileArray[316].occupiedBy.push(door1);
-        tileArray[317].occupiedBy.push(door1);
-        tileArray[340].occupiedBy.push(door1trigger);
-        tileArray[341].occupiedBy.push(door1trigger);
-        tileArray[342].occupiedBy.push(door1trigger);
-        
-        tileArray[540].occupiedBy.push(door2trigger);
-        tileArray[541].occupiedBy.push(door2trigger);
-        tileArray[542].occupiedBy.push(door2trigger);
-        tileArray[565].occupiedBy.push(door2);
-        tileArray[566].occupiedBy.push(door2);
-        tileArray[567].occupiedBy.push(door2);
-        tileArray[590].occupiedBy.push(door2trigger);
-        tileArray[591].occupiedBy.push(door2trigger);
-        tileArray[592].occupiedBy.push(door2trigger);
-        
-        tileArray[493].occupiedBy.push(door4trigger);
-        tileArray[495].occupiedBy.push(door4trigger);
-        tileArray[494].occupiedBy.push(door4);
-        tileArray[519].occupiedBy.push(door4);
-        tileArray[520].occupiedBy.push(door4trigger);
-        tileArray[518].occupiedBy.push(door4trigger);
-        
-        tileArray[363].occupiedBy.push(door5trigger);
-        tileArray[364].occupiedBy.push(door5trigger);
-        tileArray[388].occupiedBy.push(door5);
-        tileArray[389].occupiedBy.push(door5);
-        tileArray[413].occupiedBy.push(door5trigger);
-        tileArray[414].occupiedBy.push(door5trigger);
-        
-        tileArray[368].occupiedBy.push(door6trigger);
-        tileArray[369].occupiedBy.push(door6trigger);
-        tileArray[393].occupiedBy.push(door6);
-        tileArray[394].occupiedBy.push(door6);
-        tileArray[418].occupiedBy.push(door6trigger);
-        tileArray[419].occupiedBy.push(door6trigger);
-        
-        tileArray[755].occupiedBy.push(ritual);
+        if (level == 1) {
+            tileArray[941].occupiedBy.push(idol);
+            tileArray[120].occupiedBy.push(crystal);
+            tileArray[437].occupiedBy.push(trap1);
+            tileArray[438].occupiedBy.push(trap1);
+            tileArray[462].occupiedBy.push(trap1);
+            tileArray[463].occupiedBy.push(trap1);
+            tileArray[487].occupiedBy.push(trap1);
+            tileArray[488].occupiedBy.push(trap1);
+            tileArray[398].occupiedBy.push(event3);
+            tileArray[623].occupiedBy.push(event5);
+            tileArray[606].occupiedBy.push(event6);
+            
+            tileArray[290].occupiedBy.push(door1trigger);
+            tileArray[291].occupiedBy.push(door1trigger);
+            tileArray[292].occupiedBy.push(door1trigger);
+            tileArray[315].occupiedBy.push(door1);
+            tileArray[316].occupiedBy.push(door1);
+            tileArray[317].occupiedBy.push(door1);
+            tileArray[340].occupiedBy.push(door1trigger);
+            tileArray[341].occupiedBy.push(door1trigger);
+            tileArray[342].occupiedBy.push(door1trigger);
+            
+            tileArray[540].occupiedBy.push(door2trigger);
+            tileArray[541].occupiedBy.push(door2trigger);
+            tileArray[542].occupiedBy.push(door2trigger);
+            tileArray[565].occupiedBy.push(door2);
+            tileArray[566].occupiedBy.push(door2);
+            tileArray[567].occupiedBy.push(door2);
+            tileArray[590].occupiedBy.push(door2trigger);
+            tileArray[591].occupiedBy.push(door2trigger);
+            tileArray[592].occupiedBy.push(door2trigger);
+            
+            tileArray[493].occupiedBy.push(door4trigger);
+            tileArray[495].occupiedBy.push(door4trigger);
+            tileArray[494].occupiedBy.push(door4);
+            tileArray[519].occupiedBy.push(door4);
+            tileArray[520].occupiedBy.push(door4trigger);
+            tileArray[518].occupiedBy.push(door4trigger);
+            
+            tileArray[363].occupiedBy.push(door5trigger);
+            tileArray[364].occupiedBy.push(door5trigger);
+            tileArray[388].occupiedBy.push(door5);
+            tileArray[389].occupiedBy.push(door5);
+            tileArray[413].occupiedBy.push(door5trigger);
+            tileArray[414].occupiedBy.push(door5trigger);
+            
+            tileArray[368].occupiedBy.push(door6trigger);
+            tileArray[369].occupiedBy.push(door6trigger);
+            tileArray[393].occupiedBy.push(door6);
+            tileArray[394].occupiedBy.push(door6);
+            tileArray[418].occupiedBy.push(door6trigger);
+            tileArray[419].occupiedBy.push(door6trigger);
+            
+            tileArray[755].occupiedBy.push(ritual);
+        }
         event1.startLevel();
     }
 
