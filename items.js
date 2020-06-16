@@ -288,3 +288,45 @@ const door6trigger = {
         door6.useDoor();
     }
 }
+
+const ritual = {
+    progress: 13,
+    members: 5,
+    state: "",
+    modifyWalkability: function (baseWalkability, lookForTargets) {
+        if (this.state == "started" || this.state == "") {
+            for (let i = 0; i < baseWalkability.length; i++) {
+                baseWalkability[i] += 6;
+            }
+        }
+        return baseWalkability;
+    },
+    incantate: function (energy) {
+        this.progress -= energy;
+        if (this.progress <= 0) {
+            this.progress = 0;
+            circle1Img.setAlpha(1);
+            this.state = "succesful";
+            let ordrak = figuresOnMap[figuresOnMap.findIndex((element) => element.name == "Ordrak")];
+            ordrak.setOnMap();
+            showText(textL1[45]);
+        } else {
+            circle1Img.setAlpha(1-(this.progress/13));
+            this.state = "started";
+        }
+    },
+    priestDied: function () {
+        if (this.state != "succesful") {
+            this.members -= 1;
+            if (this.members <= 0) {
+                this.state = "failed";
+                circle1Img.setAlpha(0);
+                let ordrak = figuresOnMap[figuresOnMap.findIndex((element) => element.name == "Ordrak")];
+                ordrak.health = 0;
+                swirl1.setVisible(false);
+                swirl2.setVisible(false);
+                ordrak.checkHealth();
+            }
+        }
+    }
+}

@@ -33,7 +33,7 @@ class SceneTitle extends Phaser.Scene {
         this.load.image('screen_travel_1', 'img/Screen_Travel_1.png');
         
         // sceneTravel_2
-        this.load.image('screen_travel_1', 'img/Screen_Travel_2.png');
+        this.load.image('screen_travel_2', 'img/Screen_Travel_2.png');
         
         // sceneGameOver
         this.load.image('gameOver', 'img/Screen_GameOver.png');
@@ -97,6 +97,8 @@ class SceneTitle extends Phaser.Scene {
         this.load.audio("melee_hit_4_sound", ["sound/sword_4_sound.mp3","sound/sword_4_sound.ogg"]);
         this.load.audio("melee_miss_1_sound", ["sound/sword_5_sound.mp3","sound/sword_5_sound.ogg"]);
         this.load.audio("melee_miss_2_sound", ["sound/sword_6_sound.mp3","sound/sword_6_sound.ogg"]);
+        this.load.audio("magic_1_sound", ["sound/magic_1_sound.mp3","sound/magic_1_sound.ogg"]);
+        this.load.audio("magic_2_sound", ["sound/magic_2_sound.mp3","sound/magic_2_sound.ogg"]);
     }
 
     create () {
@@ -637,6 +639,8 @@ class SceneGame extends Phaser.Scene {
         melee_hits[3] = game.sound.add("melee_hit_4_sound");
         melee_misses[0] = game.sound.add("melee_miss_1_sound");
         melee_misses[1] = game.sound.add("melee_miss_2_sound");
+        spells[0] = game.sound.add("magic_1_sound");
+        spells[1] = game.sound.add("magic_2_sound");
         
 	}
     

@@ -53,7 +53,7 @@ function enemyPlanMove () {
     
     // Spezielle Aktionen für bestimmte Level
     if (level == 1) {
-        if ( activeChar.name == "Pale Priest" && (activeChar.onTile == 703 || activeChar.onTile == 707 || activeChar.onTile == 778 || activeChar.onTile == 782 || activeChar.onTile == 830) && eventReminder.ritualProgress > 0) {
+        if ( activeChar.name == "Pale Priest" && (activeChar.onTile == 703 || activeChar.onTile == 707 || activeChar.onTile == 778 || activeChar.onTile == 782 || activeChar.onTile == 830) && ritual.progress > 0) {
             actionStack.push("ritual", null);
             return actionStack;
         } else if (activeChar.name == "Ordrak" && eventReminder.e7 == true && activeChar.health < activeChar.fullHealth) {
@@ -256,9 +256,9 @@ function enemyDo (activeChar, action, target) {
             let attackroll = getRandomInt(activeChar.dieSize, activeChar.explodes);
             if (activeChar.specialAttack.roll.includes(attackroll)) {
                 specialAttack(activeChar, activeChar.specialAttack.name[activeChar.specialAttack.roll.findIndex((element) => element == attackroll)]);
-                ritual(2);
+                ritual.incantate(2);
             } else {
-                ritual(1);
+                ritual.incantate(1);
             }
             break;
         default:

@@ -29,7 +29,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.on("pointerover", this.showFace, this);
         
         this.setOnMap = function () {
-            if (this.name != "Ordrak" || eventReminder.ritualState == "succesful") {
+            if (this.name != "Ordrak" || ritual.state == "succesful") {
                 tileArray[this.onTile].occupiedBy.push(this);
                 this.setAlpha(1);
                 this.x = tileArray[this.onTile].x;
@@ -86,7 +86,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 figuresOnMap.splice(figuresOnMap.findIndex(findDeadChar),1);
                 xpIcon.addXP(this.loot);
                 if ((this.onTile == 703 || this.onTile == 707 || this.onTile == 778 || this.onTile == 782 || this.onTile == 830) && this.name == "Pale Priest") {
-                    ritual(0, true);
+                    ritual.priestDied();
                 }
                 if (figuresOnMap.length == 3) {
                     event8.endLevel();

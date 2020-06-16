@@ -73,9 +73,10 @@
     
     var mage, rogue, barb;
     var rangedDamage = [0]; // Überschüssiger Schaden der Magierin kann auf zusätzliche Ziele verteilt werden
-    var eventReminder = {e2:false, e4:false, e7:false, ritualProgress: 13, ritualMembers: 5, ritualState: ""}; // Dinge die nur einmal passieren sollen
+    var eventReminder = {e2:false, e4:false, e7:false}; // Dinge die nur einmal passieren sollen
     
     var figuresOnMap = [];
+    var objectsOnMap = [];
     var activeChar = null;  // Variable in der die Spielfigut gespeichert wird, die gerade aktiv ist um schnell darauf zugreifen zu können.
     var enemyTurnActive = false;
     var charsStillAlive = 3;
@@ -97,9 +98,10 @@
     var fightmode = false;
     
     var bgmusic;
-    var m_hit_1, m_hit_2, m_hit_3, m_hit_4, m_miss_1, m_hit_2;
+    var m_hit_1, m_hit_2, m_hit_3, m_hit_4, m_miss_1, m_hit_2, spell_1, spell_2;
     var melee_hits = [m_hit_1, m_hit_2, m_hit_3, m_hit_4];
     var melee_misses = [m_miss_1, m_hit_2];
+    var spells = [spell_1, spell_2];
     
     var AKey;
     var spaceKey;
@@ -148,6 +150,11 @@
         let levelMapInfo = returnLevelInfo(level);
         for (let i = 0; i < tileArray.length; i++) {
             tileArray[i].info = levelMapInfo[i];
+        }
+        
+        // Erstellte Objekte werden auf der Karte Platziert und Registriert
+        for (let i = 0; i < objectsOnMap.length; i++) {
+            objectsOnMap[i].setOnMap();
         }
         
         // Erstellte Figuren werden auf der Karte Platziert und Registriert
@@ -207,6 +214,8 @@
         tileArray[394].occupiedBy.push(door6);
         tileArray[418].occupiedBy.push(door6trigger);
         tileArray[419].occupiedBy.push(door6trigger);
+        
+        tileArray[755].occupiedBy.push(ritual);
         event1.startLevel();
     }
 
@@ -224,7 +233,7 @@
         for (let i = 0; i < charsStillAlive; i++) {
             for (var k = 0; k < enemyIndexes.length; k++) {
                 if (lineOfSight (figuresOnMap[i].onTile, enemyIndexes[k].onTile) && figuresOnMap[i].health > 0) {
-                    if (enemyIndexes[k].name != "Ordrak" || eventReminder.ritualState == "succesful") {
+                    if (enemyIndexes[k].name != "Ordrak" || ritual.state == "succesful") {
                         enemyIndexes[k].setAlpha(1);
                         if (figuresOnMap[i].skills.stealth.active == false) {
                             enemyIndexes[k].alarmed = true;
@@ -408,7 +417,17 @@
         tileArray.length = 0;
         
         rangedDamage = [0];
-        eventReminder = {e2:false, e4:false, e6:false, e7:false, ritualProgress: 13, ritualMembers: 5, ritualState: ""};
+        eventReminder = {e2:false, e4:false, e6:false, e7:false};
+        ritual.state = "";
+        ritual.members = 5;
+        ritual.progress = 13;
+        trap1.detected = false;
+        door1.open = false;
+        door2.open = false;
+        door4.open = false;
+        door5.open = false;
+        door6.open = true;
+        
         
         figuresOnMap.length = 0;
         activeChar = null;
