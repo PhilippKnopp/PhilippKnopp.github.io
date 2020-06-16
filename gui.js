@@ -175,13 +175,13 @@ function guiBuilder(_this) {
     
     for (let i = 0; i < 3; i++) {
         skillButton[i].setInteractive();
-        skillButton[i].on("pointerdown", function pointerUp () {
+        skillButton[i].on("pointerdown", function pointerDown () {
             let levelup = Math.floor(xp/100)*3;
             skillButton[i].setFrame(2+levelup);
         });
-	   skillButton[i].on("pointerup", function pointerUp () {
+	    skillButton[i].on("pointerup", function pointerUp () {
             let levelup = Math.floor(xp/100)*3;
-            skillButton[i].setFrame(0+levelup);
+            skillButton[i].setFrame(1+levelup);
         });
         skillButton[i].on("pointerover", function pointerOver () {
             let levelup = Math.floor(xp/100)*3;

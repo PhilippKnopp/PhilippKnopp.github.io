@@ -196,7 +196,21 @@ function enemyPlanMove () {
         console.log(finalPath.first);
         
     } else {
-        console.log("implementiere Route wenn kein Held erreichbar ist");
+        let pathToCathedral1 = calculatePath(activeChar.onTile, 615);
+        let pathToCathedral2 = calculatePath(activeChar.onTile, 541);
+        let pathToCathedral3 = calculatePath(activeChar.onTile, 291);
+        
+        if (pathToCathedral1.second != 0 && activeChar.onTile != 615) {
+        // Laufe in Kathedrale um sich dort zu sammeln
+            activeChar.pathToTravel = [...pathToCathedral1.first];
+        } else if (pathToCathedral2.second != 0 && door6.open == false) {
+        // Gehe zu Türe in die Kathedrale
+            activeChar.pathToTravel = [...pathToCathedral2.first];
+        } else if (pathToCathedral3.second != 0 && door1.open == false) {
+        // Gehe zu Türe in die Kathedrale
+            activeChar.pathToTravel = [...pathToCathedral3.first];
+        }
+        
     }
     
     // Entschluss, was getan wird, wird erneut gefasst, nachdem die Bewegung vorbei ist
@@ -232,6 +246,10 @@ function enemyPlanMove () {
         }
     } else if (neighborIndexes.includes(mage.onTile) && mage.health > 0) {
         actionStack.push("attack", mage);
+    } else if (activeChar.onTile == 541 && door6.open == false) {
+        actionStack.push("open", null);
+    } else if (activeChar.onTile == 291 && door1.open == false) {
+        actionStack.push("open", null);
     } else {
         actionStack.push("wait", null);
     }
@@ -259,6 +277,15 @@ function enemyDo (activeChar, action, target) {
                 ritual.incantate(2);
             } else {
                 ritual.incantate(1);
+            }
+            break;
+        case "open":
+            activeChar.actionStack.length = 0;
+            console.log("open");
+            for (let i = 0; i < tileArray[activeChar.onTile].occupiedBy.length-1; i++) {
+                if (typeof tileArray[activeChar.onTile].occupiedBy[i].useDoor !== "undefined") {
+                    tileArray[activeChar.onTile].occupiedBy[i].useDoor();
+                }
             }
             break;
         default:
