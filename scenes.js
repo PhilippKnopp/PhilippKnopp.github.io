@@ -80,8 +80,12 @@ class SceneTitle extends Phaser.Scene {
         this.load.spritesheet('textBackSprite', 'img/textBack.png', { frameWidth: 84, frameHeight: 46 });
         this.load.spritesheet('textForwardSprite', 'img/textForward.png', { frameWidth: 84, frameHeight: 46 });
         this.load.spritesheet('textNewSprite', 'img/textNew.png', { frameWidth: 84, frameHeight: 46 });
+        this.load.spritesheet('tutorialSprite', 'img/tutorial.png', { frameWidth: 84, frameHeight: 46 });
+        this.load.spritesheet('settingsSprite', 'img/settings.png', { frameWidth: 84, frameHeight: 46 });
+        this.load.spritesheet('menuSprite', 'img/menu.png', { frameWidth: 84, frameHeight: 46 });
         this.load.spritesheet('gameModeSprite', 'img/mode.png', { frameWidth: 84, frameHeight: 84 });
         this.load.spritesheet('xpSprite', 'img/xp.png', { frameWidth: 84, frameHeight: 84 });
+        this.load.spritesheet('skipSprite', 'img/skip.png', { frameWidth: 84, frameHeight: 84 });
         this.load.spritesheet('skillUISprite', 'img/UI_Skill.png', { frameWidth: 70, frameHeight: 70 });
         this.load.spritesheet('bPortraitUISprite', 'img/UI_B.png', { frameWidth: 84, frameHeight: 84 });
         this.load.spritesheet('rPortraitUISprite', 'img/UI_R.png', { frameWidth: 84, frameHeight: 84 });
