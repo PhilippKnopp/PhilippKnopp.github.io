@@ -1,9 +1,6 @@
 function guiBuilder(_this) {
     
-    var gui_bg_b = _this.add.image(1167, 618, 'gui_bg');
-    var gui_bg_r = _this.add.image(1167, 748, 'gui_bg');
-    var gui_bg_m = _this.add.image(1167, 878, 'gui_bg');
-    
+    var gui_bg = _this.add.image(1167, 745, 'gui_bg');
     
     barDamageB = _this.add.image(1167, 596, 'barDamage');
     barHealthB = _this.add.image(1167, 596, 'barHealth');
@@ -19,7 +16,7 @@ function guiBuilder(_this) {
     
 ////////////// Buttons //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    textBackButton = _this.add.sprite(1623, 485, 'textBackSprite');
+    textBackButton = _this.add.sprite(1621, 485, 'textBackSprite');
     textBackButton.setInteractive();
     textBackButton.on("pointerover", function pointerOver() {
     this.setFrame(1);
@@ -38,7 +35,7 @@ function guiBuilder(_this) {
         this.setFrame(0);
     });
     
-    textNextButton = _this.add.sprite(1707, 485, 'textForwardSprite');
+    textNextButton = _this.add.sprite(1705, 485, 'textForwardSprite');
     textNextButton.setInteractive();
     textNextButton.on("pointerover", function pointerOver() {
         this.setFrame(1);
@@ -57,7 +54,7 @@ function guiBuilder(_this) {
         this.setFrame(0);
     });
 
-    textNewButton = _this.add.sprite(1791, 485, 'textNewSprite');
+    textNewButton = _this.add.sprite(1789, 485, 'textNewSprite');
     textNewButton.setInteractive();
     textNewButton.on("pointerover", function pointerOver() {
         this.setFrame(1);
@@ -193,9 +190,9 @@ function guiBuilder(_this) {
         });
     }
     
-    bActionIcon = _this.add.sprite(1322, 618, 'bAction');
-    rActionIcon = _this.add.sprite(1322, 748, 'rAction');
-    mActionIcon = _this.add.sprite(1322, 878, 'mAction');
+    bActionIcon = _this.add.sprite(1322, 635, 'bAction');
+    rActionIcon = _this.add.sprite(1322, 745, 'rAction');
+    mActionIcon = _this.add.sprite(1322, 855, 'mAction');
     
     bHpText = _this.add.text(1108, 596, "12/12", { fontFamily: "Verdana" , color: '#FFFFFF'});
     rHpText = _this.add.text(1108, 726, "8/8", { fontFamily: "Verdana" , color: '#FFFFFF'});
@@ -205,12 +202,12 @@ function guiBuilder(_this) {
     rMovementText = _this.add.text(1142, 750, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
     mMovementText = _this.add.text(1142, 880, "6/6", { fontFamily: "Verdana" , color: '#FFFFFF'});
     
-    bPortraitIcon = _this.add.sprite(977, 617, 'bPortraitUISprite');
-    rPortraitIcon = _this.add.sprite(977, 747, 'rPortraitUISprite');
-    mPortraitIcon = _this.add.sprite(977, 877, 'mPortraitUISprite');
+    bPortraitIcon = _this.add.sprite(977, 635, 'bPortraitUISprite');
+    rPortraitIcon = _this.add.sprite(977, 745, 'rPortraitUISprite');
+    mPortraitIcon = _this.add.sprite(977, 855, 'mPortraitUISprite');
     
-    bRollText = _this.add.text(977, 618, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
-    rRollText = _this.add.text(977, 748, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
-    mRollText = _this.add.text(977, 878, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
+    bRollText = _this.add.text(977, 635, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
+    rRollText = _this.add.text(977, 745, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
+    mRollText = _this.add.text(977, 855, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
     
 }
