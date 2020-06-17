@@ -82,11 +82,9 @@
     var Info1, InfoName1, InfoDialog1, InfoName2, InfoDialog2, Info3;
     var textHistory = [];
     var textHistoryIndex = -1;
-    var gameModeIcon, skipIcon;
-    var gameModeText;
     var xp = 0;
-    var xpIcon;
-    var xpText;
+    var xpIcon, gameModeIcon, skipIcon;
+    var xpText, gameModeText, skipText;
     var bActionIcon, rActionIcon, mActionIcon;
     var bPortraitIcon, rPortraitIcon, mPortraitIcon;
     var barHealthB, barDamageB, barMovementB, barHealthR, barDamageR, barMovementR, barHealthM, barDamageM, barMovementM;
@@ -96,14 +94,15 @@
     
     var fightmode = false;
     
+    // Sounds
     var bgmusic;
     var m_hit_1, m_hit_2, m_hit_3, m_hit_4, m_miss_1, m_hit_2, spell_1, spell_2;
     var melee_hits = [m_hit_1, m_hit_2, m_hit_3, m_hit_4];
     var melee_misses = [m_miss_1, m_hit_2];
     var spells = [spell_1, spell_2];
     
-    var AKey;
-    var spaceKey;
+    // Tasten die gedrückt werden können
+    var AKey, spaceKey;
     
 //////////////  Diverse Funktionen   //////////////////////////////////////////////////////////////////////////////////////////
 

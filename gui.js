@@ -162,6 +162,38 @@ function guiBuilder(_this) {
     }
     xpText = _this.add.text(1428, 475, xp, { fontFamily: "Verdana" , color: '#FFFFFF'});
     
+    skipIcon = _this.add.sprite(977, 1008, 'skipSprite');
+    skipIcon.changeFrame = function (a = 0) {
+        if (enemyTurnActive == true || fightmode == false) {
+            this.setFrame(3);
+        } else if (enemyTurnActive == false && fightmode == true) {
+            this.setFrame(0+a);
+        } else if (figuresOnMap.length <= 3) {
+            this.setFrame(4+a);
+        }
+    };
+    skipIcon.setInteractive();
+    skipIcon.on("pointerover", function pointerOver () { this.changeFrame(1); });
+    skipIcon.on("pointerout", function pointerOut () { this.changeFrame(0); });
+    skipIcon.on("pointerdown", function pointerDown () { this.changeFrame(2); });
+	skipIcon.on("pointerup", function pointerUp () {
+        if (fightmode == true && enemyTurnActive == false) {
+            for (let i = 0; i < 3; i++) {
+                figuresOnMap[i].hasActed = true;
+            }
+            hideActions();
+            deactivateFigures();
+            completeTurn();
+        } else if (figuresOnMap.length <= 3) {
+            skipIcon.setFrame(5);
+            game.scene.keys.sceneGame.cameras.main.fadeOut(500, 12, 14, 17);
+            game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
+                game.scene.keys.sceneGame.scene.start('sceneTravel_2');
+            }, game.scene.keys.sceneGame);
+        }
+    });
+    skipText = _this.add.text(1097, 1008, "End Turn (Space)", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    
     let skillButton = [];
     bSkillButton = _this.add.sprite(1420, 634, 'skillUISprite');
     skillButton.push(bSkillButton);
@@ -209,35 +241,4 @@ function guiBuilder(_this) {
     bRollText = _this.add.text(977, 635, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
     rRollText = _this.add.text(977, 745, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
     mRollText = _this.add.text(977, 855, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
-    
-    skipIcon = _this.add.sprite(977, 1008, 'skipSprite');
-    skipIcon.changeFrame = function (a = 0) {
-        if (enemyTurnActive == true || fightmode == false) {
-            this.setFrame(3);
-        } else if (enemyTurnActive == false && fightmode == true) {
-            this.setFrame(0+a);
-        } else if (figuresOnMap.length <= 3) {
-            this.setFrame(4+a);
-        }
-    };
-    skipIcon.setInteractive();
-    skipIcon.on("pointerover", function pointerOver () { this.changeFrame(1); });
-    skipIcon.on("pointerout", function pointerOut () { this.changeFrame(0); });
-    skipIcon.on("pointerdown", function pointerDown () { this.changeFrame(2); });
-	skipIcon.on("pointerup", function pointerUp () {
-        if (fightmode == true && enemyTurnActive == false) {
-            for (let i = 0; i < 3; i++) {
-                figuresOnMap[i].hasActed = true;
-            }
-            hideActions();
-            deactivateFigures();
-            completeTurn();
-        } else if (figuresOnMap.length <= 3) {
-            skipIcon.setFrame(5);
-            game.scene.keys.sceneGame.cameras.main.fadeOut(500, 12, 14, 17);
-            game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
-                game.scene.keys.sceneGame.scene.start('sceneTravel_2');
-            }, game.scene.keys.sceneGame);
-        }
-    });
 }
