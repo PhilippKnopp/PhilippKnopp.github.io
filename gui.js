@@ -223,11 +223,11 @@ function guiBuilder(_this) {
     skipIcon.setInteractive();
     skipIcon.on("pointerover", function pointerOver () {
         this.changeFrame();
-        this.setFrame(this.frame+1);
+        this.frame += 1;
     });
     skipIcon.on("pointerdown", function pointerDown () {
         this.changeFrame();
-        this.setFrame(this.frame+2);
+        this.frame += 2;
     });
 	skipIcon.on("pointerup", function pointerUp () {
         if (fightmode == true && enemyTurnActive == false) {
