@@ -242,6 +242,7 @@ function guiBuilder(_this) {
         skipIcon.on("pointerout", function pointerOut () {
             if (fightmode == true && enemyTurnActive == false) {
                 skipIcon.setFrame(0);
+                console.log(skipIcon);
             } else if (figuresOnMap.length <= 3) {
                 skipIcon.setFrame(4);
             }
