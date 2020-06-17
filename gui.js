@@ -2,15 +2,15 @@ function guiBuilder(_this) {
     
     var gui_bg = _this.add.image(1167, 745, 'gui_bg');
     
-    barDamageB = _this.add.image(1167, 596, 'barDamage');
-    barHealthB = _this.add.image(1167, 596, 'barHealth');
-    barMovementB = _this.add.image(1167, 640, 'barMovement');
-    barDamageR = _this.add.image(1167, 726, 'barDamage');
-    barHealthR = _this.add.image(1167, 726, 'barHealth');
-    barMovementR = _this.add.image(1167, 770, 'barMovement');
-    barDamageM = _this.add.image(1167, 856, 'barDamage');
-    barHealthM = _this.add.image(1167, 856, 'barHealth');
-    barMovementM = _this.add.image(1167, 900, 'barMovement');
+    barDamageB = _this.add.image(1167, 615, 'barDamage');
+    barHealthB = _this.add.image(1167, 615, 'barHealth');
+    barMovementB = _this.add.image(1167, 658, 'barMovement');
+    barDamageR = _this.add.image(1167, 725, 'barDamage');
+    barHealthR = _this.add.image(1167, 725, 'barHealth');
+    barMovementR = _this.add.image(1167, 768, 'barMovement');
+    barDamageM = _this.add.image(1167, 835, 'barDamage');
+    barHealthM = _this.add.image(1167, 835, 'barHealth');
+    barMovementM = _this.add.image(1167, 878, 'barMovement');
     
     var gui = _this.add.image(1301, 540, 'gui');
     
