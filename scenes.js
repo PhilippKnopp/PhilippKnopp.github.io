@@ -77,12 +77,14 @@ class SceneTitle extends Phaser.Scene {
         this.load.spritesheet('specialSprite', 'img/special.png', { frameWidth: 65, frameHeight: 65 });
         this.load.spritesheet('faceSprite', 'img/face.png', { frameWidth: 86, frameHeight: 85 });
         this.load.spritesheet('enemyHealthSprite', 'img/enemyHealthBar.png', { frameWidth: 101, frameHeight: 101 });
+        
         this.load.spritesheet('textBackSprite', 'img/textBack.png', { frameWidth: 84, frameHeight: 46 });
         this.load.spritesheet('textForwardSprite', 'img/textForward.png', { frameWidth: 84, frameHeight: 46 });
         this.load.spritesheet('textNewSprite', 'img/textNew.png', { frameWidth: 84, frameHeight: 46 });
         this.load.spritesheet('tutorialSprite', 'img/tutorial.png', { frameWidth: 84, frameHeight: 46 });
         this.load.spritesheet('settingsSprite', 'img/settings.png', { frameWidth: 84, frameHeight: 46 });
         this.load.spritesheet('menuSprite', 'img/menu.png', { frameWidth: 84, frameHeight: 46 });
+        
         this.load.spritesheet('gameModeSprite', 'img/mode.png', { frameWidth: 84, frameHeight: 84 });
         this.load.spritesheet('xpSprite', 'img/xp.png', { frameWidth: 84, frameHeight: 84 });
         this.load.spritesheet('skipSprite', 'img/skip.png', { frameWidth: 84, frameHeight: 84 });

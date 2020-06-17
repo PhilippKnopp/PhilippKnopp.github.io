@@ -14,13 +14,11 @@ function guiBuilder(_this) {
     
     var gui = _this.add.image(1301, 540, 'gui');
     
-////////////// Buttons //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////// Buttons Text History ////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     textBackButton = _this.add.sprite(1621, 485, 'textBackSprite');
     textBackButton.setInteractive();
-    textBackButton.on("pointerover", function pointerOver() {
-    this.setFrame(1);
-    });
+    textBackButton.on("pointerover", function pointerOver() { this.setFrame(1); });
     textBackButton.on("pointerdown", function pointerDown() {
         this.setFrame(2);
         if (textHistoryIndex > 5) {
@@ -28,18 +26,12 @@ function guiBuilder(_this) {
             textHistoryIndex -= 6;
         }
     });
-    textBackButton.on("pointerup", function pointerUp() {
-        this.setFrame(1);
-    });
-    textBackButton.on("pointerout", function pointerOut() {
-        this.setFrame(0);
-    });
+    textBackButton.on("pointerup", function pointerUp() { this.setFrame(1); });
+    textBackButton.on("pointerout", function pointerOut() { this.setFrame(0); });
     
     textNextButton = _this.add.sprite(1705, 485, 'textForwardSprite');
     textNextButton.setInteractive();
-    textNextButton.on("pointerover", function pointerOver() {
-        this.setFrame(1);
-    });
+    textNextButton.on("pointerover", function pointerOver() { this.setFrame(1); });
     textNextButton.on("pointerdown", function pointerDown() {
         this.setFrame(2);
         if (textHistoryIndex < textHistory.length-6) {
@@ -47,18 +39,12 @@ function guiBuilder(_this) {
             textHistoryIndex += 6;
         }
     });
-    textNextButton.on("pointerup", function pointerUp() {
-        this.setFrame(1);
-    });
-    textNextButton.on("pointerout", function pointerOut() {
-        this.setFrame(0);
-    });
+    textNextButton.on("pointerup", function pointerUp() { this.setFrame(1); });
+    textNextButton.on("pointerout", function pointerOut() { this.setFrame(0); });
 
     textNewButton = _this.add.sprite(1789, 485, 'textNewSprite');
     textNewButton.setInteractive();
-    textNewButton.on("pointerover", function pointerOver() {
-        this.setFrame(1);
-    });
+    textNewButton.on("pointerover", function pointerOver() { this.setFrame(1); });
     textNewButton.on("pointerdown", function pointerDown() {
         this.setFrame(2);
         if (textHistoryIndex < textHistory.length-6) {
@@ -66,12 +52,31 @@ function guiBuilder(_this) {
             textHistoryIndex = textHistory.length-1;
         }
     });
-    textNewButton.on("pointerup", function pointerUp() {
-        this.setFrame(1);
-    });
-    textNewButton.on("pointerout", function pointerOut() {
-        this.setFrame(0);
-    });
+    textNewButton.on("pointerup", function pointerUp() { this.setFrame(1); });
+    textNewButton.on("pointerout", function pointerOut() { this.setFrame(0); });
+    
+////////////// Buttons Footer /// ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    tutorialButton = _this.add.sprite(1621, 1008, 'tutorialSprite');
+    tutorialButton.setInteractive();
+    tutorialButton.on("pointerover", function pointerOver() { this.setFrame(1); });
+    tutorialButton.on("pointerdown", function pointerDown() { this.setFrame(2); });
+    tutorialButton.on("pointerup", function pointerUp() { this.setFrame(1); });
+    tutorialButton.on("pointerout", function pointerOut() { this.setFrame(0); });
+    
+    settingsButton = _this.add.sprite(1705, 1008, 'settingsSprite');
+    settingsButton.setInteractive();
+    settingsButton.on("pointerover", function pointerOver() { this.setFrame(1); });
+    settingsButton.on("pointerdown", function pointerDown() { this.setFrame(2); });
+    settingsButton.on("pointerup", function pointerUp() { this.setFrame(1); });
+    settingsButton.on("pointerout", function pointerOut() { this.setFrame(0); });
+
+    menuButton = _this.add.sprite(1789, 1008, 'menuSprite');
+    menuButton.setInteractive();
+    menuButton.on("pointerover", function pointerOver() { this.setFrame(1); });
+    menuButton.on("pointerdown", function pointerDown() { this.setFrame(2); });
+    menuButton.on("pointerup", function pointerUp() { this.setFrame(1); });
+    menuButton.on("pointerout", function pointerOut() { this.setFrame(0); });
 
 ////////////// Text Messages //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
