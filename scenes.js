@@ -54,7 +54,6 @@ class SceneTitle extends Phaser.Scene {
         this.load.image('rAction', 'img/rAction.png');
         this.load.image('mAction', 'img/mAction.png');
         this.load.image('barHealth', 'img/Bar_HP.png');
-        this.load.image('barDamage', 'img/Bar_Damage.png');
         this.load.image('barMovement', 'img/Bar_Movement.png');
         this.load.spritesheet('trap1Sprite', 'img/trap1.png', { frameWidth: 79, frameHeight: 78 });
         
@@ -69,6 +68,7 @@ class SceneTitle extends Phaser.Scene {
         this.load.spritesheet('e4Sprite', 'img/e4Token.png', { frameWidth: 26, frameHeight: 26 });
         this.load.spritesheet('swirSprite', 'img/swirl.png', { frameWidth: 52, frameHeight: 52 });
         
+        this.load.spritesheet('barDamage', 'img/Bar_Damage.png', { frameWidth: 320, frameHeight: 44 });
         this.load.spritesheet('doorSprite', 'img/door.png', { frameWidth: 65, frameHeight: 65 });
         this.load.spritesheet('moveSprite', 'img/move.png', { frameWidth: 65, frameHeight: 65 });
         this.load.spritesheet('attackSprite', 'img/attack.png', { frameWidth: 65, frameHeight: 65 });
@@ -217,7 +217,7 @@ class SceneGame extends Phaser.Scene {
         spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         spaceKey.on('down', function (key, event) {
             if (figuresOnMap.length == 3) {
-                this.scene.start('sceneTravel_2');
+                game.scene.keys.sceneGame.scene.start('sceneTravel_2');
             } else if (enemyTurnActive == false) {
                 event.stopPropagation();
                 for (let i = 0; i < 3; i++) {

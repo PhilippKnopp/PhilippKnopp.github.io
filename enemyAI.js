@@ -40,6 +40,7 @@ function enemyTurn () {
     // Beendet den Gegnerischen Zug und füllt Aktionen und Bewegung der Heldinnen wieder auf
     replenishActions();
     enemyTurnActive = false;
+    skipIcon.setFrame(0);
     
 }
 

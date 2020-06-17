@@ -2,13 +2,13 @@ function guiBuilder(_this) {
     
     var gui_bg = _this.add.image(1167, 745, 'gui_bg');
     
-    barDamageB = _this.add.image(1167, 615, 'barDamage');
+    barDamageB = _this.add.sprite(1167, 615, 'barDamage');
     barHealthB = _this.add.image(1167, 615, 'barHealth');
     barMovementB = _this.add.image(1167, 658, 'barMovement');
-    barDamageR = _this.add.image(1167, 725, 'barDamage');
+    barDamageR = _this.add.sprite(1167, 725, 'barDamage');
     barHealthR = _this.add.image(1167, 725, 'barHealth');
     barMovementR = _this.add.image(1167, 768, 'barMovement');
-    barDamageM = _this.add.image(1167, 835, 'barDamage');
+    barDamageM = _this.add.sprite(1167, 835, 'barDamage');
     barHealthM = _this.add.image(1167, 835, 'barHealth');
     barMovementM = _this.add.image(1167, 878, 'barMovement');
     
@@ -210,4 +210,41 @@ function guiBuilder(_this) {
     rRollText = _this.add.text(977, 745, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
     mRollText = _this.add.text(977, 855, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
     
+    skipIcon = _this.add.sprite(977, 1008, 'skipSprite');
+    skipIcon.setInteractive();
+        skipIcon.on("pointerdown", function pointerDown () {
+            if (fightmode == true && enemyTurnActive == false) {
+                skipIcon.setFrame(2);
+            } else if (figuresOnMap.length <= 3) {
+                skipIcon.setFrame(6);
+            }
+        });
+	    skipIcon[i].on("pointerup", function pointerUp () {
+            if (fightmode == true && enemyTurnActive == false) {
+                skipIcon.setFrame(3);
+                for (let i = 0; i < 3; i++) {
+                    figuresOnMap[i].hasActed = true;
+                }
+                hideActions();
+                deactivateFigures();
+                completeTurn();
+            } else if (figuresOnMap.length <= 3) {
+                game.scene.keys.sceneGame.scene.start('sceneTravel_2');
+                skipIcon.setFrame(5);
+            }
+        });
+        skipIcon[i].on("pointerover", function pointerOver () {
+            if (fightmode == true && enemyTurnActive == false) {
+                skipIcon.setFrame(1);
+            } else if (figuresOnMap.length <= 3) {
+                skipIcon.setFrame(5);
+            }
+        });
+        skipIcon[i].on("pointerout", function pointerOut () {
+            if (fightmode == true && enemyTurnActive == false) {
+                skipIcon.setFrame(0);
+            } else if (figuresOnMap.length <= 3) {
+                skipIcon.setFrame(4);
+            }
+        });
 }
