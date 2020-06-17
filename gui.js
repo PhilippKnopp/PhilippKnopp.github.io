@@ -211,24 +211,19 @@ function guiBuilder(_this) {
     mRollText = _this.add.text(977, 855, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
     
     skipIcon = _this.add.sprite(977, 1008, 'skipSprite');
-    skipIcon.changeFrame = function () {
+    skipIcon.changeFrame = function (a = 0) {
         if (enemyTurnActive == true || fightmode == false) {
             this.setFrame(3);
         } else if (enemyTurnActive == false && fightmode == true) {
-            this.setFrame(0);
+            this.setFrame(0+a);
         } else if (figuresOnMap.length <= 3) {
-            this.setFrame(4);
+            this.setFrame(4+a);
         }
     };
     skipIcon.setInteractive();
-    skipIcon.on("pointerover", function pointerOver () {
-        this.changeFrame();
-        this.frame += 1;
-    });
-    skipIcon.on("pointerdown", function pointerDown () {
-        this.changeFrame();
-        this.frame += 2;
-    });
+    skipIcon.on("pointerover", function pointerOver () { this.changeFrame(1); });
+    skipIcon.on("pointerout", function pointerOut () { this.changeFrame(0); });
+    skipIcon.on("pointerdown", function pointerDown () { this.changeFrame(2); });
 	skipIcon.on("pointerup", function pointerUp () {
         if (fightmode == true && enemyTurnActive == false) {
             for (let i = 0; i < 3; i++) {
@@ -245,5 +240,4 @@ function guiBuilder(_this) {
             }, game.scene.keys.sceneGame);
         }
     });
-    skipIcon.on("pointerout", skipIcon.changeFrame);
 }
