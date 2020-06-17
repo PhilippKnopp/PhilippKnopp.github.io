@@ -192,7 +192,7 @@ function guiBuilder(_this) {
             }, game.scene.keys.sceneGame);
         }
     });
-    skipText = _this.add.text(1097, 1008, "End Turn (Space)", { fontFamily: "Verdana" , color: '#FFFFFF'});
+    skipText = _this.add.text(1039, 1000, "End Turn (Space)", { fontFamily: "Verdana" , color: "#999999", fontStyle: "bold"});
     
     let skillButton = [];
     bSkillButton = _this.add.sprite(1420, 634, 'skillUISprite');
