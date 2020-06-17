@@ -383,13 +383,7 @@
             mPortraitIcon.setFrame(2);
         }
         
-        if (enemyTurnActive == true || fightmode == false) {
-            skipIcon.setFrame(3);
-        } else if (enemyTurnActive == false && fightmode == true) {
-            skipIcon.setFrame(0);
-        } else if (figuresOnMap.length <= 3) {
-            skipIcon.setFrame(4);
-        }
+        skipIcon.changeFrame();
         
     }
     

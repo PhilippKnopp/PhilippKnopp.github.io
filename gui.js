@@ -211,43 +211,39 @@ function guiBuilder(_this) {
     mRollText = _this.add.text(977, 855, "", { fontFamily: "Verdana" , color: '#FFFFFF', fontSize: '36px', align: 'center'}).setOrigin(0.5).setVisible(false);
     
     skipIcon = _this.add.sprite(977, 1008, 'skipSprite');
+    skipIcon.changeFrame = function () {
+        if (enemyTurnActive == true || fightmode == false) {
+            this.setFrame(3);
+        } else if (enemyTurnActive == false && fightmode == true) {
+            this.setFrame(0);
+        } else if (figuresOnMap.length <= 3) {
+            this.setFrame(4);
+        }
+    };
     skipIcon.setInteractive();
-        skipIcon.on("pointerdown", function pointerDown () {
-            if (fightmode == true && enemyTurnActive == false) {
-                skipIcon.setFrame(2);
-            } else if (figuresOnMap.length <= 3) {
-                skipIcon.setFrame(6);
+    skipIcon.on("pointerover", function pointerOver () {
+        this.changeFrame();
+        this.setFrame(this.frame+1);
+    });
+    skipIcon.on("pointerdown", function pointerDown () {
+        this.changeFrame();
+        this.setFrame(this.frame+2);
+    });
+	skipIcon.on("pointerup", function pointerUp () {
+        if (fightmode == true && enemyTurnActive == false) {
+            for (let i = 0; i < 3; i++) {
+                figuresOnMap[i].hasActed = true;
             }
-        });
-	    skipIcon.on("pointerup", function pointerUp () {
-            if (fightmode == true && enemyTurnActive == false) {
-                for (let i = 0; i < 3; i++) {
-                    figuresOnMap[i].hasActed = true;
-                }
-                hideActions();
-                deactivateFigures();
-                completeTurn();
-            } else if (figuresOnMap.length <= 3) {
-                skipIcon.setFrame(5);
-                game.scene.keys.sceneGame.cameras.main.fadeOut(500, 12, 14, 17);
-                game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
-                    game.scene.keys.sceneGame.scene.start('sceneTravel_2');
-                }, game.scene.keys.sceneGame);
-            }
-        });
-        skipIcon.on("pointerover", function pointerOver () {
-            if (fightmode == true && enemyTurnActive == false) {
-                skipIcon.setFrame(1);
-            } else if (figuresOnMap.length <= 3) {
-                skipIcon.setFrame(5);
-            }
-        });
-        skipIcon.on("pointerout", function pointerOut () {
-            if (fightmode == true && enemyTurnActive == false) {
-                skipIcon.setFrame(0);
-                console.log(skipIcon);
-            } else if (figuresOnMap.length <= 3) {
-                skipIcon.setFrame(4);
-            }
-        });
+            hideActions();
+            deactivateFigures();
+            completeTurn();
+        } else if (figuresOnMap.length <= 3) {
+            skipIcon.setFrame(5);
+            game.scene.keys.sceneGame.cameras.main.fadeOut(500, 12, 14, 17);
+            game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
+                game.scene.keys.sceneGame.scene.start('sceneTravel_2');
+            }, game.scene.keys.sceneGame);
+        }
+    });
+    skipIcon.on("pointerout", skipIcon.changeFrame);
 }
