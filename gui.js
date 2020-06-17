@@ -219,9 +219,8 @@ function guiBuilder(_this) {
                 skipIcon.setFrame(6);
             }
         });
-	    skipIcon[i].on("pointerup", function pointerUp () {
+	    skipIcon.on("pointerup", function pointerUp () {
             if (fightmode == true && enemyTurnActive == false) {
-                skipIcon.setFrame(3);
                 for (let i = 0; i < 3; i++) {
                     figuresOnMap[i].hasActed = true;
                 }
@@ -233,14 +232,14 @@ function guiBuilder(_this) {
                 skipIcon.setFrame(5);
             }
         });
-        skipIcon[i].on("pointerover", function pointerOver () {
+        skipIcon.on("pointerover", function pointerOver () {
             if (fightmode == true && enemyTurnActive == false) {
                 skipIcon.setFrame(1);
             } else if (figuresOnMap.length <= 3) {
                 skipIcon.setFrame(5);
             }
         });
-        skipIcon[i].on("pointerout", function pointerOut () {
+        skipIcon.on("pointerout", function pointerOut () {
             if (fightmode == true && enemyTurnActive == false) {
                 skipIcon.setFrame(0);
             } else if (figuresOnMap.length <= 3) {
