@@ -228,8 +228,11 @@ function guiBuilder(_this) {
                 deactivateFigures();
                 completeTurn();
             } else if (figuresOnMap.length <= 3) {
-                game.scene.keys.sceneGame.scene.start('sceneTravel_2');
                 skipIcon.setFrame(5);
+                game.scene.keys.sceneGame.cameras.main.fadeOut(500, 12, 14, 17);
+                game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
+                    game.scene.keys.sceneGame.scene.start('sceneTravel_2');
+                }, game.scene.keys.sceneGame);
             }
         });
         skipIcon.on("pointerover", function pointerOver () {
