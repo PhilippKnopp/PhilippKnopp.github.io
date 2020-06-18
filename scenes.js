@@ -105,6 +105,15 @@ class SceneTitle extends Phaser.Scene {
         this.load.audio("melee_miss_2_sound", ["sound/sword_6_sound.mp3","sound/sword_6_sound.ogg"]);
         this.load.audio("magic_1_sound", ["sound/magic_1_sound.mp3","sound/magic_1_sound.ogg"]);
         this.load.audio("magic_2_sound", ["sound/magic_2_sound.mp3","sound/magic_2_sound.ogg"]);
+        
+        // sceneB
+        this.load.image('screenB_BG', 'img/charScreenRiva.png');
+        
+        // sceneR
+        this.load.image('screenR_BG', 'img/charScreenLeng.png');
+        
+        // sceneM
+        this.load.image('screenM_BG', 'img/charScreenCaelith.png');
     }
 
     create () {
@@ -709,15 +718,49 @@ class SceneB extends Phaser.Scene {
 
     create () {
         
-        let screen_B = this.add.image(960, 540, 'screen_B');
-        
-        let Info_Travel = this.add.text(960, 950, textTravelL1[0], { fontFamily: "Verdana" , color: '#999999', lineSpacing: 12, wordWrap: { width: 900, useAdvancedWrap: true }, align: 'center' }).setOrigin( 0.5).setX(960);
+        let screenB_BG = this.add.image(960, 540, 'screenB_BG');
         
         this.input.manager.enabled = true;
         this.input.once('pointerdown', function () {
-            // geht sicher, dass alle Spielübergreifenden Variablen auch bei einem Neustart einen sinnvollen Wert haben
-            restartLevel();
-            this.scene.start('sceneGame');
+            this.scene.switch('sceneGame');
+        }, this);
+        
+    }
+
+}
+
+class SceneR extends Phaser.Scene {
+
+    constructor () {
+        super({ key: 'sceneR' });
+    }
+
+    create () {
+        
+        let screenR_BG = this.add.image(960, 540, 'screenR_BG');
+        
+        this.input.manager.enabled = true;
+        this.input.once('pointerdown', function () {
+            this.scene.switch('sceneGame');
+        }, this);
+        
+    }
+
+}
+
+class SceneM extends Phaser.Scene {
+
+    constructor () {
+        super({ key: 'sceneM' });
+    }
+
+    create () {
+        
+        let screenM_BG = this.add.image(960, 540, 'screenM_BG');
+        
+        this.input.manager.enabled = true;
+        this.input.once('pointerdown', function () {
+            this.scene.switch('sceneGame');
         }, this);
         
     }
