@@ -211,7 +211,18 @@ function guiBuilder(_this) {
         skillButton[i].setInteractive();
         skillButton[i].on("pointerdown", function pointerDown () {
             let levelup = Math.floor(xp/100)*3;
-            skillButton[i].setFrame(2+levelup);
+            this.setFrame(2+levelup);
+        });
+        skillButton[i].on("pointerup", function pointerUp () {
+            let levelup = Math.floor(xp/100)*3;
+            this.setFrame(1+levelup);
+            if (this == bSkillButton) {
+                game.scene.keys.sceneGame.scene.switch('sceneB');
+            } else if (this == rSkillButton) {
+                game.scene.keys.sceneGame.scene.switch('sceneR');
+            } else {
+                game.scene.keys.sceneGame.scene.switch('sceneM');
+            }
         });
         skillButton[i].on("pointerover", function pointerOver () {
             let levelup = Math.floor(xp/100)*3;
@@ -219,24 +230,9 @@ function guiBuilder(_this) {
         });
         skillButton[i].on("pointerout", function pointerOut () {
             let levelup = Math.floor(xp/100)*3;
-            skillButton[i].setFrame(0+levelup);
+            this.setFrame(0+levelup);
         });
     }
-    bSkillButton.on("pointerup", function pointerUp () {
-        let levelup = Math.floor(xp/100)*3;
-        bSkillButton.setFrame(1+levelup);
-        game.scene.keys.sceneGame.scene.switch('sceneB');
-    });
-    rSkillButton.on("pointerup", function pointerUp () {
-        let levelup = Math.floor(xp/100)*3;
-        rSkillButton.setFrame(1+levelup);
-        game.scene.keys.sceneGame.scene.switch('sceneR');
-    });
-    mSkillButton.on("pointerup", function pointerUp () {
-        let levelup = Math.floor(xp/100)*3;
-        mSkillButton.setFrame(1+levelup);
-        game.scene.keys.sceneGame.scene.switch('sceneM');
-    });
     
     bActionIcon = _this.add.sprite(1322, 635, 'bAction');
     rActionIcon = _this.add.sprite(1322, 745, 'rAction');

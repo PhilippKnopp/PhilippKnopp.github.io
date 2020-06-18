@@ -721,7 +721,7 @@ class SceneB extends Phaser.Scene {
         let screenB_BG = this.add.image(960, 540, 'screenB_BG');
         
         this.input.manager.enabled = true;
-        this.input.once('pointerdown', function () {
+        this.input.on('pointerdown', function () {
             this.scene.switch('sceneGame');
         }, this);
         
@@ -740,7 +740,7 @@ class SceneR extends Phaser.Scene {
         let screenR_BG = this.add.image(960, 540, 'screenR_BG');
         
         this.input.manager.enabled = true;
-        this.input.once('pointerdown', function () {
+        this.input.on('pointerdown', function () {
             this.scene.switch('sceneGame');
         }, this);
         
@@ -759,7 +759,7 @@ class SceneM extends Phaser.Scene {
         let screenM_BG = this.add.image(960, 540, 'screenM_BG');
         
         this.input.manager.enabled = true;
-        this.input.once('pointerdown', function () {
+        this.input.on('pointerdown', function () {
             this.scene.switch('sceneGame');
         }, this);
         
