@@ -37,7 +37,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.moveNow = function () {
             if (this.pathToTravel.length > 0) {
                 if (fightmode == true) {
-                    let path = calculatePath (this.onTile, this.pathToTravel[0]);
+                    let path = calculatePath (this.onTile, this.pathToTravel[0], true);
                     console.log(path);
                     this.movementCounter -= path.second;
                     updateGUI();
