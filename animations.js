@@ -23,6 +23,7 @@ function createMovementTweens(_this) {
         duration: 250,
         ease: 'Sine.easeInOut',
         onComplete: function () {
+            console.log("tok");
             if (activeChar != null) {
                 activeChar.enterTile();
             }
