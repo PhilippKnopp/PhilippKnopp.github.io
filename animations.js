@@ -23,9 +23,16 @@ function createMovementTweens(_this) {
         duration: 250,
         ease: 'Sine.easeInOut',
         onComplete: function () {
-            console.log("tok");
             if (activeChar != null) {
                 activeChar.enterTile();
+            }
+        },
+        onCompleteScope: movementTween,
+        onStart: function () {
+            if (activeChar instanceof Figure && fightmode == true) {
+                let path = calculatePath (activeChar.onTile, activeChar.pathToTravel[0], true);
+                activeChar.movementCounter -= path.second;
+                updateGUI();
             }
         },
         onCompleteScope: movementTween
