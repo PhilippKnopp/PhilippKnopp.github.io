@@ -677,6 +677,7 @@ class SceneGame extends Phaser.Scene {
         // Bewegung
             if ( movementTween.isPlaying() == false ) {
             // Starte einen Schritt
+                console.log ("tik");
                 activeChar.moveNow();
             } else {
             // ziehe Token während dem Schritt mit
