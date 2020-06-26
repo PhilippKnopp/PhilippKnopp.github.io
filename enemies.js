@@ -51,8 +51,13 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.moveNow = function () {
             moveButton.state = 0;
             if (this.pathToTravel.length > 0) {
+                let moveArray = [this];
+                if (this.name == "Ordrak") {
+                    moveArray.push(swirl1);
+                    moveArray.push(swirl2);
+                } 
                 game.scene.keys.sceneGame.tweens.add( {
-                    targets: [this, swirl1, swirl2],
+                    targets: [...moveArray],
                     duration: 250,
                     x: tileArray[this.pathToTravel[0]].x,
                     y: tileArray[this.pathToTravel[0]].y,
