@@ -41,13 +41,6 @@ class Figure extends Phaser.GameObjects.Sprite {
                     this.movementCounter -= path.second;
                     updateGUI();
                 }
-                /*
-                movementMarker.x = this.x;
-                movementMarker.y = this.y;
-                movementTween.data[0].start = this.x;
-                movementTween.data[1].start = this.y;
-                movementTween.restart();
-                */
                 game.scene.keys.sceneGame.tweens.add( {
                     targets: this,
                     duration: 250,

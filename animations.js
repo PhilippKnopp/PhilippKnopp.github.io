@@ -3,33 +3,6 @@
 
 function createMovementTweens(_this) {
     
-    // Bewegt einen Marker von Feld zu Feld mit dem Spielfiguren auf dem Spielfeld bewegt werden
- /*   movementTween = _this.tweens.add({
-        targets: movementMarker,
-        x: { value: function () {
-            if (activeChar != null) {
-                return tileArray[activeChar.pathToTravel[0]].x;
-            } else {
-                return 0;
-            }
-        }},
-        y: { value: function () {
-            if (activeChar != null) {
-                return tileArray[activeChar.pathToTravel[0]].y;
-            } else {
-                return 0;
-            }
-        }},
-        duration: 250,
-        ease: 'Sine.easeInOut',
-        onComplete: function () {
-            if (activeChar != null) {
-                activeChar.enterTile();
-            }
-        },
-        onCompleteScope: movementTween
-    }).stop();*/
-    
     // Animiert den Health Bar in der UI, wenn eine Heldin Schaden bekommt
     damageBTween = _this.tweens.add({
         targets: barDamageB,

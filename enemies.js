@@ -49,16 +49,10 @@ class Enemy extends Phaser.GameObjects.Sprite {
         };
         
         this.moveNow = function () {
+            moveButton.state = 0;
             if (this.pathToTravel.length > 0) {
-                /*
-                movementMarker.x = this.x;
-                movementMarker.y = this.y;
-                movementTween.data[0].start = this.x;
-                movementTween.data[1].start = this.y;
-                movementTween.restart();
-                */
                 game.scene.keys.sceneGame.tweens.add( {
-                    targets: this,
+                    targets: [this, swirl1, swirl2],
                     duration: 250,
                     x: tileArray[this.pathToTravel[0]].x,
                     y: tileArray[this.pathToTravel[0]].y,
@@ -66,7 +60,6 @@ class Enemy extends Phaser.GameObjects.Sprite {
                     onComplete: function () { activeChar.enterTile(); }
                 } );
             } else {
-                moveButton.state = 0;
                 enemyTurn();
             }
         }

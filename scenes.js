@@ -541,7 +541,7 @@ class SceneGame extends Phaser.Scene {
         moveButton = this.add.sprite(400, 400, 'moveSprite').setAlpha(0);
         // state: 0 nothing
         // state: 1 planning
-        // state: 2 moving
+        // state: 2 enemy moving
         moveButton.setInteractive();
 		moveButton.on("pointerup", function pointerUp() {
             moveButton.state = 1;
@@ -669,37 +669,13 @@ class SceneGame extends Phaser.Scene {
     
     update () {
         
-/*        if (moveButton.state == 1) {
-        // Plane Bewegung
-            moveButton.x = this.game.input.activePointer.x + 50;
-            moveButton.y = this.game.input.activePointer.y + 50;
-        } else if (moveButton.state == 2 && strikeFX1.anims.isPlaying == false) {
-        // Bewegung
-            if ( movementTween.isPlaying() == false ) {
-            // Starte einen Schritt
-                activeChar.moveNow();
-            } else {
-            // ziehe Token während dem Schritt mit
-                activeChar.x = movementMarker.x;
-                activeChar.y = movementMarker.y;
-                if (activeChar.name == "Ordrak") {
-                    swirl1.x = movementMarker.x;
-                    swirl1.y = movementMarker.y;
-                    swirl2.x = movementMarker.x;
-                    swirl2.y = movementMarker.y;
-                }
-            }
-        }*/
-        
         if (moveButton.state == 1) {
         // Plane Bewegung
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
-        } else if (moveButton.state == 2 && activeChar.name == "Ordrak") {
-            swirl1.x = activeChar.x;
-            swirl1.y = activeChar.y;
-            swirl2.x = activeChar.x;
-            swirl2.y = activeChar.y;
+        } else if (moveButton.state == 2 && strikeFX1.anims.isPlaying == false) {
+        // Starte Bewegung
+            activeChar.moveNow();
         }
         
         if (searchButton.state == 1) {
