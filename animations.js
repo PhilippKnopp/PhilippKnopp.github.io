@@ -13,8 +13,7 @@ function createMovementTweens(_this) {
         onComplete: function () {
             barDamageB.setAlpha(1);
             barDamageB.x = barHealthB.x;
-        },
-        onCompleteScope: movementTween
+        }
     }).stop();
     
     // Animiert den Health Bar in der UI, wenn eine Heldin Schaden bekommt
@@ -27,8 +26,7 @@ function createMovementTweens(_this) {
         onComplete: function () {
             barDamageR.setAlpha(1);
             barDamageR.x = barHealthR.x;
-        },
-        onCompleteScope: movementTween
+        }
     }).stop();
     
     // Animiert den Health Bar in der UI, wenn eine Heldin Schaden bekommt
@@ -41,8 +39,7 @@ function createMovementTweens(_this) {
         onComplete: function () {
             barDamageM.setAlpha(1);
             barDamageM.x = barHealthM.x;
-        },
-        onCompleteScope: movementTween
+        }
     }).stop();
     
 }
