@@ -226,8 +226,6 @@ class SceneGame extends Phaser.Scene {
         idol1Img = this.add.image(516, 995, 'idol1').setAlpha(0);
         trap1Sprt = this.add.sprite(438, 501, 'trap1Sprite').setAlpha(0);
         circle1Img = this.add.image(230, 800, 'circle1').setAlpha(0);
-        
-        movementMarker = this.add.sprite(0, 0, 'tileSprite').setAlpha(0);
 		
         AKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
