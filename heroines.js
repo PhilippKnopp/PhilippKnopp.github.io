@@ -36,11 +36,26 @@ class Figure extends Phaser.GameObjects.Sprite {
         
         this.moveNow = function () {
             if (this.pathToTravel.length > 0) {
+                if (fightmode == true) {
+                    let path = calculatePath (this.onTile, this.pathToTravel[0], true);
+                    this.movementCounter -= path.second;
+                    updateGUI();
+                }
+                /*
                 movementMarker.x = this.x;
                 movementMarker.y = this.y;
                 movementTween.data[0].start = this.x;
                 movementTween.data[1].start = this.y;
                 movementTween.restart();
+                */
+                game.scene.keys.sceneGame.tweens.add( {
+                    targets: this,
+                    duration: 250,
+                    x: tileArray[this.pathToTravel[0]].x,
+                    y: tileArray[this.pathToTravel[0]].y,
+                    ease: 'Sine.easeInOut',
+                    onComplete: function () { this.enterTile(); }
+                } );
             } else {
                 moveButton.state = 0;
                 if (this.skills.stealth.active == true) {
@@ -63,6 +78,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                     tileArray[this.onTile].occupiedBy[i].stepOnThisObject();
                 }
             }
+            this.moveNow();
         }
         
         this.rangedAttack = function (enemy) {

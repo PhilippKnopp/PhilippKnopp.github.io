@@ -669,7 +669,7 @@ class SceneGame extends Phaser.Scene {
     
     update () {
         
-        if (moveButton.state == 1) {
+/*        if (moveButton.state == 1) {
         // Plane Bewegung
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
@@ -677,7 +677,6 @@ class SceneGame extends Phaser.Scene {
         // Bewegung
             if ( movementTween.isPlaying() == false ) {
             // Starte einen Schritt
-                console.log ("tik");
                 activeChar.moveNow();
             } else {
             // ziehe Token während dem Schritt mit
@@ -690,6 +689,17 @@ class SceneGame extends Phaser.Scene {
                     swirl2.y = movementMarker.y;
                 }
             }
+        }*/
+        
+        if (moveButton.state == 1) {
+        // Plane Bewegung
+            moveButton.x = this.game.input.activePointer.x + 50;
+            moveButton.y = this.game.input.activePointer.y + 50;
+        } else if (moveButton.state == 2 && activeChar.name == "Ordrak") {
+            swirl1.x = activeChar.x;
+            swirl1.y = activeChar.y;
+            swirl2.x = activeChar.x;
+            swirl2.y = activeChar.y;
         }
         
         if (searchButton.state == 1) {
