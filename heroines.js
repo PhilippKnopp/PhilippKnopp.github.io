@@ -54,7 +54,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                     x: tileArray[this.pathToTravel[0]].x,
                     y: tileArray[this.pathToTravel[0]].y,
                     ease: 'Sine.easeInOut',
-                    onComplete: function () { this.enterTile(); }
+                    onComplete: function () { activeChar.enterTile(); }
                 } );
             } else {
                 moveButton.state = 0;
