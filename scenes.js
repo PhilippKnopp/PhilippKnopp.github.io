@@ -645,7 +645,6 @@ class SceneGame extends Phaser.Scene {
         
         createEnemies(this);
         buildLevel();
-        createMovementTweens(this);
         createFrameAnimations(this);
         enemyVisibility();
         checkFightmode();
@@ -671,7 +670,7 @@ class SceneGame extends Phaser.Scene {
         // Plane Bewegung
             moveButton.x = this.game.input.activePointer.x + 50;
             moveButton.y = this.game.input.activePointer.y + 50;
-        } else if (moveButton.state == 2 && strikeFX1.anims.isPlaying() == false) {
+        } else if (moveButton.state == 2 && strikeFX1.anims.isPlaying == false) {
         // Starte Bewegung
             activeChar.moveNow();
         }

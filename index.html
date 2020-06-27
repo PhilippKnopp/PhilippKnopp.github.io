@@ -84,7 +84,6 @@
     var bActionIcon, rActionIcon, mActionIcon;
     var bPortraitIcon, rPortraitIcon, mPortraitIcon;
     var barHealthB, barDamageB, barMovementB, barHealthR, barDamageR, barMovementR, barHealthM, barDamageM, barMovementM;
-    var damageBTween, damageRTween, damageMTween;
     var bHpText, rHpText, mHpText, bMovementText, rMovementText, mMovementText, bRollText, rRollText, mRollText;
     var bSkillButton, rSkillButton, mSkillButton; 
     
@@ -319,12 +318,34 @@
         barHealthR.x = ((rogue.health/rogue.fullHealth)*320)+847;
         barHealthM.x = ((mage.health/mage.fullHealth)*320)+847;
         
-        damageBTween.data[0].start = 1;
-        damageBTween.restart();
-        damageRTween.data[0].start = 1;
-        damageRTween.restart();
-        damageMTween.data[0].start = 1;
-        damageMTween.restart();
+        let targetArray = [];
+        if (barHealthB.x != barDamageB.x) {
+            targetArray.push(barDamageB);
+        }
+        if (barHealthR.x != barDamageR.x) {
+            targetArray.push(barDamageR);
+        }
+        if (barHealthM.x != barDamageM.x) {
+            targetArray.push(barDamageM);
+        }
+        
+        if (targetArray.length > 0) {
+            game.scene.keys.sceneGame.tweens.add( {
+                targets: [...targetArray],
+                alpha: 0,
+                delay: 50,
+                duration: 300,
+                ease: 'Sine.easeInOut',
+                onComplete: function () {
+                    barDamageB.setAlpha(1);
+                    barDamageB.x = barHealthB.x;
+                    barDamageR.setAlpha(1);
+                    barDamageR.x = barHealthR.x;
+                    barDamageM.setAlpha(1);
+                    barDamageM.x = barHealthM.x;
+                }
+            } );
+        }
         
         barMovementB.x = ((barb.movementCounter/barb.movement)*320)+847;
         barMovementR.x = ((rogue.movementCounter/rogue.movement)*320)+847;
