@@ -255,7 +255,7 @@ class SceneGame extends Phaser.Scene {
                 /*  States:
                     state = 0      Wand                    [0,0,0,0,0,0,0,0]
                     
-                    state = 1      Boden (flach)           [1,1,1,1,1,1,1,1]
+                    state = 1      Boden (normal)           [1,1,1,1,1,1,1,1]
 					state = 2      Boden (schwierig)       [2,2,2,2,2,2,2,2]
                     state = 3      Boden (extrem)          [3,3,3,3,3,3,3,3]
                     
