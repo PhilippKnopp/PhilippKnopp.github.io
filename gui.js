@@ -12,6 +12,109 @@ function guiBuilder(_this) {
     barHealthM = _this.add.image(1167, 835, 'barHealth');
     barMovementM = _this.add.image(1167, 878, 'barMovement');
     
+    barHealthB.looseHP = function () {
+        barDamageB.setFrame(0);
+        barDamageB.setAlpha(1);
+        barHealthB.x = ((barb.health/barb.fullHealth)*320)+847;
+        game.scene.keys.sceneGame.tweens.add( {
+            targets: barDamageB,
+            alpha: 0,
+            delay: 50,
+            duration: 500,
+            ease: 'Sine.easeInOut',
+            onComplete: function () {
+                barDamageB.x = barHealthB.x;
+            }
+        } );
+    };
+    barHealthB.gainHP = function () {
+        barDamageB.setFrame(1);
+        barDamageB.setAlpha(0);
+        barDamageB.x = ((barb.health/barb.fullHealth)*320)+847;
+        game.scene.keys.sceneGame.tweens.add( {
+            targets: barDamageB,
+            alpha: 1,
+            duration: 500,
+            ease: 'Sine.easeInOut',
+            onComplete: function () {
+                game.scene.keys.sceneGame.tweens.add( {
+                    targets: barHealthB,
+                    x: barDamageB.x,
+                    duration: 300,
+                    ease: 'Sine.easeInOut'
+                } );
+            }
+        } );
+    };
+    barHealthR.looseHP = function () {
+        barDamageR.setFrame(0);
+        barDamageR.setAlpha(1);
+        barHealthR.x = ((rogue.health/rogue.fullHealth)*320)+847;
+        game.scene.keys.sceneGame.tweens.add( {
+            targets: barDamageR,
+            alpha: 0,
+            delay: 50,
+            duration: 500,
+            ease: 'Sine.easeInOut',
+            onComplete: function () {
+                barDamageR.x = barHealthR.x;
+            }
+        } );
+    };
+    barHealthR.gainHP = function () {
+        barDamageR.setFrame(1);
+        barDamageR.setAlpha(0);
+        barDamageR.x = ((rogue.health/rogue.fullHealth)*320)+847;
+        game.scene.keys.sceneGame.tweens.add( {
+            targets: barDamageR,
+            alpha: 1,
+            duration: 500,
+            ease: 'Sine.easeInOut',
+            onComplete: function () {
+                game.scene.keys.sceneGame.tweens.add( {
+                    targets: barHealthR,
+                    x: barDamageR.x,
+                    duration: 300,
+                    ease: 'Sine.easeInOut'
+                } );
+            }
+        } );
+    };
+    barHealthM.looseHP = function () {
+        barDamageM.setFrame(0);
+        barDamageM.setAlpha(1);
+        barHealthM.x = ((mage.health/mage.fullHealth)*320)+847;
+        game.scene.keys.sceneGame.tweens.add( {
+            targets: barDamageM,
+            alpha: 0,
+            delay: 50,
+            duration: 500,
+            ease: 'Sine.easeInOut',
+            onComplete: function () {
+                barDamageM.x = barHealthM.x;
+            }
+        } );
+    };
+    barHealthM.gainHP = function () {
+        barDamageM.setFrame(1);
+        barDamageM.setAlpha(0);
+        barDamageM.x = ((mage.health/mage.fullHealth)*320)+847;
+        game.scene.keys.sceneGame.tweens.add( {
+            targets: barDamageM,
+            alpha: 1,
+            duration: 500,
+            ease: 'Sine.easeInOut',
+            onComplete: function () {
+                game.scene.keys.sceneGame.tweens.add( {
+                    targets: barHealthM,
+                    x: barDamageM.x,
+                    duration: 300,
+                    ease: 'Sine.easeInOut'
+                } );
+            }
+        } );
+    };
+    
     var gui = _this.add.image(1301, 540, 'gui');
     
 ////////////// Buttons Text History ////////////////////////////////////////////////////////////////////////////////////////////////////////

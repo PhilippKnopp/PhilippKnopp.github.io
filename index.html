@@ -314,37 +314,20 @@
         rActionIcon.setAlpha(rogue.actionsCounter);
         mActionIcon.setAlpha(mage.actionsCounter);
         
-        barHealthB.x = ((barb.health/barb.fullHealth)*320)+847;
-        barHealthR.x = ((rogue.health/rogue.fullHealth)*320)+847;
-        barHealthM.x = ((mage.health/mage.fullHealth)*320)+847;
-        
-        let targetArray = [];
-        if (barHealthB.x != barDamageB.x) {
-            targetArray.push(barDamageB);
+        if (((barb.health/barb.fullHealth)*320)+847 < barDamageB.x) {
+            barHealthB.looseHP();
+        } else if (((barb.health/barb.fullHealth)*320)+847 > barDamageB.x) {
+            barHealthB.gainHP();
         }
-        if (barHealthR.x != barDamageR.x) {
-            targetArray.push(barDamageR);
+        if (((rogue.health/rogue.fullHealth)*320)+847 < barDamageR.x) {
+            barHealthR.looseHP();
+        } else if (((rogue.health/rogue.fullHealth)*320)+847 > barDamageR.x) {
+            barHealthR.gainHP();
         }
-        if (barHealthM.x != barDamageM.x) {
-            targetArray.push(barDamageM);
-        }
-        
-        if (targetArray.length > 0) {
-            game.scene.keys.sceneGame.tweens.add( {
-                targets: [...targetArray],
-                alpha: 0,
-                delay: 50,
-                duration: 300,
-                ease: 'Sine.easeInOut',
-                onComplete: function () {
-                    barDamageB.setAlpha(1);
-                    barDamageB.x = barHealthB.x;
-                    barDamageR.setAlpha(1);
-                    barDamageR.x = barHealthR.x;
-                    barDamageM.setAlpha(1);
-                    barDamageM.x = barHealthM.x;
-                }
-            } );
+        if (((mage.health/mage.fullHealth)*320)+847 < barDamageM.x) {
+            barHealthM.looseHP();
+        } else if (((mage.health/mage.fullHealth)*320)+847 > barDamageM.x) {
+            barHealthM.gainHP();
         }
         
         barMovementB.x = ((barb.movementCounter/barb.movement)*320)+847;
