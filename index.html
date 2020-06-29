@@ -235,11 +235,13 @@
     }
     
     /*function tileVisibility () { 
-        for (var i = 0; i < tileArray.length; i++) {
-            if ((lineOfSight (figuresOnMap[0].onTile, i) && figuresOnMap[0] instanceof Figure ) || (lineOfSight (figuresOnMap[1].onTile, i) && figuresOnMap[1] instanceof Figure ) || (lineOfSight (figuresOnMap[2].onTile, i) && figuresOnMap[2] instanceof Figure )) {
-                tileArray[i].setFrame(0);
-            } else {
-                tileArray[i].setFrame(2);
+        for (let i = 0; i < tileArray.length; i++) {
+            for (let j = 0; j < 3; j++) {
+                if ((lineOfSight (figuresOnMap[j].onTile, i) && figuresOnMap[j] instanceof Figure ) {
+                    tileShadowArray[i].setAlpha(0);
+                } else {
+                    tileShadowArray[i].setAlpha(1);
+                }
             }
         }
     }*/

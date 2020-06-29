@@ -382,11 +382,11 @@ class SceneGame extends Phaser.Scene {
                     clearNodes();
                 });
                 tile.on("pointerout", function pointerOut () {
-                    //if (moveButton.state == 1) {
+                    if (moveButton.state == 1) {
                         for (let i = 0; i < tileArray.length; i++) {
                             tileArray[i].setFrame(0);
                         }
-                    //}
+                    }
                 });
                 
                 // Passt die Daten an, wie schwer das Betreten dieser Tile aktuell ist
