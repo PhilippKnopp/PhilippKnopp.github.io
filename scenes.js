@@ -285,6 +285,7 @@ class SceneGame extends Phaser.Scene {
                         }
                         activeChar.pathToTravel = path.first;
                         returnCursorToNormal();
+                        moveButton.state = 3;
                         for (var i = 0; i < tileArray.length; i++) {
                             tileArray[i].setFrame(0);
                         }
@@ -540,6 +541,7 @@ class SceneGame extends Phaser.Scene {
         // state: 0 nothing
         // state: 1 planning
         // state: 2 enemy moving
+        // state: 3 chars moving
         moveButton.setInteractive();
 		moveButton.on("pointerup", function pointerUp() {
             moveButton.state = 1;
