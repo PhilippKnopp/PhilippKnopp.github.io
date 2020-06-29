@@ -230,12 +230,12 @@ class SceneGame extends Phaser.Scene {
         AKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         spaceKey.on('down', function (key, event) {
-            if (figuresOnMap.length == 3) {
+            if (figuresOnMap.length == 3 && enemyTurnActive == false && moveButton.state == 0) {
                 game.scene.keys.sceneGame.cameras.main.fadeOut(500, 12, 14, 17);
                 game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
                     game.scene.keys.sceneGame.scene.start('sceneTravel_2');
                 }, game.scene.keys.sceneGame);
-            } else if (enemyTurnActive == false) {
+            } else if (enemyTurnActive == false && moveButton.state == 0) {
                 event.stopPropagation();
                 for (let i = 0; i < 3; i++) {
                     figuresOnMap[i].hasActed = true;
