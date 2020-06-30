@@ -246,9 +246,9 @@ function enemyPlanMove () {
         }
     } else if (neighborIndexes.includes(mage.onTile) && mage.health > 0) {
         actionStack.push("attack", mage);
-    } else if (activeChar.onTile == 541 && door2.open == false) {
+    } else if (neighborIndexes.includes(566) && door2.open == false) {
         actionStack.push("open", null);
-    } else if (activeChar.onTile == 291 && door1.open == false) {
+    } else if (neighborIndexes.includes(316) && door1.open == false) {
         actionStack.push("open", null);
     } else {
         actionStack.push("wait", null);
