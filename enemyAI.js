@@ -196,11 +196,11 @@ function enemyPlanMove () {
         console.log(finalPath.first);
         
     } else {
-        let pathToCathedral1 = calculatePath(activeChar.onTile, 615);
+        let pathToCathedral1 = calculatePath(activeChar.onTile, 641);
         let pathToCathedral2 = calculatePath(activeChar.onTile, 541);
         let pathToCathedral3 = calculatePath(activeChar.onTile, 291);
         
-        if (pathToCathedral1.second != 0 && activeChar.onTile != 615) {
+        if (pathToCathedral1.second != 0 && activeChar.onTile != 641) {
         // Laufe in Kathedrale um sich dort zu sammeln
             activeChar.pathToTravel = [...pathToCathedral1.first];
         } else if (pathToCathedral2.second != 0 && door2.open == false) {
@@ -246,9 +246,9 @@ function enemyPlanMove () {
         }
     } else if (neighborIndexes.includes(mage.onTile) && mage.health > 0) {
         actionStack.push("attack", mage);
-    } else if (neighborIndexes.includes(542) && door2.open == false) {
+    } else if ((neighborIndexes.includes(542) || (neighborIndexes.includes(541)) && door2.open == false) {
         actionStack.push("open", null);
-    } else if (neighborIndexes.includes(292) && door1.open == false) {
+    } else if ((neighborIndexes.includes(292) || (neighborIndexes.includes(291)) && door1.open == false) {
         actionStack.push("open", null);
     } else {
         actionStack.push("wait", null);
