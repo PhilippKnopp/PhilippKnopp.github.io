@@ -49,11 +49,11 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
         if (frontierListValues.indexOf(Math.min(...frontierListValues)) != -1) {
             let minimumDistance = Math.min(...frontierListValues);
             console.log(minimumDistance);
-            frontierListValues.forEach(function(element) {
-                if (element > minimumDistance) {
-                    element += 1000;
+            for (let i = 0; i < frontierListValues.length; i++) {
+                if (frontierListValues[i] > minimumDistance) {
+                    frontierListValues[i] = 1000;
                 } else {
-                    element = frontierList[frontierListValues.indexOf(element)].estimatedWayToB2(endIndex);
+                    frontierListValues[i] = frontierList[i].estimatedWayToB2(endIndex);
                 }
             });
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
