@@ -51,6 +51,7 @@
     var level = 1;
     
     var tileArray = []; // Array mit allen Spielfeldern des Levels
+    var tileShadowArray = []; // Array mit allen Spielfeldern des Levels
     var matrixWidth = 25;   // Spielfeldbreite
     var matrixHeight = 40;  // Spielfeldhöhe
     
@@ -221,8 +222,8 @@
         
         // Alle Feinde, zu denen LoS besteht, werden wieder sichtbar
         for (let i = 0; i < charsStillAlive; i++) {
-            for (var k = 0; k < enemyIndexes.length; k++) {
-                if (lineOfSight (figuresOnMap[i].onTile, enemyIndexes[k].onTile) && figuresOnMap[i].health > 0) {
+            for (let k = 0; k < enemyIndexes.length; k++) {
+                if (lineOfSight(figuresOnMap[i].onTile, enemyIndexes[k].onTile) && figuresOnMap[i].health > 0) {
                     if (enemyIndexes[k].name != "Ordrak" || ritual.state == "succesful") {
                         enemyIndexes[k].setAlpha(1);
                         if (figuresOnMap[i].skills.stealth.active == false) {
@@ -234,17 +235,17 @@
         }
     }
     
-    /*function tileVisibility () { 
+    function tileVisibility () { 
         for (let i = 0; i < tileArray.length; i++) {
             for (let j = 0; j < 3; j++) {
-                if ((lineOfSight (figuresOnMap[j].onTile, i) && figuresOnMap[j] instanceof Figure ) {
+                if ( lineOfSight(figuresOnMap[j].onTile, i) && figuresOnMap[j] instanceof Figure ) {
                     tileShadowArray[i].setAlpha(0);
                 } else {
                     tileShadowArray[i].setAlpha(1);
                 }
             }
         }
-    }*/
+    }
     
     function completeTurn() {
         let turnOver = 0;

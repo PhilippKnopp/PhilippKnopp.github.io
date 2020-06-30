@@ -58,6 +58,7 @@ class SceneTitle extends Phaser.Scene {
         this.load.spritesheet('trap1Sprite', 'img/trap1.png', { frameWidth: 79, frameHeight: 78 });
         
         this.load.spritesheet('tileSprite', 'img/tileSprite.png', { frameWidth: 26, frameHeight: 26 });
+        this.load.image('tileShadow', 'img/tileShadow.png');
         
         this.load.spritesheet('mageSprite', 'img/mToken.png', { frameWidth: 26, frameHeight: 26 });
         this.load.spritesheet('rogueSprite', 'img/rToken.png', { frameWidth: 26, frameHeight: 26 });
@@ -510,6 +511,14 @@ class SceneGame extends Phaser.Scene {
 				}
 			}
 		}
+        
+        for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
+			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
+                let singleTileShadow = this.add.sprite(xPos*26+100, yPos*26+33, 'tileShadow');
+                tileShadowArray.push(singleTileShadow);
+                singleTileShadow.name = tileShadowArray.length-1;
+            }
+        }
         
         doorButton = this.add.sprite(400, 400, 'doorSprite').setAlpha(0);
         doorButton.setInteractive();
