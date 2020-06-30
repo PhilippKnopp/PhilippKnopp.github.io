@@ -65,7 +65,6 @@ class Figure extends Phaser.GameObjects.Sprite {
             tileArray[this.onTile].occupiedBy.push(this);
             enemyVisibility();
             checkFightmode();
-            tileVisibility();
             for (let i = 0; i < tileArray[this.onTile].occupiedBy.length-1; i++) {
                 if (typeof tileArray[this.onTile].occupiedBy[i].stepOnThisObject !== "undefined") {
                     tileArray[this.onTile].occupiedBy[i].stepOnThisObject();
