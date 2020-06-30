@@ -151,7 +151,7 @@ function lineOfSight (startIndex, endIndex) {
     
     if ( Math.abs(difX) >= Math.abs(difY) ) { // liegt Links oder Rechts 
         if (difX > 0) { //liegt Links
-            while  (aX > bX /*&& losPathDifficulty[losPathDifficulty.length-1] != 0*/) { // kann entweder eine zahl oer undefined sein. Nicht schön aber ok :)
+            while  (aX > bX && losPathDifficulty[losPathDifficulty.length-1] != 0) { // kann entweder eine zahl oer undefined sein. Nicht schön aber ok :)
                 pointer += pointerIncrement;
                 if (pointer >= stepDiagonals && difY > 0) { // N-W
                     stepDiagonals += 1/(diagonals+1);
@@ -174,7 +174,7 @@ function lineOfSight (startIndex, endIndex) {
                 }
             }
         } else if (difX < 0) { // liegt Rechts
-            while  (aX < bX /*&& losPathDifficulty[losPathDifficulty.length-1] != 0*/) {
+            while  (aX < bX && losPathDifficulty[losPathDifficulty.length-1] != 0) {
                 pointer += pointerIncrement;
                 if (pointer >= stepDiagonals && difY > 0) { // N-O
                     stepDiagonals += 1/(diagonals+1);
@@ -199,7 +199,7 @@ function lineOfSight (startIndex, endIndex) {
         }
     } else if ( Math.abs(difX) < Math.abs(difY) ) {// liegt Über oder Unter
         if (difY > 0) { //liegt Über
-            while  (aY > bY /*&& losPathDifficulty[losPathDifficulty.length-1] != 0*/) {
+            while  (aY > bY && losPathDifficulty[losPathDifficulty.length-1] != 0) {
                 pointer += pointerIncrement;
                 if (pointer >= stepDiagonals && difX > 0) { // N-W
                     stepDiagonals += 1/(diagonals+1);
@@ -222,7 +222,7 @@ function lineOfSight (startIndex, endIndex) {
                 }
             }
         } else if (difY < 0) { // liegt Unter
-            while  (aY < bY /*&& losPathDifficulty[losPathDifficulty.length-1] != 0*/) {
+            while  (aY < bY && losPathDifficulty[losPathDifficulty.length-1] != 0) {
                 pointer += pointerIncrement;
                 if (pointer >= stepDiagonals && difX > 0) { // S-W
                     stepDiagonals += 1/(diagonals+1);
