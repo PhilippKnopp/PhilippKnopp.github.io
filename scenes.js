@@ -376,9 +376,7 @@ class SceneGame extends Phaser.Scene {
                                 tileArray[path.first[i]].setFrame(3);
                             }
                         }
-                    } else if (activeChar != null) {
-                        lineOfSight (activeChar.onTile, this.name);
-                    } 
+                    }
                     clearNodes();
                 });
                 tile.on("pointerout", function pointerOut () {
