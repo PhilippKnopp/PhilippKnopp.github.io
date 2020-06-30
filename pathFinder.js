@@ -55,7 +55,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
                 } else {
                     frontierListValues[i] = frontierList[i].estimatedWayToB2(endIndex);
                 }
-            });
+            };
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
         } else {
             pathToTravel = [];
