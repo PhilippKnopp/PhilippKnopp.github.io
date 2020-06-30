@@ -151,90 +151,98 @@ function lineOfSight (startIndex, endIndex) {
     
     if ( Math.abs(difX) >= Math.abs(difY) ) { // liegt Links oder Rechts 
         if (difX > 0) { //liegt Links
-            while  (aX > bX && losPathDifficulty[losPathDifficulty.length-1] != 0) { // kann entweder eine zahl oer undefined sein. Nicht schön aber ok :)
+            while  (aX > bX /*&& losPathDifficulty[losPathDifficulty.length-1] != 0*/) { // kann entweder eine zahl oer undefined sein. Nicht schön aber ok :)
                 pointer += pointerIncrement;
                 if (pointer >= stepDiagonals && difY > 0) { // N-W
                     stepDiagonals += 1/(diagonals+1);
                     index = index - matrixWidth - 1;
                     tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[4]);
+                    aX--;
                 } else if (pointer >= stepDiagonals && difY < 0) { // S-W
                     stepDiagonals += 1/(diagonals+1);
                     index = index + matrixWidth - 1;
                     tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[2]);
+                    aX--;
                 } else if (pointer >= stepStraights || difY == 0) { // W
                     stepStraights += 1/(straights+1);
                     index = index - 1;
                     tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[3]);
+                    aX--;
                 }
-                aX--;
             }
         } else if (difX < 0) { // liegt Rechts
-            while  (aX < bX && losPathDifficulty[losPathDifficulty.length-1] != 0) {
+            while  (aX < bX /*&& losPathDifficulty[losPathDifficulty.length-1] != 0*/) {
                 pointer += pointerIncrement;
                 if (pointer >= stepDiagonals && difY > 0) { // N-O
                     stepDiagonals += 1/(diagonals+1);
                     index = index - matrixWidth + 1;
                     tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[6]);
+                    aX++;
                 } else if (pointer >= stepDiagonals && difY < 0) { // S-O
                     stepDiagonals += 1/(diagonals+1);
                     index = index + matrixWidth + 1;
                     tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[0]);
+                    aX++;
                 } else if (pointer >= stepStraights || difY == 0) { // O
                     stepStraights += 1/(straights+1);
                     index = index + 1;
                     tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[7]);
+                    aX++;
                 }
-                aX++;
             }
         }
     } else if ( Math.abs(difX) < Math.abs(difY) ) {// liegt Über oder Unter
         if (difY > 0) { //liegt Über
-            while  (aY > bY && losPathDifficulty[losPathDifficulty.length-1] != 0) {
+            while  (aY > bY /*&& losPathDifficulty[losPathDifficulty.length-1] != 0*/) {
                 pointer += pointerIncrement;
                 if (pointer >= stepDiagonals && difX > 0) { // N-W
                     stepDiagonals += 1/(diagonals+1);
                     index = index - matrixWidth - 1;
                     tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[4]);
+                    aY--;
                 } else if (pointer >= stepDiagonals && difX < 0) { // N-O
                     stepDiagonals += 1/(diagonals+1);
                     index = index - matrixWidth + 1;
                     tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[6]);
+                    aY--;
                 } else if (pointer >= stepStraights || difX == 0) { // N
                     stepStraights += 1/(straights+1);
                     index = index - matrixWidth;
                     tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[5]);
+                    aY--;
                 }
-                aY--;
             }
         } else if (difY < 0) { // liegt Unter
-            while  (aY < bY && losPathDifficulty[losPathDifficulty.length-1] != 0) {
+            while  (aY < bY /*&& losPathDifficulty[losPathDifficulty.length-1] != 0*/) {
                 pointer += pointerIncrement;
                 if (pointer >= stepDiagonals && difX > 0) { // S-W
                     stepDiagonals += 1/(diagonals+1);
                     index = index + matrixWidth - 1;
                     tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[2]);
+                    aY++;
                 } else if (pointer >= stepDiagonals && difX < 0) { // S-O
                     stepDiagonals += 1/(diagonals+1);
                     index = index + matrixWidth + 1;
                     tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[0]);
+                    aY++;
                 } else if (pointer >= stepStraights || difX == 0) { // S
                     stepStraights += 1/(straights+1);
                     index = index + matrixWidth;
                     tileArray[index].updateWalkable(true);
                     losPathDifficulty.push(tileArray[index].cWalkable[1]);
+                    aY++;
                 }
-                aY++;
             }
         }
     }
