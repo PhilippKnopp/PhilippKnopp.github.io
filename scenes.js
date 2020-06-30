@@ -507,7 +507,7 @@ class SceneGame extends Phaser.Scene {
 					let yDistance = Math.abs(Math.floor(b/matrixWidth)-Math.floor(a/matrixWidth));
 					let diagonals = Math.min(xDistance, yDistance);
 					return xDistance + yDistance - diagonals/2;*/
-                    return (Phaser.Math.distance(this.x,this.y,tileArray[b].x,tileArray[b].y)/26);
+                    return (Phaser.Math.Distance.BetweenPoints(this, tileArray[b])/26);
 				}
 			}
 		}
