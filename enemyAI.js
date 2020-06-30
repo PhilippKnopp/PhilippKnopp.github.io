@@ -203,7 +203,7 @@ function enemyPlanMove () {
         if (pathToCathedral1.second != 0 && activeChar.onTile != 615) {
         // Laufe in Kathedrale um sich dort zu sammeln
             activeChar.pathToTravel = [...pathToCathedral1.first];
-        } else if (pathToCathedral2.second != 0 && door6.open == false) {
+        } else if (pathToCathedral2.second != 0 && door2.open == false) {
         // Gehe zu Türe in die Kathedrale
             activeChar.pathToTravel = [...pathToCathedral2.first];
         } else if (pathToCathedral3.second != 0 && door1.open == false) {
@@ -246,7 +246,7 @@ function enemyPlanMove () {
         }
     } else if (neighborIndexes.includes(mage.onTile) && mage.health > 0) {
         actionStack.push("attack", mage);
-    } else if (activeChar.onTile == 541 && door6.open == false) {
+    } else if (activeChar.onTile == 541 && door2.open == false) {
         actionStack.push("open", null);
     } else if (activeChar.onTile == 291 && door1.open == false) {
         actionStack.push("open", null);
