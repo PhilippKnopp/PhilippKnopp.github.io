@@ -241,6 +241,7 @@ function lineOfSight (startIndex, endIndex) {
     
     clearNodes();
     searchButton.state = 0;
+    console.log(losPathDifficulty);
     
     // testet ob in dem Array "losPathDifficulty" eine 0 vorkommt (dort kann man nicht hinlaufen)
     let los_blocked = losPathDifficulty.includes(0);
