@@ -51,7 +51,6 @@
     var level = 1;
     
     var tileArray = []; // Array mit allen Spielfeldern des Levels
-    var tileShadowArray = []; // Array mit allen Spielfeldern des Levels
     var matrixWidth = 25;   // Spielfeldbreite
     var matrixHeight = 40;  // Spielfeldhöhe
     
@@ -207,7 +206,6 @@
             
             tileArray[755].occupiedBy.push(ritual);
         }
-        tileVisibility();
         event1.startLevel();
     }
 
@@ -231,19 +229,6 @@
                             enemyIndexes[k].alarmed = true;
                         }
                     }
-                }
-            }
-        }
-    }
-    
-    function tileVisibility () {
-        tileShadowArray.forEach(function(element) {
-            element.setAlpha(0);
-        });
-        for (let i = 0; i < tileArray.length; i++) {
-            for (let j = 0; j < 3; j++) {
-                if (lineOfSight(figuresOnMap[j].onTile, i)) {
-                    tileShadowArray[i].setAlpha(1);
                 }
             }
         }
