@@ -45,7 +45,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
             frontierListValues.push(frontierList[i].wayPointUsefulness);
         }
         
-        console.log(let a = [...frontierListValues]);
+        console.log(...frontierListValues);
         // Aus irgendeinem Grund muss hier ein Fehler abgefangen werden.
         if (frontierListValues.indexOf(Math.min(...frontierListValues)) != -1) {
             let minimumDistance = Math.min(...frontierListValues);
@@ -62,7 +62,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
             pathToTravel = [];
             break;
         }
-        console.log(let a = [...frontierListValues]);
+        console.log(...frontierListValues);
         
         // Wenn Knoten mit Niedrigster wayPointUsefulness schon das Ziel ist, ist A* fertig
         if (frontierList[activeNode].name == endIndex) {
