@@ -508,9 +508,6 @@ class SceneGame extends Phaser.Scene {
 					let diagonals = Math.min(xDistance, yDistance);
 					return xDistance + yDistance - diagonals/2;
 				}
-                tile.estimatedWayToB2 = function (b) {
-                    return (Phaser.Math.Distance.BetweenPoints(this, tileArray[b])/26);
-				}
 			}
 		}
         
