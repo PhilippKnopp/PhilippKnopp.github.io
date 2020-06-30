@@ -45,24 +45,36 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
             frontierListValues.push(frontierList[i].wayPointUsefulness);
         }
         
-        console.log(...frontierListValues);
+        
+        
+        let a = [...frontierListValues];
+        console.log("Start with this:");
+        console.log(a);
+        
         // Aus irgendeinem Grund muss hier ein Fehler abgefangen werden.
         if (frontierListValues.indexOf(Math.min(...frontierListValues)) != -1) {
             let minimumDistance = Math.min(...frontierListValues);
+            
             console.log(minimumDistance);
+            
             for (let i = 0; i < frontierListValues.length; i++) {
                 if (frontierListValues[i] > minimumDistance) {
-                    frontierListValues[i] = 1000;
+                    
                 } else {
                     frontierListValues[i] = Phaser.Math.Distance.BetweenPoints(tileArray[frontierList[i].name], tileArray[endIndex])/26;
                 }
-            };
+            }
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
         } else {
             pathToTravel = [];
             break;
         }
-        console.log(...frontierListValues);
+        
+        let b = [...frontierListValues];
+        console.log("Now you have this:");
+        console.log(b);
+        console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        
         
         // Wenn Knoten mit Niedrigster wayPointUsefulness schon das Ziel ist, ist A* fertig
         if (frontierList[activeNode].name == endIndex) {
