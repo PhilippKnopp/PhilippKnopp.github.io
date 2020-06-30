@@ -48,6 +48,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
         // Aus irgendeinem Grund muss hier ein Fehler abgefangen werden.
         if (frontierListValues.indexOf(Math.min(...frontierListValues)) != -1) {
             let minimumDistance = Math.min(...frontierListValues);
+            console.log(minimumDistance);
             frontierListValues.forEach(function(element) {
                 if (element > minimumDistance) {
                     element += 1000;
