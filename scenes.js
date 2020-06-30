@@ -503,7 +503,7 @@ class SceneGame extends Phaser.Scene {
 				tile.estimatedWayToB = function (b) {
                     let a = this.name;
 					
-					let xDistance = (Math.abs(b%matrixWidth-a%matrixWidth));
+					let xDistance = Math.abs(b%matrixWidth-a%matrixWidth);
 					let yDistance = Math.abs(Math.floor(b/matrixWidth)-Math.floor(a/matrixWidth));
 					let diagonals = Math.min(xDistance, yDistance);
 					return xDistance + yDistance - diagonals/2;
