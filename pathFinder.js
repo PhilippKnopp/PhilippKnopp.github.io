@@ -53,7 +53,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
                 if (frontierListValues[i] > minimumDistance) {
                     frontierListValues[i] = 1000;
                 } else {
-                    frontierListValues[i] = Phaser.Math.Distance.BetweenPoints(thtileArray[frontierList[i].name], tileArray[endIndex])/26;
+                    frontierListValues[i] = Phaser.Math.Distance.BetweenPoints(tileArray[frontierList[i].name], tileArray[endIndex])/26;
                 }
             };
             activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
