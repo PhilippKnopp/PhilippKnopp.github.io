@@ -501,12 +501,13 @@ class SceneGame extends Phaser.Scene {
                 
                 // Berechnet die Distanz-Luftlinie zum Ziel während des Pfadfindens
 				tile.estimatedWayToB = function (b) {
-                    let a = this.name;
+                    /*let a = this.name;
 					
 					let xDistance = (Math.abs(b%matrixWidth-a%matrixWidth));
 					let yDistance = Math.abs(Math.floor(b/matrixWidth)-Math.floor(a/matrixWidth));
 					let diagonals = Math.min(xDistance, yDistance);
-					return xDistance + yDistance - diagonals/2;
+					return xDistance + yDistance - diagonals/2;*/
+                    return Phaser.Math.distance(this.x,this.y,tileAttay[b].x,tileAttay[b].y);
 				}
 			}
 		}
