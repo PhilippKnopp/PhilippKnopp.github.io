@@ -165,7 +165,7 @@ const door1 = {
 }
 
 const door1trigger = {
-    canBeClosed: door1.canBeClosed(array),
+    canBeClosed: function (array) { return door1.canBeClosed(array); },
     useDoor: function () {
         if (door1.open == false) {
             door1Img.setAlpha(1);
@@ -204,7 +204,7 @@ const door2 = {
 }
 
 const door2trigger = {
-    canBeClosed: door2.canBeClosed(array),
+    canBeClosed: function (array) { return door2.canBeClosed(array); },
     useDoor: function () {
         if (door2.open == false) {
             door2Img.setAlpha(1);
