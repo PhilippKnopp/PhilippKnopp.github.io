@@ -386,10 +386,10 @@ function showActions(_this) {
         for (let i = 0; i < tileArray[_this.onTile].occupiedBy.length-1; i++) {
             if (typeof tileArray[_this.onTile].occupiedBy[i].useDoor !== "undefined") {
                 if (tileArray[_this.onTile].occupiedBy[i].canBeClosed() == true) {
-                        doorButton.x = _this.x+buttonXpos;
-                        doorButton.y = _this.y;
-                        doorButton.setAlpha(1);
-                        buttonXpos += 85;
+                    doorButton.x = _this.x+buttonXpos;
+                    doorButton.y = _this.y;
+                    doorButton.setAlpha(1);
+                    buttonXpos += 85;
                 }
             }
         }
