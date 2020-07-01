@@ -15,7 +15,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
     let pathFound = false;
     let pathToTravel = [];
     let distance = 0;
-    
+    console.log(startIndex + "  und  " + endIndex);
     //Fange Ausnahmen ab startIndex = endIndex
     if (startIndex == endIndex) {
         return {
@@ -28,7 +28,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
     tileArray[startIndex].entryPoint = "Start";
     tileArray[startIndex].distanceTravelled = 0;
     tileArray[startIndex].wayPointUsefulness = tileArray[startIndex].distanceTravelled + tileArray[startIndex].estimatedWayToB(endIndex);
-    tileArray[startIndex].difDegree = Phaser.Math.Angle.BetweenPoints(tileArray[startIndex], tileArray[endIndex])
+    tileArray[startIndex].difDegree = Phaser.Math.Angle.BetweenPoints(tileArray[startIndex], tileArray[endIndex]);
     frontierList.push(tileArray[startIndex]);
     
     // gehe folgende Schleife solange durch bis es einen Weg gibt
