@@ -248,33 +248,34 @@ class SceneGame extends Phaser.Scene {
         
 		let index = 0;
 		for (var yPos = 0; yPos < matrixHeight; yPos++ ) {
-			for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
-                var tile = this.add.sprite(xPos*26+100, yPos*26+33, 'tileSprite');
+            for (var xPos = 0; xPos < matrixWidth; xPos++ ) {
+                let tile = this.add.sprite(xPos*26+100, yPos*26+33, 'tileSprite');
                 tileArray.push(tile);
-				tile.state = 0;
+                tile.state = 0;
                 /*  States:
                     state = 0      Wand                    [0,0,0,0,0,0,0,0]
                     
-                    state = 1      Boden (normal)           [1,1,1,1,1,1,1,1]
-					state = 2      Boden (schwierig)       [2,2,2,2,2,2,2,2]
+                    state = 1      Boden (normal)          [1,1,1,1,1,1,1,1]
+                    state = 2      Boden (schwierig)       [2,2,2,2,2,2,2,2]
                     state = 3      Boden (extrem)          [3,3,3,3,3,3,3,3]
                     
-					state = 5      Wasser (niedrig)        [2,2,2,2,2,2,2,2]
-					state = 6      Wasser (tief)           [3,3,3,3,3,3,3,3]
+                    state = 5      Wasser (niedrig)        [2,2,2,2,2,2,2,2]
+                    state = 6      Wasser (tief)           [3,3,3,3,3,3,3,3]
                 */
                 tile.name = index++;
                 tile.info = 1;
-				tile.walkable = [1,1,1,1,1,1,1,1];
+                tile.walkable = [1,1,1,1,1,1,1,1];
                 tile.cWalkable = [];
                 tile.distanceTravelled;
-				tile.wayPointUsefulness;
-				tile.entryPoint;
+                tile.wayPointUsefulness;
+                tile.difDegree;
+                tile.entryPoint;
                 tile.occupiedBy = [];
                 tile.neighbors = [];            // Alle Nachbarn, die erreichbar sind
-				tile.neighborsDistance = [];    // Distanzen, in der Reihenfolge von tile.neighbors
+                tile.neighborsDistance = [];    // Distanzen, in der Reihenfolge von tile.neighbors
                 
-				tile.setInteractive();
-				tile.on("pointerup", function pointerUp () {
+                tile.setInteractive();
+                tile.on("pointerup", function pointerUp () {
                     this.updateWalkable();
                     
 					if (moveButton.state == 1 && (this.cWalkable.indexOf(1) > -1 || this.cWalkable.indexOf(2) > -1 || this.cWalkable.indexOf(3) > -1)) {

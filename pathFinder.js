@@ -8,13 +8,13 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
     // endIndex ist der Index im TileArray zu dem der Pfad geht
     // onlyMeasure = true begrenzt den Pfad nicht auf die maximale Bewegungsweite während einem Kampf
     
-    var mappedList = [];
-    var frontierList = [];
-    var frontierListValues = [];
-    var activeNode;
-    var pathFound = false;
-    var pathToTravel = [];
-    var distance = 0;
+    let mappedList = [];
+    let frontierList = [];
+    let frontierListValues = new Map();
+    let activeNode;
+    let pathFound = false;
+    let pathToTravel = [];
+    let distance = 0;
     
     //Fange Ausnahmen ab startIndex = endIndex
     if (startIndex == endIndex) {
@@ -40,14 +40,37 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
         }
         
         // gehe frontierList durch nach niedrigster wayPointUsefulness
-        frontierListValues.length = 0;
+        frontierListValues.clear();
+        let minWayPointUsefulness = frontierList[0].wayPointUsefulness;
         for (let i = 0; i < frontierList.length; i++) {
-            frontierListValues.push(frontierList[i].wayPointUsefulness);
+            
+            let angleStartFinish = Phaser.Math.Angle.BetweenPoints(tileArray[startIndex], tileArray[endIndex]);
+            let angleThisFinish = Phaser.Math.Angle.BetweenPoints(frontierList[i], tileArray[endIndex]);
+            frontierList[i].difDegree = Phaser.Math.Angle.ShortestBetween(angleStartFinish, angleThisFinish);
+            
+            console.log("This Point Dif Angle:  " + frontierList[i].difDegree);
+            if (frontierList[i].wayPointUsefulness == minWayPointUsefulness) {
+                frontierListValues.set(i, frontierList[i].difDegree);
+            } else if (frontierList[i].wayPointUsefulness < minWayPointUsefulness) {
+                minWayPointUsefulness = frontierList[i].wayPointUsefulness;
+                frontierListValues.clear();
+                frontierListValues.set(i, frontierList[i].difDegree);
+            }
         }
+        console.log(frontierListValues);
         
-        // Aus irgendeinem Grund muss hier ein Fehler abgefangen werden.
-        if (frontierListValues.indexOf(Math.min(...frontierListValues)) != -1) {
-            activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
+        let arrayOfDifDegrees = [];
+        for (let amount of frontierListValues.values()) {
+            arrayOfDifDegrees.push(amount);
+        }
+        if (arrayOfDifDegrees.indexOf(Math.min(...arrayOfDifDegrees)) != -1) {
+            let a = arrayOfDifDegrees.indexOf(Math.min(...arrayOfDifDegrees))
+            for (let index of frontierListValues.keys()) {
+                if (arrayOfDifDegrees[a] == frontierListValues.get(index)) {
+                    activeNode = index;
+                    console.log("This is the activeNode:  " + activeNode);
+                }
+            }
         } else {
             pathToTravel = [];
             break;
