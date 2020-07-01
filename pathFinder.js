@@ -46,9 +46,8 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
             
             let angleStartFinish = Phaser.Math.Angle.BetweenPoints(tileArray[startIndex], tileArray[endIndex]);
             let angleThisFinish = Phaser.Math.Angle.BetweenPoints(frontierList[i], tileArray[endIndex]);
-            frontierList[i].difDegree = Phaser.Math.Angle.ShortestBetween(angleStartFinish, angleThisFinish);
+            frontierList[i].difDegree = Math.abs(Phaser.Math.Angle.ShortestBetween(angleStartFinish, angleThisFinish));
             
-            console.log("This Point Dif Angle:  " + frontierList[i].difDegree);
             if (frontierList[i].wayPointUsefulness == minWayPointUsefulness) {
                 frontierListValues.set(i, frontierList[i].difDegree);
             } else if (frontierList[i].wayPointUsefulness < minWayPointUsefulness) {
