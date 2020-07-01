@@ -15,9 +15,9 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
     let pathFound = false;
     let pathToTravel = [];
     let distance = 0;
-    console.log(startIndex + "  und  " + endIndex);
+    
     //Fange Ausnahmen ab startIndex = endIndex
-    if (startIndex == endIndex) {
+    if (startIndex == endIndex || endIndex == undefined) {
         return {
             first: pathToTravel,
             second: distance
@@ -46,14 +46,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
             let difDegree = Math.abs(Phaser.Math.Angle.ShortestBetween(tileArray[startIndex].difDegree, frontierList[i].difDegree))/1000;
             frontierListValues.push(frontierList[i].wayPointUsefulness + difDegree);
         }
-        
-        // Aus irgendeinem Grund muss hier ein Fehler abgefangen werden.
-        if (frontierListValues.indexOf(Math.min(...frontierListValues)) != -1) {
-            activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
-        } else {
-            pathToTravel = [];
-            break;
-        }
+        activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
         
         // Wenn Knoten mit Niedrigster wayPointUsefulness schon das Ziel ist, ist A* fertig
         if (frontierList[activeNode].name == endIndex) {
