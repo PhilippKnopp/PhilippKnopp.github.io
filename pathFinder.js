@@ -10,7 +10,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
     
     let mappedList = [];
     let frontierList = [];
-    let frontierListValues = new Map();
+    let frontierListValues = [];
     let activeNode;
     let pathFound = false;
     let pathToTravel = [];
@@ -28,6 +28,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
     tileArray[startIndex].entryPoint = "Start";
     tileArray[startIndex].distanceTravelled = 0;
     tileArray[startIndex].wayPointUsefulness = tileArray[startIndex].distanceTravelled + tileArray[startIndex].estimatedWayToB(endIndex);
+    tileArray[startIndex].difDegree = Phaser.Math.Angle.BetweenPoints(tileArray[startIndex], tileArray[endIndex])
     frontierList.push(tileArray[startIndex]);
     
     // gehe folgende Schleife solange durch bis es einen Weg gibt
@@ -40,36 +41,15 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
         }
         
         // gehe frontierList durch nach niedrigster wayPointUsefulness
-        frontierListValues.clear();
-        let minWayPointUsefulness = frontierList[0].wayPointUsefulness;
+        frontierListValues.length = 0;
         for (let i = 0; i < frontierList.length; i++) {
-            
-            let angleStartFinish = Phaser.Math.Angle.BetweenPoints(tileArray[startIndex], tileArray[endIndex]);
-            let angleThisFinish = Phaser.Math.Angle.BetweenPoints(frontierList[i], tileArray[endIndex]);
-            frontierList[i].difDegree = Math.abs(Phaser.Math.Angle.ShortestBetween(angleStartFinish, angleThisFinish));
-            
-            if (frontierList[i].wayPointUsefulness == minWayPointUsefulness) {
-                frontierListValues.set(i, frontierList[i].difDegree);
-            } else if (frontierList[i].wayPointUsefulness < minWayPointUsefulness) {
-                minWayPointUsefulness = frontierList[i].wayPointUsefulness;
-                frontierListValues.clear();
-                frontierListValues.set(i, frontierList[i].difDegree);
-            }
+            let difDegree = Math.abs(Phaser.Math.Angle.ShortestBetween(tileArray[startIndex].difDegree, frontierList[i].difDegree))/1000;
+            frontierListValues.push(frontierList[i].wayPointUsefulness + difDegree);
         }
-        console.log(frontierListValues);
         
-        let arrayOfDifDegrees = [];
-        for (let amount of frontierListValues.values()) {
-            arrayOfDifDegrees.push(amount);
-        }
-        if (arrayOfDifDegrees.indexOf(Math.min(...arrayOfDifDegrees)) != -1) {
-            let a = arrayOfDifDegrees.indexOf(Math.min(...arrayOfDifDegrees))
-            for (let index of frontierListValues.keys()) {
-                if (arrayOfDifDegrees[a] == frontierListValues.get(index)) {
-                    activeNode = index;
-                    console.log("This is the activeNode:  " + activeNode);
-                }
-            }
+        // Aus irgendeinem Grund muss hier ein Fehler abgefangen werden.
+        if (frontierListValues.indexOf(Math.min(...frontierListValues)) != -1) {
+            activeNode = frontierListValues.indexOf(Math.min(...frontierListValues));
         } else {
             pathToTravel = [];
             break;
@@ -108,6 +88,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
                 frontierList[activeNode].neighbors[i].distanceTravelled = frontierList[activeNode].distanceTravelled + frontierList[activeNode].neighborsDistance[i];
                 frontierList[activeNode].neighbors[i].wayPointUsefulness = frontierList[activeNode].neighbors[i].distanceTravelled + frontierList[activeNode].neighbors[i].estimatedWayToB(endIndex);
                 frontierList[activeNode].neighbors[i].entryPoint = frontierList[activeNode].name;
+                frontierList[activeNode].neighbors[i].difDegree = Phaser.Math.Angle.BetweenPoints(frontierList[activeNode].neighbors[i], tileArray[endIndex])
                 frontierList.push(frontierList[activeNode].neighbors[i]);
             }
         }
