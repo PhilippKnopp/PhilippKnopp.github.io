@@ -144,8 +144,8 @@ const event8 = {
 
 const door1 = {
     open: false,
-    canBeClosed: function (array) {
-        
+    canBeClosed: function (arrayAll) {
+        let array = [arrayAll[315], arrayAll[316], arrayAll[317]];
         for (let i = 0; i < array.length; i++) {
             if (containsObject(this, array[i].occupiedBy) && (checkFor (array[i].occupiedBy, Figure) || checkFor (array[i].occupiedBy, Enemy))) {
                 return false;
@@ -183,7 +183,8 @@ const door1trigger = {
 
 const door2 = {
     open: false,
-    canBeClosed: function (array) {
+    canBeClosed: function (arrayAll) {
+        let array = [arrayAll[565], arrayAll[567], arrayAll[568]];
         for (let i = 0; i < array.length; i++) {
             if (containsObject(this, array[i].occupiedBy) && (checkFor (array[i].occupiedBy, Figure) || checkFor (array[i].occupiedBy, Enemy))) {
                 return false;
