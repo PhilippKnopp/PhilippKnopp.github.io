@@ -357,3 +357,30 @@ const ritual = {
         }
     }
 }
+
+const camp = {
+    isReady: false,
+    setUp: function () {
+        this.moveToCamp();
+    },
+    use: function () {
+        this.moveToCamp();
+    },
+    moveToCamp: function () {
+        game.scene.keys.sceneGame.cameras.main.fadeOut(500, 12, 14, 17);
+        game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
+            
+            tileArray[barb.onTile].occupiedBy.splice(tileArray[barb.onTile].occupiedBy.indexOf(barb), 1);
+            barb.onTile = campPositions[level-matrixWidth];
+            tileArray[barb.onTile].occupiedBy.push(barb);
+            tileArray[rogue.onTile].occupiedBy.splice(tileArray[rogue.onTile].occupiedBy.indexOf(rogue), 1);
+            rogue.onTile = campPositions[level+matrixWidth-1];
+            tileArray[rogue.onTile].occupiedBy.push(rogue);
+            tileArray[mage.onTile].occupiedBy.splice(tileArray[mage.onTile].occupiedBy.indexOf(mage), 1);
+            mage.onTile = campPositions[level+1];
+            tileArray[mage.onTile].occupiedBy.push(mage);
+            
+            camera.fadeIn(700);
+        }, game.scene.keys.sceneGame);
+    }
+}

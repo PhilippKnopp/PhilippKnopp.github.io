@@ -272,7 +272,7 @@ function guiBuilder(_this) {
     
     skipIcon = _this.add.sprite(977, 1008, 'skipSprite');
     skipIcon.changeFrame = function (a = 0) {
-        if (enemyTurnActive == true || fightmode == false) {
+        if (enemyTurnActive == true || (fightmode == false && figuresOnMap.length > 3) ) {
             this.setFrame(3);
         } else if (enemyTurnActive == false && fightmode == true) {
             this.setFrame(0+a);

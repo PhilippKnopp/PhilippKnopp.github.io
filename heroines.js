@@ -61,7 +61,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         this.enterTile = function () {
             // findet die aktuelle Position dieser Figur auf dieser Tile (Z-Wert) und löscht sie
             tileArray[this.onTile].occupiedBy.splice(tileArray[this.onTile].occupiedBy.indexOf(this), 1);
-            this.onTile = this.pathToTravel.shift(); // onTile wird zu em ersten Pfadschritt und dieser wird dann entfernt
+            this.onTile = this.pathToTravel.shift(); // onTile wird zum ersten Pfadschritt und dieser wird dann entfernt
             tileArray[this.onTile].occupiedBy.push(this);
             enemyVisibility();
             checkFightmode();
@@ -409,6 +409,23 @@ function showActions(_this) {
             specialButton.setAlpha(1);
             buttonXpos += 85;
             specialButton.state = 1;
+        }
+    }
+    
+    // bietet den "special-Button" an, wenn ein guter Ort in Sichtweite ist, an dem man campen könnte
+    if (fightmode == false && campPositions[level] != 0 && _this == barb) {
+        if (lineOfSight (_this.onTile, campPositions[level]) && camp.isReady == false) {
+            specialButton.x = _this.x+buttonXpos;
+            specialButton.y = _this.y;
+            specialButton.setAlpha(1);
+            buttonXpos += 85;
+            specialButton.state = 2;
+        } else if (camp.isReady) {
+            specialButton.x = _this.x+buttonXpos;
+            specialButton.y = _this.y;
+            specialButton.setAlpha(1);
+            buttonXpos += 85;
+            specialButton.state = 3;
         }
     }
     

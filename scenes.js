@@ -586,10 +586,18 @@ class SceneGame extends Phaser.Scene {
         specialButton.setInteractive();
         // state: 0 nothing
         // state: 1 disableTrap
+        // state: 2 setUpCamp
+        // state: 3 goCamping
 		specialButton.on("pointerup", function pointerUp() {
-            if (specialButton.state == 1 && level == 1) {
+            if (specialButton.state == 1) {
                 specialButton.state = 0;
                 trap1.disableTrap();
+            } else if (specialButton.state == 2) {
+                specialButton.state = 0;
+                camp.setUp();
+            } else if (specialButton.state == 3) {
+                specialButton.state = 0;
+                camp.use();
             }
 		});
         specialButton.setDepth(1);
