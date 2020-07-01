@@ -40,7 +40,7 @@ function calculatePath (startIndex, endIndex, onlyMeasure = false) {
             break;
         }
         
-        // gehe frontierList durch nach niedrigster wayPointUsefulness
+        // gehe frontierList durch nach niedrigster wayPointUsefulness + Tiebreaker (geringster Winkelunterschied zur Luftlinie)
         frontierListValues.length = 0;
         for (let i = 0; i < frontierList.length; i++) {
             let difDegree = Math.abs(Phaser.Math.Angle.ShortestBetween(tileArray[startIndex].difDegree, frontierList[i].difDegree))/1000;
