@@ -371,14 +371,20 @@ const camp = {
         game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
             
             tileArray[barb.onTile].occupiedBy.splice(tileArray[barb.onTile].occupiedBy.indexOf(barb), 1);
-            barb.onTile = campPositions[level-matrixWidth];
+            barb.onTile = campPositions[level] - matrixWidth;
             tileArray[barb.onTile].occupiedBy.push(barb);
+            barb.x = tileArray[barb.onTile].x;
+            barb.y = tileArray[barb.onTile].y;
             tileArray[rogue.onTile].occupiedBy.splice(tileArray[rogue.onTile].occupiedBy.indexOf(rogue), 1);
-            rogue.onTile = campPositions[level+matrixWidth-1];
+            rogue.onTile = campPositions[level] + matrixWidth - 1;
             tileArray[rogue.onTile].occupiedBy.push(rogue);
+            rogue.x = tileArray[rogue.onTile].x;
+            rogue.y = tileArray[rogue.onTile].y;
             tileArray[mage.onTile].occupiedBy.splice(tileArray[mage.onTile].occupiedBy.indexOf(mage), 1);
-            mage.onTile = campPositions[level+1];
+            mage.onTile = campPositions[level] + 1;
             tileArray[mage.onTile].occupiedBy.push(mage);
+            mage.x = tileArray[mage.onTile].x;
+            mage.y = tileArray[mage.onTile].y;
             
             camera.fadeIn(700);
         }, game.scene.keys.sceneGame);
