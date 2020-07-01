@@ -78,7 +78,6 @@ function enemyPlanMove () {
             for (let j = 0; j < neighborsCopy.length; j++) {
                 if (activeChar.onTile == neighborsCopy[j].name) {
                     // die Distanz ist 0 weil dieser Gegner schon auf dem richtigen Feld steht
-                    console.log("Gegner steht schon daneben");
                     isAlreadyThere = true;
                     heroineIsViable = true;
                     neighborsCopy.splice(j, 1);
@@ -86,7 +85,6 @@ function enemyPlanMove () {
                     continue;
                 } else if ( checkFor(neighborsCopy[j].occupiedBy, Enemy) ){
                     // Platz ist schon besetzt => nächsten freien Patz anschauen
-                    console.log(j + "ist schon besetzt");
                     isAlreadyFlanked = true;
                     neighborsCopy.splice(j, 1);
                     j--;
@@ -96,7 +94,6 @@ function enemyPlanMove () {
                 let path = calculatePath(activeChar.onTile, neighborsCopy[j].name, true);
                 if (path.second != 0) {
                     // eine Distanz wird zurückgegeben => Man kann auf das Feld laufen!
-                    console.log("Gegner kann da hinlaufen");
                     heroineIsViable = true;
                     distancesToThisHeroine.push(path.second);
                 }
@@ -113,10 +110,8 @@ function enemyPlanMove () {
             // Priorisiere Helden mit wenig Health wenn der gegner Verletzt ist (Faktor 1)
             if (activeChar.fullHealth > activeChar.health) {
                 if (figuresOnMap[i].health <= 4) {
-                    console.log("Verletzt +2");
                     victimRanking[i] += 2;
                 } else if (figuresOnMap[i].health <= 8) {
-                    console.log("Verletzt +1");
                     victimRanking[i] += 1;
                 }
             }
@@ -124,28 +119,22 @@ function enemyPlanMove () {
             // Priorisiere Helden die günstig stehen (Faktor 2)
             let distanceToThisHeroine = Math.min(...distancesToThisHeroine);
             if (isAlreadyThere) {
-                console.log("Distanz +4");
                 victimRanking[i] += 4;
             } else if (distanceToThisHeroine <= 2) {
-                console.log("Distanz +3");
                 victimRanking[i] += 3;
             } else if (distanceToThisHeroine <= 6) {
-                console.log("Distanz +2");
                 victimRanking[i] += 2;
             } else if (distanceToThisHeroine <= 10) {
-                console.log("Distanz +1");
                 victimRanking[i] += 1;
             }
             
             // Priorisiere Helden zu denen Line Of Sight besteht (Faktor 4)
             if (lineOfSight (activeChar.onTile, figuresOnMap[i].onTile)) {
-                console.log("Sichtbar +4");
                 victimRanking[i] += 4;
             }
             
             // Priorisiert Helden die bereits mit einem Gegner kämpfen (Faktor 1)
             if (isAlreadyFlanked) {
-                console.log("Flankiert +1");
                 victimRanking[i] += 1;
             }
             
@@ -193,7 +182,6 @@ function enemyPlanMove () {
         // Bewegung wird festgelegt
         let finalPath = calculatePath(activeChar.onTile, placeOfChoice);
         activeChar.pathToTravel = [...finalPath.first];
-        console.log(finalPath.first);
         
     } else {
         let pathToCathedral1 = calculatePath(activeChar.onTile, 641);
