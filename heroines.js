@@ -385,18 +385,11 @@ function showActions(_this) {
     if ((fightmode == false || (_this.actionsCounter > 0 || _this.movementCounter >= 1)) && _this.health > 0) {
         for (let i = 0; i < tileArray[_this.onTile].occupiedBy.length-1; i++) {
             if (typeof tileArray[_this.onTile].occupiedBy[i].useDoor !== "undefined") {
-                if (typeof tileArray[_this.onTile].occupiedBy[i].canBeClosed !== "undefined") {
-                    if (tileArray[_this.onTile].occupiedBy[i].canBeClosed() == true) {
+                if (tileArray[_this.onTile].occupiedBy[i].canBeClosed() == true) {
                         doorButton.x = _this.x+buttonXpos;
                         doorButton.y = _this.y;
                         doorButton.setAlpha(1);
                         buttonXpos += 85;
-                    }
-                } else {
-                    doorButton.x = _this.x+buttonXpos;
-                    doorButton.y = _this.y;
-                    doorButton.setAlpha(1);
-                    buttonXpos += 85;
                 }
             }
         }

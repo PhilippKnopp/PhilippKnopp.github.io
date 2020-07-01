@@ -220,6 +220,7 @@ const door2trigger = {
 
 const door4 = {
     open: false,
+    canBeClosed: function () { return true; },
     modifyWalkability: function (baseWalkability, lookForTargets) {
         if (this.open == false) {
             if (baseWalkability[4] == 0 ) {
@@ -243,6 +244,7 @@ const door4 = {
 }
 
 const door4trigger = {
+    canBeClosed: function () { return true; },
     useDoor: function () {
         door4.useDoor();
     }
@@ -250,6 +252,7 @@ const door4trigger = {
 
 const door5 = {
     open: false,
+    canBeClosed: function () { return true; },
     modifyWalkability: function (baseWalkability, lookForTargets) {
         if (this.open == false) {
             if (baseWalkability[2] == 0 ) {
@@ -273,6 +276,7 @@ const door5 = {
 }
 
 const door5trigger = {
+    canBeClosed: function () { return true; },
     useDoor: function () {
         door5.useDoor();
     }
@@ -280,6 +284,7 @@ const door5trigger = {
 
 const door6 = {
     open: true,
+    canBeClosed: function () { return true; },
     modifyWalkability: function (baseWalkability, lookForTargets) {
         if (this.open == false) {
             if (baseWalkability[2] == 0 ) {
@@ -303,6 +308,7 @@ const door6 = {
 }
 
 const door6trigger = {
+    canBeClosed: function () { return true; },
     useDoor: function () {
         door6.useDoor();
     }
