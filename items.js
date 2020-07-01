@@ -144,9 +144,10 @@ const event8 = {
 
 const door1 = {
     open: false,
-    canBeClosed: function () {
-        for (let i = 0; i < tileArray.length; i++) {
-            if (containsObject(this, tileArray[i].occupiedBy) && (checkFor (tileArray[i].occupiedBy, Figure) || checkFor (tileArray[i].occupiedBy, Enemy))) {
+    canBeClosed: function (array) {
+        
+        for (let i = 0; i < array.length; i++) {
+            if (containsObject(this, array[i].occupiedBy) && (checkFor (array[i].occupiedBy, Figure) || checkFor (array[i].occupiedBy, Enemy))) {
                 return false;
             }
         }
@@ -164,7 +165,7 @@ const door1 = {
 }
 
 const door1trigger = {
-    canBeClosed: door1.canBeClosed(),
+    canBeClosed: door1.canBeClosed(array),
     useDoor: function () {
         if (door1.open == false) {
             door1Img.setAlpha(1);
@@ -182,9 +183,9 @@ const door1trigger = {
 
 const door2 = {
     open: false,
-    canBeClosed: function () {
-        for (let i = 0; i < tileArray.length; i++) {
-            if (containsObject(this, tileArray[i].occupiedBy) && (checkFor (tileArray[i].occupiedBy, Figure) || checkFor (tileArray[i].occupiedBy, Enemy))) {
+    canBeClosed: function (array) {
+        for (let i = 0; i < array.length; i++) {
+            if (containsObject(this, array[i].occupiedBy) && (checkFor (array[i].occupiedBy, Figure) || checkFor (array[i].occupiedBy, Enemy))) {
                 return false;
             }
         }
@@ -202,7 +203,7 @@ const door2 = {
 }
 
 const door2trigger = {
-    canBeClosed: door2.canBeClosed(),
+    canBeClosed: door2.canBeClosed(array),
     useDoor: function () {
         if (door2.open == false) {
             door2Img.setAlpha(1);
