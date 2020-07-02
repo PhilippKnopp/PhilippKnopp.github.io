@@ -369,7 +369,7 @@ const camp = {
     moveToCamp: function () {
         deactivateFigures();
         hideActions();
-        hideFace();
+        barb.hideFace();
         
         game.scene.keys.sceneGame.cameras.main.fadeOut(500, 12, 14, 17);
         game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {

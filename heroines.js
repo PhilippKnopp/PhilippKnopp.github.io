@@ -198,7 +198,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         
     }
     
-    activateFigure() {
+    activateFigure(isCamping = false) {
         
         if (moveButton.state == 0 && searchButton.state == 0 && attackButton.state == 0 && (fightmode == false || (this.actionsCounter > 0 || (this.movementCounter) >= 1 ))) {
             deactivateFigures();
@@ -212,7 +212,11 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.setAlpha(0.5);
             }
             
-            showActions(this);
+            if (isCamping) {
+                showActions(this, isCamping);
+            } else {
+                showActions(this);    
+            }
             
         } else if (searchButton.state == 1) {
             if (lineOfSight (activeChar.onTile, this.onTile) == true) {
