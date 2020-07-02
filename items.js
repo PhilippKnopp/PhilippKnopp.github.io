@@ -367,6 +367,10 @@ const camp = {
         this.moveToCamp();
     },
     moveToCamp: function () {
+        deactivateFigures();
+        hideActions();
+        hideFace();
+        
         game.scene.keys.sceneGame.cameras.main.fadeOut(500, 12, 14, 17);
         game.scene.keys.sceneGame.cameras.main.once('camerafadeoutcomplete', function (camera) {
             
@@ -375,11 +379,13 @@ const camp = {
             tileArray[barb.onTile].occupiedBy.push(barb);
             barb.x = tileArray[barb.onTile].x;
             barb.y = tileArray[barb.onTile].y;
+            
             tileArray[rogue.onTile].occupiedBy.splice(tileArray[rogue.onTile].occupiedBy.indexOf(rogue), 1);
             rogue.onTile = campPositions[level] + matrixWidth - 1;
             tileArray[rogue.onTile].occupiedBy.push(rogue);
             rogue.x = tileArray[rogue.onTile].x;
             rogue.y = tileArray[rogue.onTile].y;
+            
             tileArray[mage.onTile].occupiedBy.splice(tileArray[mage.onTile].occupiedBy.indexOf(mage), 1);
             mage.onTile = campPositions[level] + 1;
             tileArray[mage.onTile].occupiedBy.push(mage);
@@ -388,5 +394,7 @@ const camp = {
             
             camera.fadeIn(700);
         }, game.scene.keys.sceneGame);
+        
+        barb.activateFigure();
     }
 }
