@@ -198,7 +198,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         
     }
     
-    activateFigure(isCamping = false) {
+    activateFigure(a, isCamping = false) {
         console.log(isCamping);
         
         if (moveButton.state == 0 && searchButton.state == 0 && attackButton.state == 0 && (fightmode == false || (this.actionsCounter > 0 || (this.movementCounter) >= 1 ))) {
