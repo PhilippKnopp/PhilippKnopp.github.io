@@ -395,6 +395,8 @@ const camp = {
             camera.fadeIn(700);
         }, game.scene.keys.sceneGame);
         
-        barb.activateFigure(true);
+        game.scene.keys.sceneGame.cameras.main.once('camerafadeincomplete', function (camera) {
+            barb.activateFigure(true);
+        }, game.scene.keys.sceneGame);
     }
 }
