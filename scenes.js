@@ -614,14 +614,14 @@ class SceneGame extends Phaser.Scene {
 		});
         restShortButton.setDepth(1);
         
-        restLongButton = this.add.sprite(400, 400, 'restShort').setAlpha(0);
+        restLongButton = this.add.sprite(400, 400, 'restLong').setAlpha(0);
         restLongButton.setInteractive();
 		restLongButton.on("pointerup", function pointerUp() {
             
 		});
         restLongButton.setDepth(1);
         
-        alchemyButton = this.add.sprite(400, 400, 'restShort').setAlpha(0);
+        alchemyButton = this.add.sprite(400, 400, 'alchemy').setAlpha(0);
         alchemyButton.setInteractive();
 		alchemyButton.on("pointerup", function pointerUp() {
             
