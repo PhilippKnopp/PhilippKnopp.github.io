@@ -509,7 +509,7 @@ function showActions(_this) {
     
     clearNodes();
     
-    if (doorButton.alpha == 0 && moveButton.alpha == 0 && attackButton.alpha == 0 && (specialButton.alpha == 0 || _this != rogue) && isCamping == false ) {
+    if (doorButton.alpha == 0 && moveButton.alpha == 0 && attackButton.alpha == 0 && (specialButton.alpha == 0 || _this != rogue) && camp.camping == false ) {
         returnCursorToNormal();
         deactivateFigures();
         _this.hasActed = true;
