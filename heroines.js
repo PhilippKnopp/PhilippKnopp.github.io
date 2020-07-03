@@ -198,8 +198,7 @@ class Figure extends Phaser.GameObjects.Sprite {
         
     }
     
-    activateFigure(a, isCamping = false) {
-        console.log(isCamping);
+    activateFigure() {
         
         if (moveButton.state == 0 && searchButton.state == 0 && attackButton.state == 0 && (fightmode == false || (this.actionsCounter > 0 || (this.movementCounter) >= 1 ))) {
             deactivateFigures();
@@ -213,11 +212,7 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.setAlpha(0.5);
             }
             
-            if (isCamping == true) {
-                showActions(this, true);
-            } else {
-                showActions(this, false);
-            }
+            showActions(this);
             
         } else if (searchButton.state == 1) {
             if (lineOfSight (activeChar.onTile, this.onTile) == true) {
@@ -319,8 +314,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     
 }
 
-function showActions(_this, isCamping) {
-    console.log(isCamping);
+function showActions(_this) {
     
     // beendet Zug für diese Heldin und checkt ob dadurch der Zug für alle beendet ist
     if (fightmode == true && (_this.actionsCounter == 0 && (_this.movementCounter) < 1 )) {
@@ -333,7 +327,7 @@ function showActions(_this, isCamping) {
     
     hideActions();
     
-    if (isCamping == false) {
+    if (camp.camping == false) {
         
         let buttonXpos = 60;
     
@@ -444,7 +438,7 @@ function showActions(_this, isCamping) {
         cancelButton.setAlpha(1);
         buttonXpos += 85;
     
-    } else if (isCamping == true) {
+    } else if (camp.camping == true) {
         
         let buttonXpos = -85;
         

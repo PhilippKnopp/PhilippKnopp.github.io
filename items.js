@@ -360,6 +360,7 @@ const ritual = {
 
 const camp = {
     isReady: false,
+    camping: false,
     setUp: function () {
         this.moveToCamp();
     },
@@ -396,7 +397,8 @@ const camp = {
         }, game.scene.keys.sceneGame);
         
         game.scene.keys.sceneGame.cameras.main.once('camerafadeincomplete', function (camera) {
-            barb.activateFigure(true);
+            camp.camping = true;
+            barb.activateFigure();
         }, game.scene.keys.sceneGame);
     }
 }
