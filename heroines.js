@@ -213,9 +213,9 @@ class Figure extends Phaser.GameObjects.Sprite {
             }
             
             if (isCamping) {
-                showActions(this, isCamping);
+                showActions(this, true);
             } else {
-                showActions(this);    
+                showActions(this, false);
             }
             
         } else if (searchButton.state == 1) {
@@ -531,6 +531,9 @@ function hideActions() {
     searchButton.setAlpha(0);
     specialButton.setAlpha(0);
     cancelButton.setAlpha(0);
+    alchemyButton.setAlpha(0);
+    restShortButton.setAlpha(0);
+    restLongButton.setAlpha(0);
     enemyHealthBase.setAlpha(0);
     enemyHealthBar.clear();
 }
