@@ -27,7 +27,7 @@ class SceneTitle extends Phaser.Scene {
         });
         
         // sceneTitle
-        this.load.image('title', 'img/Screen_Title.png');
+        this.load.image('title', 'img/Screen_Title.jpg');
         
         // sceneTravel_1
         this.load.image('screen_travel_1', 'img/Screen_Travel_1.png');
