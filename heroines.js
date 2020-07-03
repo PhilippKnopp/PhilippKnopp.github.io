@@ -212,9 +212,9 @@ class Figure extends Phaser.GameObjects.Sprite {
                 this.setAlpha(0.5);
             }
             
-            if (isCamping) {
+            if (isCamping == true) {
                 showActions(this, true);
-            } else {
+            } else if (isCamping == false) {
                 showActions(this, false);
             }
             
@@ -318,7 +318,7 @@ class Figure extends Phaser.GameObjects.Sprite {
     
 }
 
-function showActions(_this, isCamping = false) {
+function showActions(_this, isCamping) {
     
     // beendet Zug für diese Heldin und checkt ob dadurch der Zug für alle beendet ist
     if (fightmode == true && (_this.actionsCounter == 0 && (_this.movementCounter) < 1 )) {
