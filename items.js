@@ -395,6 +395,6 @@ const camp = {
             camera.fadeIn(700);
         }, game.scene.keys.sceneGame);
         
-        barb.activateFigure();
+        barb.activateFigure(true);
     }
 }

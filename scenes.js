@@ -106,6 +106,11 @@ class SceneTitle extends Phaser.Scene {
         this.load.audio("magic_1_sound", ["sound/magic_1_sound.mp3","sound/magic_1_sound.ogg"]);
         this.load.audio("magic_2_sound", ["sound/magic_2_sound.mp3","sound/magic_2_sound.ogg"]);
         
+        // sceneGame Cammping
+        this.load.image('restShort', 'img/restShort.png');
+        this.load.image('restLong', 'img/restLong.png');
+        this.load.image('alchemy', 'img/alchemy.png');
+        
         // sceneB
         this.load.image('screenB_BG', 'img/charScreenRiva.png');
         
@@ -601,6 +606,27 @@ class SceneGame extends Phaser.Scene {
             }
 		});
         specialButton.setDepth(1);
+        
+        restShortButton = this.add.sprite(400, 400, 'restShort').setAlpha(0);
+        restShortButton.setInteractive();
+		restShortButton.on("pointerup", function pointerUp() {
+            
+		});
+        restShortButton.setDepth(1);
+        
+        restLongButton = this.add.sprite(400, 400, 'restShort').setAlpha(0);
+        restLongButton.setInteractive();
+		restLongButton.on("pointerup", function pointerUp() {
+            
+		});
+        restLongButton.setDepth(1);
+        
+        alchemyButton = this.add.sprite(400, 400, 'restShort').setAlpha(0);
+        alchemyButton.setInteractive();
+		alchemyButton.on("pointerup", function pointerUp() {
+            
+		});
+        alchemyButton.setDepth(1);
         
         faceButton = this.add.sprite(400, 400, 'faceSprite').setAlpha(0);
         faceButton.setDepth(1);
