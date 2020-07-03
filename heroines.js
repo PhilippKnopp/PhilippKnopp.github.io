@@ -448,27 +448,27 @@ function showActions(_this, isCamping = false) {
         
         // Bietet den Short Rest Button an
         restShortButton.x = _this.x+buttonXpos;
-        restShortButton.y = _this.y+104;
+        restShortButton.y = _this.y+115;
         restShortButton.setAlpha(1);
         buttonXpos += 85;
         
         // Bietet den Long Rest Button an
         restLongButton.x = _this.x+buttonXpos;
-        restLongButton.y = _this.y+104;
+        restLongButton.y = _this.y+115;
         restLongButton.setAlpha(1);
         buttonXpos += 85;
         
         // Bietet den Alchemie Button an
-        if (level == 2) {
+        if (level == 3) {
             alchemyButton.x = _this.x+buttonXpos;
-            alchemyButton.y = _this.y+104;
+            alchemyButton.y = _this.y+115;
             alchemyButton.setAlpha(1);
             buttonXpos += 85;
         }
         
         // bietet den "Cancel-Button" an.
         cancelButton.x = _this.x+buttonXpos;
-        cancelButton.y = _this.y+104;
+        cancelButton.y = _this.y+115;
         cancelButton.setAlpha(1);
         buttonXpos += 85;
         
