@@ -329,7 +329,7 @@ function showActions(_this) {
         
     let buttonXpos = 60;
     let buttonXposPlus = 85;
-    if (_this.onTile > matrixWidth/2) {
+    if (_this.onTile%matrixWidth > matrixWidth/2) {
         buttonXpos = -60;
         buttonXposPlus = -85;
     }
