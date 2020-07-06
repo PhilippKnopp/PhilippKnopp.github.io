@@ -333,8 +333,11 @@ function showActions(_this) {
         buttonXpos = -60;
         buttonXposPlus = -85;
     }
-
+    
     faceButton.x = _this.x-buttonXpos;
+    if (_this.onTile%matrixWidth > matrixWidth/2) {
+        faceButton.x += 10
+    }
     faceButton.y = _this.y;
     faceButton.setAlpha(1);
     
