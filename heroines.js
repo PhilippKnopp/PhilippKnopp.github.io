@@ -328,6 +328,11 @@ function showActions(_this) {
     hideActions();
         
     let buttonXpos = 60;
+    let buttonXposPlus = 85;
+    if (_this.onTile > matrixWidth/2) {
+        buttonXpos = -60;
+        buttonXposPlus = -85;
+    }
 
     faceButton.x = _this.x-buttonXpos;
     faceButton.y = _this.y;
@@ -339,7 +344,7 @@ function showActions(_this) {
         moveButton.x = _this.x+buttonXpos;
         moveButton.y = _this.y;
         moveButton.setAlpha(1);
-        buttonXpos += 85;
+        buttonXpos += buttonXposPlus;
     }
     clearNodes();
     
@@ -358,7 +363,7 @@ function showActions(_this) {
             attackButton.x = _this.x+buttonXpos;
             attackButton.y = _this.y;
             attackButton.setAlpha(1);
-            buttonXpos += 85;
+            buttonXpos += buttonXposPlus;
         } else if (_this == mage) {
             let distantEnemies = false;
             for (let i = 0; i < tileArray.length; i++) {
@@ -371,7 +376,7 @@ function showActions(_this) {
                 attackButton.y = _this.y;
                 attackButton.setAlpha(1);
                 attackButton.state = 3; // possible Ranged Combat
-                buttonXpos += 85;
+                buttonXpos += buttonXposPlus;
             }
         }
     }
@@ -380,7 +385,7 @@ function showActions(_this) {
     searchButton.x = _this.x+buttonXpos;
     searchButton.y = _this.y;
     searchButton.setAlpha(1);
-    buttonXpos += 85;
+    buttonXpos += buttonXposPlus;
     
     // bietet den "Tür-Button" an, wenn Charakter auf einer Türe (trigger) steht.
     if ((fightmode == false || (_this.actionsCounter > 0 || _this.movementCounter >= 1)) && _this.health > 0) {
@@ -390,7 +395,7 @@ function showActions(_this) {
                     doorButton.x = _this.x+buttonXpos;
                     doorButton.y = _this.y;
                     doorButton.setAlpha(1);
-                    buttonXpos += 85;
+                    buttonXpos += buttonXposPlus;
                 }
             }
         }
@@ -408,7 +413,7 @@ function showActions(_this) {
             specialButton.x = _this.x+buttonXpos;
             specialButton.y = _this.y;
             specialButton.setAlpha(1);
-            buttonXpos += 85;
+            buttonXpos += buttonXposPlus;
             specialButton.state = 1;
         }
     }
@@ -419,13 +424,13 @@ function showActions(_this) {
             specialButton.x = _this.x+buttonXpos;
             specialButton.y = _this.y;
             specialButton.setAlpha(1);
-            buttonXpos += 85;
+            buttonXpos += buttonXposPlus;
             specialButton.state = 2;
         } else if (camp.isReady) {
             specialButton.x = _this.x+buttonXpos;
             specialButton.y = _this.y;
             specialButton.setAlpha(1);
-            buttonXpos += 85;
+            buttonXpos += buttonXposPlus;
             specialButton.state = 3;
         }
     }
@@ -434,7 +439,7 @@ function showActions(_this) {
     cancelButton.x = _this.x+buttonXpos;
     cancelButton.y = _this.y;
     cancelButton.setAlpha(1);
-    buttonXpos += 85;
+    buttonXpos += buttonXposPlus;
     
     updateGUI();
     switch(_this) {
