@@ -164,7 +164,12 @@ class Enemy extends Phaser.GameObjects.Sprite {
     
     showFace () {
         if (activeChar == null || searchButton.state == 1 || attackButton.state == 2 || attackButton.state == 1 || moveButton.state == 1) {
-            faceButton.x = this.x-60;
+            
+            if (this.onTile%matrixWidth > matrixWidth/2) {
+                faceButton.x = this.x+68;
+            } else {
+                faceButton.x = this.x-60;
+            }
             faceButton.y = this.y;
             faceButton.setAlpha(1);
             
