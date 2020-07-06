@@ -326,149 +326,115 @@ function showActions(_this) {
     }
     
     hideActions();
-    
-    if (camp.camping == false) {
         
-        let buttonXpos = 60;
+    let buttonXpos = 60;
+
+    faceButton.x = _this.x-buttonXpos;
+    faceButton.y = _this.y;
+    faceButton.setAlpha(1);
     
-        faceButton.x = _this.x-buttonXpos;
-        faceButton.y = _this.y;
-        faceButton.setAlpha(1);
+    // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
+    tileArray[_this.onTile].checkForNeighbors();
+    if (tileArray[_this.onTile].neighbors.length != 0 && (fightmode == false || _this.movementCounter >= 1)) {
+        moveButton.x = _this.x+buttonXpos;
+        moveButton.y = _this.y;
+        moveButton.setAlpha(1);
+        buttonXpos += 85;
+    }
+    clearNodes();
+    
+    // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
+    tileArray[_this.onTile].checkForNeighbors(true);
+    if ((fightmode == false && _this.health > 0) || _this.actionsCounter > 0 || (_this.movementCounter >= 6 && _this.actionsCounter == 0) ) {
+        let adjacentEnemies = false;
         
-        // bietet den "laufen-Button" an, wenn ein benachbartes Feld begehbar ist
-        tileArray[_this.onTile].checkForNeighbors();
-        if (tileArray[_this.onTile].neighbors.length != 0 && (fightmode == false || _this.movementCounter >= 1)) {
-            moveButton.x = _this.x+buttonXpos;
-            moveButton.y = _this.y;
-            moveButton.setAlpha(1);
-            buttonXpos += 85;
+        for (let i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
+            if (checkFor (tileArray[_this.onTile].neighbors[i].occupiedBy, Enemy) || tileArray[_this.onTile].neighbors[i].occupiedBy.includes(idol)) {
+                adjacentEnemies = true;
+            }
         }
-        clearNodes();
         
-        // bietet den "Angriffs-Button" an, wenn ein Gegner in Reichweite ist.
-        tileArray[_this.onTile].checkForNeighbors(true);
-        if ((fightmode == false && _this.health > 0) || _this.actionsCounter > 0 || (_this.movementCounter >= 6 && _this.actionsCounter == 0) ) {
-            let adjacentEnemies = false;
-            
-            for (let i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
-                if (checkFor (tileArray[_this.onTile].neighbors[i].occupiedBy, Enemy) || tileArray[_this.onTile].neighbors[i].occupiedBy.includes(idol)) {
-                    adjacentEnemies = true;
+        if (adjacentEnemies == true) {
+            attackButton.x = _this.x+buttonXpos;
+            attackButton.y = _this.y;
+            attackButton.setAlpha(1);
+            buttonXpos += 85;
+        } else if (_this == mage) {
+            let distantEnemies = false;
+            for (let i = 0; i < tileArray.length; i++) {
+                if (lineOfSight(_this.onTile, i) && (checkFor (tileArray[i].occupiedBy, Enemy) || tileArray[i].occupiedBy.includes(idol))) {
+                    distantEnemies = true;
                 }
             }
-            
-            if (adjacentEnemies == true) {
+            if (distantEnemies == true) {
                 attackButton.x = _this.x+buttonXpos;
                 attackButton.y = _this.y;
                 attackButton.setAlpha(1);
+                attackButton.state = 3; // possible Ranged Combat
                 buttonXpos += 85;
-            } else if (_this == mage) {
-                let distantEnemies = false;
-                for (let i = 0; i < tileArray.length; i++) {
-                    if (lineOfSight(_this.onTile, i) && (checkFor (tileArray[i].occupiedBy, Enemy) || tileArray[i].occupiedBy.includes(idol))) {
-                        distantEnemies = true;
-                    }
-                }
-                if (distantEnemies == true) {
-                    attackButton.x = _this.x+buttonXpos;
-                    attackButton.y = _this.y;
-                    attackButton.setAlpha(1);
-                    attackButton.state = 3; // possible Ranged Combat
+            }
+        }
+    }
+    
+    // bietet den "Suchen-Button" an.
+    searchButton.x = _this.x+buttonXpos;
+    searchButton.y = _this.y;
+    searchButton.setAlpha(1);
+    buttonXpos += 85;
+    
+    // bietet den "Tür-Button" an, wenn Charakter auf einer Türe (trigger) steht.
+    if ((fightmode == false || (_this.actionsCounter > 0 || _this.movementCounter >= 1)) && _this.health > 0) {
+        for (let i = 0; i < tileArray[_this.onTile].occupiedBy.length-1; i++) {
+            if (typeof tileArray[_this.onTile].occupiedBy[i].useDoor !== "undefined") {
+                if (tileArray[_this.onTile].occupiedBy[i].canBeClosed(tileArray) == true) {
+                    doorButton.x = _this.x+buttonXpos;
+                    doorButton.y = _this.y;
+                    doorButton.setAlpha(1);
                     buttonXpos += 85;
                 }
             }
         }
-        
-        // bietet den "Suchen-Button" an.
-        searchButton.x = _this.x+buttonXpos;
-        searchButton.y = _this.y;
-        searchButton.setAlpha(1);
-        buttonXpos += 85;
-        
-        // bietet den "Tür-Button" an, wenn Charakter auf einer Türe (trigger) steht.
-        if ((fightmode == false || (_this.actionsCounter > 0 || _this.movementCounter >= 1)) && _this.health > 0) {
-            for (let i = 0; i < tileArray[_this.onTile].occupiedBy.length-1; i++) {
-                if (typeof tileArray[_this.onTile].occupiedBy[i].useDoor !== "undefined") {
-                    if (tileArray[_this.onTile].occupiedBy[i].canBeClosed(tileArray) == true) {
-                        doorButton.x = _this.x+buttonXpos;
-                        doorButton.y = _this.y;
-                        doorButton.setAlpha(1);
-                        buttonXpos += 85;
-                    }
-                }
-            }
-        }
-        
-        // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist
-        if ((fightmode == false || (_this.actionsCounter > 0 || _this.movementCounter >= 6)) && _this.health > 0 ) {
-            let adjacentTrap = false;
-            for (let i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
-                if (tileArray[_this.onTile].neighbors[i].occupiedBy.includes(trap1) && trap1.detected) {
-                    adjacentTrap = true;
-                }
-            }
-            if ((_this == mage || _this == rogue) && adjacentTrap == true ) {
-                specialButton.x = _this.x+buttonXpos;
-                specialButton.y = _this.y;
-                specialButton.setAlpha(1);
-                buttonXpos += 85;
-                specialButton.state = 1;
-            }
-        }
-        
-        // bietet den "special-Button" an, wenn ein guter Ort in Sichtweite ist, an dem man campen könnte
-        if (fightmode == false && campPositions[level] != 0 && _this == barb) {
-            if (lineOfSight (_this.onTile, campPositions[level]) && camp.isReady == false) {
-                specialButton.x = _this.x+buttonXpos;
-                specialButton.y = _this.y;
-                specialButton.setAlpha(1);
-                buttonXpos += 85;
-                specialButton.state = 2;
-            } else if (camp.isReady) {
-                specialButton.x = _this.x+buttonXpos;
-                specialButton.y = _this.y;
-                specialButton.setAlpha(1);
-                buttonXpos += 85;
-                specialButton.state = 3;
-            }
-        }
-        
-        // bietet den "Cancel-Button" an.
-        cancelButton.x = _this.x+buttonXpos;
-        cancelButton.y = _this.y;
-        cancelButton.setAlpha(1);
-        buttonXpos += 85;
-    
-    } else if (camp.camping == true) {
-        
-        let buttonXpos = -85;
-        
-        // Bietet den Short Rest Button an
-        restShortButton.x = _this.x+buttonXpos;
-        restShortButton.y = _this.y+115;
-        restShortButton.setAlpha(1);
-        buttonXpos += 85;
-        
-        // Bietet den Long Rest Button an
-        restLongButton.x = _this.x+buttonXpos;
-        restLongButton.y = _this.y+115;
-        restLongButton.setAlpha(1);
-        buttonXpos += 85;
-        
-        // Bietet den Alchemie Button an
-        if (level == 3) {
-            alchemyButton.x = _this.x+buttonXpos;
-            alchemyButton.y = _this.y+115;
-            alchemyButton.setAlpha(1);
-            buttonXpos += 85;
-        }
-        
-        // bietet den "Cancel-Button" an.
-        cancelButton.x = _this.x+buttonXpos;
-        cancelButton.y = _this.y+115;
-        cancelButton.setAlpha(1);
-        buttonXpos += 85;
-        
     }
+    
+    // bietet den "special-Button" an, wenn eine Falle auf einem benachbartem Feld ist
+    if ((fightmode == false || (_this.actionsCounter > 0 || _this.movementCounter >= 6)) && _this.health > 0 ) {
+        let adjacentTrap = false;
+        for (let i = 0; i < tileArray[_this.onTile].neighbors.length; i++) {
+            if (tileArray[_this.onTile].neighbors[i].occupiedBy.includes(trap1) && trap1.detected) {
+                adjacentTrap = true;
+            }
+        }
+        if ((_this == mage || _this == rogue) && adjacentTrap == true ) {
+            specialButton.x = _this.x+buttonXpos;
+            specialButton.y = _this.y;
+            specialButton.setAlpha(1);
+            buttonXpos += 85;
+            specialButton.state = 1;
+        }
+    }
+    
+    // bietet den "special-Button" an, wenn ein guter Ort in Sichtweite ist, an dem man campen könnte
+    if (fightmode == false && campPositions[level] != 0 && _this == barb) {
+        if (lineOfSight (_this.onTile, campPositions[level]) && camp.isReady == false) {
+            specialButton.x = _this.x+buttonXpos;
+            specialButton.y = _this.y;
+            specialButton.setAlpha(1);
+            buttonXpos += 85;
+            specialButton.state = 2;
+        } else if (camp.isReady) {
+            specialButton.x = _this.x+buttonXpos;
+            specialButton.y = _this.y;
+            specialButton.setAlpha(1);
+            buttonXpos += 85;
+            specialButton.state = 3;
+        }
+    }
+    
+    // bietet den "Cancel-Button" an.
+    cancelButton.x = _this.x+buttonXpos;
+    cancelButton.y = _this.y;
+    cancelButton.setAlpha(1);
+    buttonXpos += 85;
     
     updateGUI();
     switch(_this) {

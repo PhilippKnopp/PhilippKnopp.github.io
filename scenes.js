@@ -602,7 +602,7 @@ class SceneGame extends Phaser.Scene {
                 camp.setUp();
             } else if (specialButton.state == 3) {
                 specialButton.state = 0;
-                camp.use();
+                camp.moveToCamp();
             }
 		});
         specialButton.setDepth(1);

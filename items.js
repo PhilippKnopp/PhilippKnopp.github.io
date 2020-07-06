@@ -360,11 +360,7 @@ const ritual = {
 
 const camp = {
     isReady: false,
-    camping: false,
     setUp: function () {
-        this.moveToCamp();
-    },
-    use: function () {
         this.moveToCamp();
     },
     moveToCamp: function () {
@@ -397,8 +393,37 @@ const camp = {
         }, game.scene.keys.sceneGame);
         
         game.scene.keys.sceneGame.cameras.main.once('camerafadeincomplete', function (camera) {
-            camp.camping = true;
-            barb.activateFigure();
+            camp.showActions();
         }, game.scene.keys.sceneGame);
+    },
+    showActions: function () {
+        let campPosition = tileArray[campPositions[level]];
+        let buttonXpos = -85;
+        
+        // Bietet den Short Rest Button an
+        restShortButton.x = campPosition.x+buttonXpos;
+        restShortButton.y = campPosition.y+115;
+        restShortButton.setAlpha(1);
+        buttonXpos += 85;
+        
+        // Bietet den Long Rest Button an
+        restLongButton.x = campPosition.x+buttonXpos;
+        restLongButton.y = campPosition.y+115;
+        restLongButton.setAlpha(1);
+        buttonXpos += 85;
+        
+        // Bietet den Alchemie Button an
+        if (level == 3) {
+            alchemyButton.x = campPosition.x+buttonXpos;
+            alchemyButton.y = campPosition.y+115;
+            alchemyButton.setAlpha(1);
+            buttonXpos += 85;
+        }
+        
+        // bietet den "Cancel-Button" an.
+        cancelButton.x = campPosition.x+buttonXpos;
+        cancelButton.y = campPosition.y+115;
+        cancelButton.setAlpha(1);
+        buttonXpos += 85;
     }
 }
