@@ -69,7 +69,7 @@
     
     var mage, rogue, barb;
     var rangedDamage = [0]; // Überschüssiger Schaden der Magierin kann auf zusätzliche Ziele verteilt werden
-    var eventReminder = {e2:false, e4:false, e7:false}; // Dinge die nur einmal passieren sollen
+    var eventReminder = {e2:false, e4:false, e7:false, shortRest: false, longRest: false}; // Dinge die nur einmal passieren sollen
     
     var figuresOnMap = [];
     var activeChar = null;  // Variable in der die Spielfigut gespeichert wird, die gerade aktiv ist um schnell darauf zugreifen zu können.
@@ -408,7 +408,7 @@
         tileArray.length = 0;
         
         rangedDamage = [0];
-        eventReminder = {e2:false, e4:false, e6:false, e7:false};
+        eventReminder = {e2:false, e4:false, e6:false, e7:false, shortRest: false, longRest: false};
         ritual.state = "";
         ritual.members = 5;
         ritual.progress = 13;

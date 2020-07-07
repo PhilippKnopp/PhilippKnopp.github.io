@@ -610,6 +610,7 @@ class SceneGame extends Phaser.Scene {
         restShortButton = this.add.sprite(400, 400, 'restShort').setAlpha(0);
         restShortButton.setInteractive();
 		restShortButton.on("pointerup", function pointerUpRSB() {
+            eventReminder.shortRest = true;
             for (let i = 0; i < 3; i++) {
                 if (figuresOnMap[i].health < figuresOnMap[i].fullHealth && figuresOnMap[i].health > 0) {
                     figuresOnMap[i].health++;
@@ -617,12 +618,14 @@ class SceneGame extends Phaser.Scene {
                 }
             }
             hideActions();
+            camp.showactions();
 		});
         restShortButton.setDepth(1);
         
         restLongButton = this.add.sprite(400, 400, 'restLong').setAlpha(0);
         restLongButton.setInteractive();
 		restLongButton.on("pointerup", function pointerUpRLB() {
+            eventReminder.longRest = true;
             for (let i = 0; i < 3; i++) {
                 if (figuresOnMap[i].health < figuresOnMap[i].fullHealth) {
                     figuresOnMap[i].health = figuresOnMap[i].fullHealth;
@@ -631,6 +634,7 @@ class SceneGame extends Phaser.Scene {
                 }
             }
             hideActions();
+            camp.showactions();
 		});
         restLongButton.setDepth(1);
         

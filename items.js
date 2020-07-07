@@ -401,13 +401,15 @@ const camp = {
         let buttonXpos = -85;
         
         // Bietet den Short Rest Button an
-        restShortButton.x = campPosition.x+buttonXpos;
-        restShortButton.y = campPosition.y+90;
-        restShortButton.setAlpha(1);
-        buttonXpos += 85;
+        if (eventReminder.shortRest == false) {
+            restShortButton.x = campPosition.x+buttonXpos;
+            restShortButton.y = campPosition.y+90;
+            restShortButton.setAlpha(1);
+            buttonXpos += 85;
+        }
         
         // Bietet den Long Rest Button an
-        if (xp >= 20) {
+        if (xp >= 20 && eventReminder.longRest == false) {
             restLongButton.x = campPosition.x+buttonXpos;
             restLongButton.y = campPosition.y+90;
             restLongButton.setAlpha(1);
@@ -423,9 +425,11 @@ const camp = {
         }
         
         // bietet den "Cancel-Button" an.
-        cancelButton.x = campPosition.x+buttonXpos;
-        cancelButton.y = campPosition.y+90;
-        cancelButton.setAlpha(1);
-        buttonXpos += 85;
+        if (buttonXpos > 0) {
+            cancelButton.x = campPosition.x+buttonXpos;
+            cancelButton.y = campPosition.y+90;
+            cancelButton.setAlpha(1);
+            buttonXpos += 85;
+        }
     }
 }
