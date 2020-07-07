@@ -398,13 +398,15 @@ const camp = {
     },
     showActions: function () {
         let campPosition = tileArray[campPositions[level]];
-        let buttonXpos = -85;
+        let buttonXpos = 0;
+        let numberOfButtons = [];
         
         // Bietet den Short Rest Button an
         if (eventReminder.shortRest == false) {
             restShortButton.x = campPosition.x+buttonXpos;
             restShortButton.y = campPosition.y+90;
             restShortButton.setAlpha(1);
+            numberOfButtons.push(restShortButton);
             buttonXpos += 85;
         }
         
@@ -413,6 +415,7 @@ const camp = {
             restLongButton.x = campPosition.x+buttonXpos;
             restLongButton.y = campPosition.y+90;
             restLongButton.setAlpha(1);
+            numberOfButtons.push(restLongButton);
             buttonXpos += 85;
         }
         
@@ -421,15 +424,23 @@ const camp = {
             alchemyButton.x = campPosition.x+buttonXpos;
             alchemyButton.y = campPosition.y+90;
             alchemyButton.setAlpha(1);
+            numberOfButtons.push(alchemyButton);
             buttonXpos += 85;
         }
         
         // bietet den "Cancel-Button" an.
-        if (buttonXpos > 0) {
+        if (numberOfButtons.length > 0) {
             cancelButton.x = campPosition.x+buttonXpos;
             cancelButton.y = campPosition.y+90;
             cancelButton.setAlpha(1);
+            numberOfButtons.push(cancelButton);
             buttonXpos += 85;
+            
+            // Verteilt alle Buttons gleichmäßig
+            for (let i = 0; i < numberOfButtons.length; i++) {
+            numberOfButtons[i].x -= (numberOfButtons.length-1)*84;
+            }
         }
+        
     }
 }
