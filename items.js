@@ -407,7 +407,7 @@ const camp = {
         buttonXpos += 85;
         
         // Bietet den Long Rest Button an
-        if (XP >= 20) {
+        if (xp >= 20) {
             restLongButton.x = campPosition.x+buttonXpos;
             restLongButton.y = campPosition.y+90;
             restLongButton.setAlpha(1);

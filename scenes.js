@@ -627,7 +627,7 @@ class SceneGame extends Phaser.Scene {
                     figuresOnMap[i].health = figuresOnMap[i].fullHealth;
                 }
             }
-            addXP(-20);
+            xpIcon.addXP(-20);
             updateGUI;
 		});
         restLongButton.setDepth(1);
