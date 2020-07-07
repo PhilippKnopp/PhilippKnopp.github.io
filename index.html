@@ -308,14 +308,17 @@
         if (((barb.health/barb.fullHealth)*320)+847 < barDamageB.x) {
             barHealthB.looseHP();
         } else if (((barb.health/barb.fullHealth)*320)+847 > barDamageB.x) {
+            console.log("start Tween");
             barHealthB.gainHP();
         }
         if (((rogue.health/rogue.fullHealth)*320)+847 < barDamageR.x) {
+            console.log("start Tween");
             barHealthR.looseHP();
         } else if (((rogue.health/rogue.fullHealth)*320)+847 > barDamageR.x) {
             barHealthR.gainHP();
         }
         if (((mage.health/mage.fullHealth)*320)+847 < barDamageM.x) {
+            console.log("start Tween");
             barHealthM.looseHP();
         } else if (((mage.health/mage.fullHealth)*320)+847 > barDamageM.x) {
             barHealthM.gainHP();

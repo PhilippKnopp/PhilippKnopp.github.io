@@ -609,26 +609,28 @@ class SceneGame extends Phaser.Scene {
         
         restShortButton = this.add.sprite(400, 400, 'restShort').setAlpha(0);
         restShortButton.setInteractive();
-		restShortButton.on("pointerup", function pointerUp() {
+		restShortButton.on("pointerup", function pointerUpRSB() {
             for (let i = 0; i < 3; i++) {
                 if (figuresOnMap[i].health < figuresOnMap[i].fullHealth && figuresOnMap[i].health > 0) {
                     figuresOnMap[i].health++;
+                    updateGUI;
                 }
             }
-            updateGUI;
+            hideActions();
 		});
         restShortButton.setDepth(1);
         
         restLongButton = this.add.sprite(400, 400, 'restLong').setAlpha(0);
         restLongButton.setInteractive();
-		restLongButton.on("pointerup", function pointerUp() {
+		restLongButton.on("pointerup", function pointerUpRLB() {
             for (let i = 0; i < 3; i++) {
                 if (figuresOnMap[i].health < figuresOnMap[i].fullHealth) {
                     figuresOnMap[i].health = figuresOnMap[i].fullHealth;
+                    xpIcon.addXP(-20);
+                    updateGUI;
                 }
             }
-            xpIcon.addXP(-20);
-            updateGUI;
+            hideActions();
 		});
         restLongButton.setDepth(1);
         
