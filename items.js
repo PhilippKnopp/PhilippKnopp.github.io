@@ -402,27 +402,29 @@ const camp = {
         
         // Bietet den Short Rest Button an
         restShortButton.x = campPosition.x+buttonXpos;
-        restShortButton.y = campPosition.y+115;
+        restShortButton.y = campPosition.y+90;
         restShortButton.setAlpha(1);
         buttonXpos += 85;
         
         // Bietet den Long Rest Button an
-        restLongButton.x = campPosition.x+buttonXpos;
-        restLongButton.y = campPosition.y+115;
-        restLongButton.setAlpha(1);
-        buttonXpos += 85;
+        if (XP >= 20) {
+            restLongButton.x = campPosition.x+buttonXpos;
+            restLongButton.y = campPosition.y+90;
+            restLongButton.setAlpha(1);
+            buttonXpos += 85;
+        }
         
         // Bietet den Alchemie Button an
         if (level == 3) {
             alchemyButton.x = campPosition.x+buttonXpos;
-            alchemyButton.y = campPosition.y+115;
+            alchemyButton.y = campPosition.y+90;
             alchemyButton.setAlpha(1);
             buttonXpos += 85;
         }
         
         // bietet den "Cancel-Button" an.
         cancelButton.x = campPosition.x+buttonXpos;
-        cancelButton.y = campPosition.y+115;
+        cancelButton.y = campPosition.y+90;
         cancelButton.setAlpha(1);
         buttonXpos += 85;
     }

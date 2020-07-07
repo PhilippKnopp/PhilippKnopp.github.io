@@ -611,7 +611,7 @@ class SceneGame extends Phaser.Scene {
         restShortButton.setInteractive();
 		restShortButton.on("pointerup", function pointerUp() {
             for (let i = 0; i < 3; i++) {
-                if (figuresOnMap[i].health < figuresOnMap[i].fullHealth) {
+                if (figuresOnMap[i].health < figuresOnMap[i].fullHealth && figuresOnMap[i].health > 0) {
                     figuresOnMap[i].health++;
                 }
             }
@@ -627,6 +627,7 @@ class SceneGame extends Phaser.Scene {
                     figuresOnMap[i].health = figuresOnMap[i].fullHealth;
                 }
             }
+            addXP(-20);
             updateGUI;
 		});
         restLongButton.setDepth(1);
