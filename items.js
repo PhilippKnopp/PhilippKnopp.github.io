@@ -438,7 +438,7 @@ const camp = {
             
             // Verteilt alle Buttons gleichmäßig
             for (let i = 0; i < numberOfButtons.length; i++) {
-            numberOfButtons[i].x -= (numberOfButtons.length-1)*84;
+                numberOfButtons[i].x -= (numberOfButtons.length-1)*42;
             }
         }
         
