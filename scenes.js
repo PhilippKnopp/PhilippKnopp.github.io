@@ -618,7 +618,7 @@ class SceneGame extends Phaser.Scene {
                 }
             }
             hideActions();
-            camp.showactions();
+            camp.showActions();
 		});
         restShortButton.setDepth(1);
         
@@ -634,7 +634,7 @@ class SceneGame extends Phaser.Scene {
                 }
             }
             hideActions();
-            camp.showactions();
+            camp.showActions();
 		});
         restLongButton.setDepth(1);
         
